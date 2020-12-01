@@ -1,0 +1,17 @@
+package projectXML.team9.services;
+
+import org.springframework.stereotype.Service;
+
+import projectXML.team9.ObavestenjeRepository;
+import projectXML.team9.models.obavestenje.Obavestenje;
+
+@Service
+public class ObavestenjeService {
+
+	private ObavestenjeRepository obavestenjeRepository;
+	
+	private String getDocument(String naziv) {
+		Obavestenje obavestenje = obavestenjeRepository.loadDocument(naziv);
+		return "";
+	}
+}

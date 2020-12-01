@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified"
+    vc:minVersion="1.0" vc:maxVersion="1.1" targetNamespace="http://www.projekat.org/zahtev"
+    xmlns:za="http://www.projekat.org/zahtev">
+    <xs:element name="zahtev_gradjana">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="organ" type="za:TPravno_lice"/>
+                <xs:element name="trazilac">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="lice" type="za:TLice"/>
+                            <xs:element minOccurs="0" name="drugi_podatak_za_kontakt"
+                                nillable="false">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="1"/>
+                                        <xs:maxLength value="30"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="informacije_vezane_za_zahtev">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="tip_zahteva">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0"
+                                            name="obavestenje_posedovanja_informacije">
+                                            <xs:complexType>
+                                                <xs:attribute
+                                                  fixed="obaveštenje da li poseduje traženu informaciju"
+                                                  name="tip" type="xs:string"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="uvid_u_dokument">
+                                            <xs:complexType>
+                                                <xs:attribute
+                                                  fixed="uvid u dokument koji sadrži traženu informaciju"
+                                                  name="tip" type="xs:string"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="kopiju_dokumenta">
+                                            <xs:complexType>
+                                                <xs:attribute
+                                                  fixed="kopiju dokumenta koji sadrži traženu informaciju"
+                                                  name="tip" type="xs:string"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="dostavljanje_kopije">
+                                            <xs:complexType>
+                                                <xs:sequence minOccurs="1">
+                                                  <xs:element minOccurs="0" name="posta">
+                                                  <xs:complexType>
+                                                  <xs:attribute fixed="poštom" name="tip"
+                                                  type="xs:string"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="faks">
+                                                  <xs:complexType>
+                                                  <xs:attribute fixed="faksom" name="tip"
+                                                  type="xs:string"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="e-posta">
+                                                  <xs:complexType>
+                                                  <xs:attribute fixed="elektronskom postom"
+                                                  name="tip" type="xs:string"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="drugi_nacin">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="opis_dostave">
+                                                  <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                  <xs:maxLength value="50"/>
+                                                  </xs:restriction>
+                                                  </xs:simpleType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  <xs:attribute fixed="na drugi nacin" name="tip"
+                                                  type="xs:string"/>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute
+                                                  fixed="dostavljanje kopije dokumenta koji sadži traženu informaciju"
+                                                  name="tip" type="xs:string"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="opis_zahteva" type="xs:string"/>
+                            <xs:element name="mesto" type="xs:string"/>
+                            <xs:element name="datum" type="xs:date"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="broj_zahteva" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TAdresa">
+        <xs:sequence>
+            <xs:element name="mesto">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="ulica" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="broj" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TLice" abstract="true">
+        <xs:sequence>
+            <xs:element name="adresa" type="za:TAdresa"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TFizicko_lice">
+        <xs:complexContent>
+            <xs:extension base="za:TLice">
+                <xs:sequence>
+                    <xs:element name="ime">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="prezime">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TPravno_lice">
+        <xs:complexContent>
+            <xs:extension base="za:TLice">
+                <xs:sequence>
+                    <xs:element name="naziv">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

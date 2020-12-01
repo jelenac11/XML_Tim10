@@ -1,0 +1,12 @@
+package projectXML.team9.controllers;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.AllArgsConstructor;
+import projectXML.team9.services.ObavestenjeService;
+
+@RestController
+@AllArgsConstructor
+public class ObavestenjeController {
+	private ObavestenjeService obavestenjeService;
+}

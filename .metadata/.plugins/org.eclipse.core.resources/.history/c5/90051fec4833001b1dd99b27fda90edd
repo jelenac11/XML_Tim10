@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<obavestenje xmlns="http://www.projekat.org/obavestenje" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="C:/Users/Lauda/Desktop/XML/dfsddfd/obavestenje.xsd"
+    broj_obavestenja='1234' broj_zahteva='123123'>
+    <informacije_o_obavestenju>
+        <organ>
+            <adresa>
+                <mesto>NS</mesto>
+                <ulica>Futoska ulica</ulica>
+                <broj>1</broj>
+            </adresa>
+            <naziv>RNG</naziv>
+        </organ>
+        <trazilac xsi:type="TFizicko_lice">
+            <adresa>
+                <mesto>RNGlovac</mesto>
+                <ulica>RNG ulica</ulica>
+                <broj>2</broj>
+            </adresa>
+            <ime>RNG</ime>
+            <prezime>RNGvic</prezime>
+        </trazilac>
+        <datum>2012-05-12</datum>
+    </informacije_o_obavestenju>
+    
+    <!-- Ovde bi mozda moglo samo da se referenciramo zahtev na koji se pozivamo
+        umesto da ceo zahtev ponovo navodimo -->
+    <zahtev>   
+        <datum_trazenja_informacija>2012-05-12</datum_trazenja_informacija>
+        <opis_trazene_informacije>
+            neka trazena informacija nemam pojma ajsjksjak
+        </opis_trazene_informacije>
+    </zahtev>
+    
+    <informacije_o_posedovanju status="true"/>
+    
+    <dostavljanje_dokumenta status="true">
+        <primalac xsi:type="TPravno_lice">
+            <adresa>
+                <mesto>RNGlovac</mesto>
+                <ulica>RNG ulica</ulica>
+                <broj>2</broj>
+            </adresa>
+            <naziv>RNG</naziv>
+        </primalac>
+        <uplata_troskova>
+            <primalac>
+                Budzet RS
+            </primalac>
+            <racun>123-123456789-12</racun>
+            <iznos>25656.02</iznos>
+            <poziv_na_broj>97</poziv_na_broj>
+        </uplata_troskova>
+    </dostavljanje_dokumenta>
+    <dostavljeno>
+        <imenovanom>Imenovanom</imenovanom>
+    </dostavljeno>
+</obavestenje>

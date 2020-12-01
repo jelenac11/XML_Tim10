@@ -1,0 +1,13 @@
+package projectXML.team9;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class ObavestenjeRepository {
+
+	private static String documentPath = "../resources/static/XMLDocuments/";
+	
+	public loadDocument(String name) {
+		
+	}
+}

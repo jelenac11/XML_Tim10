@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<obavestenje xmlns="http://www.projekat.org/obavestenje" broj_obavestenja="1234" broj_zahteva="123123">
+    <informacije_o_obavestenju>
+        <organ>
+            <adresa>
+                <mesto>Novi Sad</mesto>
+                <ulica>Draze Mihajlovica</ulica>
+                <broj>3</broj>
+            </adresa>
+            <naziv>MUP RS</naziv>
+        </organ>
+        <trazilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizicko_lice">
+            <adresa>
+                <mesto>RNGlovac</mesto>
+                <ulica>RNG ulica</ulica>
+                <broj>2</broj>
+            </adresa>
+            <ime>RNG</ime>
+            <prezime>RNGvic</prezime>
+        </trazilac>
+        <datum_obavestenja>2012-05-12</datum_obavestenja>
+    </informacije_o_obavestenju>
+    <zahtev>
+        <datum_trazenja_informacija>2012-05-12</datum_trazenja_informacija>
+        <opis_trazene_informacije>neka trazena informacija nemam pojma ajsjksjak</opis_trazene_informacije>
+    </zahtev>
+    <informacije_o_uvidu status="true">
+        <datum_uvida>2020-12-02</datum_uvida>
+        <vreme_uvida>
+            <interval_uvida>
+                <od>9</od>
+                <do>15</do>
+            </interval_uvida>
+        </vreme_uvida>
+        <mesto_uvida>
+            <mesto>RNGlovac</mesto>
+            <ulica>RNG ulica</ulica>
+            <broj>2</broj>
+            <kancelarija>18a</kancelarija>
+        </mesto_uvida>
+    </informacije_o_uvidu>
+    <informacije_o_posedovanju poseduje="true" status="true"/>
+    <informacije_o_dostavljanju_dokumenta status="true">
+        <uplata_troskova>
+            <primalac>Budzet RS</primalac>
+            <racun>123-123456789-12</racun>
+            <iznos>25656.02</iznos>
+            <poziv_na_broj>97</poziv_na_broj>
+        </uplata_troskova>
+    </informacije_o_dostavljanju_dokumenta>
+    <dostavljeno>
+        <imenovanom>Imenovanom</imenovanom>
+    </dostavljeno>
+</obavestenje>

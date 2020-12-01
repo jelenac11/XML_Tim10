@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zahtev_gradjana broj_zahteva='123123' xmlns="http://www.projekat.org/zahtev" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="../schemas/sema_zahtev.xsd">
+    <organ>
+        <adresa>
+            <mesto>NS</mesto>
+            <ulica>Futoska ulica</ulica>
+            <broj>1</broj>
+        </adresa>
+        <naziv>RNG</naziv>
+    </organ>
+    <trazilac>
+        <lice xsi:type="TFizicko_lice">
+            <adresa>
+                <mesto>RNGlovac</mesto>
+                <ulica>RNG ulica</ulica>
+                <broj>2</broj>
+            </adresa>
+            <ime>RNG</ime>
+            <prezime>RNGvic</prezime>
+        </lice>
+        <drugi_podatak_za_kontakt>neki_email@hotmail.com</drugi_podatak_za_kontakt>
+    </trazilac>
+    <informacije_vezane_za_zahtev>
+        <tip_zahteva>
+            <obavestenje_posedovanja_informacije/>
+            <kopiju_dokumenta/>
+            <dostavljanje_kopije>
+                <posta/>
+                <e-posta/>
+                <drugi_nacin>
+                    <opis_dostave>neki opis drugog nacina dostave</opis_dostave>
+                </drugi_nacin>
+            </dostavljanje_kopije>
+        </tip_zahteva>
+        <opis_zahteva>Ovdje ide opis zahteva koji se trazi</opis_zahteva>
+        <mesto>Neko mjesto</mesto>
+        <datum>2012-12-12</datum>
+    </informacije_vezane_za_zahtev>
+    
+</zahtev_gradjana>

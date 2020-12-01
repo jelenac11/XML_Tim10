@@ -1,0 +1,34 @@
+package projectXML.team9;
+
+import java.io.File;
+
+import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+
+import org.springframework.stereotype.Repository;
+import org.xml.sax.SAXException;
+
+import projectXML.team9.models.obavestenje.Obavestenje;
+
+@Repository
+public class ObavestenjeRepository {
+
+	private static String documentPath = "../resources/static/XMLDocuments/";
+	
+	public Obavestenje loadDocument(String name) throws SAXException, JAXBException {
+		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.obavestenje");
+
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+		
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		Schema schema = schemaFactory.newSchema(new File("./sema_obavestenje.xsd"));
+		unmarshaller.setSchema(schema);
+		// Unmarshalling generiĹˇe objektni model na osnovu XML fajla
+		Obavestenje obavestenje = (Obavestenje) unmarshaller.unmarshal(new File("./data/obavestenje.xml"));
+		return obavestenje;
+	}
+}

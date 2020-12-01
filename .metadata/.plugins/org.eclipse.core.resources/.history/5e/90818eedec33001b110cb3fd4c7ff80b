@@ -1,0 +1,30 @@
+package projectXML.team9.services;
+
+import java.io.IOException;
+import javax.xml.bind.JAXBException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
+
+import projectXML.team9.models.zahtev.TAdresa;
+import projectXML.team9.models.zahtev.TLice;
+import projectXML.team9.models.zahtev.ZahtevGradjana;
+import projectXML.team9.models.zahtev.ZahtevGradjana.Trazilac;
+import projectXML.team9.repositories.ZahtevRepository;
+
+@Service
+public class ZahtevService {
+
+	@Autowired
+	private ZahtevRepository zahtevRepository;
+	
+	public String getDocument(String naziv) throws SAXException, JAXBException {
+		ZahtevGradjana zahtev = zahtevRepository.loadDocument(naziv);
+		return zahtev.toString();
+	}
+	public void postDocument(TAdresa adresa) throws JAXBException, SAXException, IOException {
+		ZahtevGradjana zahtevGradjana = zahtevRepository.loadDocument("zahtev");
+		zahtevGradjana.getTrazilac().getLice().setAdresa(adresa);
+		zahtevRepository.save(zahtevGradjana);
+	}
+}

@@ -1,0 +1,15 @@
+package projectXML.team9.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import projectXML.team9.services.ZahtevService;
+
+@RestController
+@RequestMapping(value = "/api/zahtev")
+public class ZahtevController {
+
+	@Autowired
+	private ZahtevService zahtevService;
+}

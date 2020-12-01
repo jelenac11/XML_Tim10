@@ -1,0 +1,17 @@
+package projectXML.team9.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import projectXML.team9.models.zahtev.ObjectFactory;
+import projectXML.team9.repositories.ZahtevRepository;
+
+@Service
+public class ZahtevService {
+
+	@Autowired
+	private ZahtevRepository zahtevRepository;
+	
+	@Autowired
+	private ObjectFactory objectFactory;
+}
