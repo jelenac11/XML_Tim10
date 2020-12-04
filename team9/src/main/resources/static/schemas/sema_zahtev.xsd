@@ -30,48 +30,15 @@
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element minOccurs="0"
-                                            name="obavestenje_posedovanja_informacije">
-                                            <xs:complexType>
-                                                <xs:attribute
-                                                  fixed="obaveštenje da li poseduje traženu informaciju"
-                                                  name="tip" type="xs:string"/>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element minOccurs="0" name="uvid_u_dokument">
-                                            <xs:complexType>
-                                                <xs:attribute
-                                                  fixed="uvid u dokument koji sadrži traženu informaciju"
-                                                  name="tip" type="xs:string"/>
-                                            </xs:complexType>
-                                        </xs:element>
-                                        <xs:element minOccurs="0" name="kopiju_dokumenta">
-                                            <xs:complexType>
-                                                <xs:attribute
-                                                  fixed="kopiju dokumenta koji sadrži traženu informaciju"
-                                                  name="tip" type="xs:string"/>
-                                            </xs:complexType>
-                                        </xs:element>
+                                            name="obavestenje_posedovanja_informacije"> </xs:element>
+                                        <xs:element minOccurs="0" name="uvid_u_dokument"> </xs:element>
+                                        <xs:element minOccurs="0" name="kopiju_dokumenta"> </xs:element>
                                         <xs:element minOccurs="0" name="dostavljanje_kopije">
                                             <xs:complexType>
                                                 <xs:sequence minOccurs="1">
-                                                  <xs:element minOccurs="0" name="posta">
-                                                  <xs:complexType>
-                                                  <xs:attribute fixed="poštom" name="tip"
-                                                  type="xs:string"/>
-                                                  </xs:complexType>
-                                                  </xs:element>
-                                                  <xs:element minOccurs="0" name="faks">
-                                                  <xs:complexType>
-                                                  <xs:attribute fixed="faksom" name="tip"
-                                                  type="xs:string"/>
-                                                  </xs:complexType>
-                                                  </xs:element>
-                                                  <xs:element minOccurs="0" name="e-posta">
-                                                  <xs:complexType>
-                                                  <xs:attribute fixed="elektronskom postom"
-                                                  name="tip" type="xs:string"/>
-                                                  </xs:complexType>
-                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="posta"> </xs:element>
+                                                  <xs:element minOccurs="0" name="faks"> </xs:element>
+                                                  <xs:element minOccurs="0" name="e-posta"> </xs:element>
                                                   <xs:element minOccurs="0" name="drugi_nacin">
                                                   <xs:complexType>
                                                   <xs:sequence>
@@ -84,14 +51,9 @@
                                                   </xs:simpleType>
                                                   </xs:element>
                                                   </xs:sequence>
-                                                  <xs:attribute fixed="na drugi nacin" name="tip"
-                                                  type="xs:string"/>
                                                   </xs:complexType>
                                                   </xs:element>
                                                 </xs:sequence>
-                                                <xs:attribute
-                                                  fixed="dostavljanje kopije dokumenta koji sadži traženu informaciju"
-                                                  name="tip" type="xs:string"/>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
