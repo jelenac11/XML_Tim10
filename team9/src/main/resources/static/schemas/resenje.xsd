@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.projekat.org/resenje"
+    xmlns:res="http://www.projekat.org/resenje">
+
+    <xs:element name="odluka_poverioca">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="opis_žalbe">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="žalioc" type="res:T_Žalioc"/>
+                            <xs:element name="organ">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="naziv" type="xs:string"/>
+                                        <xs:element name="adresa" type="res:T_Adresa"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="datum_žalbe" type="xs:date"/>
+                            <xs:element name="ceo_opis" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="rešenja" type="res:T_Multi_Paragraf"/>
+                <xs:element name="obrazloženje">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="opis" type="res:T_Multi_Paragraf"/>
+                            <xs:element name="razlog" type="res:T_Multi_Paragraf"/>
+                            <xs:element name="konačno_rešenje" type="res:T_Multi_Paragraf"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="uputstvo" type="xs:string"/>
+                <xs:element name="datum_rešenja" type="xs:date"/>
+                <xs:element name="poverenik" type="res:T_Lice"/>
+            </xs:sequence>
+            <xs:attribute name="broj_rešenja"/>
+            <xs:attribute name="broj_žalbe"/>
+            <xs:attribute name="broj_zahteva"/>
+            <xs:attribute name="tip_rešenja"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="T_Lice">
+        <xs:sequence>
+            <xs:element name="ime" type="xs:string"/>
+            <xs:element name="prezime" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="T_Žalioc">
+        <xs:complexContent>
+            <xs:extension base="res:T_Lice">
+                <xs:sequence>
+                    <xs:element name="adresa" type="res:T_Adresa"/>
+                    <xs:element name="kontakt" type="res:TBroj_telefona"/>
+                    <xs:element name="potpis" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="T_Adresa">
+        <xs:sequence>
+            <xs:element name="mesto" type="xs:string"/>
+            <xs:element name="ulica" type="xs:string"/>
+            <xs:element name="broj" type="xs:positiveInteger"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="TBroj_telefona">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{9,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="T_Multi_Paragraf">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="paragraf" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
