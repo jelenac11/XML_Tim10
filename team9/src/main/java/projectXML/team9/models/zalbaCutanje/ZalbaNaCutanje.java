@@ -18,142 +18,103 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import lombok.NoArgsConstructor;
 
-
 /**
-* &lt;p&gt;Java class for anonymous complex type.
-* 
-* &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-* 
-* &lt;pre&gt;
-* &amp;lt;complexType&amp;gt;
-*   &amp;lt;complexContent&amp;gt;
-*     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-*       &amp;lt;sequence&amp;gt;
-*         &amp;lt;element name="adresa_poverenika" type="{http://www.projekat.org/zalba_cutanja}TAdresa"/&amp;gt;
-*         &amp;lt;element name="organ_protiv_kojeg_je_zalba" type="{http://www.projekat.org/zalba_cutanja}TPravno_lice"/&amp;gt;
-*         &amp;lt;element name="podaci_o_zahtevu"&amp;gt;
-*           &amp;lt;complexType&amp;gt;
-*             &amp;lt;complexContent&amp;gt;
-*               &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-*                 &amp;lt;sequence&amp;gt;
-*                   &amp;lt;element name="informacije"&amp;gt;
-*                     &amp;lt;simpleType&amp;gt;
-*                       &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-*                         &amp;lt;minLength value="1"/&amp;gt;
-*                       &amp;lt;/restriction&amp;gt;
-*                     &amp;lt;/simpleType&amp;gt;
-*                   &amp;lt;/element&amp;gt;
-*                   &amp;lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt;
-*                   &amp;lt;element name="zahtevi"&amp;gt;
-*                     &amp;lt;complexType&amp;gt;
-*                       &amp;lt;complexContent&amp;gt;
-*                         &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-*                           &amp;lt;sequence&amp;gt;
-*                             &amp;lt;element name="uvid" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-*                             &amp;lt;element name="kopija" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-*                             &amp;lt;element name="dostava" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-*                             &amp;lt;element name="posedovanje" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-*                           &amp;lt;/sequence&amp;gt;
-*                         &amp;lt;/restriction&amp;gt;
-*                       &amp;lt;/complexContent&amp;gt;
-*                     &amp;lt;/complexType&amp;gt;
-*                   &amp;lt;/element&amp;gt;
-*                 &amp;lt;/sequence&amp;gt;
-*               &amp;lt;/restriction&amp;gt;
-*             &amp;lt;/complexContent&amp;gt;
-*           &amp;lt;/complexType&amp;gt;
-*         &amp;lt;/element&amp;gt;
-*         &amp;lt;element name="podaci_o_zalbi"&amp;gt;
-*           &amp;lt;complexType&amp;gt;
-*             &amp;lt;complexContent&amp;gt;
-*               &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-*                 &amp;lt;sequence&amp;gt;
-*                   &amp;lt;element name="podnosilac_zalbe"&amp;gt;
-*                     &amp;lt;complexType&amp;gt;
-*                       &amp;lt;complexContent&amp;gt;
-*                         &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-*                           &amp;lt;sequence&amp;gt;
-*                             &amp;lt;element name="lice" type="{http://www.projekat.org/zalba_cutanja}TLice"/&amp;gt;
-*                             &amp;lt;element name="drugi_podaci_za_kontakt"&amp;gt;
-*                               &amp;lt;simpleType&amp;gt;
-*                                 &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-*                                   &amp;lt;minLength value="1"/&amp;gt;
-*                                 &amp;lt;/restriction&amp;gt;
-*                               &amp;lt;/simpleType&amp;gt;
-*                             &amp;lt;/element&amp;gt;
-*                           &amp;lt;/sequence&amp;gt;
-*                         &amp;lt;/restriction&amp;gt;
-*                       &amp;lt;/complexContent&amp;gt;
-*                     &amp;lt;/complexType&amp;gt;
-*                   &amp;lt;/element&amp;gt;
-*                   &amp;lt;element name="datum_podnosenja" type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt;
-*                   &amp;lt;element name="mesto"&amp;gt;
-*                     &amp;lt;simpleType&amp;gt;
-*                       &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-*                         &amp;lt;minLength value="1"/&amp;gt;
-*                       &amp;lt;/restriction&amp;gt;
-*                     &amp;lt;/simpleType&amp;gt;
-*                   &amp;lt;/element&amp;gt;
-*                   &amp;lt;element name="razlog_zalbe"&amp;gt;
-*                     &amp;lt;simpleType&amp;gt;
-*                       &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-*                         &amp;lt;enumeration value="nije postupio"/&amp;gt;
-*                         &amp;lt;enumeration value="nije postupio u celosti"/&amp;gt;
-*                         &amp;lt;enumeration value="nije postupio u zakonskom roku"/&amp;gt;
-*                       &amp;lt;/restriction&amp;gt;
-*                     &amp;lt;/simpleType&amp;gt;
-*                   &amp;lt;/element&amp;gt;
-*                 &amp;lt;/sequence&amp;gt;
-*               &amp;lt;/restriction&amp;gt;
-*             &amp;lt;/complexContent&amp;gt;
-*           &amp;lt;/complexType&amp;gt;
-*         &amp;lt;/element&amp;gt;
-*       &amp;lt;/sequence&amp;gt;
-*       &amp;lt;attribute name="broj_zalbe"&amp;gt;
-*         &amp;lt;simpleType&amp;gt;
-*           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-*             &amp;lt;minLength value="1"/&amp;gt;
-*           &amp;lt;/restriction&amp;gt;
-*         &amp;lt;/simpleType&amp;gt;
-*       &amp;lt;/attribute&amp;gt;
-*       &amp;lt;attribute name="broj_zahteva"&amp;gt;
-*         &amp;lt;simpleType&amp;gt;
-*           &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-*             &amp;lt;minLength value="1"/&amp;gt;
-*           &amp;lt;/restriction&amp;gt;
-*         &amp;lt;/simpleType&amp;gt;
-*       &amp;lt;/attribute&amp;gt;
-*     &amp;lt;/restriction&amp;gt;
-*   &amp;lt;/complexContent&amp;gt;
-* &amp;lt;/complexType&amp;gt;
-* &lt;/pre&gt;
-* 
-* 
-*/
+ * &lt;p&gt;Java class for anonymous complex type.
+ * 
+ * &lt;p&gt;The following schema fragment specifies the expected content
+ * contained within this class.
+ * 
+ * &lt;pre&gt; &amp;lt;complexType&amp;gt; &amp;lt;complexContent&amp;gt;
+ * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ * &amp;lt;sequence&amp;gt; &amp;lt;element name="adresa_poverenika"
+ * type="{http://www.projekat.org/zalba_cutanja}TAdresa"/&amp;gt;
+ * &amp;lt;element name="organ_protiv_kojeg_je_zalba"
+ * type="{http://www.projekat.org/zalba_cutanja}TPravno_lice"/&amp;gt;
+ * &amp;lt;element name="podaci_o_zahtevu"&amp;gt; &amp;lt;complexType&amp;gt;
+ * &amp;lt;complexContent&amp;gt; &amp;lt;restriction
+ * base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ * &amp;lt;sequence&amp;gt; &amp;lt;element name="informacije"&amp;gt;
+ * &amp;lt;simpleType&amp;gt; &amp;lt;restriction
+ * base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt; &amp;lt;minLength
+ * value="1"/&amp;gt; &amp;lt;/restriction&amp;gt; &amp;lt;/simpleType&amp;gt;
+ * &amp;lt;/element&amp;gt; &amp;lt;element name="datum"
+ * type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt; &amp;lt;element
+ * name="zahtevi"&amp;gt; &amp;lt;complexType&amp;gt;
+ * &amp;lt;complexContent&amp;gt; &amp;lt;restriction
+ * base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ * &amp;lt;sequence&amp;gt; &amp;lt;element name="uvid"
+ * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+ * &amp;lt;element name="kopija"
+ * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+ * &amp;lt;element name="dostava"
+ * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+ * &amp;lt;element name="posedovanje"
+ * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+ * &amp;lt;/sequence&amp;gt; &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/complexContent&amp;gt; &amp;lt;/complexType&amp;gt;
+ * &amp;lt;/element&amp;gt; &amp;lt;/sequence&amp;gt;
+ * &amp;lt;/restriction&amp;gt; &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt; &amp;lt;/element&amp;gt; &amp;lt;element
+ * name="podaci_o_zalbi"&amp;gt; &amp;lt;complexType&amp;gt;
+ * &amp;lt;complexContent&amp;gt; &amp;lt;restriction
+ * base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ * &amp;lt;sequence&amp;gt; &amp;lt;element name="podnosilac_zalbe"&amp;gt;
+ * &amp;lt;complexType&amp;gt; &amp;lt;complexContent&amp;gt;
+ * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+ * &amp;lt;sequence&amp;gt; &amp;lt;element name="lice"
+ * type="{http://www.projekat.org/zalba_cutanja}TLice"/&amp;gt; &amp;lt;element
+ * name="drugi_podaci_za_kontakt"&amp;gt; &amp;lt;simpleType&amp;gt;
+ * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+ * &amp;lt;minLength value="1"/&amp;gt; &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/simpleType&amp;gt; &amp;lt;/element&amp;gt;
+ * &amp;lt;/sequence&amp;gt; &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/complexContent&amp;gt; &amp;lt;/complexType&amp;gt;
+ * &amp;lt;/element&amp;gt; &amp;lt;element name="datum_podnosenja"
+ * type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt; &amp;lt;element
+ * name="mesto"&amp;gt; &amp;lt;simpleType&amp;gt; &amp;lt;restriction
+ * base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt; &amp;lt;minLength
+ * value="1"/&amp;gt; &amp;lt;/restriction&amp;gt; &amp;lt;/simpleType&amp;gt;
+ * &amp;lt;/element&amp;gt; &amp;lt;element name="razlog_zalbe"&amp;gt;
+ * &amp;lt;simpleType&amp;gt; &amp;lt;restriction
+ * base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt; &amp;lt;enumeration
+ * value="nije postupio"/&amp;gt; &amp;lt;enumeration value="nije postupio u
+ * celosti"/&amp;gt; &amp;lt;enumeration value="nije postupio u zakonskom
+ * roku"/&amp;gt; &amp;lt;/restriction&amp;gt; &amp;lt;/simpleType&amp;gt;
+ * &amp;lt;/element&amp;gt; &amp;lt;/sequence&amp;gt;
+ * &amp;lt;/restriction&amp;gt; &amp;lt;/complexContent&amp;gt;
+ * &amp;lt;/complexType&amp;gt; &amp;lt;/element&amp;gt;
+ * &amp;lt;/sequence&amp;gt; &amp;lt;attribute name="broj_zalbe"&amp;gt;
+ * &amp;lt;simpleType&amp;gt; &amp;lt;restriction
+ * base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt; &amp;lt;minLength
+ * value="1"/&amp;gt; &amp;lt;/restriction&amp;gt; &amp;lt;/simpleType&amp;gt;
+ * &amp;lt;/attribute&amp;gt; &amp;lt;attribute name="broj_zahteva"&amp;gt;
+ * &amp;lt;simpleType&amp;gt; &amp;lt;restriction
+ * base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt; &amp;lt;minLength
+ * value="1"/&amp;gt; &amp;lt;/restriction&amp;gt; &amp;lt;/simpleType&amp;gt;
+ * &amp;lt;/attribute&amp;gt; &amp;lt;/restriction&amp;gt;
+ * &amp;lt;/complexContent&amp;gt; &amp;lt;/complexType&amp;gt; &lt;/pre&gt;
+ * 
+ * 
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
- "adresaPoverenika",
- "organProtivKojegJeZalba",
- "podaciOZahtevu",
- "podaciOZalbi"
-})
+@XmlType(name = "", propOrder = { "adresaPoverenika", "organProtivKojegJeZalba", "podaciOZahtevu", "podaciOZalbi" })
 @XmlRootElement(name = "zalba_na_cutanje")
 public class ZalbaNaCutanje {
 
- @XmlElement(name = "adresa_poverenika", required = true)
- protected TAdresa adresaPoverenika;
- @XmlElement(name = "organ_protiv_kojeg_je_zalba", required = true)
- protected TPravnoLice organProtivKojegJeZalba;
- @XmlElement(name = "podaci_o_zahtevu", required = true)
- protected ZalbaNaCutanje.PodaciOZahtevu podaciOZahtevu;
- @XmlElement(name = "podaci_o_zalbi", required = true)
- protected ZalbaNaCutanje.PodaciOZalbi podaciOZalbi;
- @XmlAttribute(name = "broj_zalbe")
- protected String brojZalbe;
- @XmlAttribute(name = "broj_zahteva")
- protected String brojZahteva;
+	@XmlElement(name = "adresa_poverenika", required = true)
+	protected TAdresa adresaPoverenika;
+	@XmlElement(name = "organ_protiv_kojeg_je_zalba", required = true)
+	protected TPravnoLice organProtivKojegJeZalba;
+	@XmlElement(name = "podaci_o_zahtevu", required = true)
+	protected ZalbaNaCutanje.PodaciOZahtevu podaciOZahtevu;
+	@XmlElement(name = "podaci_o_zalbi", required = true)
+	protected ZalbaNaCutanje.PodaciOZalbi podaciOZalbi;
+	@XmlAttribute(name = "broj_zalbe")
+	protected String brojZalbe;
+	@XmlAttribute(name = "broj_zahteva")
+	protected String brojZahteva;
 
- @Override
+	@Override
 	public String toString() {
 		String zalbaNaCutanje = String.format("Zalba na cutanje\nBroj zalbe je: %s\n", brojZalbe);
 		zalbaNaCutanje += "\nAdresa poverenika kojem se salje zalba:\n" + adresaPoverenika.toString();
@@ -162,327 +123,273 @@ public class ZalbaNaCutanje {
 		zalbaNaCutanje += podaciOZalbi.toString();
 		return zalbaNaCutanje;
 	}
- 
- /**
-  * Gets the value of the adresaPoverenika property.
-  * 
-  * @return
-  *     possible object is
-  *     {@link TAdresa }
-  *     
-  */
- public TAdresa getAdresaPoverenika() {
-     return adresaPoverenika;
- }
 
- /**
-  * Sets the value of the adresaPoverenika property.
-  * 
-  * @param value
-  *     allowed object is
-  *     {@link TAdresa }
-  *     
-  */
- public void setAdresaPoverenika(TAdresa value) {
-     this.adresaPoverenika = value;
- }
+	/**
+	 * Gets the value of the adresaPoverenika property.
+	 * 
+	 * @return possible object is {@link TAdresa }
+	 * 
+	 */
+	public TAdresa getAdresaPoverenika() {
+		return adresaPoverenika;
+	}
 
- /**
-  * Gets the value of the organProtivKojegJeZalba property.
-  * 
-  * @return
-  *     possible object is
-  *     {@link TPravnoLice }
-  *     
-  */
- public TPravnoLice getOrganProtivKojegJeZalba() {
-     return organProtivKojegJeZalba;
- }
+	/**
+	 * Sets the value of the adresaPoverenika property.
+	 * 
+	 * @param value allowed object is {@link TAdresa }
+	 * 
+	 */
+	public void setAdresaPoverenika(TAdresa value) {
+		this.adresaPoverenika = value;
+	}
 
- /**
-  * Sets the value of the organProtivKojegJeZalba property.
-  * 
-  * @param value
-  *     allowed object is
-  *     {@link TPravnoLice }
-  *     
-  */
- public void setOrganProtivKojegJeZalba(TPravnoLice value) {
-     this.organProtivKojegJeZalba = value;
- }
+	/**
+	 * Gets the value of the organProtivKojegJeZalba property.
+	 * 
+	 * @return possible object is {@link TPravnoLice }
+	 * 
+	 */
+	public TPravnoLice getOrganProtivKojegJeZalba() {
+		return organProtivKojegJeZalba;
+	}
 
- /**
-  * Gets the value of the podaciOZahtevu property.
-  * 
-  * @return
-  *     possible object is
-  *     {@link ZalbaNaCutanje.PodaciOZahtevu }
-  *     
-  */
- public ZalbaNaCutanje.PodaciOZahtevu getPodaciOZahtevu() {
-     return podaciOZahtevu;
- }
+	/**
+	 * Sets the value of the organProtivKojegJeZalba property.
+	 * 
+	 * @param value allowed object is {@link TPravnoLice }
+	 * 
+	 */
+	public void setOrganProtivKojegJeZalba(TPravnoLice value) {
+		this.organProtivKojegJeZalba = value;
+	}
 
- /**
-  * Sets the value of the podaciOZahtevu property.
-  * 
-  * @param value
-  *     allowed object is
-  *     {@link ZalbaNaCutanje.PodaciOZahtevu }
-  *     
-  */
- public void setPodaciOZahtevu(ZalbaNaCutanje.PodaciOZahtevu value) {
-     this.podaciOZahtevu = value;
- }
+	/**
+	 * Gets the value of the podaciOZahtevu property.
+	 * 
+	 * @return possible object is {@link ZalbaNaCutanje.PodaciOZahtevu }
+	 * 
+	 */
+	public ZalbaNaCutanje.PodaciOZahtevu getPodaciOZahtevu() {
+		return podaciOZahtevu;
+	}
 
- /**
-  * Gets the value of the podaciOZalbi property.
-  * 
-  * @return
-  *     possible object is
-  *     {@link ZalbaNaCutanje.PodaciOZalbi }
-  *     
-  */
- public ZalbaNaCutanje.PodaciOZalbi getPodaciOZalbi() {
-     return podaciOZalbi;
- }
+	/**
+	 * Sets the value of the podaciOZahtevu property.
+	 * 
+	 * @param value allowed object is {@link ZalbaNaCutanje.PodaciOZahtevu }
+	 * 
+	 */
+	public void setPodaciOZahtevu(ZalbaNaCutanje.PodaciOZahtevu value) {
+		this.podaciOZahtevu = value;
+	}
 
- /**
-  * Sets the value of the podaciOZalbi property.
-  * 
-  * @param value
-  *     allowed object is
-  *     {@link ZalbaNaCutanje.PodaciOZalbi }
-  *     
-  */
- public void setPodaciOZalbi(ZalbaNaCutanje.PodaciOZalbi value) {
-     this.podaciOZalbi = value;
- }
+	/**
+	 * Gets the value of the podaciOZalbi property.
+	 * 
+	 * @return possible object is {@link ZalbaNaCutanje.PodaciOZalbi }
+	 * 
+	 */
+	public ZalbaNaCutanje.PodaciOZalbi getPodaciOZalbi() {
+		return podaciOZalbi;
+	}
 
- /**
-  * Gets the value of the brojZalbe property.
-  * 
-  * @return
-  *     possible object is
-  *     {@link String }
-  *     
-  */
- public String getBrojZalbe() {
-     return brojZalbe;
- }
+	/**
+	 * Sets the value of the podaciOZalbi property.
+	 * 
+	 * @param value allowed object is {@link ZalbaNaCutanje.PodaciOZalbi }
+	 * 
+	 */
+	public void setPodaciOZalbi(ZalbaNaCutanje.PodaciOZalbi value) {
+		this.podaciOZalbi = value;
+	}
 
- /**
-  * Sets the value of the brojZalbe property.
-  * 
-  * @param value
-  *     allowed object is
-  *     {@link String }
-  *     
-  */
- public void setBrojZalbe(String value) {
-     this.brojZalbe = value;
- }
+	/**
+	 * Gets the value of the brojZalbe property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getBrojZalbe() {
+		return brojZalbe;
+	}
 
- /**
-  * Gets the value of the brojZahteva property.
-  * 
-  * @return
-  *     possible object is
-  *     {@link String }
-  *     
-  */
- public String getBrojZahteva() {
-     return brojZahteva;
- }
+	/**
+	 * Sets the value of the brojZalbe property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setBrojZalbe(String value) {
+		this.brojZalbe = value;
+	}
 
- /**
-  * Sets the value of the brojZahteva property.
-  * 
-  * @param value
-  *     allowed object is
-  *     {@link String }
-  *     
-  */
- public void setBrojZahteva(String value) {
-     this.brojZahteva = value;
- }
+	/**
+	 * Gets the value of the brojZahteva property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getBrojZahteva() {
+		return brojZahteva;
+	}
 
+	/**
+	 * Sets the value of the brojZahteva property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setBrojZahteva(String value) {
+		this.brojZahteva = value;
+	}
 
- /**
-  * &lt;p&gt;Java class for anonymous complex type.
-  * 
-  * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-  * 
-  * &lt;pre&gt;
-  * &amp;lt;complexType&amp;gt;
-  *   &amp;lt;complexContent&amp;gt;
-  *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-  *       &amp;lt;sequence&amp;gt;
-  *         &amp;lt;element name="informacije"&amp;gt;
-  *           &amp;lt;simpleType&amp;gt;
-  *             &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-  *               &amp;lt;minLength value="1"/&amp;gt;
-  *             &amp;lt;/restriction&amp;gt;
-  *           &amp;lt;/simpleType&amp;gt;
-  *         &amp;lt;/element&amp;gt;
-  *         &amp;lt;element name="datum" type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt;
-  *         &amp;lt;element name="zahtevi"&amp;gt;
-  *           &amp;lt;complexType&amp;gt;
-  *             &amp;lt;complexContent&amp;gt;
-  *               &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-  *                 &amp;lt;sequence&amp;gt;
-  *                   &amp;lt;element name="uvid" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-  *                   &amp;lt;element name="kopija" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-  *                   &amp;lt;element name="dostava" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-  *                   &amp;lt;element name="posedovanje" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-  *                 &amp;lt;/sequence&amp;gt;
-  *               &amp;lt;/restriction&amp;gt;
-  *             &amp;lt;/complexContent&amp;gt;
-  *           &amp;lt;/complexType&amp;gt;
-  *         &amp;lt;/element&amp;gt;
-  *       &amp;lt;/sequence&amp;gt;
-  *     &amp;lt;/restriction&amp;gt;
-  *   &amp;lt;/complexContent&amp;gt;
-  * &amp;lt;/complexType&amp;gt;
-  * &lt;/pre&gt;
-  * 
-  * 
-  */
- @NoArgsConstructor
- @XmlAccessorType(XmlAccessType.FIELD)
- @XmlType(name = "", propOrder = {
-     "informacije",
-     "datum",
-     "zahtevi"
- })
- public static class PodaciOZahtevu {
+	/**
+	 * &lt;p&gt;Java class for anonymous complex type.
+	 * 
+	 * &lt;p&gt;The following schema fragment specifies the expected content
+	 * contained within this class.
+	 * 
+	 * &lt;pre&gt; &amp;lt;complexType&amp;gt; &amp;lt;complexContent&amp;gt;
+	 * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+	 * &amp;lt;sequence&amp;gt; &amp;lt;element name="informacije"&amp;gt;
+	 * &amp;lt;simpleType&amp;gt; &amp;lt;restriction
+	 * base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt; &amp;lt;minLength
+	 * value="1"/&amp;gt; &amp;lt;/restriction&amp;gt; &amp;lt;/simpleType&amp;gt;
+	 * &amp;lt;/element&amp;gt; &amp;lt;element name="datum"
+	 * type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt; &amp;lt;element
+	 * name="zahtevi"&amp;gt; &amp;lt;complexType&amp;gt;
+	 * &amp;lt;complexContent&amp;gt; &amp;lt;restriction
+	 * base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+	 * &amp;lt;sequence&amp;gt; &amp;lt;element name="uvid"
+	 * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+	 * &amp;lt;element name="kopija"
+	 * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+	 * &amp;lt;element name="dostava"
+	 * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+	 * &amp;lt;element name="posedovanje"
+	 * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+	 * &amp;lt;/sequence&amp;gt; &amp;lt;/restriction&amp;gt;
+	 * &amp;lt;/complexContent&amp;gt; &amp;lt;/complexType&amp;gt;
+	 * &amp;lt;/element&amp;gt; &amp;lt;/sequence&amp;gt;
+	 * &amp;lt;/restriction&amp;gt; &amp;lt;/complexContent&amp;gt;
+	 * &amp;lt;/complexType&amp;gt; &lt;/pre&gt;
+	 * 
+	 * 
+	 */
+	@NoArgsConstructor
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "", propOrder = { "informacije", "datum", "zahtevi" })
+	public static class PodaciOZahtevu {
 
-     @XmlElement(required = true)
-     protected String informacije;
-     @XmlElement(required = true)
-     @XmlSchemaType(name = "date")
-     protected XMLGregorianCalendar datum;
-     @XmlElement(required = true)
-     protected ZalbaNaCutanje.PodaciOZahtevu.Zahtevi zahtevi;
+		@XmlElement(required = true)
+		protected String informacije;
+		@XmlElement(required = true)
+		@XmlSchemaType(name = "date")
+		protected XMLGregorianCalendar datum;
+		@XmlElement(required = true)
+		protected ZalbaNaCutanje.PodaciOZahtevu.Zahtevi zahtevi;
 
-     @Override
+		@Override
 		public String toString() {
-			String podaciOZahtevu = String.format("\nPodaci o zahtevu:\nInformacije: %s\nDatum podnosenja zahteva: %s\n", informacije, datum);
+			String podaciOZahtevu = String
+					.format("\nPodaci o zahtevu:\nInformacije: %s\nDatum podnosenja zahteva: %s\n", informacije, datum);
 			podaciOZahtevu += "Zahtevi:" + zahtevi.toString() + "\n";
 			return podaciOZahtevu;
 		}
-     
-     /**
-      * Gets the value of the informacije property.
-      * 
-      * @return
-      *     possible object is
-      *     {@link String }
-      *     
-      */
-     public String getInformacije() {
-         return informacije;
-     }
 
-     /**
-      * Sets the value of the informacije property.
-      * 
-      * @param value
-      *     allowed object is
-      *     {@link String }
-      *     
-      */
-     public void setInformacije(String value) {
-         this.informacije = value;
-     }
+		/**
+		 * Gets the value of the informacije property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getInformacije() {
+			return informacije;
+		}
 
-     /**
-      * Gets the value of the datum property.
-      * 
-      * @return
-      *     possible object is
-      *     {@link XMLGregorianCalendar }
-      *     
-      */
-     public XMLGregorianCalendar getDatum() {
-         return datum;
-     }
+		/**
+		 * Sets the value of the informacije property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setInformacije(String value) {
+			this.informacije = value;
+		}
 
-     /**
-      * Sets the value of the datum property.
-      * 
-      * @param value
-      *     allowed object is
-      *     {@link XMLGregorianCalendar }
-      *     
-      */
-     public void setDatum(XMLGregorianCalendar value) {
-         this.datum = value;
-     }
+		/**
+		 * Gets the value of the datum property.
+		 * 
+		 * @return possible object is {@link XMLGregorianCalendar }
+		 * 
+		 */
+		public XMLGregorianCalendar getDatum() {
+			return datum;
+		}
 
-     /**
-      * Gets the value of the zahtevi property.
-      * 
-      * @return
-      *     possible object is
-      *     {@link ZalbaNaCutanje.PodaciOZahtevu.Zahtevi }
-      *     
-      */
-     public ZalbaNaCutanje.PodaciOZahtevu.Zahtevi getZahtevi() {
-         return zahtevi;
-     }
+		/**
+		 * Sets the value of the datum property.
+		 * 
+		 * @param value allowed object is {@link XMLGregorianCalendar }
+		 * 
+		 */
+		public void setDatum(XMLGregorianCalendar value) {
+			this.datum = value;
+		}
 
-     /**
-      * Sets the value of the zahtevi property.
-      * 
-      * @param value
-      *     allowed object is
-      *     {@link ZalbaNaCutanje.PodaciOZahtevu.Zahtevi }
-      *     
-      */
-     public void setZahtevi(ZalbaNaCutanje.PodaciOZahtevu.Zahtevi value) {
-         this.zahtevi = value;
-     }
+		/**
+		 * Gets the value of the zahtevi property.
+		 * 
+		 * @return possible object is {@link ZalbaNaCutanje.PodaciOZahtevu.Zahtevi }
+		 * 
+		 */
+		public ZalbaNaCutanje.PodaciOZahtevu.Zahtevi getZahtevi() {
+			return zahtevi;
+		}
 
+		/**
+		 * Sets the value of the zahtevi property.
+		 * 
+		 * @param value allowed object is {@link ZalbaNaCutanje.PodaciOZahtevu.Zahtevi }
+		 * 
+		 */
+		public void setZahtevi(ZalbaNaCutanje.PodaciOZahtevu.Zahtevi value) {
+			this.zahtevi = value;
+		}
 
-     /**
-      * &lt;p&gt;Java class for anonymous complex type.
-      * 
-      * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-      * 
-      * &lt;pre&gt;
-      * &amp;lt;complexType&amp;gt;
-      *   &amp;lt;complexContent&amp;gt;
-      *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-      *       &amp;lt;sequence&amp;gt;
-      *         &amp;lt;element name="uvid" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-      *         &amp;lt;element name="kopija" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-      *         &amp;lt;element name="dostava" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-      *         &amp;lt;element name="posedovanje" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
-      *       &amp;lt;/sequence&amp;gt;
-      *     &amp;lt;/restriction&amp;gt;
-      *   &amp;lt;/complexContent&amp;gt;
-      * &amp;lt;/complexType&amp;gt;
-      * &lt;/pre&gt;
-      * 
-      * 
-      */
-     @NoArgsConstructor
-     @XmlAccessorType(XmlAccessType.FIELD)
-     @XmlType(name = "", propOrder = {
-         "uvid",
-         "kopija",
-         "dostava",
-         "posedovanje"
-     })
-     public static class Zahtevi {
+		/**
+		 * &lt;p&gt;Java class for anonymous complex type.
+		 * 
+		 * &lt;p&gt;The following schema fragment specifies the expected content
+		 * contained within this class.
+		 * 
+		 * &lt;pre&gt; &amp;lt;complexType&amp;gt; &amp;lt;complexContent&amp;gt;
+		 * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+		 * &amp;lt;sequence&amp;gt; &amp;lt;element name="uvid"
+		 * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+		 * &amp;lt;element name="kopija"
+		 * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+		 * &amp;lt;element name="dostava"
+		 * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+		 * &amp;lt;element name="posedovanje"
+		 * type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/&amp;gt;
+		 * &amp;lt;/sequence&amp;gt; &amp;lt;/restriction&amp;gt;
+		 * &amp;lt;/complexContent&amp;gt; &amp;lt;/complexType&amp;gt; &lt;/pre&gt;
+		 * 
+		 * 
+		 */
+		@NoArgsConstructor
+		@XmlAccessorType(XmlAccessType.FIELD)
+		@XmlType(name = "", propOrder = { "uvid", "kopija", "dostava", "posedovanje" })
+		public static class Zahtevi {
 
-         protected Object uvid;
-         protected Object kopija;
-         protected Object dostava;
-         protected Object posedovanje;
+			protected Object uvid;
+			protected Object kopija;
+			protected Object dostava;
+			protected Object posedovanje;
 
-         @Override
+			@Override
 			public String toString() {
 				String zahtevi = " ";
 				if (uvid != null) {
@@ -499,182 +406,143 @@ public class ZalbaNaCutanje {
 				}
 				return zahtevi;
 			}
-         
-         /**
-          * Gets the value of the uvid property.
-          * 
-          * @return
-          *     possible object is
-          *     {@link Object }
-          *     
-          */
-         public Object getUvid() {
-             return uvid;
-         }
 
-         /**
-          * Sets the value of the uvid property.
-          * 
-          * @param value
-          *     allowed object is
-          *     {@link Object }
-          *     
-          */
-         public void setUvid(Object value) {
-             this.uvid = value;
-         }
+			/**
+			 * Gets the value of the uvid property.
+			 * 
+			 * @return possible object is {@link Object }
+			 * 
+			 */
+			public Object getUvid() {
+				return uvid;
+			}
 
-         /**
-          * Gets the value of the kopija property.
-          * 
-          * @return
-          *     possible object is
-          *     {@link Object }
-          *     
-          */
-         public Object getKopija() {
-             return kopija;
-         }
+			/**
+			 * Sets the value of the uvid property.
+			 * 
+			 * @param value allowed object is {@link Object }
+			 * 
+			 */
+			public void setUvid(Object value) {
+				this.uvid = value;
+			}
 
-         /**
-          * Sets the value of the kopija property.
-          * 
-          * @param value
-          *     allowed object is
-          *     {@link Object }
-          *     
-          */
-         public void setKopija(Object value) {
-             this.kopija = value;
-         }
+			/**
+			 * Gets the value of the kopija property.
+			 * 
+			 * @return possible object is {@link Object }
+			 * 
+			 */
+			public Object getKopija() {
+				return kopija;
+			}
 
-         /**
-          * Gets the value of the dostava property.
-          * 
-          * @return
-          *     possible object is
-          *     {@link Object }
-          *     
-          */
-         public Object getDostava() {
-             return dostava;
-         }
+			/**
+			 * Sets the value of the kopija property.
+			 * 
+			 * @param value allowed object is {@link Object }
+			 * 
+			 */
+			public void setKopija(Object value) {
+				this.kopija = value;
+			}
 
-         /**
-          * Sets the value of the dostava property.
-          * 
-          * @param value
-          *     allowed object is
-          *     {@link Object }
-          *     
-          */
-         public void setDostava(Object value) {
-             this.dostava = value;
-         }
+			/**
+			 * Gets the value of the dostava property.
+			 * 
+			 * @return possible object is {@link Object }
+			 * 
+			 */
+			public Object getDostava() {
+				return dostava;
+			}
 
-         /**
-          * Gets the value of the posedovanje property.
-          * 
-          * @return
-          *     possible object is
-          *     {@link Object }
-          *     
-          */
-         public Object getPosedovanje() {
-             return posedovanje;
-         }
+			/**
+			 * Sets the value of the dostava property.
+			 * 
+			 * @param value allowed object is {@link Object }
+			 * 
+			 */
+			public void setDostava(Object value) {
+				this.dostava = value;
+			}
 
-         /**
-          * Sets the value of the posedovanje property.
-          * 
-          * @param value
-          *     allowed object is
-          *     {@link Object }
-          *     
-          */
-         public void setPosedovanje(Object value) {
-             this.posedovanje = value;
-         }
+			/**
+			 * Gets the value of the posedovanje property.
+			 * 
+			 * @return possible object is {@link Object }
+			 * 
+			 */
+			public Object getPosedovanje() {
+				return posedovanje;
+			}
 
-     }
+			/**
+			 * Sets the value of the posedovanje property.
+			 * 
+			 * @param value allowed object is {@link Object }
+			 * 
+			 */
+			public void setPosedovanje(Object value) {
+				this.posedovanje = value;
+			}
 
- }
+		}
 
+	}
 
- /**
-  * &lt;p&gt;Java class for anonymous complex type.
-  * 
-  * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-  * 
-  * &lt;pre&gt;
-  * &amp;lt;complexType&amp;gt;
-  *   &amp;lt;complexContent&amp;gt;
-  *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-  *       &amp;lt;sequence&amp;gt;
-  *         &amp;lt;element name="podnosilac_zalbe"&amp;gt;
-  *           &amp;lt;complexType&amp;gt;
-  *             &amp;lt;complexContent&amp;gt;
-  *               &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-  *                 &amp;lt;sequence&amp;gt;
-  *                   &amp;lt;element name="lice" type="{http://www.projekat.org/zalba_cutanja}TLice"/&amp;gt;
-  *                   &amp;lt;element name="drugi_podaci_za_kontakt"&amp;gt;
-  *                     &amp;lt;simpleType&amp;gt;
-  *                       &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-  *                         &amp;lt;minLength value="1"/&amp;gt;
-  *                       &amp;lt;/restriction&amp;gt;
-  *                     &amp;lt;/simpleType&amp;gt;
-  *                   &amp;lt;/element&amp;gt;
-  *                 &amp;lt;/sequence&amp;gt;
-  *               &amp;lt;/restriction&amp;gt;
-  *             &amp;lt;/complexContent&amp;gt;
-  *           &amp;lt;/complexType&amp;gt;
-  *         &amp;lt;/element&amp;gt;
-  *         &amp;lt;element name="datum_podnosenja" type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt;
-  *         &amp;lt;element name="mesto"&amp;gt;
-  *           &amp;lt;simpleType&amp;gt;
-  *             &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-  *               &amp;lt;minLength value="1"/&amp;gt;
-  *             &amp;lt;/restriction&amp;gt;
-  *           &amp;lt;/simpleType&amp;gt;
-  *         &amp;lt;/element&amp;gt;
-  *         &amp;lt;element name="razlog_zalbe"&amp;gt;
-  *           &amp;lt;simpleType&amp;gt;
-  *             &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-  *               &amp;lt;enumeration value="nije postupio"/&amp;gt;
-  *               &amp;lt;enumeration value="nije postupio u celosti"/&amp;gt;
-  *               &amp;lt;enumeration value="nije postupio u zakonskom roku"/&amp;gt;
-  *             &amp;lt;/restriction&amp;gt;
-  *           &amp;lt;/simpleType&amp;gt;
-  *         &amp;lt;/element&amp;gt;
-  *       &amp;lt;/sequence&amp;gt;
-  *     &amp;lt;/restriction&amp;gt;
-  *   &amp;lt;/complexContent&amp;gt;
-  * &amp;lt;/complexType&amp;gt;
-  * &lt;/pre&gt;
-  * 
-  * 
-  */
- @NoArgsConstructor
- @XmlAccessorType(XmlAccessType.FIELD)
- @XmlType(name = "", propOrder = {
-     "podnosilacZalbe",
-     "datumPodnosenja",
-     "mesto",
-     "razlogZalbe"
- })
- public static class PodaciOZalbi {
+	/**
+	 * &lt;p&gt;Java class for anonymous complex type.
+	 * 
+	 * &lt;p&gt;The following schema fragment specifies the expected content
+	 * contained within this class.
+	 * 
+	 * &lt;pre&gt; &amp;lt;complexType&amp;gt; &amp;lt;complexContent&amp;gt;
+	 * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+	 * &amp;lt;sequence&amp;gt; &amp;lt;element name="podnosilac_zalbe"&amp;gt;
+	 * &amp;lt;complexType&amp;gt; &amp;lt;complexContent&amp;gt;
+	 * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+	 * &amp;lt;sequence&amp;gt; &amp;lt;element name="lice"
+	 * type="{http://www.projekat.org/zalba_cutanja}TLice"/&amp;gt; &amp;lt;element
+	 * name="drugi_podaci_za_kontakt"&amp;gt; &amp;lt;simpleType&amp;gt;
+	 * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+	 * &amp;lt;minLength value="1"/&amp;gt; &amp;lt;/restriction&amp;gt;
+	 * &amp;lt;/simpleType&amp;gt; &amp;lt;/element&amp;gt;
+	 * &amp;lt;/sequence&amp;gt; &amp;lt;/restriction&amp;gt;
+	 * &amp;lt;/complexContent&amp;gt; &amp;lt;/complexType&amp;gt;
+	 * &amp;lt;/element&amp;gt; &amp;lt;element name="datum_podnosenja"
+	 * type="{http://www.w3.org/2001/XMLSchema}date"/&amp;gt; &amp;lt;element
+	 * name="mesto"&amp;gt; &amp;lt;simpleType&amp;gt; &amp;lt;restriction
+	 * base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt; &amp;lt;minLength
+	 * value="1"/&amp;gt; &amp;lt;/restriction&amp;gt; &amp;lt;/simpleType&amp;gt;
+	 * &amp;lt;/element&amp;gt; &amp;lt;element name="razlog_zalbe"&amp;gt;
+	 * &amp;lt;simpleType&amp;gt; &amp;lt;restriction
+	 * base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt; &amp;lt;enumeration
+	 * value="nije postupio"/&amp;gt; &amp;lt;enumeration value="nije postupio u
+	 * celosti"/&amp;gt; &amp;lt;enumeration value="nije postupio u zakonskom
+	 * roku"/&amp;gt; &amp;lt;/restriction&amp;gt; &amp;lt;/simpleType&amp;gt;
+	 * &amp;lt;/element&amp;gt; &amp;lt;/sequence&amp;gt;
+	 * &amp;lt;/restriction&amp;gt; &amp;lt;/complexContent&amp;gt;
+	 * &amp;lt;/complexType&amp;gt; &lt;/pre&gt;
+	 * 
+	 * 
+	 */
+	@NoArgsConstructor
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "", propOrder = { "podnosilacZalbe", "datumPodnosenja", "mesto", "razlogZalbe" })
+	public static class PodaciOZalbi {
 
-     @XmlElement(name = "podnosilac_zalbe", required = true)
-     protected ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe podnosilacZalbe;
-     @XmlElement(name = "datum_podnosenja", required = true)
-     @XmlSchemaType(name = "date")
-     protected XMLGregorianCalendar datumPodnosenja;
-     @XmlElement(required = true)
-     protected String mesto;
-     @XmlElement(name = "razlog_zalbe", required = true)
-     protected String razlogZalbe;
+		@XmlElement(name = "podnosilac_zalbe", required = true)
+		protected ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe podnosilacZalbe;
+		@XmlElement(name = "datum_podnosenja", required = true)
+		@XmlSchemaType(name = "date")
+		protected XMLGregorianCalendar datumPodnosenja;
+		@XmlElement(required = true)
+		protected String mesto;
+		@XmlElement(name = "razlog_zalbe", required = true)
+		protected String razlogZalbe;
 
-     @Override
+		@Override
 		public String toString() {
 			String podaci = String.format("\nPodaci o zalbi:");
 			podaci += "\nPodnosilac zalbe:\n" + podnosilacZalbe.toString();
@@ -683,200 +551,167 @@ public class ZalbaNaCutanje {
 			podaci += "\nRazlog: " + razlogZalbe;
 			return podaci;
 		}
-     
-     /**
-      * Gets the value of the podnosilacZalbe property.
-      * 
-      * @return
-      *     possible object is
-      *     {@link ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe }
-      *     
-      */
-     public ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe getPodnosilacZalbe() {
-         return podnosilacZalbe;
-     }
 
-     /**
-      * Sets the value of the podnosilacZalbe property.
-      * 
-      * @param value
-      *     allowed object is
-      *     {@link ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe }
-      *     
-      */
-     public void setPodnosilacZalbe(ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe value) {
-         this.podnosilacZalbe = value;
-     }
+		/**
+		 * Gets the value of the podnosilacZalbe property.
+		 * 
+		 * @return possible object is
+		 *         {@link ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe }
+		 * 
+		 */
+		public ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe getPodnosilacZalbe() {
+			return podnosilacZalbe;
+		}
 
-     /**
-      * Gets the value of the datumPodnosenja property.
-      * 
-      * @return
-      *     possible object is
-      *     {@link XMLGregorianCalendar }
-      *     
-      */
-     public XMLGregorianCalendar getDatumPodnosenja() {
-         return datumPodnosenja;
-     }
+		/**
+		 * Sets the value of the podnosilacZalbe property.
+		 * 
+		 * @param value allowed object is
+		 *              {@link ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe }
+		 * 
+		 */
+		public void setPodnosilacZalbe(ZalbaNaCutanje.PodaciOZalbi.PodnosilacZalbe value) {
+			this.podnosilacZalbe = value;
+		}
 
-     /**
-      * Sets the value of the datumPodnosenja property.
-      * 
-      * @param value
-      *     allowed object is
-      *     {@link XMLGregorianCalendar }
-      *     
-      */
-     public void setDatumPodnosenja(XMLGregorianCalendar value) {
-         this.datumPodnosenja = value;
-     }
+		/**
+		 * Gets the value of the datumPodnosenja property.
+		 * 
+		 * @return possible object is {@link XMLGregorianCalendar }
+		 * 
+		 */
+		public XMLGregorianCalendar getDatumPodnosenja() {
+			return datumPodnosenja;
+		}
 
-     /**
-      * Gets the value of the mesto property.
-      * 
-      * @return
-      *     possible object is
-      *     {@link String }
-      *     
-      */
-     public String getMesto() {
-         return mesto;
-     }
+		/**
+		 * Sets the value of the datumPodnosenja property.
+		 * 
+		 * @param value allowed object is {@link XMLGregorianCalendar }
+		 * 
+		 */
+		public void setDatumPodnosenja(XMLGregorianCalendar value) {
+			this.datumPodnosenja = value;
+		}
 
-     /**
-      * Sets the value of the mesto property.
-      * 
-      * @param value
-      *     allowed object is
-      *     {@link String }
-      *     
-      */
-     public void setMesto(String value) {
-         this.mesto = value;
-     }
+		/**
+		 * Gets the value of the mesto property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getMesto() {
+			return mesto;
+		}
 
-     /**
-      * Gets the value of the razlogZalbe property.
-      * 
-      * @return
-      *     possible object is
-      *     {@link String }
-      *     
-      */
-     public String getRazlogZalbe() {
-         return razlogZalbe;
-     }
+		/**
+		 * Sets the value of the mesto property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setMesto(String value) {
+			this.mesto = value;
+		}
 
-     /**
-      * Sets the value of the razlogZalbe property.
-      * 
-      * @param value
-      *     allowed object is
-      *     {@link String }
-      *     
-      */
-     public void setRazlogZalbe(String value) {
-         this.razlogZalbe = value;
-     }
+		/**
+		 * Gets the value of the razlogZalbe property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getRazlogZalbe() {
+			return razlogZalbe;
+		}
 
+		/**
+		 * Sets the value of the razlogZalbe property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setRazlogZalbe(String value) {
+			this.razlogZalbe = value;
+		}
 
-     /**
-      * &lt;p&gt;Java class for anonymous complex type.
-      * 
-      * &lt;p&gt;The following schema fragment specifies the expected content contained within this class.
-      * 
-      * &lt;pre&gt;
-      * &amp;lt;complexType&amp;gt;
-      *   &amp;lt;complexContent&amp;gt;
-      *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
-      *       &amp;lt;sequence&amp;gt;
-      *         &amp;lt;element name="lice" type="{http://www.projekat.org/zalba_cutanja}TLice"/&amp;gt;
-      *         &amp;lt;element name="drugi_podaci_za_kontakt"&amp;gt;
-      *           &amp;lt;simpleType&amp;gt;
-      *             &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
-      *               &amp;lt;minLength value="1"/&amp;gt;
-      *             &amp;lt;/restriction&amp;gt;
-      *           &amp;lt;/simpleType&amp;gt;
-      *         &amp;lt;/element&amp;gt;
-      *       &amp;lt;/sequence&amp;gt;
-      *     &amp;lt;/restriction&amp;gt;
-      *   &amp;lt;/complexContent&amp;gt;
-      * &amp;lt;/complexType&amp;gt;
-      * &lt;/pre&gt;
-      * 
-      * 
-      */
-     @NoArgsConstructor
-     @XmlAccessorType(XmlAccessType.FIELD)
-     @XmlType(name = "", propOrder = {
-         "lice",
-         "drugiPodaciZaKontakt"
-     })
-     public static class PodnosilacZalbe {
+		/**
+		 * &lt;p&gt;Java class for anonymous complex type.
+		 * 
+		 * &lt;p&gt;The following schema fragment specifies the expected content
+		 * contained within this class.
+		 * 
+		 * &lt;pre&gt; &amp;lt;complexType&amp;gt; &amp;lt;complexContent&amp;gt;
+		 * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
+		 * &amp;lt;sequence&amp;gt; &amp;lt;element name="lice"
+		 * type="{http://www.projekat.org/zalba_cutanja}TLice"/&amp;gt; &amp;lt;element
+		 * name="drugi_podaci_za_kontakt"&amp;gt; &amp;lt;simpleType&amp;gt;
+		 * &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
+		 * &amp;lt;minLength value="1"/&amp;gt; &amp;lt;/restriction&amp;gt;
+		 * &amp;lt;/simpleType&amp;gt; &amp;lt;/element&amp;gt;
+		 * &amp;lt;/sequence&amp;gt; &amp;lt;/restriction&amp;gt;
+		 * &amp;lt;/complexContent&amp;gt; &amp;lt;/complexType&amp;gt; &lt;/pre&gt;
+		 * 
+		 * 
+		 */
+		@NoArgsConstructor
+		@XmlAccessorType(XmlAccessType.FIELD)
+		@XmlType(name = "", propOrder = { "lice", "drugiPodaciZaKontakt" })
+		public static class PodnosilacZalbe {
 
-         @XmlElement(required = true)
-         protected TLice lice;
-         @XmlElement(name = "drugi_podaci_za_kontakt", required = true)
-         protected String drugiPodaciZaKontakt;
+			@XmlElement(required = true)
+			protected TLice lice;
+			@XmlElement(name = "drugi_podaci_za_kontakt", required = true)
+			protected String drugiPodaciZaKontakt;
 
-         @Override
- 		public String toString() {
- 			String podnosilac = lice.toString();
- 			podnosilac += "Drugi podaci za kontakt: " + drugiPodaciZaKontakt + "\n";
- 			return podnosilac;
- 		}
-         
-         /**
-          * Gets the value of the lice property.
-          * 
-          * @return
-          *     possible object is
-          *     {@link TLice }
-          *     
-          */
-         public TLice getLice() {
-             return lice;
-         }
+			@Override
+			public String toString() {
+				String podnosilac = lice.toString();
+				podnosilac += "Drugi podaci za kontakt: " + drugiPodaciZaKontakt + "\n";
+				return podnosilac;
+			}
 
-         /**
-          * Sets the value of the lice property.
-          * 
-          * @param value
-          *     allowed object is
-          *     {@link TLice }
-          *     
-          */
-         public void setLice(TLice value) {
-             this.lice = value;
-         }
+			/**
+			 * Gets the value of the lice property.
+			 * 
+			 * @return possible object is {@link TLice }
+			 * 
+			 */
+			public TLice getLice() {
+				return lice;
+			}
 
-         /**
-          * Gets the value of the drugiPodaciZaKontakt property.
-          * 
-          * @return
-          *     possible object is
-          *     {@link String }
-          *     
-          */
-         public String getDrugiPodaciZaKontakt() {
-             return drugiPodaciZaKontakt;
-         }
+			/**
+			 * Sets the value of the lice property.
+			 * 
+			 * @param value allowed object is {@link TLice }
+			 * 
+			 */
+			public void setLice(TLice value) {
+				this.lice = value;
+			}
 
-         /**
-          * Sets the value of the drugiPodaciZaKontakt property.
-          * 
-          * @param value
-          *     allowed object is
-          *     {@link String }
-          *     
-          */
-         public void setDrugiPodaciZaKontakt(String value) {
-             this.drugiPodaciZaKontakt = value;
-         }
+			/**
+			 * Gets the value of the drugiPodaciZaKontakt property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getDrugiPodaciZaKontakt() {
+				return drugiPodaciZaKontakt;
+			}
 
-     }
+			/**
+			 * Sets the value of the drugiPodaciZaKontakt property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setDrugiPodaciZaKontakt(String value) {
+				this.drugiPodaciZaKontakt = value;
+			}
 
- }
+		}
+
+	}
 
 }

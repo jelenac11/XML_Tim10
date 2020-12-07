@@ -17,16 +17,16 @@ import javax.xml.validation.SchemaFactory;
 import org.springframework.stereotype.Repository;
 import org.xml.sax.SAXException;
 
-import projectXML.team9.models.zalbaCutanje.ZalbaNaCutanje;
+import projectXML.team9.models.zalbaNaOdluku.ZalbaNaOdluku;
 
 @Repository
-public class ZalbaCutanjeRepository {
+public class ZalbaNaOdlukuRepository {
 
-	private static String documentPath = "src/main/resources/static/XMLDocuments/ZalbeCutanje/";
-	private static String schemaPath = "src/main/resources/static/schemas/zalba_cutanja.xsd";
+	private static String documentPath = "src/main/resources/static/XMLDocuments/ZalbeNaOdluku/";
+	private static String schemaPath = "src/main/resources/static/schemas/zalba_na_odluku.xsd";
 
-	public ZalbaNaCutanje loadDocument(String name) throws SAXException, JAXBException {
-		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.zalbaCutanje");
+	public ZalbaNaOdluku loadDocument(String name) throws SAXException, JAXBException {
+		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.zalbaNaOdluku");
 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
@@ -34,12 +34,12 @@ public class ZalbaCutanjeRepository {
 		Schema schema = schemaFactory.newSchema(new File(schemaPath));
 		unmarshaller.setSchema(schema);
 
-		ZalbaNaCutanje zalbaNaCutanje = (ZalbaNaCutanje) unmarshaller.unmarshal(new File(documentPath + name + ".xml"));
-		return zalbaNaCutanje;
+		ZalbaNaOdluku zalbaNaOdluku = (ZalbaNaOdluku) unmarshaller.unmarshal(new File(documentPath + name + ".xml"));
+		return zalbaNaOdluku;
 	}
 
-	public void save(ZalbaNaCutanje zalba) throws JAXBException, SAXException, IOException {
-		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.zalbaCutanje");
+	public void save(ZalbaNaOdluku zalba) throws JAXBException, SAXException, IOException {
+		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.zalbaNaOdluku");
 
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = schemaFactory.newSchema(new File(schemaPath));
@@ -48,10 +48,10 @@ public class ZalbaCutanjeRepository {
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		marshaller.setSchema(schema);
 		
-		OutputStream os = new FileOutputStream( documentPath + "nova_zalba_cutanja.xml" );
+		OutputStream os = new FileOutputStream( documentPath + "nova_zalba_na_odluku.xml" );
 
-		zalba.getPodaciOZahtevu().getDatum().setTimezone(DatatypeConstants.FIELD_UNDEFINED);
-		zalba.getPodaciOZahtevu().getDatum().setTime(DatatypeConstants.FIELD_UNDEFINED,
+		zalba.getDatumZahteva().setTimezone(DatatypeConstants.FIELD_UNDEFINED);
+		zalba.getDatumZahteva().setTime(DatatypeConstants.FIELD_UNDEFINED,
 			       DatatypeConstants.FIELD_UNDEFINED,
 			       DatatypeConstants.FIELD_UNDEFINED,
 			       DatatypeConstants.FIELD_UNDEFINED);
