@@ -26,33 +26,59 @@
         <datum_trazenja_informacija>2012-05-12</datum_trazenja_informacija>
         <opis_trazene_informacije>neka trazena informacija nemam pojma ajsjksjak</opis_trazene_informacije>
     </zahtev>
-    
-    <informacije_o_uvidu status="true">
-        <datum_uvida>2020-12-02</datum_uvida>
-        <vreme_uvida>
-            <interval_uvida>
-                <od>09</od>
-                <do>15</do>
-            </interval_uvida>
-        </vreme_uvida>
-        <mesto_uvida>
-            <mesto>RNGlovac</mesto>
-            <ulica>RNG ulica</ulica>
-            <broj>2</broj>
-            <kancelarija>18a</kancelarija>
-        </mesto_uvida>
-    </informacije_o_uvidu>
-    
-    <informacije_o_posedovanju status="true" poseduje="true"/>
-    
-    <informacije_o_dostavljanju_dokumenta status="true">
+    <odgovor_na_zahtev>
         <uplata_troskova>
-            <primalac>Budzet RS</primalac>
-            <racun>123-123456789-12</racun>
-            <iznos>25656.02</iznos>
-            <poziv_na_broj>97</poziv_na_broj>
+            <uplatnica>
+                <primalac>Budzet RS</primalac>
+                <racun>123-123456789-12</racun>
+                <iznos>884.00</iznos>
+                <poziv_na_broj>97</poziv_na_broj>
+            </uplatnica>
+            <troskovi>
+                <trosak>
+                    <stavka>CD</stavka>
+                    <kolicina>2</kolicina>
+                    <jedinicna_cijena>40</jedinicna_cijena>
+                </trosak>
+                <trosak>
+                    <stavka>Dostava</stavka>
+                    <kolicina>1</kolicina>
+                    <jedinicna_cijena>400</jedinicna_cijena>
+                </trosak>
+                <trosak>
+                    <stavka>A4 papir</stavka>
+                    <kolicina>20</kolicina>
+                    <jedinicna_cijena>15</jedinicna_cijena>
+                </trosak>
+                <trosak>
+                    <stavka>A5 papir</stavka>
+                    <kolicina>13</kolicina>
+                    <jedinicna_cijena>8</jedinicna_cijena>
+                </trosak>
+            </troskovi>
         </uplata_troskova>
-    </informacije_o_dostavljanju_dokumenta>
+        <zahtevi>
+            <informacije_o_uvidu status="true">
+                <datum_uvida>2020-12-02</datum_uvida>
+                <vreme_uvida>
+                    <interval_uvida>
+                        <od>09</od>
+                        <do>15</do>
+                    </interval_uvida>
+                </vreme_uvida>
+                <mesto_uvida>
+                    <mesto>RNGlovac</mesto>
+                    <ulica>RNG ulica</ulica>
+                    <broj>2</broj>
+                    <kancelarija>18a</kancelarija>
+                </mesto_uvida>
+            </informacije_o_uvidu>
+            
+            <informacije_o_posedovanju status="true" poseduje="true"/>
+            
+            <informacije_o_dostavljanju_dokumenta status="true"/>
+        </zahtevi>
+    </odgovor_na_zahtev>
     <dostavljeno>
         <imenovanom>Imenovanom</imenovanom>
     </dostavljeno>

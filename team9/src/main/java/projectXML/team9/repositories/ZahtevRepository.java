@@ -19,7 +19,7 @@ import projectXML.team9.models.zahtev.ZahtevGradjana;
 @Repository
 public class ZahtevRepository {
 
-	private static String documentPath = "src/main/resources/static/XMLDocuments/";
+	private static String documentPath = "src/main/resources/static/XMLDocuments/Zahtevi/";
 	private static String schemaPath = "src/main/resources/static/schemas/sema_zahtev.xsd";
 
 	public ZahtevGradjana loadDocument(String name) throws SAXException, JAXBException {

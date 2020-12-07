@@ -54,7 +54,7 @@ public abstract class TLice {
 
 	@Override
 	public String toString() {
-		return "Adresa je:\n"+adresa.toString();
+		return "\tAdresa je:\n"+adresa.toString();
 	}
 	
     @XmlElement(required = true)

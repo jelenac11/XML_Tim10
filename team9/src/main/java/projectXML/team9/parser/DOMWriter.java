@@ -20,7 +20,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import ch.qos.logback.core.pattern.parser.Node;
 import projectXML.team9.models.resenje.OdlukaPoverioca.OpisŽalbe.Organ;
 
 /**

@@ -20,7 +20,7 @@ import projectXML.team9.models.obavestenje.Obavestenje;
 @Repository
 public class ObavestenjeRepository {
 
-	private static String documentPath = "src/main/resources/static/XMLDocuments/";
+	private static String documentPath = "src/main/resources/static/XMLDocuments/Obavestenja/";
 	private static String schemaPath = "src/main/resources/static/schemas/sema_obavestenje.xsd";
 
 	public Obavestenje loadDocument(String name) throws SAXException, JAXBException {

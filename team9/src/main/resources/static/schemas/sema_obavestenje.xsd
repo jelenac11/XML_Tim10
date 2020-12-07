@@ -34,12 +34,11 @@
                         <xs:sequence>
                             <xs:element name="uplata_troskova" minOccurs="0">
                                 <xs:complexType>
-                                    <xs:complexContent>
-                                        <xs:extension base="ob:TUplatnica">
-                                            <xs:sequence>
-                                                <xs:element name="troskovi" maxOccurs="1">
-                                                  <xs:complexType>
-                                                  <xs:sequence maxOccurs="1">
+                                    <xs:sequence>
+                                        <xs:element name="uplatnica" type="ob:TUplatnica"/>
+                                        <xs:element name="troskovi" maxOccurs="1">
+                                            <xs:complexType>
+                                                <xs:sequence maxOccurs="1">
                                                   <xs:element maxOccurs="unbounded" name="trosak">
                                                   <xs:complexType>
                                                   <xs:sequence>
@@ -67,12 +66,10 @@
                                                   </xs:sequence>
                                                   </xs:complexType>
                                                   </xs:element>
-                                                  </xs:sequence>
-                                                  </xs:complexType>
-                                                </xs:element>
-                                            </xs:sequence>
-                                        </xs:extension>
-                                    </xs:complexContent>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="zahtevi">

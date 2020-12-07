@@ -133,9 +133,9 @@ public class ZahtevGradjana {
 	@Override
 	public String toString() {
 		String obavestenje = String.format("!Dokument zahtev!\nId zahteva je: %s.\n", brojZahteva);
-		obavestenje += "Organ:\n"+organ.toString();
-		obavestenje += "Podnosilac zahteva:\n"+trazilac.toString();
-		obavestenje += informacijeVezaneZaZahtev.toString();
+		obavestenje += "Organ:\n\t" + organ.toString();
+		obavestenje += "\nPodnosilac zahteva:\n\t" + trazilac.toString();
+		obavestenje +="\n"+ informacijeVezaneZaZahtev.toString();
 		return obavestenje;
 	}
 
@@ -496,18 +496,18 @@ public class ZahtevGradjana {
 
 			@Override
 			public String toString() {
-				String zahtev= "Zahtevi koje je podnosilac zahteva naveo: \n";
-				if(obavestenjePosedovanjaInformacije!=null) {
-					zahtev+=obavestenjePosedovanjaInformacije.toString();
+				String zahtev = "Zahtevi koje je podnosilac zahteva naveo: \n\t";
+				if (obavestenjePosedovanjaInformacije != null) {
+					zahtev += obavestenjePosedovanjaInformacije.toString()+"\t";
 				}
-				if(uvidUDokument!=null) {
-					zahtev+=uvidUDokument.toString();
+				if (uvidUDokument != null) {
+					zahtev += uvidUDokument.toString()+"\t";
 				}
-				if(kopijuDokumenta!=null) {
-					zahtev+=kopijuDokumenta.toString();
+				if (kopijuDokumenta != null) {
+					zahtev += kopijuDokumenta.toString()+"\t";
 				}
-				if(dostavljanjeKopije!=null) {
-					zahtev+=dostavljanjeKopije.toString();
+				if (dostavljanjeKopije != null) {
+					zahtev += dostavljanjeKopije.toString();
 				}
 				return zahtev;
 			}
@@ -661,18 +661,17 @@ public class ZahtevGradjana {
 			@XmlAccessorType(XmlAccessType.FIELD)
 			@XmlType(name = "", propOrder = { "posta", "faks", "ePosta", "drugiNacin" })
 			public static class DostavljanjeKopije {
-				
+
 				@Override
 				public String toString() {
-					String zahtev = getTip();
-					zahtev+= "\nNacini dostave:\n";
-					zahtev+= posta!=null?posta.toString():"";
-					zahtev+= faks!=null?faks.toString():"";
-					zahtev+= ePosta!=null?ePosta.toString():"";
-					zahtev+= drugiNacin!=null?drugiNacin.toString():"";
-					return zahtev;
+					String zahtev = "-dostavljanje kopije dokumenta koji sadr\u017ei tra\u017eenu informaciju:\n\t\tNacini dostave:\n";
+					zahtev += posta != null ? posta.toString() : "";
+					zahtev += faks != null ? faks.toString() : "";
+					zahtev += ePosta != null ? ePosta.toString() : "";
+					zahtev += drugiNacin != null ? drugiNacin.toString() : "";
+					return zahtev+"\n";
 				}
-				
+
 				protected ZahtevGradjana.InformacijeVezaneZaZahtev.TipZahteva.DostavljanjeKopije.Posta posta;
 				protected ZahtevGradjana.InformacijeVezaneZaZahtev.TipZahteva.DostavljanjeKopije.Faks faks;
 				@XmlElement(name = "e-posta")
@@ -774,30 +773,6 @@ public class ZahtevGradjana {
 				}
 
 				/**
-				 * Gets the value of the tip property.
-				 * 
-				 * @return possible object is {@link String }
-				 * 
-				 */
-				public String getTip() {
-					if (tip == null) {
-						return "dostavljanje kopije dokumenta koji sad\u017ei tra\u017eenu informaciju";
-					} else {
-						return tip;
-					}
-				}
-
-				/**
-				 * Sets the value of the tip property.
-				 * 
-				 * @param value allowed object is {@link String }
-				 * 
-				 */
-				public void setTip(String value) {
-					this.tip = value;
-				}
-
-				/**
 				 * &lt;p&gt;Java class for anonymous complex type.
 				 * 
 				 * &lt;p&gt;The following schema fragment specifies the expected content
@@ -823,14 +798,12 @@ public class ZahtevGradjana {
 
 					@Override
 					public String toString() {
-						return getTip()+String.format(": %s.\n",opisDostave);
+						return String.format("\t\t\tna drugi nacin: %s.\n", opisDostave);
 					}
-					
+
 					@XmlElement(name = "opis_dostave", required = true)
 					protected String opisDostave;
-					@XmlAttribute(name = "tip")
-					protected String tip;
-
+					
 					/**
 					 * Gets the value of the opisDostave property.
 					 * 
@@ -850,31 +823,6 @@ public class ZahtevGradjana {
 					public void setOpisDostave(String value) {
 						this.opisDostave = value;
 					}
-
-					/**
-					 * Gets the value of the tip property.
-					 * 
-					 * @return possible object is {@link String }
-					 * 
-					 */
-					public String getTip() {
-						if (tip == null) {
-							return "na drugi nacin";
-						} else {
-							return tip;
-						}
-					}
-
-					/**
-					 * Sets the value of the tip property.
-					 * 
-					 * @param value allowed object is {@link String }
-					 * 
-					 */
-					public void setTip(String value) {
-						this.tip = value;
-					}
-
 				}
 
 				/**
@@ -894,39 +842,11 @@ public class ZahtevGradjana {
 				@XmlAccessorType(XmlAccessType.FIELD)
 				@XmlType(name = "")
 				public static class EPosta {
-					
+
 					@Override
 					public String toString() {
-						return getTip()+"\n";
+						return "\t\t\telektronskom postom\n";
 					}
-
-					@XmlAttribute(name = "tip")
-					protected String tip;
-
-					/**
-					 * Gets the value of the tip property.
-					 * 
-					 * @return possible object is {@link String }
-					 * 
-					 */
-					public String getTip() {
-						if (tip == null) {
-							return "elektronskom postom";
-						} else {
-							return tip;
-						}
-					}
-
-					/**
-					 * Sets the value of the tip property.
-					 * 
-					 * @param value allowed object is {@link String }
-					 * 
-					 */
-					public void setTip(String value) {
-						this.tip = value;
-					}
-
 				}
 
 				/**
@@ -949,34 +869,7 @@ public class ZahtevGradjana {
 
 					@Override
 					public String toString() {
-						return getTip()+"\n";
-					}
-					
-					@XmlAttribute(name = "tip")
-					protected String tip;
-
-					/**
-					 * Gets the value of the tip property.
-					 * 
-					 * @return possible object is {@link String }
-					 * 
-					 */
-					public String getTip() {
-						if (tip == null) {
-							return "faksom";
-						} else {
-							return tip;
-						}
-					}
-
-					/**
-					 * Sets the value of the tip property.
-					 * 
-					 * @param value allowed object is {@link String }
-					 * 
-					 */
-					public void setTip(String value) {
-						this.tip = value;
+						return "\t\t\tfaksom\n";
 					}
 
 				}
@@ -998,37 +891,10 @@ public class ZahtevGradjana {
 				@XmlAccessorType(XmlAccessType.FIELD)
 				@XmlType(name = "")
 				public static class Posta {
-					
+
 					@Override
 					public String toString() {
-						return getTip()+"\n";
-					}
-
-					@XmlAttribute(name = "tip")
-					protected String tip;
-
-					/**
-					 * Gets the value of the tip property.
-					 * 
-					 * @return possible object is {@link String }
-					 * 
-					 */
-					public String getTip() {
-						if (tip == null) {
-							return "po\u0161tom";
-						} else {
-							return tip;
-						}
-					}
-
-					/**
-					 * Sets the value of the tip property.
-					 * 
-					 * @param value allowed object is {@link String }
-					 * 
-					 */
-					public void setTip(String value) {
-						this.tip = value;
+						return "\t\t\tpo\u0161tom\n";
 					}
 
 				}
@@ -1056,36 +922,8 @@ public class ZahtevGradjana {
 
 				@Override
 				public String toString() {
-					return getTip() + "\n";
+					return "-kopiju dokumenta koji sadr\u017ei tra\u017eenu informaciju\n";
 				}
-
-				@XmlAttribute(name = "tip")
-				protected String tip;
-
-				/**
-				 * Gets the value of the tip property.
-				 * 
-				 * @return possible object is {@link String }
-				 * 
-				 */
-				public String getTip() {
-					if (tip == null) {
-						return "kopiju dokumenta koji sadr\u017ei tra\u017eenu informaciju";
-					} else {
-						return tip;
-					}
-				}
-
-				/**
-				 * Sets the value of the tip property.
-				 * 
-				 * @param value allowed object is {@link String }
-				 * 
-				 */
-				public void setTip(String value) {
-					this.tip = value;
-				}
-
 			}
 
 			/**
@@ -1107,37 +945,9 @@ public class ZahtevGradjana {
 			@XmlType(name = "")
 			public static class ObavestenjePosedovanjaInformacije {
 
-				
 				@Override
 				public String toString() {
-					return getTip()+"\n";
-				}
-
-				@XmlAttribute(name = "tip")
-				protected String tip;
-
-				/**
-				 * Gets the value of the tip property.
-				 * 
-				 * @return possible object is {@link String }
-				 * 
-				 */
-				public String getTip() {
-					if (tip == null) {
-						return "obave\u0161tenje da li poseduje tra\u017eenu informaciju";
-					} else {
-						return tip;
-					}
-				}
-
-				/**
-				 * Sets the value of the tip property.
-				 * 
-				 * @param value allowed object is {@link String }
-				 * 
-				 */
-				public void setTip(String value) {
-					this.tip = value;
+					return "-obave\u0161tenje da li poseduje tra\u017eenu informaciju\n";
 				}
 
 			}
@@ -1163,36 +973,8 @@ public class ZahtevGradjana {
 
 				@Override
 				public String toString() {
-					return getTip()+"\n";
+					return "-uvid u dokument koji sadr\u017ei tra\u017eenu informaciju\n";
 				}
-
-				@XmlAttribute(name = "tip")
-				protected String tip;
-
-				/**
-				 * Gets the value of the tip property.
-				 * 
-				 * @return possible object is {@link String }
-				 * 
-				 */
-				public String getTip() {
-					if (tip == null) {
-						return "uvid u dokument koji sadr\u017ei tra\u017eenu informaciju";
-					} else {
-						return tip;
-					}
-				}
-
-				/**
-				 * Sets the value of the tip property.
-				 * 
-				 * @param value allowed object is {@link String }
-				 * 
-				 */
-				public void setTip(String value) {
-					this.tip = value;
-				}
-
 			}
 
 		}
@@ -1225,14 +1007,14 @@ public class ZahtevGradjana {
 
 		@Override
 		public String toString() {
-			return lice.toString() + String.format("Drugi podatak za kontakt: %s.\n", drugiPodatakZaKontakt);
+			return lice.toString() + String.format("\tDrugi podatak za kontakt: %s.\n", drugiPodatakZaKontakt);
 		}
 
-		
 		@XmlElement(required = true)
 		protected TLice lice;
 		@XmlElement(name = "drugi_podatak_za_kontakt")
 		protected String drugiPodatakZaKontakt;
+
 		/**
 		 * Gets the value of the drugiPodatakZaKontakt property.
 		 * 

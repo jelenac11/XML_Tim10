@@ -74,7 +74,7 @@ public class TAdresa {
 
 	@Override
 	public String toString() {
-		return String.format("Mesto: %s\nUlica: %s\nBroj: %s\n",mesto, ulica, broj);
+		return String.format("\t\tMesto: %s\n\t\tUlica: %s\n\t\tBroj: %s\n",mesto, ulica, broj);
 	}
 
     @XmlElement(required = true)

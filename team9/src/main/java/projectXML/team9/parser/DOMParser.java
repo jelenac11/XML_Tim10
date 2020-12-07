@@ -2,8 +2,6 @@ package projectXML.team9.parser;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.Scanner;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
