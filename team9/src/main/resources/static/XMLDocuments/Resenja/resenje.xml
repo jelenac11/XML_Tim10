@@ -2,7 +2,7 @@
 <odluka_poverioca 
 	xmlns="http://www.projekat.org/resenje"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.projekat.org/resenje ../schemas/resenje.xsd"
+    xsi:schemaLocation="http://www.projekat.org/resenje ../../schemas/resenje.xsd"
 
 	broj_rešenja='071-01-1114/2020-03' 
 	broj_žalbe='1235' broj_zahteva='123123' 
@@ -17,7 +17,6 @@
                 <broj>2</broj>
             </adresa>
             <kontakt>064111111</kontakt>
-            <potpis>R. RNGvic</potpis>
         </žalioc>
         <organ>
             <naziv>Учитељског факултета у Призрену</naziv>

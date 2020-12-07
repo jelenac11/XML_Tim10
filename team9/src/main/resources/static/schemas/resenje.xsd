@@ -55,7 +55,6 @@
                 <xs:sequence>
                     <xs:element name="adresa" type="res:T_Adresa"/>
                     <xs:element name="kontakt" type="res:TBroj_telefona"/>
-                    <xs:element name="potpis" type="xs:string"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
