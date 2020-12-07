@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.projekat.org/resenje"
-    xmlns:res="http://www.projekat.org/resenje">
+    targetNamespace="http://www.projekat.org/resenje" xmlns:res="http://www.projekat.org/resenje">
 
     <xs:element name="odluka_poverioca">
         <xs:complexType>
@@ -13,13 +12,25 @@
                             <xs:element name="organ">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="naziv" type="xs:string"/>
+                                        <xs:element name="naziv">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
                                         <xs:element name="adresa" type="res:T_Adresa"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="datum_žalbe" type="xs:date"/>
-                            <xs:element name="ceo_opis" type="xs:string"/>
+                            <xs:element name="ceo_opis">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -45,8 +56,20 @@
     </xs:element>
     <xs:complexType name="T_Lice">
         <xs:sequence>
-            <xs:element name="ime" type="xs:string"/>
-            <xs:element name="prezime" type="xs:string"/>
+            <xs:element name="ime">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="prezime">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="T_Žalioc">
@@ -61,8 +84,20 @@
     </xs:complexType>
     <xs:complexType name="T_Adresa">
         <xs:sequence>
-            <xs:element name="mesto" type="xs:string"/>
-            <xs:element name="ulica" type="xs:string"/>
+            <xs:element name="mesto">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="ulica">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
             <xs:element name="broj" type="xs:positiveInteger"/>
         </xs:sequence>
     </xs:complexType>
@@ -73,7 +108,13 @@
     </xs:simpleType>
     <xs:complexType name="T_Multi_Paragraf">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="paragraf" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="paragraf">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>
