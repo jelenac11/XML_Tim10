@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import projectXML.team9.models.zalbaNaOdluku.ZalbaNaOdluku;
+import projectXML.team9.models.zalbaNaOdluku.ZalbaNaOdluku.Zalilac;
 import projectXML.team9.repositories.ZalbaNaOdlukuRepository;
 
 @Service
@@ -36,9 +37,9 @@ public class ZalbaNaOdlukuService {
 		zalbaNaOdlukuRepository.save(zalba, naziv);
 	}
 
-	public void changeDrugiPodaciZaKontaktZalioca(String naziv, String broj) throws JAXBException, SAXException, IOException {
+	public void changeZalilac(String naziv, Zalilac zalilac) throws JAXBException, SAXException, IOException {
 		ZalbaNaOdluku zalba = zalbaNaOdlukuRepository.loadDocument(naziv);
-		zalba.getZalilac().setDrugiPodaciZaKontakt(broj);
+		zalba.setZalilac(zalilac);
 		zalbaNaOdlukuRepository.save(zalba, naziv + "Update");
 	}
 

@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "68184ff5-a71d-43d9-a868-d1de08d61dab",
+		"name": "Jelena",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetDokument",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/zalba-na-odluku/zalba_na_odluku",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"zalba-na-odluku",
+						"zalba_na_odluku"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateDocument",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"adresaPoverenika\": {\r\n        \"mesto\": \"Beograd\",\r\n        \"ulica\": \"Bulevar kralja Aleksandra\",\r\n        \"broj\": \"15\"\r\n    },\r\n    \"zalilac\": {\r\n        \"lice\": {\r\n            \"type\": \"pravno_lice\",\r\n            \"adresa\": {\r\n                \"mesto\": \"Novi Sad\",\r\n                \"ulica\": \"Narodnog fronta\",\r\n                \"broj\": \"23d\"\r\n            },\r\n            \"naziv\": \"RNG\"\r\n        },\r\n        \"drugiPodaciZaKontakt\": \"0612971992\"\r\n    },\r\n    \"podaciOResenju\": {\r\n        \"godina\": 2019,\r\n        \"nazivOrgana\": \"RNG\"\r\n    },\r\n    \"datumZahteva\": 1570658400000,\r\n    \"podaciOZalbi\": {\r\n        \"podnosilacZalbe\": {\r\n            \"lice\": {\r\n                \"type\": \"fizicko_lice\",\r\n                \"adresa\": {\r\n                    \"mesto\": \"Novi Sad\",\r\n                    \"ulica\": \"Narodnog fronta\",\r\n                    \"broj\": \"23d\"\r\n                },\r\n                \"ime\": \"Marko\",\r\n                \"prezime\": \"Markovic\"\r\n            },\r\n            \"drugiPodaciZaKontakt\": \"0612971992\"\r\n        },\r\n        \"datumPodnosenja\": 1602280800000,\r\n        \"mesto\": \"Novi Sad\",\r\n        \"opis\": \"opis\"\r\n    },\r\n    \"brojZalbe\": \"123\",\r\n    \"brojZahteva\": \"213\",\r\n    \"brojResenja\": \"321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/zalba-na-odluku/novaZalba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"zalba-na-odluku",
+						"novaZalba"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"lice\": {\r\n            \"type\": \"pravno_lice\",\r\n            \"adresa\": {\r\n                \"mesto\": \"Sombor\",\r\n                \"ulica\": \"Narodnog fronta\",\r\n                \"broj\": \"23d\"\r\n            },\r\n            \"naziv\": \"ABC\"\r\n        },\r\n        \"drugiPodaciZaKontakt\": \"066419361\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/zalba-na-odluku/novaZalba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"zalba-na-odluku",
+						"novaZalba"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

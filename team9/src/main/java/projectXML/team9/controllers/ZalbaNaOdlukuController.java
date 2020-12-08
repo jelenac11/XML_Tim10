@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.xml.sax.SAXException;
 
 import projectXML.team9.models.zalbaNaOdluku.ZalbaNaOdluku;
+import projectXML.team9.models.zalbaNaOdluku.ZalbaNaOdluku.Zalilac;
 import projectXML.team9.services.ZalbaNaOdlukuService;
 
 @RestController
@@ -41,9 +42,9 @@ public class ZalbaNaOdlukuController {
 	}
 	
 	@PutMapping(value = "/{naziv}")
-	public ResponseEntity<Void> changeDrugiPodaciZaKontaktZalioca(@PathVariable String naziv, @RequestBody String broj){
+	public ResponseEntity<Void> changeZalilac(@PathVariable String naziv, @RequestBody Zalilac zalilac){
 		try {
-			zalbaNaOdlukuService.changeDrugiPodaciZaKontaktZalioca(naziv, broj);
+			zalbaNaOdlukuService.changeZalilac(naziv, zalilac);
 		} catch (JAXBException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (SAXException e) {
