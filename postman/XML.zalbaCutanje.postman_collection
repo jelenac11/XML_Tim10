@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "8b97677b-ce33-48a4-b433-876d81d6e1f6",
+		"name": "XML",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetDocument",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/zalba-cutanje/zalba_cutanja",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"zalba-cutanje",
+						"zalba_cutanja"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateDocument",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"adresaPoverenika\": {\r\n        \"mesto\": \"Beograd\",\r\n        \"ulica\": \"Bulevar kralja Aleksandra\",\r\n        \"broj\": \"15\"\r\n    },\r\n    \"organProtivKojegJeZalba\": {\r\n        \"type\": \"pravno_lice\",\r\n        \"adresa\": {\r\n            \"mesto\": \"Novi Sad\",\r\n            \"ulica\": \"Futoska ulica\",\r\n            \"broj\": \"1\"\r\n        },\r\n        \"naziv\": \"RNG\"\r\n    },\r\n    \"podaciOZahtevu\": {\r\n        \"informacije\": \"info\",\r\n        \"datum\": 1602280800000,\r\n        \"zahtevi\": {\r\n            \"uvid\": null,\r\n            \"kopija\": \"\",\r\n            \"dostava\": \"\",\r\n            \"posedovanje\": null\r\n        }\r\n    },\r\n    \"podaciOZalbi\": {\r\n        \"podnosilacZalbe\": {\r\n            \"lice\": {\r\n                \"type\": \"fizicko_lice\",\r\n                \"adresa\": {\r\n                    \"mesto\": \"Novi Sad\",\r\n                    \"ulica\": \"Narodnog fronta\",\r\n                    \"broj\": \"23d\"\r\n                },\r\n                \"ime\": \"Jelena\",\r\n                \"prezime\": \"Jelenovic\"\r\n            },\r\n            \"drugiPodaciZaKontakt\": \"0612971992\"\r\n        },\r\n        \"datumPodnosenja\": 1602280800000,\r\n        \"mesto\": \"Novi Sad\",\r\n        \"razlogZalbe\": \"nije postupio\"\r\n    },\r\n    \"brojZalbe\": \"321\",\r\n    \"brojZahteva\": \"123\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/zalba-cutanje/noviDokument",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"zalba-cutanje",
+						"noviDokument"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChangeAddress",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mesto\": \"Novi Sad\",\r\n    \"ulica\": \"Narodnog fronta\",\r\n    \"broj\": \"23d\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/zalba-cutanje/noviDokument",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"zalba-cutanje",
+						"noviDokument"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

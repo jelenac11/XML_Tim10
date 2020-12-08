@@ -5,7 +5,7 @@
                   broj_zahteva="123123"
                   broj_žalbe="1235"
                   tip_rešenja="žalba_cutanja"
-                  xsi:schemaLocation="http://www.projekat.org/resenje ../schemas/resenje.xsd">
+                  xsi:schemaLocation="http://www.projekat.org/resenje ../../schemas/resenje.xsd">
    <opis_žalbe>
       <žalioc>
          <ime>A</ime>
@@ -16,13 +16,12 @@
             <broj>2</broj>
          </adresa>
          <kontakt>064111111</kontakt>
-         <potpis>R. RNGvic</potpis>
       </žalioc>
       <organ>
-         <naziv>Uciteljski fakultet u Loznici</naziv>
+         <naziv>MUP Beograd</naziv>
          <adresa>
-            <mesto>Loznica</mesto>
-            <ulica>Loznicka ulica</ulica>
+            <mesto>Beograd</mesto>
+            <ulica>Beogradska ulica</ulica>
             <broj>64123123</broj>
          </adresa>
       </organ>

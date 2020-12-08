@@ -38,7 +38,7 @@ public class ZalbaCutanjeRepository {
 		return zalbaNaCutanje;
 	}
 
-	public void save(ZalbaNaCutanje zalba) throws JAXBException, SAXException, IOException {
+	public void save(ZalbaNaCutanje zalba, String imeDokumenta) throws JAXBException, SAXException, IOException {
 		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.zalbaCutanje");
 
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -48,7 +48,7 @@ public class ZalbaCutanjeRepository {
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		marshaller.setSchema(schema);
 		
-		OutputStream os = new FileOutputStream( documentPath + "nova_zalba_cutanja.xml" );
+		OutputStream os = new FileOutputStream( documentPath + imeDokumenta + ".xml" );
 
 		zalba.getPodaciOZahtevu().getDatum().setTimezone(DatatypeConstants.FIELD_UNDEFINED);
 		zalba.getPodaciOZahtevu().getDatum().setTime(DatatypeConstants.FIELD_UNDEFINED,

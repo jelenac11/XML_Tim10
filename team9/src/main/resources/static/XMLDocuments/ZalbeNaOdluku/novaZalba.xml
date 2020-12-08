@@ -14,13 +14,13 @@
             </adresa>
             <naziv>RNG</naziv>
         </lice>
-        <drugi_podaci_za_kontakt>066419361</drugi_podaci_za_kontakt>
+        <drugi_podaci_za_kontakt>0612971992</drugi_podaci_za_kontakt>
     </zalilac>
     <podaci_o_resenju>
         <godina>2019</godina>
         <naziv_organa>RNG</naziv_organa>
     </podaci_o_resenju>
-    <datum_zahteva>2019-10-10</datum_zahteva>
+    <datum_zahteva>2019-10-09</datum_zahteva>
     <podaci_o_zalbi>
         <podnosilac_zalbe>
             <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizicko_lice">
@@ -34,7 +34,7 @@
             </lice>
             <drugi_podaci_za_kontakt>0612971992</drugi_podaci_za_kontakt>
         </podnosilac_zalbe>
-        <datum_podnosenja>2020-10-10</datum_podnosenja>
+        <datum_podnosenja>2020-10-09</datum_podnosenja>
         <mesto>Novi Sad</mesto>
         <opis>opis</opis>
     </podaci_o_zalbi>

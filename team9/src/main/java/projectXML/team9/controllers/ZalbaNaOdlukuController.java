@@ -54,10 +54,10 @@ public class ZalbaNaOdlukuController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> createZalbaNaOdluku(@RequestBody ZalbaNaOdluku zalba){
+	@PostMapping(value = "/{naziv}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> createZalbaNaOdluku(@PathVariable String naziv, @RequestBody ZalbaNaOdluku zalba){
 		try {
-			zalbaNaOdlukuService.createZalbaNaOdluku(zalba);
+			zalbaNaOdlukuService.createZalbaNaOdluku(zalba, naziv);
 		} catch (JAXBException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (SAXException e) {

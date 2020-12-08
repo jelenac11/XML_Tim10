@@ -38,7 +38,7 @@ public class ZalbaNaOdlukuRepository {
 		return zalbaNaOdluku;
 	}
 
-	public void save(ZalbaNaOdluku zalba) throws JAXBException, SAXException, IOException {
+	public void save(ZalbaNaOdluku zalba, String naziv) throws JAXBException, SAXException, IOException {
 		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.zalbaNaOdluku");
 
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -48,7 +48,7 @@ public class ZalbaNaOdlukuRepository {
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		marshaller.setSchema(schema);
 		
-		OutputStream os = new FileOutputStream( documentPath + "nova_zalba_na_odluku.xml" );
+		OutputStream os = new FileOutputStream( documentPath + naziv + ".xml" );
 
 		zalba.getDatumZahteva().setTimezone(DatatypeConstants.FIELD_UNDEFINED);
 		zalba.getDatumZahteva().setTime(DatatypeConstants.FIELD_UNDEFINED,

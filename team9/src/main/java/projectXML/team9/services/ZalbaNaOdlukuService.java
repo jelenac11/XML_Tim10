@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import projectXML.team9.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team9.repositories.ZalbaNaOdlukuRepository;
 
@@ -19,26 +22,24 @@ public class ZalbaNaOdlukuService {
 	
 	public String getDocument(String naziv) throws SAXException, JAXBException {
 		ZalbaNaOdluku zalbaNaOdluku = zalbaNaOdlukuRepository.loadDocument(naziv);
-		return zalbaNaOdluku.toString();
-		/*ObjectMapper Obj = new ObjectMapper();
+		ObjectMapper Obj = new ObjectMapper();
 		String jsonStr = "";
 		try {
-			jsonStr = Obj.writeValueAsString(zalbaCutanja);
+			jsonStr = Obj.writerWithDefaultPrettyPrinter().writeValueAsString(zalbaNaOdluku);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return jsonStr;*/
+		return jsonStr;
 	}
 
-	public void createZalbaNaOdluku(ZalbaNaOdluku zalba) throws JAXBException, SAXException, IOException {
-		zalbaNaOdlukuRepository.save(zalba);
+	public void createZalbaNaOdluku(ZalbaNaOdluku zalba, String naziv) throws JAXBException, SAXException, IOException {
+		zalbaNaOdlukuRepository.save(zalba, naziv);
 	}
 
 	public void changeDrugiPodaciZaKontaktZalioca(String naziv, String broj) throws JAXBException, SAXException, IOException {
 		ZalbaNaOdluku zalba = zalbaNaOdlukuRepository.loadDocument(naziv);
 		zalba.getZalilac().setDrugiPodaciZaKontakt(broj);
-		zalbaNaOdlukuRepository.save(zalba);
+		zalbaNaOdlukuRepository.save(zalba, naziv + "Update");
 	}
 
 }

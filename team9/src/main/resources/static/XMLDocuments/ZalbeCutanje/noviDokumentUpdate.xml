@@ -15,10 +15,10 @@
     </organ_protiv_kojeg_je_zalba>
     <podaci_o_zahtevu>
         <informacije>info</informacije>
-        <datum>2020-10-10</datum>
+        <datum>2020-10-09</datum>
         <zahtevi>
-            <kopija xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
-            <dostava xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <kopija xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string"></kopija>
+            <dostava xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string"></dostava>
         </zahtevi>
     </podaci_o_zahtevu>
     <podaci_o_zalbi>
@@ -34,7 +34,7 @@
             </lice>
             <drugi_podaci_za_kontakt>0612971992</drugi_podaci_za_kontakt>
         </podnosilac_zalbe>
-        <datum_podnosenja>2020-10-10</datum_podnosenja>
+        <datum_podnosenja>2020-10-09</datum_podnosenja>
         <mesto>Novi Sad</mesto>
         <razlog_zalbe>nije postupio</razlog_zalbe>
     </podaci_o_zalbi>
