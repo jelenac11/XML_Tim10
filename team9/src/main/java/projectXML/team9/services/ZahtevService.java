@@ -1,12 +1,10 @@
 package projectXML.team9.services;
 
-import java.io.IOException;
-import javax.xml.bind.JAXBException;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xml.sax.SAXException;
-
-import projectXML.team9.models.zahtev.TAdresa;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.repositories.ZahtevRepository;
 
@@ -16,13 +14,15 @@ public class ZahtevService {
 	@Autowired
 	private ZahtevRepository zahtevRepository;
 	
-	public String getDocument(String naziv) throws SAXException, JAXBException {
-		ZahtevGradjana zahtev = zahtevRepository.loadDocument(naziv);
-		return zahtev.toString();
+	public ZahtevGradjana getZahtev(String id) throws Exception {
+		ZahtevGradjana zahtev = zahtevRepository.getById(id);
+		return zahtev;
 	}
-	public void postDocument(TAdresa adresa) throws JAXBException, SAXException, IOException {
-		ZahtevGradjana zahtevGradjana = zahtevRepository.loadDocument("zahtev");
-		zahtevGradjana.getTrazilac().getLice().setAdresa(adresa);
+	public ZahtevGradjana create(ZahtevGradjana zahtevGradjana) throws Exception {
+		String id = UUID.randomUUID().toString();
+		zahtevGradjana.setId(id);
+		zahtevGradjana.setBrojZahteva(id.split("-")[4]+"-"+new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue()+"/2020");
 		zahtevRepository.save(zahtevGradjana);
+		return zahtevGradjana;
 	}
 }

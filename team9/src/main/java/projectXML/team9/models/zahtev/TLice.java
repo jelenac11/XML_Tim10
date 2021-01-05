@@ -50,6 +50,7 @@ public abstract class TLice {
 	}
 
 	public TLice() {
+		super();
 	}
 
 	@Override

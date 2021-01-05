@@ -10,7 +10,7 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="lice" type="zno:TLice"/>
-                            <xs:element name="drugi_podaci_za_kontakt">
+                            <xs:element name="drugi_podaci_za_kontakt" minOccurs="1">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
                                         <xs:minLength value="1"/>

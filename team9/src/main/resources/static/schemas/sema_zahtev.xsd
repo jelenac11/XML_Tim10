@@ -38,7 +38,7 @@
                                                 <xs:sequence minOccurs="1">
                                                   <xs:element minOccurs="0" name="posta"> </xs:element>
                                                   <xs:element minOccurs="0" name="faks"> </xs:element>
-                                                  <xs:element minOccurs="0" name="e-posta"> </xs:element>
+                                                  <xs:element minOccurs="0" name="eposta"> </xs:element>
                                                   <xs:element minOccurs="0" name="drugi_nacin">
                                                   <xs:complexType>
                                                   <xs:sequence>
@@ -73,6 +73,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="id" type="xs:string" use="required"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TAdresa">

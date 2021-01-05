@@ -145,9 +145,10 @@ public class ZahtevGradjana {
 	protected ZahtevGradjana.Trazilac trazilac;
 	@XmlElement(name = "informacije_vezane_za_zahtev", required = true)
 	protected ZahtevGradjana.InformacijeVezaneZaZahtev informacijeVezaneZaZahtev;
-	@XmlAttribute(name = "broj_zahteva", required = true)
+	@XmlAttribute(name = "broj_zahteva", required = false)
 	protected String brojZahteva;
-
+	@XmlAttribute(name = "id", required = false)
+	protected String id;
 	/**
 	 * Gets the value of the organ property.
 	 * 
@@ -227,6 +228,14 @@ public class ZahtevGradjana {
 	 */
 	public void setBrojZahteva(String value) {
 		this.brojZahteva = value;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/**
@@ -674,7 +683,7 @@ public class ZahtevGradjana {
 
 				protected ZahtevGradjana.InformacijeVezaneZaZahtev.TipZahteva.DostavljanjeKopije.Posta posta;
 				protected ZahtevGradjana.InformacijeVezaneZaZahtev.TipZahteva.DostavljanjeKopije.Faks faks;
-				@XmlElement(name = "e-posta")
+				@XmlElement(name = "eposta")
 				protected ZahtevGradjana.InformacijeVezaneZaZahtev.TipZahteva.DostavljanjeKopije.EPosta ePosta;
 				@XmlElement(name = "drugi_nacin")
 				protected ZahtevGradjana.InformacijeVezaneZaZahtev.TipZahteva.DostavljanjeKopije.DrugiNacin drugiNacin;
@@ -1053,6 +1062,10 @@ public class ZahtevGradjana {
 		 */
 		public void setLice(TLice value) {
 			this.lice = value;
+		}
+
+		public Trazilac() {
+			super();
 		}
 
 	}

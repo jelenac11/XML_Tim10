@@ -196,10 +196,12 @@ public class Obavestenje {
 	protected Obavestenje.OdgovorNaZahtev odgovorNaZahtev;
 	@XmlElement(required = true)
 	protected Obavestenje.Dostavljeno dostavljeno;
-	@XmlAttribute(name = "broj_obavestenja", required = true)
+	@XmlAttribute(name = "broj_obavestenja", required = false)
 	protected String brojObavestenja;
 	@XmlAttribute(name = "broj_zahteva", required = true)
 	protected String brojZahteva;
+	@XmlAttribute(name = "id", required = false)
+	protected String id;
 
 	@Override
 	public String toString() {
@@ -330,6 +332,14 @@ public class Obavestenje {
 	 */
 	public void setBrojZahteva(String value) {
 		this.brojZahteva = value;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/**

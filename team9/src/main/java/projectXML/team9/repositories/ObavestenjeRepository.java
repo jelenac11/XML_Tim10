@@ -1,54 +1,71 @@
 package projectXML.team9.repositories;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
-
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.xml.sax.SAXException;
+import org.xmldb.api.base.Collection;
+import org.xmldb.api.modules.XMLResource;
 import projectXML.team9.models.obavestenje.Obavestenje;
+import projectXML.team9.util.DatabaseConnector;
+import projectXML.team9.util.MarshallerFactory;
 
 @Repository
 public class ObavestenjeRepository {
 
-	private static String documentPath = "src/main/resources/static/XMLDocuments/Obavestenja/";
+	private static String collectionId = "/db/sample/obavestenja";
 	private static String schemaPath = "src/main/resources/static/schemas/sema_obavestenje.xsd";
+	private static String contextPath = "projectXML.team9.models.obavestenje";
+	private DatabaseConnector databaseConnector;
+	private MarshallerFactory marshallerFactory;
 
-	public Obavestenje loadDocument(String name) throws SAXException, JAXBException {
-		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.obavestenje");
-
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Schema schema = schemaFactory.newSchema(new File(schemaPath));
-		unmarshaller.setSchema(schema);
-
-		Obavestenje obavestenje = (Obavestenje) unmarshaller.unmarshal(new File(documentPath + name + ".xml"));
-		return obavestenje;
+	@Autowired
+	public ObavestenjeRepository(DatabaseConnector databaseConnector, MarshallerFactory marshallerFactory) {
+		this.databaseConnector = databaseConnector;
+		this.marshallerFactory = marshallerFactory;
 	}
 
-	public void save(Obavestenje obavestenje) throws JAXBException, SAXException, IOException {
-		JAXBContext context = JAXBContext.newInstance("projectXML.team9.models.obavestenje");
+	public Obavestenje getById(String id) throws Exception {
+		Unmarshaller unmarshaller = marshallerFactory.createUnmarshaller(contextPath, schemaPath);
 
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		Schema schema = schemaFactory.newSchema(new File(schemaPath));
-		
-		Marshaller marshaller = context.createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		marshaller.setSchema(schema);
-		
-		OutputStream os = new FileOutputStream( documentPath + "obavestenjeUpdate.xml" );
-		marshaller.marshal(obavestenje, os);
-		os.flush();
-		os.close();
+		Collection col = null;
+		XMLResource res = null;
+		try {
+			col = databaseConnector.getCollection(collectionId);
+
+			res = databaseConnector.getResource(col, id);
+
+			Obavestenje obavestenje = (Obavestenje) unmarshaller.unmarshal(res.getContentAsDOM());
+			return obavestenje;
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			databaseConnector.closeConnections(res, col);
+		}
+	}
+
+	public void save(Obavestenje obavestenje) throws Exception {
+		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
+
+		Collection col = null;
+		XMLResource res = null;
+		OutputStream os = new ByteArrayOutputStream();
+
+		try {
+			col = databaseConnector.getOrCreateCollection(collectionId, 0);
+			res = databaseConnector.createResource(col, obavestenje.getId());
+			marshaller.marshal(obavestenje, os);
+
+			res.setContent(os);
+
+			col.storeResource(res);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			databaseConnector.closeConnections(res, col);
+		}
 	}
 }
