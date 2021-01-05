@@ -17,8 +17,8 @@
         <informacije>info</informacije>
         <datum>2020-10-09</datum>
         <zahtevi>
-            <kopija xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string"></kopija>
-            <dostava xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xsi:type="xs:string"></dostava>
+            <kopija/>
+            <dostava/>
         </zahtevi>
     </podaci_o_zahtevu>
     <podaci_o_zalbi>

@@ -19,6 +19,8 @@
         <informacije>info</informacije>
         <datum>2020-10-10</datum>
         <zahtevi>
+            <uvid/>
+            <kopija/>
         </zahtevi>
     </podaci_o_zahtevu>
     <podaci_o_zalbi>
