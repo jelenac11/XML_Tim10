@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.projekat.org/zalba_cutanja"
+    xmlns:zc="http://www.projekat.org/zalba_cutanja" xmlns:common="http://www.projekat.org/common">
+    <xs:import namespace="http://www.projekat.org/common" schemaLocation="common.xsd"/>
+    <xs:element name="zalba_na_cutanje">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="adresa_poverenika" type="common:TAdresa"> </xs:element>
+                <xs:element name="organ_protiv_kojeg_je_zalba" type="common:TPravno_lice"/>
+                <xs:element name="podaci_o_zahtevu">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="informacije">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="datum" type="xs:date"/>
+                            <xs:element name="zahtevi">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0" name="uvid" fixed="uvid"
+                                            type="xs:string"/>
+                                        <xs:element minOccurs="0" name="kopija" fixed="kopija"
+                                            type="xs:string"/>
+                                        <xs:element minOccurs="0" name="dostava" fixed="dostava"
+                                            type="xs:string"/>
+                                        <xs:element minOccurs="0" name="posedovanje"
+                                            fixed="posedovanje" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="podaci_o_zalbi">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="podnosilac_zalbe">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="lice" type="common:TLice"/>
+                                        <xs:element name="drugi_podaci_za_kontakt">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="datum_podnosenja" type="xs:date"/>
+                            <xs:element name="mesto">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="razlog_zalbe">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="nije postupio"/>
+                                        <xs:enumeration value="nije postupio u celosti"/>
+                                        <xs:enumeration value="nije postupio u zakonskom roku"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="broj_zalbe">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="broj_zahteva">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

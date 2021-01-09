@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zc:zalba_na_cutanje xmlns:common="http://www.projekat.org/common"
+ xmlns:zc="http://www.projekat.org/zalba_cutanja"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.projekat.org/zalba_cutanja" id="id0">
+    <zc:adresa_poverenika>
+        <common:mesto>mesto0</common:mesto>
+    </zc:adresa_poverenika>
+    <zc:organ_protiv_kojeg_je_zalba>
+        <common:adresa>
+            <common:mesto>mesto1</common:mesto>
+        </common:adresa>
+        <common:naziv>naziv0</common:naziv>
+    </zc:organ_protiv_kojeg_je_zalba>
+    <zc:podaci_o_zahtevu>
+        <zc:informacije>informacije0</zc:informacije>
+        <zc:datum>2006-05-04</zc:datum>
+        <zc:zahtevi>
+        </zc:zahtevi>
+    </zc:podaci_o_zahtevu>
+    <zc:podaci_o_zalbi>
+        <zc:podnosilac_zalbe>
+            <zc:lice xsi:type="common:TFizicko_lice">
+                <common:adresa>
+                    <common:mesto>mesto2</common:mesto>
+                </common:adresa>
+                <common:ime>ime0</common:ime>
+                <common:prezime>prezime0</common:prezime>
+            </zc:lice>
+            <zc:drugi_podaci_za_kontakt>drugi_podaci_za_kontakt0</zc:drugi_podaci_za_kontakt>
+        </zc:podnosilac_zalbe>
+        <zc:datum_podnosenja>2006-05-04</zc:datum_podnosenja>
+        <zc:mesto>mesto0</zc:mesto>
+        <zc:razlog_zalbe>nije postupio</zc:razlog_zalbe>
+    </zc:podaci_o_zalbi>
+</zc:zalba_na_cutanje>

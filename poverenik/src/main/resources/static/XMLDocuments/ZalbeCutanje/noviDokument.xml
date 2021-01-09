@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zalba_na_cutanje xmlns="http://www.projekat.org/zalba_cutanja" broj_zalbe="321" broj_zahteva="123">
+    <adresa_poverenika>
+        <mesto>Beograd</mesto>
+        <ulica>Bulevar kralja Aleksandra</ulica>
+        <broj>15</broj>
+    </adresa_poverenika>
+    <organ_protiv_kojeg_je_zalba>
+        <adresa>
+            <mesto>Novi Sad</mesto>
+            <ulica>Futoska ulica</ulica>
+            <broj>1</broj>
+        </adresa>
+        <naziv>RNG</naziv>
+    </organ_protiv_kojeg_je_zalba>
+    <podaci_o_zahtevu>
+        <informacije>info</informacije>
+        <datum>2020-10-09</datum>
+        <zahtevi>
+            <kopija/>
+            <dostava/>
+        </zahtevi>
+    </podaci_o_zahtevu>
+    <podaci_o_zalbi>
+        <podnosilac_zalbe>
+            <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizicko_lice">
+                <adresa>
+                    <mesto>Novi Sad</mesto>
+                    <ulica>Narodnog fronta</ulica>
+                    <broj>23d</broj>
+                </adresa>
+                <ime>Jelena</ime>
+                <prezime>Jelenovic</prezime>
+            </lice>
+            <drugi_podaci_za_kontakt>0612971992</drugi_podaci_za_kontakt>
+        </podnosilac_zalbe>
+        <datum_podnosenja>2020-10-09</datum_podnosenja>
+        <mesto>Novi Sad</mesto>
+        <razlog_zalbe>nije postupio</razlog_zalbe>
+    </podaci_o_zalbi>
+</zalba_na_cutanje>
