@@ -1,14 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-odluku/76a7bf36-d931-4d97-8004-e0b35ca5e3e5">
-<pred:organ_koji_je_doneo_odluku xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">j</pred:organ_koji_je_doneo_odluku>
+<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-cutanje/482fd639-49e7-4ee4-adad-f14a17932826">
+<pred:organ_protiv_kojeg_je_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://www.projekat.org/organ/j</pred:organ_protiv_kojeg_je_zalba>
 </rdf:Description>
-<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-odluku/76a7bf36-d931-4d97-8004-e0b35ca5e3e5">
-<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://www.projekat.org/korisnici/korisnikneki</pred:podnosilac_zalbe>
+<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-cutanje/482fd639-49e7-4ee4-adad-f14a17932826">
+<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://www.projekat.org/korisnici/nekikorisnik</pred:podnosilac_zalbe>
 </rdf:Description>
-<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-odluku/76a7bf36-d931-4d97-8004-e0b35ca5e3e5">
+<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-cutanje/482fd639-49e7-4ee4-adad-f14a17932826">
 <pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-01-10</pred:datum_podnosenja>
 </rdf:Description>
-<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-odluku/76a7bf36-d931-4d97-8004-e0b35ca5e3e5">
-<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">y</pred:mesto_podnosenja>
+<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-cutanje/482fd639-49e7-4ee4-adad-f14a17932826">
+<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nosi</pred:mesto_podnosenja>
 </rdf:Description>
 </rdf:RDF>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zc:zalba_na_cutanje xmlns:zc="http://www.projekat.org/zalba_cutanja"
  xmlns:common="http://www.projekat.org/common"
- xmlns:pred="http://www.projekat.org/predicate"
+ xmlns:pred="http://www.projekat.org/predicate/"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.projekat.org/zalba_cutanja ../schemas/zalba_cutanja.xsd" broj_zahteva="broj_zahteva0" vocab="http://www.projekat.org/predicate" about="about0">
     <zc:adresa_poverenika>
         <common:mesto>mesto0</common:mesto>
     </zc:adresa_poverenika>
-    <zc:organ_protiv_kojeg_je_zalba property="pred:organ_protiv_kojeg_je_zalba" datatype="xs:string">
+    <zc:organ_protiv_kojeg_je_zalba property="pred:organ_protiv_kojeg_je_zalba" content="nekiuri">
         <common:adresa>
             <common:mesto>mesto1</common:mesto>
         </common:adresa>
@@ -20,7 +20,7 @@
         </zc:zahtevi>
     </zc:podaci_o_zahtevu>
     <zc:podaci_o_zalbi>
-        <zc:podnosilac_zalbe property="pred:podnosilac_zalbe" id_podnosioca="id_podnosioca0" resource="resource0">
+        <zc:podnosilac_zalbe content="pred:podnosilac_zalbe" id_podnosioca="id_podnosioca0" resource="resource0">
             <zc:lice>
                 <common:adresa>
                     <common:mesto>mesto2</common:mesto>

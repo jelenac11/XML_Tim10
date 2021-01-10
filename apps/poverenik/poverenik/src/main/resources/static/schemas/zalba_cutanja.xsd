@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.projekat.org/zalba_cutanja"
     xmlns:zc="http://www.projekat.org/zalba_cutanja" xmlns:common="http://www.projekat.org/common"
-    xmlns:pred="http://www.projekat.org/predicate">
+    xmlns:pred="http://www.projekat.org/predicate/">
     <xs:import namespace="http://www.projekat.org/common" schemaLocation="common.xsd"/>
     <xs:element name="zalba_na_cutanje">
         <xs:complexType>
@@ -15,7 +15,7 @@
                                 <xs:attribute fixed="pred:organ_protiv_kojeg_je_zalba"
                                     form="unqualified" name="property" type="xs:string"
                                     use="required"/>
-                                <xs:attribute fixed="xs:string" name="datatype" type="xs:string"
+                                <xs:attribute name="content" type="xs:string"
                                     use="required"/>
                             </xs:extension>
                         </xs:complexContent>
@@ -68,7 +68,7 @@
                                         type="xs:string" use="required"/>
                                     <xs:attribute name="id_podnosioca" type="xs:string"
                                         use="required"/>
-                                    <xs:attribute name="resource" type="xs:string" use="required"/>
+                                    <xs:attribute name="content" type="xs:string" use="required"/>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="datum_podnosenja">

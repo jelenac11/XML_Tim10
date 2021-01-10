@@ -41,7 +41,18 @@ export class ZalbaCutanjeXonomyService {
           }
         },
         menu: [],
-        attributes: {}
+        attributes: {
+          "vocab": {
+            isInvisible: true,
+          },
+          "about": {
+            isInvisible: true,
+          },
+          "broj_zahteva": {
+            asker: Xonomy.askString,
+            menu: [],
+          },
+        }
       },
 
       "zc:adresa_poverenika": {
@@ -53,48 +64,10 @@ export class ZalbaCutanjeXonomyService {
             }
             );
           }
-          if (!jsElement.hasChildElement("common:mesto")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element mesto."
-            }
-            );
-          }
-          if (!jsElement.hasChildElement("common:ulica") && jsElement.hasChildElement("common:mesto") && jsElement.hasChildElement("common:broj")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element ulica if has element broj."
-            }
-            );
-          }
         },
-        menu: [
-          {
-            caption: "Append an <common:mesto>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:mesto ${common}></common:mesto>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:mesto");
-            }
-          },
-          {
-            caption: "Append an <common:ulica>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:ulica ${common}></common:ulica>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:ulica");
-            }
-          },
-          {
-            caption: "Append an <common:broj>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:broj ${common}></common:broj>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:broj");
-            }
-          },
-        ],
+        menu: [],
         mustBeBefore: ["zc:organ_protiv_kojeg_je_zalba", "zc:podaci_o_zahtevu", "zc:podaci_o_zalbi"],
+        isReadOnly: true,
       },
 
       "common:mesto": {
@@ -122,6 +95,14 @@ export class ZalbaCutanjeXonomyService {
           }
         },
         mustBeBefore: ["zc:razlog_zalbe"],
+        attributes: {
+          "property": {
+            isInvisible: true,
+          },
+          "datatype": {
+            isInvisible: true,
+          }
+        },
         hasText: true
       },
 
@@ -135,11 +116,7 @@ export class ZalbaCutanjeXonomyService {
             );
           }
         },
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
-        ],
+        menu: [],
         mustBeBefore: ["common:broj"],
         hasText: true
       },
@@ -154,11 +131,7 @@ export class ZalbaCutanjeXonomyService {
             );
           }
         },
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
-        ],
+        menu: [],
         hasText: true
       },
 
@@ -171,47 +144,8 @@ export class ZalbaCutanjeXonomyService {
             }
             );
           }
-          if (!jsElement.hasChildElement("common:mesto")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <common:mesto>."
-            }
-            );
-          }
-          if (!jsElement.hasChildElement("common:ulica") && jsElement.hasChildElement("common:mesto") && jsElement.hasChildElement("common:broj")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <common:ulica> if has element <common:broj>."
-            }
-            );
-          }
         },
-        menu: [
-          {
-            caption: "Append an <common:mesto>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:mesto ${common}></common:mesto>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:mesto");
-            }
-          },
-          {
-            caption: "Append an <common:ulica>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:ulica ${common}></common:ulica>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:ulica");
-            }
-          },
-          {
-            caption: "Append an <common:broj>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:broj ${common}></common:broj>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:broj");
-            }
-          },
-        ]
+        menu: [],
       },
 
       "zc:organ_protiv_kojeg_je_zalba": {
@@ -248,6 +182,14 @@ export class ZalbaCutanjeXonomyService {
             }
           }
         ],
+        attributes: {
+          "property": {
+            isInvisible: true,
+          },
+          "content": {
+            isInvisible: true,
+          }
+        },
         mustBeBefore: ["zc:podaci_o_zahtevu", "zc:podaci_o_zalbi"]
       },
 
@@ -407,34 +349,6 @@ export class ZalbaCutanjeXonomyService {
             }
             );
           }
-          if (!jsElement.hasChildElement("zc:podnosilac_zalbe")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <zc:podnosilac_zalbe>."
-            }
-            );
-          }
-          if (!jsElement.hasChildElement("zc:datum_podnosenja")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <zc:datum_podnosenja>."
-            }
-            );
-          }
-          if (!jsElement.hasChildElement("zc:mesto")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <zc:mesto>."
-            }
-            );
-          }
-          if (!jsElement.hasChildElement("zc:razlog_zalbe")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <zc:razlog_zalbe>."
-            }
-            );
-          }
         },
         menu: []
       },
@@ -448,34 +362,24 @@ export class ZalbaCutanjeXonomyService {
             }
             );
           }
-          if (!jsElement.hasChildElement("zc:lice")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <zc:lice>."
-            }
-            );
-          }
-          if (!jsElement.hasChildElement("zc:drugi_podaci_za_kontakt")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <zc:drugi_podaci_za_kontakt>."
-            }
-            );
-          }
         },
         menu: [],
+        attributes: {
+          "property": {
+            isInvisible: true,
+          },
+          "id_podnosioca": {
+            isInvisible: true,
+          },
+          "content": {
+            isInvisible: true,
+          }
+        },
         mustBeBefore: ["zc:datum_podnosenja", "zc:mesto", "zc:razlog_zalbe"]
       },
 
       "zc:lice": {
         validate: function (jsElement) {
-          if (jsElement.hasAttribute("xsi:type") == "") {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have attribute xsi:type."
-            }
-            );
-          }
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
@@ -483,92 +387,9 @@ export class ZalbaCutanjeXonomyService {
             }
             );
           }
-          if (jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice" && (!jsElement.hasChildElement("common:ime") || !jsElement.hasChildElement("common:prezime"))) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have elements <common:ime> and <common:prezime> with attribute xsi:type value common:TFizicko_lice."
-            }
-            );
-          }
-          if (jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice" && !jsElement.hasChildElement("common:naziv")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have elements <common:naziv> with attribute xsi:type value common:TPravno_lice."
-            }
-            );
-          }
-          if (!jsElement.hasChildElement("common:adresa")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <common:adresa>."
-            }
-            );
-          }
         },
-        menu: [
-          {
-            caption: "Append an <common:adresa>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:adresa ${common}><common:mesto ${common}></common:mesto></common:adresa>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:adresa") || !jsElement.getAttributeValue("xsi:type", null);
-            }
-          },
-          {
-            caption: "Append an <common:naziv>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:naziv ${common}></common:naziv>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || jsElement.hasChildElement("common:prezime")
-                || !jsElement.getAttributeValue("xsi:type", null) || jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice";
-            }
-          },
-          {
-            caption: "Append an <common:ime>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:ime ${common}></common:ime>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || !jsElement.getAttributeValue("xsi:type", null)
-                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
-            }
-          },
-          {
-            caption: "Append an <common:prezime>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<common:prezime ${common}></common:prezime>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:prezime") || !jsElement.getAttributeValue("xsi:type", null)
-                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
-            }
-          },
-          {
-            caption: "Add @xsi:type",
-            action: Xonomy.newAttribute,
-            actionParameter: { name: "xsi:type", value: "" },
-            hideIf: function (jsElement) {
-              return jsElement.hasAttribute("xsi:type");
-            }
-          },
-        ],
+        menu: [],
         mustBeBefore: ["zc:drugi_podatak_za_kontakt"],
-        attributes: {
-          "xsi:type": {
-            asker: Xonomy.askPicklist,
-            askerParameter: [
-              { value: "common:TFizicko_lice" },
-              { value: "common:TPravno_lice" }
-            ],
-            validate: function (jsAttribute) {
-              if (jsAttribute.value == "") {
-                Xonomy.warnings.push({
-                  htmlID: jsAttribute.htmlID,
-                  text: "This attribute must not be empty."
-                }
-                );
-              }
-            }
-          }
-        }
       },
 
       "zc:drugi_podaci_za_kontakt": {
@@ -653,6 +474,14 @@ export class ZalbaCutanjeXonomyService {
           }
         },
         isReadOnly: true,
+        attributes: {
+          "property": {
+            isInvisible: true,
+          },
+          "datatype": {
+            isInvisible: true,
+          }
+        },
         mustBeBefore: ["zc:mesto", "zc:razlog_zalbe"]
       },
 
@@ -666,6 +495,8 @@ export class ZalbaCutanjeXonomyService {
             );
           }
         },
+        asker: Xonomy.askPicklist,
+        askerParameter: ["није поступио", "није поступио у целости", "није поступио у законском року"],
         hasText: true,
       }
 

@@ -1,17 +1,12 @@
 package projectXML.team10.poverenik.services;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,11 +42,7 @@ public class ZalbaNaOdlukuService {
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(zalba, sw);
-		//InputStream in = new FileInputStream(new File("src/main/resources/static/zalba_na_odluku.xml")); 
 		String xmlString = sw.toString();
-		//String result = IOUtils.toString(in, StandardCharsets.UTF_8);
-		//System.out.println(result);
-		
 		metadataExtractor.extractMetadata(xmlString);
 		FusekiWriter.saveRDF("/zalbe-na-odluku");
 		return zalba;

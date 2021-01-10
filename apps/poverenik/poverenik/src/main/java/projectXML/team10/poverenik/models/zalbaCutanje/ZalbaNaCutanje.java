@@ -437,8 +437,8 @@ public class ZalbaNaCutanje {
 
         @XmlAttribute(name = "property", required = true)
         protected String property;
-        @XmlAttribute(name = "datatype", required = true)
-        protected String datatype;
+        @XmlAttribute(name = "content", required = true)
+        protected String content;
 
         /**
          * Gets the value of the property property.
@@ -476,12 +476,8 @@ public class ZalbaNaCutanje {
          *     {@link String }
          *     
          */
-        public String getDatatype() {
-            if (datatype == null) {
-                return "xs:string";
-            } else {
-                return datatype;
-            }
+        public String getContent() {
+           return content;
         }
 
         /**
@@ -492,8 +488,8 @@ public class ZalbaNaCutanje {
          *     {@link String }
          *     
          */
-        public void setDatatype(String value) {
-            this.datatype = value;
+        public void setContent(String value) {
+            this.content = value;
         }
 
     }
@@ -1225,8 +1221,8 @@ public class ZalbaNaCutanje {
             protected String property;
             @XmlAttribute(name = "id_podnosioca", required = true)
             protected String idPodnosioca;
-            @XmlAttribute(name = "resource", required = true)
-            protected String resource;
+            @XmlAttribute(name = "content", required = true)
+            protected String content;
 
             /**
              * Gets the value of the lice property.
@@ -1336,8 +1332,8 @@ public class ZalbaNaCutanje {
              *     {@link String }
              *     
              */
-            public String getResource() {
-                return resource;
+            public String getContent() {
+                return content;
             }
 
             /**
@@ -1348,8 +1344,8 @@ public class ZalbaNaCutanje {
              *     {@link String }
              *     
              */
-            public void setResource(String value) {
-                this.resource = value;
+            public void setContent(String value) {
+                this.content = value;
             }
 
         }
