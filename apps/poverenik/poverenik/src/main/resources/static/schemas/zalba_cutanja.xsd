@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.projekat.org/zalba_cutanja"
-    xmlns:zc="http://www.projekat.org/zalba_cutanja" xmlns:common="http://www.projekat.org/common">
+    xmlns:zc="http://www.projekat.org/zalba_cutanja" xmlns:common="http://www.projekat.org/common"
+    xmlns:pred="http://www.projekat.org/predicate">
     <xs:import namespace="http://www.projekat.org/common" schemaLocation="common.xsd"/>
     <xs:element name="zalba_na_cutanje">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="adresa_poverenika" type="common:TAdresa"> </xs:element>
-                <xs:element name="organ_protiv_kojeg_je_zalba" type="common:TPravno_lice"/>
+                <xs:element name="organ_protiv_kojeg_je_zalba">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="common:TPravno_lice">
+                                <xs:attribute fixed="pred:organ_protiv_kojeg_je_zalba"
+                                    form="unqualified" name="property" type="xs:string"
+                                    use="required"/>
+                                <xs:attribute fixed="xs:string" name="datatype" type="xs:string"
+                                    use="required"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="podaci_o_zahtevu">
                     <xs:complexType>
                         <xs:sequence>
@@ -42,7 +55,7 @@
                             <xs:element name="podnosilac_zalbe">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="lice" type="common:TLice"/>
+                                        <xs:element name="lice" type="common:TFizicko_lice"/>
                                         <xs:element name="drugi_podaci_za_kontakt">
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
@@ -51,22 +64,44 @@
                                             </xs:simpleType>
                                         </xs:element>
                                     </xs:sequence>
+                                    <xs:attribute fixed="pred:podnosilac_zalbe" name="property"
+                                        type="xs:string" use="required"/>
+                                    <xs:attribute name="id_podnosioca" type="xs:string"
+                                        use="required"/>
+                                    <xs:attribute name="resource" type="xs:string" use="required"/>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="datum_podnosenja" type="xs:date"/>
+                            <xs:element name="datum_podnosenja">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute fixed="pred:datum_podnosenja"
+                                                name="property" type="xs:string" use="required"/>
+                                            <xs:attribute fixed="xs:date" name="datatype"
+                                                type="xs:string" use="required"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
                             <xs:element name="mesto">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:minLength value="1"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="property"
+                                                fixed="pred:mesto_podnosenja" type="xs:string"
+                                                use="required"/>
+                                            <xs:attribute name="datatype" fixed="xs:string"
+                                                type="xs:string" use="required"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
                             </xs:element>
                             <xs:element name="razlog_zalbe">
                                 <xs:simpleType>
                                     <xs:restriction base="xs:string">
-                                        <xs:enumeration value="nije postupio"/>
-                                        <xs:enumeration value="nije postupio u celosti"/>
-                                        <xs:enumeration value="nije postupio u zakonskom roku"/>
+                                        <xs:enumeration value="није поступио"/>
+                                        <xs:enumeration value="није поступио у целости"/>
+                                        <xs:enumeration value="није поступио у законском року"/>
                                     </xs:restriction>
                                 </xs:simpleType>
                             </xs:element>
@@ -81,14 +116,17 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="broj_zahteva">
+            <xs:attribute name="broj_zahteva" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:minLength value="1"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="id" type="xs:string" use="required"/>
+            <xs:attribute name="id" type="xs:string" use="optional"/>
+            <xs:attribute name="vocab" type="xs:string" use="required"
+                fixed="http://www.projekat.org/predicate"/>
+            <xs:attribute name="about" type="xs:string" use="required"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

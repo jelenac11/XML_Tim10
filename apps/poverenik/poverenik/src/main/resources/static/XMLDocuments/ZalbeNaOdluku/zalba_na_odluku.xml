@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zno:zalba_na_odluku xmlns:zno="http://www.projekat.org/zalba_na_odluku"
  xmlns:common="http://www.projekat.org/common"
+ xmlns:pred="http://www.projekat.org/predicate/"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.projekat.org/zalba_na_odluku" id="id0">
+ xsi:schemaLocation="http://www.projekat.org/zalba_na_odluku ../schemas/zalba_na_odluku.xsd" broj_zahteva="broj_zahteva0" broj_resenja="broj_resenja0" vocab="http://www.projekat.org/predicate"
+     about="about0">
     <zno:adresa_poverenika>
         <common:mesto>mesto0</common:mesto>
     </zno:adresa_poverenika>
@@ -14,13 +16,13 @@
         <common:prezime>prezime0</common:prezime>
     </zno:zalilac>
     <zno:podaci_o_resenju>
-        <zno:godina>2000</zno:godina>
-        <zno:naziv_organa>naziv_organa0</zno:naziv_organa>
+        <zno:godina>5000</zno:godina>
+        <zno:naziv_organa property="pred:organ_koji_je_doneo_odluku" datatype="xs:string">naziv_organa0</zno:naziv_organa>
     </zno:podaci_o_resenju>
     <zno:datum_zahteva>2006-05-04</zno:datum_zahteva>
     <zno:podaci_o_zalbi>
-        <zno:podnosilac_zalbe>
-            <zno:lice xsi:type="common:TFizicko_lice">
+        <zno:podnosilac_zalbe property="pred:podnosilac_zalbe" id_podnosioca="id_podnosioca0" content="resource0">
+            <zno:lice>
                 <common:adresa>
                     <common:mesto>mesto2</common:mesto>
                 </common:adresa>
@@ -29,8 +31,8 @@
             </zno:lice>
             <zno:drugi_podaci_za_kontakt>drugi_podaci_za_kontakt0</zno:drugi_podaci_za_kontakt>
         </zno:podnosilac_zalbe>
-        <zno:datum_podnosenja>2006-05-04</zno:datum_podnosenja>
-        <zno:mesto>mesto0</zno:mesto>
+        <zno:datum_podnosenja property="pred:datum_podnosenja" datatype="xs:date">2006-05-04</zno:datum_podnosenja>
+        <zno:mesto property="pred:mesto_podnosenja" datatype="xs:string">mesto0</zno:mesto>
         <zno:opis>opis0</zno:opis>
     </zno:podaci_o_zalbi>
 </zno:zalba_na_odluku>

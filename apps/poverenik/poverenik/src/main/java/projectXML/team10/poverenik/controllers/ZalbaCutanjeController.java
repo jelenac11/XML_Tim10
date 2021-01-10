@@ -16,7 +16,7 @@ import projectXML.team10.poverenik.models.zalbaCutanje.ZalbaNaCutanje;
 import projectXML.team10.poverenik.services.ZalbaCutanjeService;
 
 @RestController
-@RequestMapping(value = "/api/zalba-cutanje")
+@RequestMapping(value = "/api/zalba-cutanje", produces = MediaType.APPLICATION_XML_VALUE)
 public class ZalbaCutanjeController {
 
 	@Autowired

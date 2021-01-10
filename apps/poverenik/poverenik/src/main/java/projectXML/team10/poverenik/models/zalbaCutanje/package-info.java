@@ -5,7 +5,7 @@
 // Generated on: 2021.01.08 at 02:59:50 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.projekat.org/zalba_cutanja", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns={@XmlNs(prefix="zc", namespaceURI="http://www.projekat.org/zalba_cutanja"), @XmlNs(prefix="common", namespaceURI = "http://www.projekat.org/common")})
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.projekat.org/zalba_cutanja", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns={@XmlNs(prefix="zc", namespaceURI="http://www.projekat.org/zalba_cutanja"), @XmlNs(prefix="pred", namespaceURI="http://www.projekat.org/predicate"), @XmlNs(prefix="common", namespaceURI = "http://www.projekat.org/common")})
 package projectXML.team10.poverenik.models.zalbaCutanje;
 
 import javax.xml.bind.annotation.XmlNs;
