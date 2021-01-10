@@ -2,28 +2,29 @@
 <odluka_poverioca 
 	xmlns="http://www.projekat.org/resenje"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:common="http://www.projekat.org/common"
     xsi:schemaLocation="http://www.projekat.org/resenje ../../schemas/resenje.xsd"
 
-	broj_rešenja='071-01-1114/2020-03' 
+    broj_rešenja='1114/2020-03' 
 	broj_žalbe='1235' broj_zahteva='123123' 
 	tip_rešenja='žalba_cutanja'>
     <opis_žalbe>
         <žalioc>
-            <ime>A</ime>
-            <prezime>A</prezime>
-            <adresa>
-                <mesto>RNGlovac</mesto>
-                <ulica>RNG ulica</ulica>
-                <broj>2</broj>
-            </adresa>
-            <kontakt>064111111</kontakt>
+            <common:adresa>
+                <common:mesto>RNGlovac</common:mesto>
+                <common:ulica>RNG ulica</common:ulica>
+                <common:broj>2</common:broj>
+            </common:adresa>
+            <common:ime>A</common:ime>
+            <common:prezime>A</common:prezime>
+            
         </žalioc>
         <organ>
             <naziv>Учитељског факултета у Призрену</naziv>
             <adresa>
-                <mesto>Лепосавићу,</mesto>
-                <ulica>Немањина</ulica>
-                <broj>064123123</broj>
+                <common:mesto>Лепосавићу,</common:mesto>
+                <common:ulica>Немањина</common:ulica>
+                <common:broj>064123123</common:broj>
             </adresa>
         </organ>
         <datum_žalbe>2020-04-16</datum_žalbe>
@@ -82,7 +83,12 @@
     
     <datum_rešenja>2020-06-09</datum_rešenja>
     <poverenik>
-        <ime>Milan</ime>
-        <prezime>Marinovic</prezime>
+        <common:adresa>
+            <common:mesto>RNGlovac</common:mesto>
+            <common:ulica>RNG ulica</common:ulica>
+            <common:broj>2</common:broj>
+        </common:adresa>
+        <common:ime>Milan</common:ime>
+        <common:prezime>Marinovic</common:prezime>
     </poverenik>
 </odluka_poverioca>
