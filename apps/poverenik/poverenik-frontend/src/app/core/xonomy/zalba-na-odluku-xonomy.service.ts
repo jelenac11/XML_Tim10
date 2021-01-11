@@ -347,6 +347,7 @@ export class ZalbaNaOdlukuXonomyService {
           }
         },
         hasText: true,
+        asker: Xonomy.askString,
       },
 
       "zno:datum_zahteva": {

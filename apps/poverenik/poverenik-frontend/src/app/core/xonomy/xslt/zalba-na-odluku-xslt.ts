@@ -13,12 +13,12 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                     }
                 
                  .c1 {
-                    padding-left: 70pt;
+                    padding-left: 50pt;
                     margin: 0 auto;
                     margin-top: 20pt;
                     margin-bottom: 20pt;
                     background-color: white;
-                    padding-right: 70pt;
+                    padding-right: 50pt;
                     padding-top: 60pt;
                     padding-bottom: 60pt;
                     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
