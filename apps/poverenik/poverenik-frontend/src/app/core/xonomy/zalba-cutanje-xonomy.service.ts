@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
+import { zalbaCutanjeXSLT } from './xslt/zalba-na-cutanje-xslt';
 
 declare const Xonomy: any;
+const xsltProcessor = new XSLTProcessor();
+const domParser = new DOMParser();
+const xmlSerializer = new XMLSerializer();
 
 const zc = `xmlns:zc="http://www.projekat.org/zalba_cutanja"`;
 const common = `xmlns:common="http://www.projekat.org/common"`;
@@ -9,6 +13,13 @@ const common = `xmlns:common="http://www.projekat.org/common"`;
   providedIn: 'root'
 })
 export class ZalbaCutanjeXonomyService {
+
+  public convertZalbaXSLT(zalbaXML: string): string {
+    xsltProcessor.reset();
+    xsltProcessor.importStylesheet(domParser.parseFromString(zalbaCutanjeXSLT, 'text/xml'));
+    let result = xsltProcessor.transformToDocument(domParser.parseFromString(zalbaXML, 'text/xml'));
+    return xmlSerializer.serializeToString(result);
+  }
 
   public zalbaCutanjeSpecification = {
     validate: function (jsElement) {
@@ -81,7 +92,8 @@ export class ZalbaCutanjeXonomyService {
           }
         },
         mustBeBefore: ["common:ulica", "common:broj"],
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "zc:mesto": {
@@ -103,7 +115,8 @@ export class ZalbaCutanjeXonomyService {
             isInvisible: true,
           }
         },
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "common:ulica": {
@@ -118,7 +131,8 @@ export class ZalbaCutanjeXonomyService {
         },
         menu: [],
         mustBeBefore: ["common:broj"],
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "common:broj": {
@@ -132,7 +146,8 @@ export class ZalbaCutanjeXonomyService {
           }
         },
         menu: [],
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "common:adresa": {
@@ -256,6 +271,7 @@ export class ZalbaCutanjeXonomyService {
 
         },
         hasText: true,
+        asker: Xonomy.askString,
         mustBeBefore: ["zc:zahtevi"]
       },
 
@@ -402,7 +418,8 @@ export class ZalbaCutanjeXonomyService {
             );
           }
         },
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "common:naziv": {
@@ -416,6 +433,7 @@ export class ZalbaCutanjeXonomyService {
           }
         },
         hasText: true,
+        asker: Xonomy.askString,
         menu: [
           {
             caption: "Delete this <item>",
@@ -436,6 +454,7 @@ export class ZalbaCutanjeXonomyService {
         },
         hasText: true,
         mustBeBefore: ["common:prezime"],
+        asker: Xonomy.askString,
         menu: [
           {
             caption: "Delete this <item>",
@@ -460,7 +479,8 @@ export class ZalbaCutanjeXonomyService {
             action: Xonomy.deleteElement
           }
         ],
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "zc:datum_podnosenja": {
@@ -482,7 +502,8 @@ export class ZalbaCutanjeXonomyService {
             isInvisible: true,
           }
         },
-        mustBeBefore: ["zc:mesto", "zc:razlog_zalbe"]
+        mustBeBefore: ["zc:mesto", "zc:razlog_zalbe"],
+        asker: Xonomy.askString,
       },
 
       "zc:razlog_zalbe": {

@@ -10,12 +10,16 @@ import { ZalbaCutanjeXonomyService } from './core/xonomy/zalba-cutanje-xonomy.se
 import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.component';
 import { ZalbaNaOdlukuService } from './core/services/zalba-na-odluku.service';
 import { ZalbaNaOdlukuXonomyService } from './core/xonomy/zalba-na-odluku-xonomy.service';
+import { PrikazZalbaNaOdlukuComponent } from './prikaz-zalba-na-odluku/prikaz-zalba-na-odluku.component';
+import { PrikazZalbaCutanjeComponent } from './prikaz-zalba-cutanje/prikaz-zalba-cutanje.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ZalbaCutanjeComponent,
-    ZalbaNaOdlukuComponent
+    ZalbaNaOdlukuComponent,
+    PrikazZalbaNaOdlukuComponent,
+    PrikazZalbaCutanjeComponent
   ],
   imports: [
     BrowserModule,

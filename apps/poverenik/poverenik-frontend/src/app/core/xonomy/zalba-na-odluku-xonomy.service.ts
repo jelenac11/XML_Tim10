@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
+import { zalbaNaOdlukuXSLT } from './xslt/zalba-na-odluku-xslt';
 
 declare const Xonomy: any;
+const xsltProcessor = new XSLTProcessor();
+const domParser = new DOMParser();
+const xmlSerializer = new XMLSerializer();
 
 const zno = `xmlns:zno="http://www.projekat.org/zalba_na_odluku"`;
 const common = `xmlns:common="http://www.projekat.org/common"`;
@@ -9,6 +13,13 @@ const common = `xmlns:common="http://www.projekat.org/common"`;
   providedIn: 'root'
 })
 export class ZalbaNaOdlukuXonomyService {
+
+  public convertZalbaXSLT(zalbaXML: string): string {
+    xsltProcessor.reset();
+    xsltProcessor.importStylesheet(domParser.parseFromString(zalbaNaOdlukuXSLT, 'text/xml'));
+    let result = xsltProcessor.transformToDocument(domParser.parseFromString(zalbaXML, 'text/xml'));
+    return xmlSerializer.serializeToString(result);
+  }
 
   public zalbaNaOdlukuSpecification = {
     validate: function (jsElement) {
@@ -85,7 +96,8 @@ export class ZalbaNaOdlukuXonomyService {
           }
         },
         mustBeBefore: ["common:ulica", "common:broj"],
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "zno:mesto": {
@@ -107,7 +119,8 @@ export class ZalbaNaOdlukuXonomyService {
             isInvisible: true,
           }
         },
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "common:ulica": {
@@ -122,7 +135,8 @@ export class ZalbaNaOdlukuXonomyService {
         },
         menu: [],
         mustBeBefore: ["common:broj"],
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "common:broj": {
@@ -136,7 +150,8 @@ export class ZalbaNaOdlukuXonomyService {
           }
         },
         menu: [],
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "common:adresa": {
@@ -309,7 +324,8 @@ export class ZalbaNaOdlukuXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["zno:naziv_organa"]
+        mustBeBefore: ["zno:naziv_organa"],
+        asker: Xonomy.askString,
       },
 
       "zno:naziv_organa": {
@@ -348,7 +364,8 @@ export class ZalbaNaOdlukuXonomyService {
 
         },
         hasText: true,
-        mustBeBefore: ["zno:podaci_o_zalbi"]
+        mustBeBefore: ["zno:podaci_o_zalbi"],
+        asker: Xonomy.askString,
       },
       
       "zno:podaci_o_zalbi": {
@@ -455,7 +472,8 @@ export class ZalbaNaOdlukuXonomyService {
             );
           }
         },
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "common:naziv": {
@@ -474,7 +492,8 @@ export class ZalbaNaOdlukuXonomyService {
             caption: "Delete this <item>",
             action: Xonomy.deleteElement
           }
-        ]
+        ],
+        asker: Xonomy.askString,
       },
 
       "common:ime": {
@@ -494,7 +513,8 @@ export class ZalbaNaOdlukuXonomyService {
             caption: "Delete this <item>",
             action: Xonomy.deleteElement
           }
-        ]
+        ],
+        asker: Xonomy.askString,
       },
 
       "common:prezime": {
@@ -513,7 +533,8 @@ export class ZalbaNaOdlukuXonomyService {
             action: Xonomy.deleteElement
           }
         ],
-        hasText: true
+        hasText: true,
+        asker: Xonomy.askString,
       },
 
       "zno:datum_podnosenja": {
@@ -535,7 +556,8 @@ export class ZalbaNaOdlukuXonomyService {
             isInvisible: true,
           }
         },
-        mustBeBefore: ["zno:mesto", "zno:opis"]
+        mustBeBefore: ["zno:mesto", "zno:opis"],
+        asker: Xonomy.askString,
       },
 
       "zno:opis": {
