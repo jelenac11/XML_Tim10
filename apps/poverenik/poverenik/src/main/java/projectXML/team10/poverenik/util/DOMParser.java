@@ -4,7 +4,6 @@ import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.tomcat.jni.File;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -90,8 +89,6 @@ public class DOMParser implements ErrorHandler {
 
 			// Print stack trace...
 			embeddedException.printStackTrace();
-			
-			System.exit(0);
 			
 		} catch (SAXException e) {
 			e.printStackTrace();

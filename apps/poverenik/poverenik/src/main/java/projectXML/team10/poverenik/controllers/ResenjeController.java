@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xmldb.api.modules.XMLResource;
 
-import projectXML.team10.poverenik.models.resenje.OdlukaPoverioca;
 import projectXML.team10.poverenik.services.ResenjeService;
 
 @RestController
@@ -25,9 +21,9 @@ public class ResenjeController {
 	@Autowired
 	private ResenjeService resenjeService;
 
-	@GetMapping(value = "")
+	@GetMapping(value = "/{id}")
 	@CrossOrigin
-	public ResponseEntity<?> ResponseEntitygetOdluka(@RequestBody String id) {
+	public ResponseEntity<?> ResponseEntitygetOdluka(@PathVariable String id) {
 		String odluka;
 		try {
 			odluka = resenjeService.getOdlukaPoverioca(id);

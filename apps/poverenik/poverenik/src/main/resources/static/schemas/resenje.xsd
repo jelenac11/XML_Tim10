@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
     targetNamespace="http://www.projekat.org/resenje" xmlns:res="http://www.projekat.org/resenje"
-    xmlns:common="http://www.projekat.org/common">
+    xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/">
     <xs:import namespace="http://www.projekat.org/common" schemaLocation="common.xsd"/>
     <xs:element name="odluka_poverioca">
         <xs:complexType>
@@ -9,7 +9,23 @@
                 <xs:element name="opis_žalbe">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="žalioc" type="common:TFizicko_lice"/>
+                            <xs:element name="žalioc">
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="common:TFizicko_lice">
+                                            <xs:attribute fixed="pred:podnosilac_zalbe"
+                                                name="property" type="xs:string"/>
+                                            <xs:attribute name="content">
+                                                <xs:simpleType>
+                                                  <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                  </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:attribute>
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
                             <xs:element name="organ">
                                 <xs:complexType>
                                     <xs:sequence>
@@ -22,16 +38,30 @@
                                         </xs:element>
                                         <xs:element name="adresa" type="common:TAdresa"/>
                                     </xs:sequence>
+                                    <xs:attribute fixed="pred:organ_protiv_kojeg_je_zalba"
+                                        name="property" type="xs:string"/>
+                                    <xs:attribute name="content">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:minLength value="1"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="datum_žalbe" type="xs:date"/>
-                            <xs:element name="ceo_opis">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:minLength value="1"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
+                            <xs:element name="datum_žalbe">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute fixed="pred:datum_zalbe" name="property"
+                                                type="xs:string"/>
+                                            <xs:attribute fixed="xs:date" name="datatype"
+                                                type="xs:string" use="required"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
                             </xs:element>
+                            <xs:element name="ceo_opis" type="res:T_Multi_Paragraf"> </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -46,23 +76,65 @@
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="uputstvo" type="xs:string"/>
-                <xs:element name="datum_rešenja" type="xs:date"/>
-                <xs:element name="poverenik" type="common:TFizicko_lice"/>
+                <xs:element name="datum_rešenja">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:date">
+                                <xs:attribute fixed="pred:datum_resenja" name="property"
+                                    type="xs:string"/>
+                                <xs:attribute fixed="xs:date" name="datatype" type="xs:string"
+                                    use="required"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="poverenik">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="common:TFizicko_lice">
+                                <xs:attribute fixed="pred:poverenik" name="property"
+                                    type="xs:string"/>
+                                <xs:attribute name="content">
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
             <xs:attribute name="broj_rešenja" type="xs:positiveInteger"> </xs:attribute>
             <xs:attribute name="broj_žalbe" type="xs:positiveInteger"/>
             <xs:attribute name="broj_zahteva" type="xs:positiveInteger"/>
             <xs:attribute name="tip_rešenja" type="xs:string"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:complexType name="T_Multi_Paragraf">
-        <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="paragraf">
+            <xs:attribute fixed="http://www.projekat.org/predicate" name="vocab">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:minLength value="1"/>
                     </xs:restriction>
                 </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="about">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="T_Multi_Paragraf">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="paragraf">
+                <xs:complexType mixed="true">
+                    <xs:choice minOccurs="0" maxOccurs="unbounded">
+                        <xs:element name="datum" type="xs:date"> </xs:element>
+                        <xs:element name="zakon" type="xs:string"> </xs:element>
+                    </xs:choice>
+                </xs:complexType>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
