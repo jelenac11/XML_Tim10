@@ -202,28 +202,28 @@ export const zalbaCutanjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                         text-align: justify;
                         font-size: 11pt;
                         font-family: 'Times New Roman';
-                    }
+                     }
                     
-                    .c28 {
+                     .c28 {
                         width: 200px;
                         margin-left: 5px;
                         display: inline-block;
-                    }
+                     }
                     
-                    .c29 {
+                     .c29 {
                         text-indent: 10pt;
                         margin-top: -20pt;
                         margin-bottom: 30pt;
                         text-align: justify;
                         font-size: 11pt;
                         font-family: 'Times New Roman';
-                    }
+                     }
                     
-                    .c30 {
+                     .c30 {
                         width: 50%;
                         margin-left: 2px;
                         display: inline-block;
-                    }
+                     }
                     
                     .c31 {
                         width: 20px;

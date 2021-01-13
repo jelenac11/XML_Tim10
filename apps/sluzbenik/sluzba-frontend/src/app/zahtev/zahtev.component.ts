@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ZahtevService } from '../core/services/zahtev.service';
 import { ZahtevXonomyService } from '../core/xonomy/zahtev-xonomy.service';
 
@@ -17,16 +17,29 @@ export class ZahtevComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @ViewChild('zahtevXonomy', { static: false }) zahtevXonomy;
+  @ViewChild('zahtevHTML', { static: false }) zahtevHTML;
+  
   ngAfterViewInit(): void {
     let element = document.getElementById("zahtev");
     let specification = this.xonomyService.zahtevGradjanaSpecification;
-    let xmlString = `<?xml version='1.0' encoding='UTF-8'?><zahtev_gradjana xmlns="http://www.projekat.org/zahtev" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><organ><adresa><mesto></mesto></adresa><naziv></naziv></organ><trazilac><lice/><drugi_podatak_za_kontakt></drugi_podatak_za_kontakt></trazilac><informacije_vezane_za_zahtev><tip_zahteva></tip_zahteva><opis_zahteva></opis_zahteva><mesto></mesto><datum>${new Date().toISOString().slice(0, 10)}</datum></informacije_vezane_za_zahtev></zahtev_gradjana>`;
+    let xmlString = `<?xml version='1.0' encoding='UTF-8'?><za:zahtev_gradjana xmlns:common="http://www.projekat.org/common" xmlns:za="http://www.projekat.org/zahtev" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><za:organ><common:adresa><common:mesto></common:mesto><common:ulica/><common:broj/></common:adresa><common:naziv></common:naziv></za:organ><za:trazilac><za:lice/><za:drugi_podatak_za_kontakt></za:drugi_podatak_za_kontakt></za:trazilac><za:informacije_vezane_za_zahtev><za:tip_zahteva></za:tip_zahteva><za:opis_zahteva></za:opis_zahteva><za:mesto></za:mesto><za:datum>${new Date().toISOString().slice(0, 10)}</za:datum></za:informacije_vezane_za_zahtev></za:zahtev_gradjana>`;
     Xonomy.render(xmlString, element, specification);
+    Xonomy.render(xmlString, element, {
+      validate: this.xonomyService.zahtevGradjanaSpecification.validate,
+      elements: this.xonomyService.zahtevGradjanaSpecification.elements,
+      onchange: () => { this.onChange() }
+    });
+    this.onChange();
   }
 
   public submit(): void {
     this.zahtevService.post("zahtevi", Xonomy.harvest())
       .subscribe(res =>
         console.log(res));
+  }
+
+  onChange() {
+    this.zahtevHTML.nativeElement.innerHTML = this.xonomyService.convertZahtevXSLT(Xonomy.harvest());
   }
 }

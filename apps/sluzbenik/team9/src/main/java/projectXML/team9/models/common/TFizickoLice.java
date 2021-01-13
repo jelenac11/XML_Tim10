@@ -6,7 +6,7 @@
 //
 
 
-package projectXML.team9.models.obavestenje;
+package projectXML.team9.models.common;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -47,7 +47,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TFizicko_lice", propOrder = {
+@XmlType(name = "TFizicko_lice", namespace = "http://www.projekat.org/common", propOrder = {
     "ime",
     "prezime"
 })
@@ -55,9 +55,9 @@ public class TFizickoLice
     extends TLice
 {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.projekat.org/common", required = true)
     protected String ime;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.projekat.org/common", required = true)
     protected String prezime;
     
     @Override

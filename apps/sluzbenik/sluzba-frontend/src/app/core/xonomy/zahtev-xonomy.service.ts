@@ -1,11 +1,25 @@
 import { Injectable } from '@angular/core';
+import { zahtevXSLT } from './xslt/zahtev-xslt';
 
 declare const Xonomy: any;
+const xsltProcessor = new XSLTProcessor();
+const domParser = new DOMParser();
+const xmlSerializer = new XMLSerializer();
+
+const za = `xmlns:za="http://www.projekat.org/zahtev"`;
+const common = `xmlns:common="http://www.projekat.org/common"`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZahtevXonomyService {
+
+  public convertZahtevXSLT(zahtevXML: string): string {
+    xsltProcessor.reset();
+    xsltProcessor.importStylesheet(domParser.parseFromString(zahtevXSLT, 'text/xml'));
+    let result = xsltProcessor.transformToDocument(domParser.parseFromString(zahtevXML, 'text/xml'));
+    return xmlSerializer.serializeToString(result);
+  }
 
   public zahtevGradjanaSpecification = {
     validate: function (jsElement) {
@@ -27,7 +41,7 @@ export class ZahtevXonomyService {
       }
     },
     elements: {
-      zahtev_gradjana: {
+      "za:zahtev_gradjana": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -40,32 +54,32 @@ export class ZahtevXonomyService {
         menu: [{
           caption: "Append an <organ>",
           action: Xonomy.newElementChild,
-          actionParameter: "<organ></organ>",
+          actionParameter: `<za:organ ${za}/>`,
           hideIf: function (jsElement) {
-            return jsElement.hasChildElement("organ");
+            return jsElement.hasChildElement("za:organ");
           }
         },
         {
           caption: "Append an <trazilac>",
           action: Xonomy.newElementChild,
-          actionParameter: "<trazilac></trazilac>",
+          actionParameter: `<za:trazilac ${za}/>`,
           hideIf: function (jsElement) {
-            return jsElement.hasChildElement("trazilac");
+            return jsElement.hasChildElement("za:trazilac");
           }
         },
         {
           caption: "Append an <informacije_vezane_za_zahtev>",
           action: Xonomy.newElementChild,
-          actionParameter: "<informacije_vezane_za_zahtev></informacije_vezane_za_zahtev>",
+          actionParameter: `<za:informacije_vezane_za_zahtev ${za}/>`,
           hideIf: function (jsElement) {
-            return jsElement.hasChildElement("informacije_vezane_za_zahtev");
+            return jsElement.hasChildElement("za:informacije_vezane_za_zahtev");
           }
         }
         ],
         attributes: {
         }
       },
-      organ: {
+      "za:organ": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -74,14 +88,14 @@ export class ZahtevXonomyService {
             }
             );
           }
-          if (!jsElement.hasChildElement("adresa")) {
+          if (!jsElement.hasChildElement("common:adresa")) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have element adresa."
             }
             );
           }
-          if (!jsElement.hasChildElement("naziv")) {
+          if (!jsElement.hasChildElement("common:naziv")) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have element naziv."
@@ -89,27 +103,27 @@ export class ZahtevXonomyService {
             );
           }
         },
-        mustBeBefore: ["trazilac", "informacije_vezane_za_zahtev"],
+        mustBeBefore: ["za:trazilac", "za:informacije_vezane_za_zahtev"],
         menu: [
           {
             caption: "Append an <adresa>",
             action: Xonomy.newElementChild,
-            actionParameter: "<adresa></adresa>",
+            actionParameter: `<common:adresa ${common}></common:adresa>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("adresa");
+              return jsElement.hasChildElement("common:adresa");
             }
           },
           {
             caption: "Append an <naziv>",
             action: Xonomy.newElementChild,
-            actionParameter: "<naziv></naziv>",
+            actionParameter: `<common:naziv ${common}></common:naziv>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("naziv");
+              return jsElement.hasChildElement("common:naziv");
             }
           }
         ]
       },
-      adresa: {
+      "common:adresa": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -123,31 +137,31 @@ export class ZahtevXonomyService {
           {
             caption: "Append an <mesto>",
             action: Xonomy.newElementChild,
-            actionParameter: "<mesto></mesto>",
+            actionParameter: `<common:mesto ${common}></common:mesto>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("mesto");
+              return jsElement.hasChildElement("common:mesto");
             }
           },
           {
             caption: "Append an <ulica>",
             action: Xonomy.newElementChild,
-            actionParameter: "<ulica></ulica>",
+            actionParameter: `<common:ulica ${common}></common:ulica>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("ulica");
+              return jsElement.hasChildElement("common:ulica");
             }
           },
           {
             caption: "Append an <broj>",
             action: Xonomy.newElementChild,
-            actionParameter: "<broj></broj>",
+            actionParameter: `<common:broj ${common}></common:broj>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("broj");
+              return jsElement.hasChildElement("common:broj");
             }
           },
         ],
-        mustBeBefore: ["naziv", "ime", "prezime"],
+        mustBeBefore: ["common:naziv", "common:ime", "common:prezime"],
       },
-      mesto: {
+      "common:mesto": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -157,10 +171,10 @@ export class ZahtevXonomyService {
             );
           }
         },
-        mustBeBefore: ["ulica", "broj", "datum"],
+        mustBeBefore: ["common:ulica", "common:broj", "za:datum"],
         hasText: true
       },
-      ulica: {
+      "common:ulica": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -170,15 +184,12 @@ export class ZahtevXonomyService {
             );
           }
         },
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
+        menu: [
         ],
-        mustBeBefore: ["broj"],
+        mustBeBefore: ["common:broj"],
         hasText: true
       },
-      broj: {
+      "common:broj": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -188,14 +199,11 @@ export class ZahtevXonomyService {
             );
           }
         },
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
+        menu: [
         ],
         hasText: true
       },
-      naziv: {
+      "common:naziv": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -212,7 +220,7 @@ export class ZahtevXonomyService {
         ],
         hasText: true
       },
-      trazilac: {
+      "za:trazilac": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -224,25 +232,25 @@ export class ZahtevXonomyService {
         },
         menu: [
           {
-            caption: "Append an <lice>",
+            caption: "Append an <za:lice>",
             action: Xonomy.newElementChild,
-            actionParameter: "<lice></lice>",
+            actionParameter: `<za:lice ${za}/>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("lice");
+              return jsElement.hasChildElement("za:lice");
             }
           },
           {
             caption: "Append an <drugi_podatak_za_kontakt>",
             action: Xonomy.newElementChild,
-            actionParameter: "<drugi_podatak_za_kontakt></drugi_podatak_za_kontakt>",
+            actionParameter: `<za:drugi_podatak_za_kontakt ${za}/>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("drugi_podatak_za_kontakt");
+              return jsElement.hasChildElement("za:drugi_podatak_za_kontakt");
             }
           }
         ],
-        mustBeBefore: ["informacije_vezane_za_zahtev"],
+        mustBeBefore: ["za:informacije_vezane_za_zahtev"],
       },
-      lice: {
+      "za:lice": {
         validate: function (jsElement) {
           if (jsElement.hasAttribute("xsi:type") == "") {
             Xonomy.warnings.push({
@@ -258,21 +266,21 @@ export class ZahtevXonomyService {
             }
             );
           }
-          if (jsElement.getAttributeValue("xsi:type", null) == "TFizicko_lice" && (!jsElement.hasChildElement("ime") || !jsElement.hasChildElement("prezime"))) {
+          if (jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice" && (!jsElement.hasChildElement("common:ime") || !jsElement.hasChildElement("common:prezime"))) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have elements ime and prezime with attribute xsi:type value TFizicko_lice."
             }
             );
           }
-          if (jsElement.getAttributeValue("xsi:type", null) == "TPravno_lice" && !jsElement.hasChildElement("naziv")) {
+          if (jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice" && !jsElement.hasChildElement("common:naziv")) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have elements naziv with attribute xsi:type value TPravno_lice."
             }
             );
           }
-          if (!jsElement.hasChildElement("adresa")) {
+          if (!jsElement.hasChildElement("common:adresa")) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have element adresa."
@@ -284,36 +292,36 @@ export class ZahtevXonomyService {
           {
             caption: "Append an <adresa>",
             action: Xonomy.newElementChild,
-            actionParameter: "<adresa><mesto></mesto></adresa>",
+            actionParameter: `<common:adresa ${common}><common:mesto ${common}/><common:ulica ${common}/><common:broj ${common}/></common:adresa>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("adresa") || !jsElement.getAttributeValue("xsi:type", null);
+              return jsElement.hasChildElement("common:adresa") || !jsElement.getAttributeValue("xsi:type", null);
             }
           },
           {
             caption: "Append an <naziv>",
             action: Xonomy.newElementChild,
-            actionParameter: "<naziv></naziv>",
+            actionParameter: `<common:naziv ${common}></common:naziv>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("naziv") || jsElement.hasChildElement("ime") || jsElement.hasChildElement("prezime")
-                || !jsElement.getAttributeValue("xsi:type", null) || jsElement.getAttributeValue("xsi:type", null) == "TFizicko_lice";
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || jsElement.hasChildElement("common:prezime")
+                || !jsElement.getAttributeValue("xsi:type", null) || jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice";
             }
           },
           {
             caption: "Append an <ime>",
             action: Xonomy.newElementChild,
-            actionParameter: "<ime></ime>",
+            actionParameter: `<common:ime ${common}></common:ime>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("naziv") || jsElement.hasChildElement("ime") || !jsElement.getAttributeValue("xsi:type", null)
-                || jsElement.getAttributeValue("xsi:type", null) == "TPravno_lice";
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || !jsElement.getAttributeValue("xsi:type", null)
+                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
             }
           },
           {
             caption: "Append an <prezime>",
             action: Xonomy.newElementChild,
-            actionParameter: "<prezime></prezime>",
+            actionParameter: `<common:prezime ${common}></common:prezime>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("naziv") || jsElement.hasChildElement("prezime") || !jsElement.getAttributeValue("xsi:type", null)
-                || jsElement.getAttributeValue("xsi:type", null) == "TPravno_lice";
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:prezime") || !jsElement.getAttributeValue("xsi:type", null)
+                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
             }
           },
           {
@@ -325,13 +333,13 @@ export class ZahtevXonomyService {
             }
           },
         ],
-        mustBeBefore: ["drugi_podatak_za_kontakt"],
+        mustBeBefore: ["za:drugi_podatak_za_kontakt"],
         attributes: {
           "xsi:type": {
             asker: Xonomy.askPicklist,
             askerParameter: [
-              { value: "TFizicko_lice" },
-              { value: "TPravno_lice" }
+              { value: "common:TFizicko_lice" },
+              { value: "common:TPravno_lice" }
             ],
             validate: function (jsAttribute) {
               if (jsAttribute.value == "") {
@@ -345,7 +353,7 @@ export class ZahtevXonomyService {
           }
         }
       },
-      drugi_podatak_za_kontakt: {
+      "za:drugi_podatak_za_kontakt": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -357,7 +365,7 @@ export class ZahtevXonomyService {
         },
         hasText: true
       },
-      ime: {
+      "common:ime": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -368,7 +376,7 @@ export class ZahtevXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["prezime"],
+        mustBeBefore: ["common:prezime"],
         menu: [
           {
             caption: "Delete this <item>",
@@ -376,7 +384,7 @@ export class ZahtevXonomyService {
           }
         ]
       },
-      prezime: {
+      "common:prezime": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -394,7 +402,7 @@ export class ZahtevXonomyService {
         ],
         hasText: true
       },
-      informacije_vezane_za_zahtev: {
+      "za:informacije_vezane_za_zahtev": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -407,40 +415,40 @@ export class ZahtevXonomyService {
         menu:
           [
             {
-              caption: "Append an <tip_zahteva>",
+              caption: "Append an <za:tip_zahteva>",
               action: Xonomy.newElementChild,
-              actionParameter: "<tip_zahteva></tip_zahteva>",
+              actionParameter: `<za:tip_zahteva ${za}></za:tip_zahteva>`,
               hideIf: function (jsElement) {
-                return jsElement.hasChildElement("tip_zahteva");
+                return jsElement.hasChildElement("za:tip_zahteva");
               }
             },
             {
-              caption: "Append an <opis_zahteva>",
+              caption: "Append an <za:opis_zahteva>",
               action: Xonomy.newElementChild,
-              actionParameter: "<opis_zahteva></opis_zahteva>",
+              actionParameter: `<za:opis_zahteva ${za}></za:opis_zahteva>`,
               hideIf: function (jsElement) {
-                return jsElement.hasChildElement("opis_zahteva");
+                return jsElement.hasChildElement("za:opis_zahteva");
               }
             },
             {
-              caption: "Append an <mesto>",
+              caption: "Append an <za:mesto>",
               action: Xonomy.newElementChild,
-              actionParameter: "<mesto></mesto>",
+              actionParameter: `<za:mesto ${za}></za:mesto>`,
               hideIf: function (jsElement) {
-                return jsElement.hasChildElement("mesto");
+                return jsElement.hasChildElement("za:mesto");
               }
             },
             {
-              caption: "Append an <datum>",
+              caption: "Append an <za:datum>",
               action: Xonomy.newElementChild,
-              actionParameter: `<datum>${new Date().toISOString().slice(0, 10)}</datum>`,
+              actionParameter: `<za:datum ${za}>${new Date().toISOString().slice(0, 10)}</za:datum>`,
               hideIf: function (jsElement) {
-                return jsElement.hasChildElement("datum");
+                return jsElement.hasChildElement("za:datum");
               }
             },
           ]
       },
-      opis_zahteva: {
+      "za:opis_zahteva": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -450,10 +458,10 @@ export class ZahtevXonomyService {
             );
           }
         },
-        mustBeBefore: ["mesto", "datum"],
+        mustBeBefore: ["za:mesto", "za:datum"],
         hasText: true
       },
-      datum: {
+      "za:datum": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -465,7 +473,7 @@ export class ZahtevXonomyService {
         },
         isReadOnly: true
       },
-      tip_zahteva: {
+      "za:tip_zahteva": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -475,52 +483,52 @@ export class ZahtevXonomyService {
             );
           }
         },
-        mustBeBefore: ["opis_zahteva", "mesto", "datum"],
+        mustBeBefore: ["za:opis_zahteva", "za:mesto", "za:datum"],
         menu: [
           {
             caption: "Append an <obavestenje_posedovanja_informacije>",
             action: Xonomy.newElementChild,
-            actionParameter: "<obavestenje_posedovanja_informacije></obavestenje_posedovanja_informacije>",
+            actionParameter: `<za:obavestenje_posedovanja_informacije ${za}></za:obavestenje_posedovanja_informacije>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("obavestenje_posedovanja_informacije");
+              return jsElement.hasChildElement("za:obavestenje_posedovanja_informacije");
             }
           },
           {
             caption: "Append an <uvid_u_dokument>",
             action: Xonomy.newElementChild,
-            actionParameter: "<uvid_u_dokument></uvid_u_dokument>",
+            actionParameter: `<za:uvid_u_dokument ${za}></za:uvid_u_dokument>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("uvid_u_dokument");
+              return jsElement.hasChildElement("za:uvid_u_dokument");
             }
           },
           {
             caption: "Append an <kopiju_dokumenta>",
             action: Xonomy.newElementChild,
-            actionParameter: "<kopiju_dokumenta></kopiju_dokumenta>",
+            actionParameter: `<za:kopiju_dokumenta ${za}></za:kopiju_dokumenta>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("kopiju_dokumenta");
+              return jsElement.hasChildElement("za:kopiju_dokumenta");
             }
           },
           {
             caption: "Append an <dostavljanje_kopije>",
             action: Xonomy.newElementChild,
-            actionParameter: "<dostavljanje_kopije></dostavljanje_kopije>",
+            actionParameter: `<za:dostavljanje_kopije ${za}></za:dostavljanje_kopije>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("dostavljanje_kopije");
+              return jsElement.hasChildElement("za:dostavljanje_kopije");
             }
           },
         ]
       },
-      obavestenje_posedovanja_informacije: {
-        mustBeBefore: ["uvid_u_dokument", "kopiju_dokumenta", "dostavljanje_kopije"]
+      "za:obavestenje_posedovanja_informacije": {
+        mustBeBefore: ["za:uvid_u_dokument", "za:kopiju_dokumenta", "za:dostavljanje_kopije"]
       },
-      uvid_u_dokument: {
-        mustBeBefore: ["kopiju_dokumenta", "dostavljanje_kopije"]
+      "za:uvid_u_dokument": {
+        mustBeBefore: ["za:kopiju_dokumenta", "za:dostavljanje_kopije"]
       },
-      kopiju_dokumenta: {
-        mustBeBefore: ["dostavljanje_kopije"]
+      "za:kopiju_dokumenta": {
+        mustBeBefore: ["za:dostavljanje_kopije"]
       },
-      dostavljanje_kopije: {
+      "za:dostavljanje_kopije": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -534,47 +542,47 @@ export class ZahtevXonomyService {
           {
             caption: "Append an <posta>",
             action: Xonomy.newElementChild,
-            actionParameter: "<posta></posta>",
+            actionParameter: `<za:posta ${za}></za:posta>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("posta");
+              return jsElement.hasChildElement("za:posta");
             }
           },
           {
-            caption: "Append an <faks>",
+            caption: "Append an <za:faks>",
             action: Xonomy.newElementChild,
-            actionParameter: "<faks></faks>",
+            actionParameter: `<za:faks ${za}></za:faks>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("faks");
+              return jsElement.hasChildElement("za:faks");
             }
           },
           {
-            caption: "Append an <eposta>",
+            caption: "Append an <za:eposta>",
             action: Xonomy.newElementChild,
-            actionParameter: "<eposta></eposta>",
+            actionParameter: `<za:eposta ${za}></za:eposta>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("eposta");
+              return jsElement.hasChildElement("za:eposta");
             }
           },
           {
             caption: "Append an <drugi_nacin>",
             action: Xonomy.newElementChild,
-            actionParameter: "<drugi_nacin><opis_dostave></opis_dostave></drugi_nacin>",
+            actionParameter: `<za:drugi_nacin ${za}><za:opis_dostave ${za}></za:opis_dostave></za:drugi_nacin>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("drugi_nacin");
+              return jsElement.hasChildElement("za:drugi_nacin");
             }
           },
         ]
       },
-      posta: {
-        mustBeBefore: ["faks", "eposta", "drugi_nacin"]
+      "za:posta": {
+        mustBeBefore: ["za:faks", "za:eposta", "za:drugi_nacin"]
       },
-      faks: {
-        mustBeBefore: ["eposta", "drugi_nacin"]
+      "za:faks": {
+        mustBeBefore: ["za:eposta", "za:drugi_nacin"]
       },
-      eposta: {
-        mustBeBefore: ["drugi_nacin"]
+      "za:eposta": {
+        mustBeBefore: ["za:drugi_nacin"]
       },
-      drugi_nacin: {
+      "za:drugi_nacin": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -588,14 +596,26 @@ export class ZahtevXonomyService {
           {
             caption: "Append an <opis_dostave>",
             action: Xonomy.newElementChild,
-            actionParameter: "<opis_dostave></opis_dostave>",
+            actionParameter: `<za:opis_dostave ${za}></za:opis_dostave>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("opis_dostave");
+              return jsElement.hasChildElement("za:opis_dostave");
             }
           },
         ]
       },
-      opis_dostave: {
+      "za:opis_dostave": {
+        validate: function (jsElement) {
+          if (jsElement.getText() == "") {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element must not be empty."
+            }
+            );
+          }
+        },
+        hasText: true
+      },
+      "za:mesto":{
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -609,6 +629,6 @@ export class ZahtevXonomyService {
       }
     }
   }
-  
+
   constructor() { }
 }

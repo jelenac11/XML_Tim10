@@ -6,7 +6,7 @@
 //
 
 
-package projectXML.team9.models.obavestenje;
+package projectXML.team9.models.common;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TLice", propOrder = {
+@XmlType(name = "TLice", namespace = "http://www.projekat.org/common", propOrder = {
     "adresa"
 })
 @XmlSeeAlso({
@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public abstract class TLice {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.projekat.org/common", required = true)
     protected TAdresa adresa;
 
     @Override

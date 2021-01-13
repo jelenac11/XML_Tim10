@@ -20,6 +20,10 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import projectXML.team9.models.common.TAdresa;
+import projectXML.team9.models.common.TLice;
+import projectXML.team9.models.common.TPravnoLice;
+
 /**
  * &lt;p&gt;Java class for anonymous complex type.
  * 

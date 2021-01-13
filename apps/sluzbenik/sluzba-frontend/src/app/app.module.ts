@@ -10,12 +10,16 @@ import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
 import { ObavestenjeService } from './core/services/obavestenje.service';
 import { ZahtevXonomyService } from './core/xonomy/zahtev-xonomy.service';
 import { ObavestenjeXonomyService } from './core/xonomy/obavestenje-xonomy.service';
+import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
+import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ZahtevComponent,
-    ObavestenjeComponent
+    ObavestenjeComponent,
+    ZahtevPrikazComponent,
+    ObavestenjePrikazComponent
   ],
   imports: [
     BrowserModule,

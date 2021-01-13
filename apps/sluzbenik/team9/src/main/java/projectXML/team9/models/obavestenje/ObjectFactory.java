@@ -10,6 +10,10 @@ package projectXML.team9.models.obavestenje;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
+import projectXML.team9.models.common.TAdresa;
+import projectXML.team9.models.common.TFizickoLice;
+import projectXML.team9.models.common.TPravnoLice;
+
 
 /**
  * This object contains factory methods for each 

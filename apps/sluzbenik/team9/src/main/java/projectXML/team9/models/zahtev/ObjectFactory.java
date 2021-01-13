@@ -12,6 +12,10 @@ import javax.xml.bind.annotation.XmlRegistry;
 
 import org.springframework.stereotype.Component;
 
+import projectXML.team9.models.common.TAdresa;
+import projectXML.team9.models.common.TFizickoLice;
+import projectXML.team9.models.common.TPravnoLice;
+
 
 /**
  * This object contains factory methods for each 

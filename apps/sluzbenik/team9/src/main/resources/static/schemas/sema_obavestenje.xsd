@@ -2,15 +2,16 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified"
     vc:minVersion="1.0" vc:maxVersion="1.1" targetNamespace="http://www.projekat.org/obavestenje"
-    xmlns:ob="http://www.projekat.org/obavestenje">
+    xmlns:ob="http://www.projekat.org/obavestenje" xmlns:common="http://www.projekat.org/common">
+    <xs:import namespace="http://www.projekat.org/common" schemaLocation="common.xsd"/>
     <xs:element name="obavestenje">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="informacije_o_obavestenju">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="organ" type="ob:TPravno_lice"/>
-                            <xs:element name="trazilac" type="ob:TLice"> </xs:element>
+                            <xs:element name="organ" type="common:TPravno_lice"/>
+                            <xs:element name="trazilac" type="common:TLice"> </xs:element>
                             <xs:element name="datum_obavestenja" type="xs:date"/>
                         </xs:sequence>
                     </xs:complexType>
@@ -118,7 +119,7 @@
                                                   <xs:element name="mesto_uvida">
                                                   <xs:complexType>
                                                   <xs:complexContent>
-                                                  <xs:extension base="ob:TAdresa">
+                                                  <xs:extension base="common:TAdresa">
                                                   <xs:sequence>
                                                   <xs:element name="kancelarija">
                                                   <xs:simpleType>
@@ -192,73 +193,6 @@
             <xs:attribute name="id" type="xs:string" use="required"/>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="TAdresa">
-        <xs:sequence>
-            <xs:element name="mesto" minOccurs="1">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="1"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="ulica" minOccurs="0">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="1"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="broj" minOccurs="0">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="1"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TLice" abstract="true">
-        <xs:sequence>
-            <xs:element name="adresa" type="ob:TAdresa"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="TPravno_lice">
-        <xs:complexContent>
-            <xs:extension base="ob:TLice">
-                <xs:sequence>
-                    <xs:element name="naziv">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:minLength value="1"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:complexType name="TFizicko_lice">
-        <xs:complexContent>
-            <xs:extension base="ob:TLice">
-                <xs:sequence>
-                    <xs:element name="ime">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:minLength value="1"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="prezime">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:minLength value="1"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:element>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
     <xs:complexType name="TUplatnica">
         <xs:sequence>
             <xs:element name="primalac">
