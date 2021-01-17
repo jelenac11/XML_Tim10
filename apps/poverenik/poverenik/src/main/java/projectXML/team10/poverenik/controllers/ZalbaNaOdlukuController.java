@@ -24,7 +24,7 @@ public class ZalbaNaOdlukuController {
 
 	@GetMapping(value = "/{id}")
 	@CrossOrigin
-	public ResponseEntity getZalba(@PathVariable String id) {
+	public ResponseEntity<?> getZalba(@PathVariable String id) {
 		ZalbaNaOdluku zalba;
 		try {
 			zalba = zalbaNaOdlukuService.getZalba(id);
@@ -36,7 +36,7 @@ public class ZalbaNaOdlukuController {
 	
 	@PostMapping(consumes = MediaType.APPLICATION_XML_VALUE)
 	@CrossOrigin
-	public ResponseEntity createZalbaCutanje(@RequestBody ZalbaNaOdluku zalba){
+	public ResponseEntity<?> createZalbaCutanje(@RequestBody ZalbaNaOdluku zalba){
 		try {
 			zalbaNaOdlukuService.create(zalba);
 		} catch (Exception e) {
