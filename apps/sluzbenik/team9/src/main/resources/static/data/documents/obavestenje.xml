@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<obavestenje xmlns="http://www.projekat.org/obavestenje" xmlns:ns2="http://www.projekat.org/common" broj_obavestenja="307593ad63c8-1/2020" broj_zahteva="b83a0be1e785-1/2020" id="94f4cf8f-0d7b-40e1-9082-307593ad63c8">
+    <informacije_o_obavestenju>
+        <organ>
+            <ns2:adresa>
+                <ns2:mesto>nesto</ns2:mesto>
+                <ns2:ulica>nesto</ns2:ulica>
+                <ns2:broj>nesto</ns2:broj>
+            </ns2:adresa>
+            <ns2:naziv>nesto</ns2:naziv>
+        </organ>
+        <trazilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TPravno_lice">
+            <ns2:adresa>
+                <ns2:mesto>nesto</ns2:mesto>
+                <ns2:ulica>nesto</ns2:ulica>
+                <ns2:broj>nesto</ns2:broj>
+            </ns2:adresa>
+            <ns2:naziv>nesto</ns2:naziv>
+        </trazilac>
+        <datum_obavestenja>2021-01-15</datum_obavestenja>
+    </informacije_o_obavestenju>
+    <zahtev>
+        <datum_trazenja_informacija>2021-01-13</datum_trazenja_informacija>
+        <opis_trazene_informacije>nesto</opis_trazene_informacije>
+    </zahtev>
+    <odgovor_na_zahtev>
+        <zahtevi>
+            <informacije_o_uvidu status="false"/>
+            <informacije_o_posedovanju status="false"/>
+            <informacije_o_izradi_kopije status="false"/>
+            <informacije_o_dostavljanju_dokumenta status="false"/>
+        </zahtevi>
+    </odgovor_na_zahtev>
+    <dostavljeno/>
+</obavestenje>

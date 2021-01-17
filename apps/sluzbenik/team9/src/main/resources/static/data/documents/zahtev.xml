@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:zahtev_gradjana xmlns="http://www.projekat.org/common" xmlns:ns2="http://www.projekat.org/obavestenje" xmlns:ns3="http://www.projekat.org/zahtev" broj_zahteva="b83a0be1e785-1/2020" id="7d0d10c2-5320-4d1d-a332-b83a0be1e785">
+    <ns3:organ>
+        <adresa>
+            <mesto>nesto</mesto>
+            <ulica>nesto</ulica>
+            <broj>nesto</broj>
+        </adresa>
+        <naziv>nesto</naziv>
+    </ns3:organ>
+    <ns3:trazilac>
+        <ns3:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TPravno_lice">
+            <adresa>
+                <mesto>nesto</mesto>
+                <ulica>nesto</ulica>
+                <broj>nesto</broj>
+            </adresa>
+            <naziv>nesto</naziv>
+        </ns3:lice>
+        <ns3:drugi_podatak_za_kontakt>nesto</ns3:drugi_podatak_za_kontakt>
+    </ns3:trazilac>
+    <ns3:informacije_vezane_za_zahtev>
+        <ns3:tip_zahteva>
+            <ns3:obavestenje_posedovanja_informacije/>
+            <ns3:uvid_u_dokument/>
+            <ns3:kopiju_dokumenta/>
+            <ns3:dostavljanje_kopije>
+                <ns3:posta/>
+            </ns3:dostavljanje_kopije>
+        </ns3:tip_zahteva>
+        <ns3:opis_zahteva>nesto</ns3:opis_zahteva>
+        <ns3:mesto>nesto</ns3:mesto>
+        <ns3:datum>2021-01-13</ns3:datum>
+    </ns3:informacije_vezane_za_zahtev>
+</ns3:zahtev_gradjana>

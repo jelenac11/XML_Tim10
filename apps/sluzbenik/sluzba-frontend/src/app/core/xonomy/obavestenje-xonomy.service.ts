@@ -1,11 +1,25 @@
 import { Injectable } from '@angular/core';
+import { obavestenjeXSLT } from './xslt/obavestenje-xslt';
 
 declare const Xonomy: any;
+const xsltProcessor = new XSLTProcessor();
+const domParser = new DOMParser();
+const xmlSerializer = new XMLSerializer();
+
+const ob = `xmlns:ob="http://www.projekat.org/obavestenje"`;
+const common = `xmlns:common="http://www.projekat.org/common"`;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObavestenjeXonomyService {
+
+  public convertObavestenjeXSLT(obavestenjeXML: string): string {
+    xsltProcessor.reset();
+    xsltProcessor.importStylesheet(domParser.parseFromString(obavestenjeXSLT, 'text/xml'));
+    let result = xsltProcessor.transformToDocument(domParser.parseFromString(obavestenjeXML, 'text/xml'));
+    return xmlSerializer.serializeToString(result);
+  }
 
   public obavestenjeSpecification = {
     validate: function (jsElement) {
@@ -27,72 +41,72 @@ export class ObavestenjeXonomyService {
       }
     },
     elements: {
-      obavestenje: {
+      "ob:obavestenje": {
         menu: [
           {
             caption: "Append an <informacije_o_obavestenju>",
             action: Xonomy.newElementChild,
-            actionParameter: "<informacije_o_obavestenju></informacije_o_obavestenju>",
+            actionParameter: `<ob:informacije_o_obavestenju ${ob}></ob:informacije_o_obavestenju>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("informacije_o_obavestenju");
+              return jsElement.hasChildElement("ob:informacije_o_obavestenju");
             }
           },
           {
             caption: "Append an <zahtev>",
             action: Xonomy.newElementChild,
-            actionParameter: "<zahtev></zahtev>",
+            actionParameter: `<ob:zahtev ${ob}></ob:zahtev>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("zahtev");
+              return jsElement.hasChildElement("ob:zahtev");
             }
           },
           {
             caption: "Append an <odgovor_na_zahtev>",
             action: Xonomy.newElementChild,
-            actionParameter: "<odgovor_na_zahtev></odgovor_na_zahtev>",
+            actionParameter: `<ob:odgovor_na_zahtev ${ob}></ob:odgovor_na_zahtev>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("odgovor_na_zahtev");
+              return jsElement.hasChildElement("ob:odgovor_na_zahtev");
             }
           },
           {
             caption: "Append an <dostavljeno>",
             action: Xonomy.newElementChild,
-            actionParameter: "<dostavljeno></dostavljeno>",
+            actionParameter: `<ob:dostavljeno ${ob}></ob:dostavljeno>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("dostavljeno");
+              return jsElement.hasChildElement("ob:dostavljeno");
             }
           },
         ]
       },
-      informacije_o_obavestenju: {
+      "ob:informacije_o_obavestenju": {
         menu: [
           {
             caption: "Append an <organ>",
             action: Xonomy.newElementChild,
-            actionParameter: "<organ></organ>",
+            actionParameter: `<ob:organ ${ob}></ob:organ>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("organ");
+              return jsElement.hasChildElement("ob:organ");
             }
           },
           {
             caption: "Append an <trazilac>",
             action: Xonomy.newElementChild,
-            actionParameter: "<trazilac></trazilac>",
+            actionParameter: `<ob:trazilac ${ob}></ob:trazilac>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("trazilac");
+              return jsElement.hasChildElement("ob:trazilac");
             }
           },
           {
             caption: "Append an <datum_obavestenja>",
             action: Xonomy.newElementChild,
-            actionParameter: `<datum_obavestenja>${new Date().toISOString().slice(0, 10)}</datum_obavestenja>`,
+            actionParameter: `<ob:datum_obavestenja ${ob}>${new Date().toISOString().slice(0, 10)}</ob:datum_obavestenja>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("datum_obavestenja");
+              return jsElement.hasChildElement("ob:datum_obavestenja");
             }
           },
         ],
-        mustBeBefore: ["zahtev", "odgovor_na_zahtev", "dostavljeno"]
+        mustBeBefore: ["ob:zahtev", "ob:odgovor_na_zahtev", "ob:dostavljeno"]
       },
-      organ: {
+      "ob:organ": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -101,7 +115,7 @@ export class ObavestenjeXonomyService {
             }
             );
           }
-          if (!jsElement.hasChildElement("adresa")) {
+          if (!jsElement.hasChildElement("common:adresa")) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have element adresa."
@@ -109,28 +123,28 @@ export class ObavestenjeXonomyService {
             );
           }
         },
-        mustBeBefore: ["trazilac", "datum_obavestenja"],
+        mustBeBefore: ["ob:trazilac", "ob:datum_obavestenja"],
         menu: [
           {
             caption: "Append an <adresa>",
             action: Xonomy.newElementChild,
-            actionParameter: "<adresa></adresa>",
+            actionParameter: `<common:adresa ${common}></common:adresa>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("adresa");
+              return jsElement.hasChildElement("common:adresa");
             }
           },
           {
             caption: "Append an <naziv>",
             action: Xonomy.newElementChild,
-            actionParameter: "<naziv></naziv>",
+            actionParameter: `<common:naziv ${common}></common:naziv>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("naziv");
+              return jsElement.hasChildElement("common:naziv");
             }
           }
         ],
         isReadOnly: true
       },
-      adresa: {
+      "common:adresa": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
@@ -144,31 +158,31 @@ export class ObavestenjeXonomyService {
           {
             caption: "Append an <mesto>",
             action: Xonomy.newElementChild,
-            actionParameter: "<mesto></mesto>",
+            actionParameter: `<common:mesto ${common}></common:mesto>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("mesto");
+              return jsElement.hasChildElement("common:mesto");
             }
           },
           {
             caption: "Append an <ulica>",
             action: Xonomy.newElementChild,
-            actionParameter: "<ulica></ulica>",
+            actionParameter: `<common:ulica ${common}></common:ulica>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("ulica");
+              return jsElement.hasChildElement("common:ulica");
             }
           },
           {
             caption: "Append an <broj>",
             action: Xonomy.newElementChild,
-            actionParameter: "<broj></broj>",
+            actionParameter: `<common:broj ${common}></common:broj>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("broj");
+              return jsElement.hasChildElement("common:broj");
             }
           },
         ],
-        mustBeBefore: ["naziv", "ime", "prezime"],
+        mustBeBefore: ["common:naziv", "common:ime", "common:prezime"],
       },
-      mesto: {
+      "common:mesto": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -178,10 +192,10 @@ export class ObavestenjeXonomyService {
             );
           }
         },
-        mustBeBefore: ["ulica", "broj", "datum", "kancelarija"],
+        mustBeBefore: ["common:ulica", "common:broj", "ob:datum", "ob:kancelarija"],
         hasText: true
       },
-      ulica: {
+      "common:ulica": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -191,15 +205,10 @@ export class ObavestenjeXonomyService {
             );
           }
         },
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
-        ],
-        mustBeBefore: ["broj", "kancelarija"],
+        mustBeBefore: ["common:broj", "ob:kancelarija"],
         hasText: true
       },
-      broj: {
+      "common:broj": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -209,15 +218,10 @@ export class ObavestenjeXonomyService {
             );
           }
         },
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
-        ],
         hasText: true,
-        mustBeBefore: ["kancelarija"]
+        mustBeBefore: ["ob:kancelarija"]
       },
-      naziv: {
+      "common:naziv": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -234,7 +238,7 @@ export class ObavestenjeXonomyService {
         ],
         hasText: true
       },
-      trazilac: {
+      "ob:trazilac": {
         validate: function (jsElement) {
           if (jsElement.hasAttribute("xsi:type") == "") {
             Xonomy.warnings.push({
@@ -250,21 +254,21 @@ export class ObavestenjeXonomyService {
             }
             );
           }
-          if (jsElement.getAttributeValue("xsi:type", null) == "TFizicko_lice" && (!jsElement.hasChildElement("ime") || !jsElement.hasChildElement("prezime"))) {
+          if (jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice" && (!jsElement.hasChildElement("common:ime") || !jsElement.hasChildElement("common:prezime"))) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have elements ime and prezime with attribute xsi:type value TFizicko_lice."
             }
             );
           }
-          if (jsElement.getAttributeValue("xsi:type", null) == "TPravno_lice" && !jsElement.hasChildElement("naziv")) {
+          if (jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice" && !jsElement.hasChildElement("common:naziv")) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have elements naziv with attribute xsi:type value TPravno_lice."
             }
             );
           }
-          if (!jsElement.hasChildElement("adresa")) {
+          if (!jsElement.hasChildElement("common:adresa")) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: "This element needs to have element adresa."
@@ -276,36 +280,36 @@ export class ObavestenjeXonomyService {
           {
             caption: "Append an <adresa>",
             action: Xonomy.newElementChild,
-            actionParameter: "<adresa><mesto></mesto></adresa>",
+            actionParameter: `<common:adresa ${common}><common:mesto ${common}></common:mesto><common:ulica ${common}/><common:broj ${common}></common:adresa>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("adresa") || !jsElement.getAttributeValue("xsi:type", null);
+              return jsElement.hasChildElement("common:adresa") || !jsElement.getAttributeValue("xsi:type", null);
             }
           },
           {
             caption: "Append an <naziv>",
             action: Xonomy.newElementChild,
-            actionParameter: "<naziv></naziv>",
+            actionParameter: `<common:naziv ${common}></common:naziv>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("naziv") || jsElement.hasChildElement("ime") || jsElement.hasChildElement("prezime")
-                || !jsElement.getAttributeValue("xsi:type", null) || jsElement.getAttributeValue("xsi:type", null) == "TFizicko_lice";
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || jsElement.hasChildElement("common:prezime")
+                || !jsElement.getAttributeValue("xsi:type", null) || jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice";
             }
           },
           {
             caption: "Append an <ime>",
             action: Xonomy.newElementChild,
-            actionParameter: "<ime></ime>",
+            actionParameter: `<common:ime ${common}></common:ime>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("naziv") || jsElement.hasChildElement("ime") || !jsElement.getAttributeValue("xsi:type", null)
-                || jsElement.getAttributeValue("xsi:type", null) == "TPravno_lice";
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || !jsElement.getAttributeValue("xsi:type", null)
+                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
             }
           },
           {
             caption: "Append an <prezime>",
             action: Xonomy.newElementChild,
-            actionParameter: "<prezime></prezime>",
+            actionParameter: `<common:prezime ${common}></common:prezime>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("naziv") || jsElement.hasChildElement("prezime") || !jsElement.getAttributeValue("xsi:type", null)
-                || jsElement.getAttributeValue("xsi:type", null) == "TPravno_lice";
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:prezime") || !jsElement.getAttributeValue("xsi:type", null)
+                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
             }
           },
           {
@@ -317,13 +321,13 @@ export class ObavestenjeXonomyService {
             }
           },
         ],
-        mustBeBefore: ["datum_obavestenja"],
+        mustBeBefore: ["ob:datum_obavestenja"],
         attributes: {
           "xsi:type": {
             asker: Xonomy.askPicklist,
             askerParameter: [
-              { value: "TFizicko_lice" },
-              { value: "TPravno_lice" }
+              { value: "common:TFizicko_lice" },
+              { value: "common:TPravno_lice" }
             ],
             validate: function (jsAttribute) {
               if (jsAttribute.value == "") {
@@ -338,7 +342,7 @@ export class ObavestenjeXonomyService {
         },
         isReadOnly: true
       },
-      ime: {
+      "common:ime": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -349,7 +353,7 @@ export class ObavestenjeXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["prezime"],
+        mustBeBefore: ["ob:prezime"],
         menu: [
           {
             caption: "Delete this <item>",
@@ -357,7 +361,7 @@ export class ObavestenjeXonomyService {
           }
         ]
       },
-      prezime: {
+      "common:prezime": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -375,7 +379,7 @@ export class ObavestenjeXonomyService {
         ],
         hasText: true
       },
-      datum_obavestenja: {
+      "ob:datum_obavestenja": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -387,118 +391,118 @@ export class ObavestenjeXonomyService {
         },
         isReadOnly: true
       },
-      zahtev: {
-        mustBeBefore: ["odgovor_na_zahtev", "dostavljeno"],
+      "ob:zahtev": {
+        mustBeBefore: ["ob:odgovor_na_zahtev", "ob:dostavljeno"],
         menu: [
           {
             caption: "Append an <datum_trazenja_informacija>",
             action: Xonomy.newElementChild,
-            actionParameter: "<datum_trazenja_informacija></datum_trazenja_informacija>",
+            actionParameter: `<ob:datum_trazenja_informacija ${ob}></ob:datum_trazenja_informacija>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("datum_trazenja_informacija");
+              return jsElement.hasChildElement("ob:datum_trazenja_informacija");
             }
           },
           {
             caption: "Append an <opis_trazene_informacije>",
             action: Xonomy.newElementChild,
-            actionParameter: "<opis_trazene_informacije></opis_trazene_informacije>",
+            actionParameter: `<ob:opis_trazene_informacije ${ob}></ob:opis_trazene_informacije>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("opis_trazene_informacije");
+              return jsElement.hasChildElement("ob:opis_trazene_informacije");
             }
           },
         ]
       },
-      datum_trazenja_informacija:
+      "ob:datum_trazenja_informacija":
       {
         isReadOnly: true
       },
-      opis_trazene_informacije:
+      "ob:opis_trazene_informacije":
       {
         isReadOnly: true
       },
-      odgovor_na_zahtev:
+      "ob:odgovor_na_zahtev":
       {
         menu: [
           {
             caption: "Append an <uplata_troskova>",
             action: Xonomy.newElementChild,
-            actionParameter: "<uplata_troskova><uplatnica><primalac></primalac><racun></racun><iznos></iznos><poziv_na_broj></poziv_na_broj></uplatnica><troskovi><trosak><stavka></stavka><kolicina></kolicina><jedinicna_cijena></jedinicna_cijena></trosak></troskovi></uplata_troskova>",
+            actionParameter: `<ob:uplata_troskova ${ob}><ob:uplatnica ${ob}><ob:primalac ${ob}></ob:primalac><ob:racun ${ob}></ob:racun><ob:iznos ${ob}></ob:iznos><ob:poziv_na_broj ${ob}></ob:poziv_na_broj></ob:uplatnica><ob:troskovi ${ob}><ob:trosak ${ob}><ob:stavka ${ob}></ob:stavka><ob:kolicina ${ob}></ob:kolicina><ob:jedinicna_cijena ${ob}></ob:jedinicna_cijena></ob:trosak></ob:troskovi></ob:uplata_troskova>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("uplata_troskova");
+              return jsElement.hasChildElement("ob:uplata_troskova");
             }
           },
           {
             caption: "Append an <zahtevi>",
             action: Xonomy.newElementChild,
-            actionParameter: "<zahtevi></zahtevi>",
+            actionParameter: `<ob:zahtevi ${ob}></ob:zahtevi>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("zahtevi");
+              return jsElement.hasChildElement("ob:zahtevi");
             }
           },
         ],
-        mustBeBefore: ["dostavljeno"]
+        mustBeBefore: ["ob:dostavljeno"]
       },
-      uplata_troskova:
+      "ob:uplata_troskova":
       {
         menu: [
           {
             caption: "Append an <uplatnica>",
             action: Xonomy.newElementChild,
-            actionParameter: "<uplatnica></uplatnica>",
+            actionParameter: `<ob:uplatnica ${ob}></ob:uplatnica>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("uplatnica");
+              return jsElement.hasChildElement("ob:uplatnica");
             }
           },
           {
             caption: "Append an <troskovi>",
             action: Xonomy.newElementChild,
-            actionParameter: "<troskovi></troskovi>",
+            actionParameter: `<ob:troskovi ${ob}></ob:troskovi>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("troskovi");
+              return jsElement.hasChildElement("ob:troskovi");
             }
           },
         ],
-        mustBeBefore: ["zahtevi"]
+        mustBeBefore: ["ob:zahtevi"]
       },
-      uplatnica:
+      "ob:uplatnica":
       {
         menu: [
           {
             caption: "Append an <primalac>",
             action: Xonomy.newElementChild,
-            actionParameter: "<primalac></primalac>",
+            actionParameter: `<ob:primalac ${ob}></ob:primalac>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("primalac");
+              return jsElement.hasChildElement("ob:primalac");
             }
           },
           {
             caption: "Append an <racun>",
             action: Xonomy.newElementChild,
-            actionParameter: "<racun></racun>",
+            actionParameter: `<ob:racun ${ob}></ob:racun>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("racun");
+              return jsElement.hasChildElement("ob:racun");
             }
           },
           {
             caption: "Append an <iznos>",
             action: Xonomy.newElementChild,
-            actionParameter: "<iznos></iznos>",
+            actionParameter: `<ob:iznos ${ob}></ob:iznos>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("iznos");
+              return jsElement.hasChildElement("ob:iznos");
             }
           },
           {
             caption: "Append an <poziv_na_broj>",
             action: Xonomy.newElementChild,
-            actionParameter: "<poziv_na_broj></poziv_na_broj>",
+            actionParameter: `<ob:poziv_na_broj ${ob}></ob:poziv_na_broj>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("poziv_na_broj");
+              return jsElement.hasChildElement("ob:poziv_na_broj");
             }
           },
         ],
-        mustBeBefore: ["troskovi"]
+        mustBeBefore: ["ob:troskovi"]
       },
-      primalac:
+      "ob:primalac":
       {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
@@ -510,9 +514,9 @@ export class ObavestenjeXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["racun", "iznos", "poziv_na_broj"]
+        mustBeBefore: ["ob:racun", "ob:iznos", "ob:poziv_na_broj"]
       },
-      racun:
+      "ob:racun":
       {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
@@ -524,9 +528,9 @@ export class ObavestenjeXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["iznos", "poziv_na_broj"]
+        mustBeBefore: ["ob:iznos", "ob:poziv_na_broj"]
       },
-      iznos:
+      "ob:iznos":
       {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
@@ -538,9 +542,9 @@ export class ObavestenjeXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["poziv_na_broj"]
+        mustBeBefore: ["ob:poziv_na_broj"]
       },
-      poziv_na_broj:
+      "ob:poziv_na_broj":
       {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
@@ -552,48 +556,48 @@ export class ObavestenjeXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["troskovi"]
+        mustBeBefore: ["ob:troskovi"]
       },
-      troskovi:
+      "ob:troskovi":
       {
         menu: [
           {
             caption: "Append an <trosak>",
             action: Xonomy.newElementChild,
-            actionParameter: "<trosak><stavka></stavka><kolicina></kolicina><jedinicna_cijena></jedinicna_cijena></trosak>"
+            actionParameter: `<ob:trosak ${ob}><ob:stavka ${ob}></ob:stavka><ob:kolicina ${ob}></ob:kolicina><ob:jedinicna_cijena ${ob}></ob:jedinicna_cijena></ob:trosak>`
           },
         ]
       },
-      trosak:
+      "ob:trosak":
       {
         menu: [
           {
             caption: "Append an <stavka>",
             action: Xonomy.newElementChild,
-            actionParameter: "<stavka></stavka>",
+            actionParameter: `<ob:stavka ${ob}></ob:stavka>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("stavka");
+              return jsElement.hasChildElement("ob:stavka");
             }
           },
           {
             caption: "Append an <kolicina>",
             action: Xonomy.newElementChild,
-            actionParameter: "<kolicina></kolicina>",
+            actionParameter: `<ob:kolicina ${ob}></ob:kolicina>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("kolicina");
+              return jsElement.hasChildElement("ob:kolicina");
             }
           },
           {
             caption: "Append an <jedinicna_cijena>",
             action: Xonomy.newElementChild,
-            actionParameter: "<jedinicna_cijena></jedinicna_cijena>",
+            actionParameter: `<ob:jedinicna_cijena ${ob}></ob:jedinicna_cijena>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("jedinicna_cijena");
+              return jsElement.hasChildElement("ob:jedinicna_cijena");
             }
           },
         ]
       },
-      stavka: {
+      "ob:stavka": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -604,11 +608,11 @@ export class ObavestenjeXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["kolicina", "jedinicna_cijena"],
+        mustBeBefore: ["ob:kolicina", "ob:jedinicna_cijena"],
         asker: Xonomy.askPicklist,
         askerParameter: ["CD", "A4 papir", "A5 papir", "USB", "Skeniranje", "Dostava"],
       },
-      kolicina: {
+      "ob:kolicina": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -619,9 +623,9 @@ export class ObavestenjeXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["jedinicna_cijena"]
+        mustBeBefore: ["ob:jedinicna_cijena"]
       },
-      jedinicna_cijena: {
+      "ob:jedinicna_cijena": {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -633,34 +637,57 @@ export class ObavestenjeXonomyService {
         },
         hasText: true,
       },
-      zahtevi:
+      "ob:zahtevi":
       {
       },
-      informacije_o_uvidu:
+      "ob:informacije_o_uvidu":
       {
+        validate: function (jsElement) {
+          if (jsElement.getAttributeValue("status", null) == "true" && !jsElement.hasElements()) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element must not be empty when @status is 'true'."
+            }
+            );
+          }
+          if (jsElement.getAttributeValue("status", null) == "true" && !(jsElement.hasChildElement("ob:datum_uvida") && jsElement.hasChildElement("ob:vreme_uvida") && jsElement.hasChildElement("ob:mesto_uvida"))) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element must have <mesto_uvida>, <vreme_uvida> and <datum_uvida> when @status is 'true'."
+            }
+            );
+          }
+          if (jsElement.getAttributeValue("status", null) == "false" && (jsElement.hasChildElement("ob:datum_uvida") || jsElement.hasChildElement("ob:vreme_uvida") || jsElement.hasChildElement("ob:mesto_uvida"))) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element must be empty when @status is 'false'."
+            }
+            );
+          }
+        },
         menu: [
           {
             caption: "Append an <datum_uvida>",
             action: Xonomy.newElementChild,
-            actionParameter: "<datum_uvida></datum_uvida>",
+            actionParameter: `<ob:datum_uvida ${ob}></ob:datum_uvida>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("datum_uvida");
+              return jsElement.hasChildElement("ob:datum_uvida") || jsElement.getAttributeValue("status", null) == "false";
             }
           },
           {
             caption: "Append an <vreme_uvida>",
             action: Xonomy.newElementChild,
-            actionParameter: "<vreme_uvida></vreme_uvida>",
+            actionParameter: `<ob:vreme_uvida ${ob}></ob:vreme_uvida>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("vreme_uvida");
+              return jsElement.hasChildElement("ob:vreme_uvida") || jsElement.getAttributeValue("status", null) == "false";
             }
           },
           {
             caption: "Append an <mesto_uvida>",
             action: Xonomy.newElementChild,
-            actionParameter: "<mesto_uvida><mesto/><kancelarija/></mesto_uvida>",
+            actionParameter: `<ob:mesto_uvida ${ob}><common:mesto ${common}/><common:ulica ${common}/><common:broj ${common}/><ob:kancelarija ${ob}/></ob:mesto_uvida>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("mesto_uvida");
+              return jsElement.hasChildElement("ob:mesto_uvida") || jsElement.getAttributeValue("status", null) == "false";
             }
           },
           {
@@ -691,8 +718,14 @@ export class ObavestenjeXonomyService {
           }
         }
       },
-      datum_uvida:
+      "ob:datum_uvida":
       {
+        menu: [
+          {
+            caption: "Delete this <item>",
+            action: Xonomy.deleteElement
+          },
+        ],
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
             Xonomy.warnings.push({
@@ -702,48 +735,61 @@ export class ObavestenjeXonomyService {
             );
           }
         },
-        mustBeBefore: ["vreme_uvida", "mesto_uvida"],
+        mustBeBefore: ["ob:vreme_uvida", "ob:mesto_uvida"],
         hasText: true,
       },
-      vreme_uvida:
+      "ob:vreme_uvida":
       {
+        validate: function (jsElement) {
+          if (!jsElement.hasElements()) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element must not be empty."
+            }
+            );
+          }
+        },
         menu: [
+          {
+            caption: "Delete this <item>",
+            action: Xonomy.deleteElement
+          },
           {
             caption: "Append an <interval_uvida>",
             action: Xonomy.newElementChild,
-            actionParameter: "<interval_uvida><od/><do/></interval_uvida>",
+            actionParameter: `<ob:interval_uvida ${ob}><ob:od ${ob}/><ob:do ${ob}/></ob:interval_uvida>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("interval_uvida") || jsElement.hasChildElement("tacno_vreme_uvida");
+              return jsElement.hasChildElement("ob:interval_uvida") || jsElement.hasChildElement("ob:tacno_vreme_uvida");
             }
           },
           {
             caption: "Append an <tacno_vreme_uvida>",
             action: Xonomy.newElementChild,
-            actionParameter: "<tacno_vreme_uvida></tacno_vreme_uvida>",
+            actionParameter: `<ob:tacno_vreme_uvida ${ob}></ob:tacno_vreme_uvida>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("tacno_vreme_uvida") || jsElement.hasChildElement("interval_uvida");
+              return jsElement.hasChildElement("ob:tacno_vreme_uvida") || jsElement.hasChildElement("ob:interval_uvida");
             }
           },
         ],
-        mustBeBefore: ["mesto_uvida"],
+        mustBeBefore: ["ob:mesto_uvida"],
       },
-      interval_uvida:
+      "ob:interval_uvida":
       {
         menu: [
           {
             caption: "Append an <od>",
             action: Xonomy.newElementChild,
-            actionParameter: "<od></od>",
+            actionParameter: `<ob:od ${ob}></ob:od>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("od");
+              return jsElement.hasChildElement("ob:od");
             }
           },
           {
             caption: "Append an <do>",
             action: Xonomy.newElementChild,
-            actionParameter: "<do></do>",
+            actionParameter: `<ob:do ${ob}></ob:do>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("do");
+              return jsElement.hasChildElement("ob:do");
             }
           },
           {
@@ -752,7 +798,7 @@ export class ObavestenjeXonomyService {
           }
         ]
       },
-      od:
+      "ob:od":
       {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
@@ -763,10 +809,10 @@ export class ObavestenjeXonomyService {
             );
           }
         },
-        mustBeBefore: ["do"],
+        mustBeBefore: ["ob:do"],
         hasText: true,
       },
-      do:
+      "ob:do":
       {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
@@ -779,7 +825,7 @@ export class ObavestenjeXonomyService {
         },
         hasText: true,
       },
-      tacno_vreme_uvida:
+      "ob:tacno_vreme_uvida":
       {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
@@ -798,44 +844,48 @@ export class ObavestenjeXonomyService {
         ],
         hasText: true,
       },
-      mesto_uvida:
+      "ob:mesto_uvida":
       {
         menu: [
           {
+            caption: "Delete this <item>",
+            action: Xonomy.deleteElement
+          },
+          {
             caption: "Append an <mesto>",
             action: Xonomy.newElementChild,
-            actionParameter: "<mesto></mesto>",
+            actionParameter: `<common:mesto ${common}></common:mesto>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("mesto");
+              return jsElement.hasChildElement("common:mesto");
             }
           },
           {
             caption: "Append an <ulica>",
             action: Xonomy.newElementChild,
-            actionParameter: "<ulica></ulica>",
+            actionParameter: `<common:ulica ${common}></common:ulica>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("ulica");
+              return jsElement.hasChildElement("common:ulica");
             }
           },
           {
             caption: "Append an <broj>",
             action: Xonomy.newElementChild,
-            actionParameter: "<broj></broj>",
+            actionParameter: `<common:broj ${common}></common:broj>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("broj");
+              return jsElement.hasChildElement("common:broj");
             }
           },
           {
             caption: "Append an <kancelarija>",
             action: Xonomy.newElementChild,
-            actionParameter: "<kancelarija></kancelarija>",
+            actionParameter: `<ob:kancelarija ${ob}></ob:kancelarija>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("kancelarija");
+              return jsElement.hasChildElement("ob:kancelarija");
             }
           },
         ]
       },
-      kancelarija:
+      "ob:kancelarija":
       {
         validate: function (jsElement) {
           if (jsElement.getText() == "") {
@@ -848,8 +898,24 @@ export class ObavestenjeXonomyService {
         },
         hasText: true,
       },
-      informacije_o_posedovanju:
+      "ob:informacije_o_posedovanju":
       {
+        validate: function (jsElement) {
+          if (jsElement.getAttributeValue("status", null) == "true" && !jsElement.hasAttribute("poseduje")) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element must have attribute @poseduje when @status is 'true'."
+            }
+            );
+          }
+          if (jsElement.getAttributeValue("status", null) == "false" && jsElement.hasAttribute("poseduje")) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element must not have attribute @poseduje when @status is 'false'."
+            }
+            );
+          }
+        },
         menu: [
           {
             caption: "Add @status",
@@ -864,7 +930,7 @@ export class ObavestenjeXonomyService {
             action: Xonomy.newAttribute,
             actionParameter: { name: "poseduje", value: "" },
             hideIf: function (jsElement) {
-              return jsElement.hasAttribute("poseduje");
+              return jsElement.hasAttribute("poseduje") || jsElement.getAttributeValue("status", null) == "false";
             }
           },
         ],
@@ -886,6 +952,10 @@ export class ObavestenjeXonomyService {
             }
           },
           "poseduje": {
+            menu: [{
+              caption: "Delete attribute @poseduje",
+              action: Xonomy.deleteAttribute
+            }],
             asker: Xonomy.askPicklist,
             askerParameter: [
               { value: "true" },
@@ -903,7 +973,7 @@ export class ObavestenjeXonomyService {
           }
         }
       },
-      informacije_o_izradi_kopije:
+      "ob:informacije_o_izradi_kopije":
       {
         menu: [
           {
@@ -934,7 +1004,7 @@ export class ObavestenjeXonomyService {
           }
         }
       },
-      informacije_o_dostavljanju_dokumenta:
+      "ob:informacije_o_dostavljanju_dokumenta":
       {
         menu: [
           {
@@ -965,7 +1035,7 @@ export class ObavestenjeXonomyService {
           }
         }
       },
-      dostavljeno:
+      "ob:dostavljeno":
       {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
@@ -980,27 +1050,27 @@ export class ObavestenjeXonomyService {
           {
             caption: "Append an <imenovanom>",
             action: Xonomy.newElementChild,
-            actionParameter: "<imenovanom>Imenovanom</imenovanom>",
+            actionParameter: `<ob:imenovanom ${ob}>Imenovanom</ob:imenovanom>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("imenovanom");
+              return jsElement.hasChildElement("ob:imenovanom");
             }
           },
           {
             caption: "Append an <arhivi>",
             action: Xonomy.newElementChild,
-            actionParameter: "<arhivi>Arhivi</arhivi>",
+            actionParameter: `<ob:arhivi ${ob}>Arhivi</ob:arhivi>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("arhivi");
+              return jsElement.hasChildElement("ob:arhivi");
             }
           },
         ]
       },
-      imenovanom:
+      "ob:imenovanom":
       {
-        mustBeBefore: ["arhivi"],
+        mustBeBefore: ["ob:arhivi"],
         isReadOnly: true
       },
-      arhivi:
+      "ob:arhivi":
       {
         isReadOnly: true
       },

@@ -21,6 +21,17 @@ public class ZahtevController {
 	@Autowired
 	private ZahtevService zahtevService;
 
+	@GetMapping(value = "/generate-pdf-html/{id}")
+	@CrossOrigin
+	public ResponseEntity<Void> generatePDFAndHTMLZahtev(@PathVariable String id) {
+		try {
+			zahtevService.generatePDFAndHTMLZahtev(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	@GetMapping(value = "/{id}")
 	@CrossOrigin
 	public ResponseEntity getZahtev(@PathVariable String id) {

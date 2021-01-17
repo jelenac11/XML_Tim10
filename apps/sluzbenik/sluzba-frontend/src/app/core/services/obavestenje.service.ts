@@ -8,6 +8,10 @@ import { environment } from 'src/environments/environment';
 })
 export class ObavestenjeService {
 
+  get(path: string, id: string): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
+  }
+
   constructor(private http: HttpClient) { }
 
   post(path: string, body: any): Observable<any> {
