@@ -44,7 +44,7 @@ public class AuthenticationController {
 					authenticationRequest.getEmail(), authenticationRequest.getLozinka()));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return new ResponseEntity<>("Incorrect email or password.", HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>("Pogrešan e-mail ili lozinka.", HttpStatus.UNAUTHORIZED);
 		}
 
 		// Kreiraj token za tog korisnika
@@ -65,7 +65,7 @@ public class AuthenticationController {
 	public ResponseEntity<?> addUser(@Valid @RequestBody Korisnik userRequest) throws Exception {
 		Korisnik existEmail = this.userDetailsService.findByEmail(userRequest.getEmail());
 		if (existEmail != null) {
-			return new ResponseEntity<>("Email already exists.", HttpStatus.CONFLICT);
+			return new ResponseEntity<>("Već postoji korisnik sa unetim e-mailom.", HttpStatus.CONFLICT);
 		}
 		Korisnik newUser = null;
 		try {

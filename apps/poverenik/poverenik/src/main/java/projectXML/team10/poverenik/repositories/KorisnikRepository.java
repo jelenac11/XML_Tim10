@@ -81,17 +81,13 @@ public class KorisnikRepository {
 	public Korisnik findByEmail(String email) throws Exception {
 		Unmarshaller unmarshaller = marshallerFactory.createUnmarshaller(contextPath, schemaPath);
 
-		System.out.println("iz repozi");
-		
 		Collection collection = null;
 		XMLResource xmlResource = null;
 		try {
 			collection = databaseConnector.getCollection(collectionId);
 			XQueryService xQueryService = (XQueryService) collection.getService("XQueryService", "1.0");
-			System.out.println(String.format(DatabaseQueries.X_QUERY_FIND_BY_EMAIL_KORISNICI, email));
 	        CompiledExpression compiledExpression = xQueryService.compile(String.format(DatabaseQueries.X_QUERY_FIND_BY_EMAIL_KORISNICI, email));
 	        ResourceSet resourceSet = xQueryService.execute(compiledExpression);
-	        System.out.println(resourceSet.getSize());
 	        if (resourceSet.getSize() == 0) {
 	        	return null;
 	        }

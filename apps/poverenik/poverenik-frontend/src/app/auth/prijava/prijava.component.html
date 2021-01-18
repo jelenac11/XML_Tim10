@@ -1,0 +1,34 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <mat-card class="col-sm-6 offset-sm-3" [class.mat-elevation-z24]='true'>
+                <mat-card-header>
+                    <mat-card-title><p class="mb-5 mt-4 title">Prijava</p></mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="formaLogin" (ngSubmit)="onSubmit()">
+                        <p><mat-form-field appearance="outline" class="full-row">
+                            <mat-label>E-mail</mat-label>
+                            <input formControlName="email" matInput placeholder="E-mail" [errorStateMatcher]="matcher">
+                            <mat-icon matSuffix>email</mat-icon>
+                            <mat-error *ngIf="f.email.errors?.required">Niste uneli e-mail adresu</mat-error>
+                            <mat-error *ngIf="f.email.errors?.required">E-mail adresa nije validna</mat-error>
+                        </mat-form-field></p>
+                        <p><mat-form-field appearance="outline" class="full-row">
+                            <mat-label>Lozinka</mat-label>
+                            <input formControlName="lozinka" matInput placeholder="Lozinka" [type]="hidePassword ? 'password' : 'text'" [errorStateMatcher]="matcher">
+                            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="f.lozinka.errors?.required">Niste uneli lozinku</mat-error>
+                        </mat-form-field></p>
+                        <button class="mr-3 px-3 mt-2 mb-4 btn sign-in">Prijavi se</button>
+                        <div>
+                            Nemate nalog? <a [routerLink]="['/registracija']" class="text-primary mb-2">Registracija</a>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

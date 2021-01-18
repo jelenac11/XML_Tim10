@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'base';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~bootstrap/scss/bootstrap';
+
+snack-bar-container.success {
+  background-color: base.$success;
+}
+
+snack-bar-container.error {
+  background-color: base.$error;
+}
+
+snack-bar-container.notification {
+  font-size: 18px !important;
+  color: white;
+  font-weight: bold;
+}
+
+mat-card {
+  border-radius: 30px !important;
+  @extend %flex-center;
+  width: 500px;
+}
+
+.navCss {
+  nav {
+    background-color: base.$main-color;
+  }
+}
