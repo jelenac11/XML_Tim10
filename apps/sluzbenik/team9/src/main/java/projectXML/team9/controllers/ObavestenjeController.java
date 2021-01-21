@@ -1,9 +1,20 @@
 package projectXML.team9.controllers;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URLConnection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +32,31 @@ public class ObavestenjeController {
 	@Autowired
 	private ObavestenjeService obavestenjeService;
 
-	@GetMapping(value = "/generate-pdf-html/{id}")
+	@GetMapping(value = "/generate-pdf/{id}")
 	@CrossOrigin
-	public ResponseEntity<Void> generatePDFAndHTMLZahtev(@PathVariable String id) {
+	public byte[] generatePDFZahtev(@PathVariable String id) {
 		try {
-			obavestenjeService.generatePDFAndHTMLZahtev(id);
+			String path = obavestenjeService.generatePDFZahtev(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+            return IOUtils.toByteArray(fileInputStream);
+
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GetMapping(value = "/generate-html/{id}")
+	@CrossOrigin
+	public byte[] generateXHTMLZahtev(@PathVariable String id) {
+		try {
+			String path = obavestenjeService.generateHTMLZahtev(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+            return IOUtils.toByteArray(fileInputStream);
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

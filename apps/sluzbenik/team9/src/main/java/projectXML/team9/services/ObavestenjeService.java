@@ -42,10 +42,25 @@ public class ObavestenjeService {
 		return obavestenje;
 	}
 
-	public void generatePDFAndHTMLZahtev(String id) throws Exception {
+	public String generatePDFAndHTMLZahtev(String id) throws Exception {
 		Obavestenje obavestenje = getObavestenje(id);
 		obavestenjeRepository.saveToFile(obavestenje, INPUT_FILE);
 		xmlTransformations.generateHTML(INPUT_FILE, XSLT_FILE, HTML_FILE + id + ".html");
 		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
+		return OUTPUT_FILE + id + ".pdf";
+	}
+
+	public String generatePDFZahtev(String id) throws Exception {
+		Obavestenje obavestenje = getObavestenje(id);
+		obavestenjeRepository.saveToFile(obavestenje, INPUT_FILE);
+		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
+		return OUTPUT_FILE + id + ".pdf";
+	}
+
+	public String generateHTMLZahtev(String id) throws Exception {
+		Obavestenje obavestenje = getObavestenje(id);
+		obavestenjeRepository.saveToFile(obavestenje, INPUT_FILE);
+		xmlTransformations.generateHTML(INPUT_FILE, XSLT_FILE, HTML_FILE + id + ".html");
+		return HTML_FILE + id + ".html";
 	}
 }

@@ -42,10 +42,17 @@ public class ZahtevService {
 		return zahtevGradjana;
 	}
 
-	public void generatePDFAndHTMLZahtev(String id) throws Exception {
+	public String generatePDFZahtev(String id) throws Exception {
+		ZahtevGradjana zahtev = getZahtev(id);
+		zahtevRepository.saveToFile(zahtev, INPUT_FILE);
+		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
+		return OUTPUT_FILE + id + ".pdf";// TODO Auto-generated method stub
+	}
+
+	public String generateHTMLZahtev(String id) throws Exception {
 		ZahtevGradjana zahtev = getZahtev(id);
 		zahtevRepository.saveToFile(zahtev, INPUT_FILE);
 		xmlTransformations.generateHTML(INPUT_FILE, XSLT_FILE, HTML_FILE + id + ".html");
-		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
+		return HTML_FILE + id + ".html";
 	}
 }

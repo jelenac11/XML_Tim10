@@ -29,4 +29,36 @@ export class ObavestenjePrikazComponent implements OnInit {
     });
   }
 
+  downloadPDF(): void {
+    this.obavestenjeService.download('obavestenja/generate-pdf', this.id).subscribe(response => {
+      let file = new Blob([response], { type: 'application/pdf' });
+      var fileURL = URL.createObjectURL(file);
+      let a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = fileURL;
+      a.download = `${this.id}.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(fileURL);
+      a.remove();
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  downloadHTML(): void {
+    this.obavestenjeService.download('obavestenja/generate-html', this.id).subscribe(response => {
+      let file = new Blob([response], { type: 'text/html' });
+      var fileURL = URL.createObjectURL(file);
+      let a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = fileURL;
+      a.download = `${this.id}.html`;
+      a.click();
+      window.URL.revokeObjectURL(fileURL);
+      a.remove();
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
 }

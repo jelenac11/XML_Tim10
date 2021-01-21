@@ -44,7 +44,7 @@
 					<fo:block font-family="Times New Roman" text-align="left"
 						font-size="11pt">
 						Датум:
-						<fo:inline text-indent="4em">
+						<fo:inline text-indent="8em">
 							<xsl:value-of
 								select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:datum_obavestenja"></xsl:value-of>
 						</fo:inline>
