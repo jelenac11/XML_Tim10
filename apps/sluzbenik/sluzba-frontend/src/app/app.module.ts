@@ -12,6 +12,12 @@ import { ZahtevXonomyService } from './core/xonomy/zahtev-xonomy.service';
 import { ObavestenjeXonomyService } from './core/xonomy/obavestenje-xonomy.service';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -23,8 +29,15 @@ import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-pri
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CoreModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+    AuthModule,
+    MatSnackBarModule,
   ],
   providers: [ZahtevService, ObavestenjeService, ZahtevXonomyService, ObavestenjeXonomyService],
   bootstrap: [AppComponent]

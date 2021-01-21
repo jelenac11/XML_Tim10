@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PrijavaComponent } from './auth/prijava/prijava.component';
+import { RegistracijaComponent } from './auth/registracija/registracija.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZahtevComponent } from './zahtev/zahtev.component';
 
 const routes: Routes = [
+  {
+    path: "registracija", component: RegistracijaComponent
+  },
+  {
+    path: "prijava", component: PrijavaComponent
+  },
   {
     path: "create-zahtev", component: ZahtevComponent
   },
