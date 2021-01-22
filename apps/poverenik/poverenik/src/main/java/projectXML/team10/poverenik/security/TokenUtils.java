@@ -87,8 +87,7 @@ public class TokenUtils {
         final String username = getUsernameFromToken(token);
         final Date created = getIssuedAtDateFromToken(token);
 
-        return (username != null && username.equals(((Korisnik) userDetails).getEmail())
-                && !isCreatedBeforeLastPasswordReset(created, new Date()));
+        return (username != null && username.equals(((Korisnik) userDetails).getEmail()));
     }
 
     public String getUsernameFromToken(String token) {

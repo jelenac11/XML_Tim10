@@ -72,7 +72,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/auth/**").permitAll()
 
                 // umesto anotacija iynad svake metode, moze i ovde da se proveravaju prava pristupa ya odredjeni URL
-                //.antMatchers(HttpMethod.GET, "/api/cultural-content-category").hasRole("ROLE_ADMIN")
 
                 // za svaki drugi zahtev korisnik mora biti autentifikovan
                 //.anyRequest().authenticated()
@@ -91,10 +90,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
-    	web.ignoring().antMatchers(HttpMethod.POST, "/auth/sign-up");
-		web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
-		web.ignoring().antMatchers(HttpMethod.POST, "/auth/forgot-password");
-		web.ignoring().antMatchers(HttpMethod.GET, "/auth/confirm-registration/**");
+    	web.ignoring().antMatchers(HttpMethod.POST, "/auth/registracija");
+		web.ignoring().antMatchers(HttpMethod.POST, "/auth/prijava");
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg");
     }

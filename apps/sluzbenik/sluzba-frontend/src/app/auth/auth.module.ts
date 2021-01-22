@@ -12,6 +12,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { NoAuthGuard } from './guards/no-auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 
 @NgModule({
@@ -33,6 +35,6 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule
   ],
   exports: [RegistracijaComponent, PrijavaComponent],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true }]
+  providers: [NoAuthGuard, RoleGuard, { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true }]
 })
 export class AuthModule { }
