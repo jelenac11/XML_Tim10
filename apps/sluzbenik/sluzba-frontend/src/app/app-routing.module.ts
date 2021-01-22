@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NoAuthGuard } from './auth/guards/no-auth.guard';
+import { RoleGuard } from './auth/guards/role.guard';
 import { PrijavaComponent } from './auth/prijava/prijava.component';
 import { RegistracijaComponent } from './auth/registracija/registracija.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
@@ -9,22 +11,43 @@ import { ZahtevComponent } from './zahtev/zahtev.component';
 
 const routes: Routes = [
   {
-    path: "registracija", component: RegistracijaComponent
+    path: "", component: ZahtevComponent //ovde ce inace da ide na moji dokumenti kad se napravi ta stranica i treba da ima rolu gradjanin
   },
   {
-    path: "prijava", component: PrijavaComponent
+    path: "registracija", component: RegistracijaComponent,
+    canActivate: [NoAuthGuard]
   },
   {
-    path: "create-zahtev", component: ZahtevComponent
+    path: "prijava", component: PrijavaComponent,
+    canActivate: [NoAuthGuard]
   },
   {
-    path: "zahtev/:id", component: ZahtevPrikazComponent
+    path: "novi-zahtev", component: ZahtevComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin'
+    }
   },
   {
-    path: "create-obavestenje/:id", component: ObavestenjeComponent
+    path: "zahtev/:id", component: ZahtevPrikazComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin|sluzbenik'
+    }
   },
   {
-    path: "obavestenje/:id", component: ObavestenjePrikazComponent
+    path: "novo-obavestenje/:id", component: ObavestenjeComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin'
+    }
+  },
+  {
+    path: "obavestenje/:id", component: ObavestenjePrikazComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin|sluzbenik'
+    }
   }
 ];
 

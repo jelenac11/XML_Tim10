@@ -1,0 +1,83 @@
+<mdb-navbar
+  SideClass="navbar navbar-expand-lg navbar-dark"
+  class="navCss"
+  [containerInside]="false"
+>
+  <mdb-navbar-brand
+    ><a class="navbar-brand" routerLink="" routerLinkActive="active"
+      ><img height="40" width="40" src="../../../../assets/grb.png"></a
+    ></mdb-navbar-brand
+  >
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a
+          *ngIf="role === 'gradjanin'"
+          class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
+          routerLink="/novi-zahtev"
+          routerLinkActive="active"
+          mdbWavesEffect
+          >Zahtev za pristup informacijama od javnog značaja</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="role === 'gradjanin'"
+          class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
+          routerLink="/moji-dokumenti"
+          routerLinkActive="active"
+          mdbWavesEffect
+          >Moji dokumenti</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="role === 'sluzbenik'"
+          class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
+          routerLink="/zahtevi"
+          routerLinkActive="active"
+          mdbWavesEffect
+          >Zahtevi za pristup informacijama od javnog značaja</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="role === 'sluzbenik'"
+          class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
+          routerLink="/pregled-dokumenata"
+          routerLinkActive="active"
+          mdbWavesEffect
+          >Pregled dokumenata</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="role === 'sluzbenik'"
+          class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
+          routerLink="/novi-zahtev"
+          routerLinkActive="active"
+          mdbWavesEffect
+          >Izveštaj</a
+        >
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a
+          *ngIf="role"
+          class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
+          mdbWavesEffect
+          >{{ korisnik?.korisnik.ime._text.charAt(0).toUpperCase() + korisnik?.korisnik.ime._text.slice(1) }} {{ korisnik?.korisnik.prezime._text.charAt(0).toUpperCase() + korisnik?.korisnik.prezime._text.slice(1) }}</a
+        >
+      </li>
+      <li class="nav-item">
+        <button *ngIf="role" mat-icon-button [matMenuTriggerFor]="menu" id="profile-circle-button">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="logout()" mat-menu-item><mat-icon>exit_to_app</mat-icon> Odjavi se</button>
+        </mat-menu>
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>

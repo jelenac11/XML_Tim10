@@ -8,7 +8,9 @@
 
 package projectXML.team9.models.korisnik;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -63,7 +65,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  *         &amp;lt;element name="uloga"&amp;gt;
  *           &amp;lt;simpleType&amp;gt;
  *             &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&amp;gt;
- *               &amp;lt;enumeration value="poverenik"/&amp;gt;
+ *               &amp;lt;enumeration value="sluzbenik"/&amp;gt;
  *               &amp;lt;enumeration value="gradjanin"/&amp;gt;
  *             &amp;lt;/restriction&amp;gt;
  *           &amp;lt;/simpleType&amp;gt;
@@ -263,7 +265,9 @@ public class Korisnik implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		List<Authority> authorities = new ArrayList<Authority>();
+		authorities.add(new Authority(this.uloga));
+		return authorities;
 	}
 
 	@Override

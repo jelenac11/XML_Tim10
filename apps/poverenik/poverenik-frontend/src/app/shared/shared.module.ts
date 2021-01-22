@@ -10,9 +10,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HeaderComponent
+  ],
   imports: [
     CommonModule,
     NavbarModule,
@@ -27,7 +30,9 @@ import { MatInputModule } from '@angular/material/input';
     ButtonsModule,
     MatDialogModule
   ],
-  exports: [],
+  exports: [
+    HeaderComponent
+  ],
   providers: [Snackbar]
 })
 export class SharedModule { }

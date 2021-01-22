@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { NoAuthGuard } from './auth/guards/no-auth.guard';
+import { RoleGuard } from './auth/guards/role.guard';
 import { PrijavaComponent } from './auth/prijava/prijava.component';
 import { RegistracijaComponent } from './auth/registracija/registracija.component';
 import { PrikazZalbaCutanjeComponent } from './prikaz-zalba-cutanje/prikaz-zalba-cutanje.component';
@@ -9,22 +11,43 @@ import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.compon
 
 const routes: Routes = [
   {
-    path: "registracija", component: RegistracijaComponent
+    path: "", component: ZalbaCutanjeComponent //ovde ce inace da ide na moji dokumenti kad se napravi ta stranica i treba da ima rolu gradjanin
   },
   {
-    path: "prijava", component: PrijavaComponent
+    path: "registracija", component: RegistracijaComponent,
+    canActivate: [NoAuthGuard]
   },
   {
-    path: "nova-zalba-cutanje", component: ZalbaCutanjeComponent
+    path: "prijava", component: PrijavaComponent,
+    canActivate: [NoAuthGuard]
   },
   {
-    path: "nova-zalba-na-odluku", component: ZalbaNaOdlukuComponent
+    path: "nova-zalba-cutanje", component: ZalbaCutanjeComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin'
+    }
   },
   {
-    path: "zalba-cutanje/:id", component: PrikazZalbaCutanjeComponent
+    path: "nova-zalba-na-odluku", component: ZalbaNaOdlukuComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin'
+    }
   },
   {
-    path: "zalba-na-odluku/:id", component: PrikazZalbaNaOdlukuComponent
+    path: "zalba-cutanje/:id", component: PrikazZalbaCutanjeComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin|poverenik'
+    }
+  },
+  {
+    path: "zalba-na-odluku/:id", component: PrikazZalbaNaOdlukuComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin|poverenik'
+    }
   }
 ];
 

@@ -8,7 +8,9 @@
 
 package projectXML.team10.poverenik.models.korisnik;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -263,7 +265,9 @@ public class Korisnik implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		List<Authority> authorities = new ArrayList<Authority>();
+		authorities.add(new Authority(this.uloga));
+		return authorities;
 	}
 
 	@Override

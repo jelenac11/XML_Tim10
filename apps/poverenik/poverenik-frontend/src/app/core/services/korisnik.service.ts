@@ -16,7 +16,7 @@ export class KorisnikService {
     return this.http.post(`${environment.auth_url}registracija`, body, { headers: this.headers, responseType: 'text' });
   }
 
-  getCurrentUser(): Observable<any> {
+  getTrenutnoUlogovan(): Observable<any> {
     return this.http.get(`${environment.auth_url}trenutno-ulogovan`, { responseType: 'text' });
   }
 

@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<div fxLayout="column">
+    <div *ngIf="showNavbar">
+        <app-header></app-header>
+    </div>
+    <div fxFlex>
+        <router-outlet></router-outlet>
+    </div>
+</div>

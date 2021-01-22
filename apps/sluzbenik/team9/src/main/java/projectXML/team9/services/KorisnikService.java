@@ -14,7 +14,7 @@ import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.repositories.KorisnikRepository;
 
 @Service
-public class KorisnikService implements UserDetailsService{
+public class KorisnikService implements UserDetailsService {
 
 //	private static String schemaPath = "src/main/resources/static/schemas/korisnik.xsd";
 	//private static String contextPath = "projectXML.team10.poverenik.models.korisnik";

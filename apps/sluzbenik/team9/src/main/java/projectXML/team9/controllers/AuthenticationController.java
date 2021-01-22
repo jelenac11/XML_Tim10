@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,5 +75,11 @@ public class AuthenticationController {
 			return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+	}
+	
+	@GetMapping(value = "/trenutno-ulogovan")
+	public ResponseEntity<Korisnik> currentUser() {
+		Korisnik current = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return new ResponseEntity<>(current, HttpStatus.OK);
 	}
 }
