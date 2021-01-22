@@ -5,5 +5,5 @@
 // Generated on: 2021.01.16 at 11:47:04 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.projekat.org/korisnik_portal_poverenik", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.projekat.org/korisnik_portal_sluzbenik", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package projectXML.team9.models.korisnik;

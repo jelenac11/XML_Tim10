@@ -11,7 +11,11 @@ import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.compon
 
 const routes: Routes = [
   {
-    path: "", component: ZalbaCutanjeComponent //ovde ce inace da ide na moji dokumenti kad se napravi ta stranica i treba da ima rolu gradjanin
+    path: "", component: ZalbaCutanjeComponent, //ovde ce inace da ide na moji dokumenti kad se napravi ta stranica i treba da ima rolu gradjanin
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin|poverenik'
+    } 
   },
   {
     path: "registracija", component: RegistracijaComponent,

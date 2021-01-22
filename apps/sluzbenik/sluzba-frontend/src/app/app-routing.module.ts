@@ -11,7 +11,11 @@ import { ZahtevComponent } from './zahtev/zahtev.component';
 
 const routes: Routes = [
   {
-    path: "", component: ZahtevComponent //ovde ce inace da ide na moji dokumenti kad se napravi ta stranica i treba da ima rolu gradjanin
+    path: "", component: ZahtevComponent, //ovde ce inace da ide na moji dokumenti kad se napravi ta stranica i treba da ima rolu gradjanin
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin|sluzbenik'
+    }
   },
   {
     path: "registracija", component: RegistracijaComponent,

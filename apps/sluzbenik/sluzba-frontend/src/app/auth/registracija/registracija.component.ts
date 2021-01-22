@@ -41,7 +41,7 @@ export class RegistracijaComponent implements OnInit {
     if (this.formaRegistracija.invalid) {
       return;
     }
-    var korisnik: Korisnik = { "_declaration": { "_attributes": { "version": "1.0", "encoding": "utf-8" } }, "korisnik": { "_attributes": { "xmlns": "http://www.projekat.org/korisnik_portal_poverenik", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation": "http://www.projekat.org/korisnik_portal_poverenik", "id": '' }, "ime": { "_text": '' }, "prezime": { "_text": '' }, "email": { "_text": '' }, "lozinka": { "_text": '' }, "uloga": { "_text": "gradjanin" } } };
+    var korisnik: Korisnik = { "_declaration": { "_attributes": { "version": "1.0", "encoding": "utf-8" } }, "korisnik": { "_attributes": { "xmlns": "http://www.projekat.org/korisnik_portal_sluzbenik", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation": "http://www.projekat.org/korisnik_portal_sluzbenik", "id": '' }, "ime": { "_text": '' }, "prezime": { "_text": '' }, "email": { "_text": '' }, "lozinka": { "_text": '' }, "uloga": { "_text": "gradjanin" } } };
     korisnik.korisnik["email"] = this.formaRegistracija.value['email'];
     korisnik.korisnik["lozinka"] = this.formaRegistracija.value['lozinka'];
     korisnik.korisnik["ime"] = this.formaRegistracija.value['ime'];
@@ -60,7 +60,7 @@ export class RegistracijaComponent implements OnInit {
     },
     error => {
       if (error.status !== 200) {
-        this.snackBar.error(error.error);
+        this.snackBar.error("Već postoji korisnik sa unetim e-mailom.");
       }
     });
   }

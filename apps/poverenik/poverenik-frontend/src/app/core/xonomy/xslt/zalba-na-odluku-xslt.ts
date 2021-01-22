@@ -22,7 +22,7 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                     padding-top: 60pt;
                     padding-bottom: 60pt;
                     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                    width: 82%;
+                    width: 90%;
                     position: sticky;
                     top: 25pt;
                  }
@@ -31,29 +31,29 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                     font-family: 'Times New Roman';
                     font-size: 10pt;
                     text-align: center;
-                    margin-top: 0pt;
-                    margin-bottom: 0pt;
+                    margin-top: 0pt !important;
+                    margin-bottom: 0pt !important;
                  }
                 
                  .c3 {
                     font-family: 'Times New Roman';
                     font-size: 10pt;
                     text-align: center;
-                    margin-top: 0pt;
-                    margin-bottom: 0pt;
+                    margin-top: 0pt !important;
+                    margin-bottom: 20pt !important;
                  }
                 
                  .c4 {
                     font-family: 'Times New Roman';
                     font-size: 11pt;
-                    margin-bottom: 0pt;
+                    margin-bottom: 0pt !important;
                  }
                 
                  .c5 {
                     font-family: 'Times New Roman';
                     font-size: 11pt;
-                    margin-top: 0pt;
-                    margin-bottom: 30pt;
+                    margin-top: 0pt !important;
+                    margin-bottom: 20pt !important;
                  }
                 
                  .c6 {
@@ -158,16 +158,16 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                  }
                 
                  .c20 {
-                    margin-top: 0pt;
-                    margin-bottom: 0pt;
+                    margin-top: 0pt !important;
+                    margin-bottom: 0pt !important;
                     text-indent: 36pt;
                     text-align: justify;
                     font-size: 11pt;
                  }
                 
                  .c21 {
-                    margin-top: 0pt;
-                    margin-bottom: 0pt;
+                    margin-top: 0pt !important;
+                    margin-bottom: 0pt !important;
                     text-indent: 36pt;
                     text-align: justify;
                     font-size: 11pt;
@@ -239,7 +239,7 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                 
                  .c32 {
                     text-indent: 10pt;
-                    margin-bottom: 5pt;
+                    margin-bottom: 0pt !important;
                     padding-left: 8px;
                     font-size: 11pt;
                     font-family: 'Times New Roman';
@@ -257,8 +257,8 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
             </head>
             <body>
                 <div class="c1">
-                    <h4 class="c2">ЖАЛБА  ПРОТИВ  ОДЛУКЕ ОРГАНА  ВЛАСТИ КОЈОМ ЈЕ</h4>
-                    <h4 class="c3"><u>ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАХТЕВ</u> ЗА ПРИСТУП ИНФОРМАЦИЈИ</h4>
+                    <h4 class="c2"><b>ЖАЛБА  ПРОТИВ  ОДЛУКЕ ОРГАНА  ВЛАСТИ КОЈОМ ЈЕ</b></h4>
+                    <h4 class="c3"><b><u>ОДБИЈЕН ИЛИ ОДБАЧЕН ЗАХТЕВ</u> ЗА ПРИСТУП ИНФОРМАЦИЈИ</b></h4>
                     <p class="c4"><b>Поверенику за информације од јавног значаја и заштиту података о личности</b></p>
                     <p class="c5">Адреса за пошту: <xsl:value-of select="/zno:zalba_na_odluku/zno:adresa_poverenika/common:mesto"></xsl:value-of>, 
                     <xsl:value-of select="/zno:zalba_na_odluku/zno:adresa_poverenika/common:ulica"></xsl:value-of> бр. <xsl:value-of select="/zno:zalba_na_odluku/zno:adresa_poverenika/common:broj"></xsl:value-of></p>

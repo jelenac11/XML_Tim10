@@ -60,7 +60,7 @@ export class RegistracijaComponent implements OnInit {
     },
     error => {
       if (error.status !== 200) {
-        this.snackBar.error(error.error);
+        this.snackBar.error("Već postoji korisnik sa unetim e-mailom.");
       }
     });
   }

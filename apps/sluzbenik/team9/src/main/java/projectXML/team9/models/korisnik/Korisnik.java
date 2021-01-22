@@ -24,6 +24,9 @@ import javax.xml.bind.annotation.XmlType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 /**
  * &lt;p&gt;Java class for TKorisnik complex type.
  * 
@@ -88,6 +91,8 @@ import org.springframework.security.core.userdetails.UserDetails;
     "uloga"
 })
 @XmlRootElement(name = "korisnik")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Korisnik implements UserDetails {
 
     /**

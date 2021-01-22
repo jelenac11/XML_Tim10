@@ -21,7 +21,7 @@ export const zahtevXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                         padding-top: 60pt;
                         padding-bottom: 60pt;
                         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                        width: 82%;
+                        width: 90%;
                         position: sticky;
                         top: 25pt;
                     }

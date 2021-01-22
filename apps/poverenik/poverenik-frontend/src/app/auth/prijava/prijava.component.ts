@@ -60,7 +60,7 @@ export class PrijavaComponent implements OnInit {
       this.router.navigate(['/']);
     },
     error => {
-      this.snackBar.error(error.error);
+      this.snackBar.error("Pogrešan e-mail ili lozinka.");
     });
   }
 
