@@ -146,13 +146,15 @@
 					}
 
 					.c36 {
-					font-family: 'Times New Roman';
+					font-family:
+					'Times New Roman';
 					width: 80%;
 					border: none
 					}
 
 					.c37 {
-					font-family: 'Times New Roman';
+					font-family: 'Times
+					New Roman';
 					font-size: 11pt;
 					text-align:
 					center;
@@ -162,7 +164,8 @@
 					.c38 {
 					font-family: 'Times New Roman';
 					font-size: 9pt;
-					margin-top: -10pt;
+					margin-top:
+					-10pt;
 					}
 
 					.c39 {
@@ -180,7 +183,8 @@
 
 					.c44 {
 					margin-top: 0pt;
-					font-size: 11pt;
+					font-size:
+					11pt;
 					font-family: 'Times New Roman';
 					}
 
@@ -389,7 +393,9 @@
 											<xsl:value-of
 												select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/ob:kancelarija"></xsl:value-of>
 										</u>
-										можете <b>извршити увид</b> у документ/е у коме је садржана тражена
+										можете
+										<b>извршити увид</b>
+										у документ/е у коме је садржана тражена
 										информација.
 									</tab1>
 								</p>
@@ -398,8 +404,11 @@
 								<p class="c39">
 									<tab1>
 										Обавештавамо вас да ваш захтев за увид у документ/е у
-										коме је садржана
-										тражена информација <b>није прихваћен</b>.
+										коме је
+										садржана
+										тражена информација
+										<b>није прихваћен</b>
+										.
 									</tab1>
 								</p>
 							</xsl:otherwise>
@@ -415,7 +424,8 @@
 										test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@poseduje,'true')">
 										<p class="c39">
 											<tab1>
-												Овом приликом вас обавештавамо да <b>поседујемо</b>
+												Овом приликом вас обавештавамо да
+												<b>поседујемо</b>
 												информације које
 												сте навели у захтеву.
 											</tab1>
@@ -424,7 +434,9 @@
 									<xsl:otherwise>
 										<p class="c39">
 											<tab1>
-												Нажалост, <b>не поседујемо</b> информације које сте навели у
+												Нажалост,
+												<b>не поседујемо</b>
+												информације које сте навели у
 												захтеву.
 											</tab1>
 										</p>
@@ -434,7 +446,9 @@
 							<xsl:otherwise>
 								<p class="c39">
 									<tab1>
-										Нажалост, <b>не можемо вам рећи</b> да ли поседујемо информације
+										Нажалост,
+										<b>не можемо вам рећи</b>
+										да ли поседујемо информације
 										које сте
 										тражили у захтеву.
 									</tab1>
@@ -451,7 +465,9 @@
 									<tab1>
 										Обавештавамо вас да је ваш захтев за издавњем копије
 										документа/ата у коме
-										је садржана тражена информација <b>прихваћен</b>.
+										је садржана тражена информација
+										<b>прихваћен</b>
+										.
 									</tab1>
 								</p>
 							</xsl:when>
@@ -460,8 +476,10 @@
 									<tab1>
 										Обавештавамо вас да ваш захтев за издавњем копије
 										документа/ата у коме је
-										садржана тражена информација <b>није
-										прихваћен</b>.
+										садржана тражена информација
+										<b>није
+											прихваћен</b>
+										.
 									</tab1>
 								</p>
 							</xsl:otherwise>
@@ -475,8 +493,11 @@
 								<p class="c39">
 									<tab1>
 										Обавештавамо вас да је ваш захтев за достављање
-										документа/ата у коме је
-										садржана тражена информација <b>прихваћен</b>.
+										документа/ата у
+										коме је
+										садржана тражена информација
+										<b>прихваћен</b>
+										.
 									</tab1>
 								</p>
 							</xsl:when>
@@ -484,9 +505,12 @@
 								<p class="c39">
 									<tab1>
 										Обавештавамо вас да ваш захтев за достављање
-										документа/ата у коме је
-										садржана тражена информација <b>није
-										прихваћен</b>.
+										документа/ата у
+										коме је
+										садржана тражена информација
+										<b>није
+											прихваћен</b>
+										.
 									</tab1>
 								</p>
 							</xsl:otherwise>
@@ -541,26 +565,33 @@
 					<p class="c39">
 						Достављено:
 					</p>
-					<p class="c40">
-						<xsl:choose>
-							<xsl:when
-								test="/ob:obavestenje/ob:dostavljeno/ob:imenovanom and /ob:obavestenje/ob:dostavljeno/ob:arhivi">
+
+					<xsl:choose>
+						<xsl:when
+							test="/ob:obavestenje/ob:dostavljeno/ob:imenovanom and /ob:obavestenje/ob:dostavljeno/ob:arhivi">
+							<p class="c40">
 								1. Именованом
-								<br />
+							</p>
+							<p class="c40">
 								2. Архиви
-							</xsl:when>
-							<xsl:when
-								test="/ob:obavestenje/ob:dostavljeno/ob:imenovanom and not(/ob:obavestenje/ob:dostavljeno/ob:arhivi)">
+							</p>
+						</xsl:when>
+						<xsl:when
+							test="/ob:obavestenje/ob:dostavljeno/ob:imenovanom and not(/ob:obavestenje/ob:dostavljeno/ob:arhivi)">
+							<p class="c40">
 								1. Именованом
-							</xsl:when>
-							<xsl:when
-								test="not(/ob:obavestenje/ob:dostavljeno/ob:imenovanom) and /ob:obavestenje/ob:dostavljeno/ob:arhivi">
+							</p>
+						</xsl:when>
+						<xsl:when
+							test="not(/ob:obavestenje/ob:dostavljeno/ob:imenovanom) and /ob:obavestenje/ob:dostavljeno/ob:arhivi">
+							<p class="c40">
 								1. Архиви
-							</xsl:when>
-							<xsl:otherwise>
-							</xsl:otherwise>
-						</xsl:choose>
-					</p>
+							</p>
+						</xsl:when>
+						<xsl:otherwise>
+						</xsl:otherwise>
+					</xsl:choose>
+
 					<div class="c25">
 						<p class="c24">(М.П.)</p>
 					</div>

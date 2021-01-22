@@ -1,5 +1,9 @@
 package projectXML.team9.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,11 +25,30 @@ public class ZahtevController {
 	@Autowired
 	private ZahtevService zahtevService;
 
-	@GetMapping(value = "/generate-pdf-html/{id}")
+	@GetMapping(value = "/generate-pdf/{id}")
 	@CrossOrigin
-	public ResponseEntity<Void> generatePDFAndHTMLZahtev(@PathVariable String id) {
+	public byte[] generatePDFZahtev(@PathVariable String id) {
 		try {
-			zahtevService.generatePDFAndHTMLZahtev(id);
+			String path = zahtevService.generatePDFZahtev(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+            return IOUtils.toByteArray(fileInputStream);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GetMapping(value = "/generate-html/{id}")
+	@CrossOrigin
+	public byte[] generateXHTMLZahtev(@PathVariable String id) {
+		try {
+			String path = zahtevService.generateHTMLZahtev(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+            return IOUtils.toByteArray(fileInputStream);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -12,6 +12,10 @@ export class ObavestenjeService {
     return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
   }
 
+  download(path: string, id: string): any {
+    return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'arraybuffer' as 'text' });
+  }
+
   constructor(private http: HttpClient) { }
 
   post(path: string, body: any): Observable<any> {

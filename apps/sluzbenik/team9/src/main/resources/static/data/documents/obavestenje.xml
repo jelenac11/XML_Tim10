@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<obavestenje xmlns="http://www.projekat.org/obavestenje" xmlns:ns2="http://www.projekat.org/common" broj_obavestenja="307593ad63c8-1/2020" broj_zahteva="b83a0be1e785-1/2020" id="94f4cf8f-0d7b-40e1-9082-307593ad63c8">
-    <informacije_o_obavestenju>
-        <organ>
-            <ns2:adresa>
-                <ns2:mesto>nesto</ns2:mesto>
-                <ns2:ulica>nesto</ns2:ulica>
-                <ns2:broj>nesto</ns2:broj>
-            </ns2:adresa>
-            <ns2:naziv>nesto</ns2:naziv>
-        </organ>
-        <trazilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TPravno_lice">
-            <ns2:adresa>
-                <ns2:mesto>nesto</ns2:mesto>
-                <ns2:ulica>nesto</ns2:ulica>
-                <ns2:broj>nesto</ns2:broj>
-            </ns2:adresa>
-            <ns2:naziv>nesto</ns2:naziv>
-        </trazilac>
-        <datum_obavestenja>2021-01-15</datum_obavestenja>
-    </informacije_o_obavestenju>
-    <zahtev>
-        <datum_trazenja_informacija>2021-01-13</datum_trazenja_informacija>
-        <opis_trazene_informacije>nesto</opis_trazene_informacije>
-    </zahtev>
-    <odgovor_na_zahtev>
-        <zahtevi>
-            <informacije_o_uvidu status="false"/>
-            <informacije_o_posedovanju status="false"/>
-            <informacije_o_izradi_kopije status="false"/>
-            <informacije_o_dostavljanju_dokumenta status="false"/>
-        </zahtevi>
-    </odgovor_na_zahtev>
-    <dostavljeno/>
-</obavestenje>
+<ns2:obavestenje xmlns="http://www.projekat.org/common" xmlns:ns2="http://www.projekat.org/obavestenje" broj_obavestenja="a49d1ebb8732-1/2020" broj_zahteva="ccb20c78b24d-1/2020" id="28a10530-3a26-40b8-9443-a49d1ebb8732">
+    <ns2:informacije_o_obavestenju>
+        <ns2:organ>
+            <adresa>
+                <mesto>nesto</mesto>
+                <ulica>nesto</ulica>
+                <broj>nesto</broj>
+            </adresa>
+            <naziv>nesto</naziv>
+        </ns2:organ>
+        <ns2:trazilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizicko_lice">
+            <adresa>
+                <mesto>nesto</mesto>
+                <ulica>nesto</ulica>
+                <broj>nesto</broj>
+            </adresa>
+            <ime>nesto</ime>
+            <prezime>nesto</prezime>
+        </ns2:trazilac>
+        <ns2:datum_obavestenja>2021-01-14</ns2:datum_obavestenja>
+    </ns2:informacije_o_obavestenju>
+    <ns2:zahtev>
+        <ns2:datum_trazenja_informacija>2021-01-13</ns2:datum_trazenja_informacija>
+        <ns2:opis_trazene_informacije>nesto</ns2:opis_trazene_informacije>
+    </ns2:zahtev>
+    <ns2:odgovor_na_zahtev>
+        <ns2:zahtevi>
+            <ns2:informacije_o_uvidu status="true">
+                <ns2:datum_uvida>2021-01-18</ns2:datum_uvida>
+                <ns2:vreme_uvida>
+                    <ns2:interval_uvida>
+                        <ns2:od>7</ns2:od>
+                        <ns2:do>14</ns2:do>
+                    </ns2:interval_uvida>
+                </ns2:vreme_uvida>
+                <ns2:mesto_uvida>
+                    <mesto>beograd</mesto>
+                    <ulica>ddvdsf</ulica>
+                    <broj>452a</broj>
+                    <ns2:kancelarija>15</ns2:kancelarija>
+                </ns2:mesto_uvida>
+            </ns2:informacije_o_uvidu>
+            <ns2:informacije_o_posedovanju poseduje="false" status="false"/>
+            <ns2:informacije_o_izradi_kopije status="true"/>
+            <ns2:informacije_o_dostavljanju_dokumenta status="false"/>
+        </ns2:zahtevi>
+    </ns2:odgovor_na_zahtev>
+    <ns2:dostavljeno>
+        <ns2:imenovanom>Imenovanom</ns2:imenovanom>
+        <ns2:arhivi>Arhivi</ns2:arhivi>
+    </ns2:dostavljeno>
+</ns2:obavestenje>
