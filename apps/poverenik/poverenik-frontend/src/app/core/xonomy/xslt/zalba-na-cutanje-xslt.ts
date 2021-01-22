@@ -21,7 +21,7 @@ export const zalbaCutanjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                         padding-top: 60pt;
                         padding-bottom: 60pt;
                         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                        width: 82%;
+                        width: 90%;
                         position: sticky;
                         top: 25pt;
                     }
@@ -30,29 +30,28 @@ export const zalbaCutanjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                         font-family: 'Times New Roman';
                         font-size: 10pt;
                         text-align: center;
-                        margin-top: 0pt;
-                        margin-bottom: 0pt;
+                        margin: 0 !important;
                     }
                     
                     .c3 {
                         font-family: 'Times New Roman';
                         font-size: 10pt;
                         text-align: center;
-                        margin-top: 0pt;
-                        margin-bottom: 0pt;
+                        margin: 0 !important;
                     }
                     
                     .c4 {
                         font-family: 'Times New Roman';
                         font-size: 11pt;
-                        margin-bottom: 0pt;
+                        margin-top: 20pt !important;
+                        margin-bottom: 0pt !important;
                     }
                     
                     .c5 {
                         font-family: 'Times New Roman';
                         font-size: 11pt;
-                        margin-top: 0pt;
-                        margin-bottom: 30pt;
+                        margin-top: 0pt !important;
+                        margin-bottom: 20pt !important;
                     }
                     
                     .c6 {
@@ -154,17 +153,19 @@ export const zalbaCutanjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                     }
                     
                     .c20 {
-                        margin-top: 0pt;
-                        margin-bottom: 0pt;
+                        margin-top: 0pt !important;
+                        margin-bottom: 0pt !important;
                         text-align: justify;
                         font-size: 11pt;
+                        text-indent: 30pt !important;
                     }
                     
                     .c21 {
-                        margin-top: 0pt;
-                        margin-bottom: 0pt;
+                        margin-top: 0pt !important;
+                        margin-bottom: 0pt !important;
                         text-align: justify;
                         font-size: 11pt;
+                        text-indent: 30pt !important;
                     }
                     
                     .c22 {
@@ -251,8 +252,8 @@ export const zalbaCutanjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
             </head>
             <body>
                 <div class="c1">
-                    <h4 class="c2">ЖАЛБА КАДА ОРГАН ВЛАСТИ <u>НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ</u></h4>
-                    <h4 class="c3">ТРАЖИОЦА У ЗАКОНСКОМ  РОКУ  (ЋУТАЊЕ УПРАВЕ)</h4>
+                    <h4 class="c2"><b>ЖАЛБА КАДА ОРГАН ВЛАСТИ <u>НИЈЕ ПОСТУПИО/ није поступио у целости/ ПО ЗАХТЕВУ</u></b></h4>
+                    <h4 class="c3"><b>ТРАЖИОЦА У ЗАКОНСКОМ  РОКУ  (ЋУТАЊЕ УПРАВЕ)</b></h4>
                     <p class="c4"><b>Поверенику за информације од јавног значаја и заштиту података о личности</b></p>
                     <p class="c5">Адреса за пошту: <xsl:value-of select="/zc:zalba_na_cutanje/zc:adresa_poverenika/common:mesto"></xsl:value-of>, 
                     <xsl:value-of select="/zc:zalba_na_cutanje/zc:adresa_poverenika/common:ulica"></xsl:value-of> бр. <xsl:value-of select="/zc:zalba_na_cutanje/zc:adresa_poverenika/common:broj"></xsl:value-of></p>
@@ -293,10 +294,10 @@ export const zalbaCutanjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                     </p>
                     <p class="c9" style="margin-bottom: 10pt">(навести податке о захтеву и информацији/ама)</p>
                     <p class="c20">
-                        <span class="c17">На основу изнетог, предлажем да Повереник уважи моју жалбу и омогући ми приступ траженој/им  информацији/ма.</span>
+                        <span class="c17">На основу изнетог, предлажем да Повереник уважи моју жалбу и омогући ми приступ траженој/им информацији/ма.</span>
                     </p>
                     <p class="c20">
-                        <span class="c17">Као доказ , уз жалбу достављам копију захтева са доказом о предаји органу власти.</span>
+                        <span class="c17">Као доказ, уз жалбу достављам копију захтева са доказом о предаји органу власти.</span>
                     </p>
                     <p class="c21">
                         <span class="c17"><b>Напомена:</b> Код жалбе  због непоступању по захтеву у целости, треба приложити и добијени одговор органа власти.</span>

@@ -45,7 +45,7 @@ export class PrijavaComponent implements OnInit {
       return;
     }
 
-    var korisnik: KorisnikPrijava = { "_declaration": { "_attributes": { "version": "1.0", "encoding": "utf-8" } }, "korisnik_prijava": { "_attributes": { "xmlns": "http://www.projekat.org/korisnik_portal_poverenik", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation": "http://www.projekat.org/korisnik_portal_poverenik" }, "email": { "_text": '' }, "lozinka": { "_text": '' } } };
+    var korisnik: KorisnikPrijava = { "_declaration": { "_attributes": { "version": "1.0", "encoding": "utf-8" } }, "korisnik_prijava": { "_attributes": { "xmlns": "http://www.projekat.org/korisnik_portal_sluzbenik", "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance", "xsi:schemaLocation": "http://www.projekat.org/korisnik_portal_sluzbenik" }, "email": { "_text": '' }, "lozinka": { "_text": '' } } };
     korisnik.korisnik_prijava.email = this.formaLogin.value['email'];
     korisnik.korisnik_prijava.lozinka = this.formaLogin.value['lozinka'];
 
@@ -60,7 +60,7 @@ export class PrijavaComponent implements OnInit {
       this.router.navigate(['/']);
     },
     error => {
-      this.snackBar.error(error.error);
+      this.snackBar.error("Pogrešan e-mail ili lozinka.");
     });
   }
 

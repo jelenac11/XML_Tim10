@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://www.projekat.org/korisnik_portal_poverenik"
-    xmlns:kor="http://www.projekat.org/korisnik_portal_poverenik">
+    targetNamespace="http://www.projekat.org/korisnik_portal_sluzbenik"
+    xmlns:kor="http://www.projekat.org/korisnik_portal_sluzbenik">
     <xs:element name="korisnik">
         <xs:complexType>
             <xs:sequence>
