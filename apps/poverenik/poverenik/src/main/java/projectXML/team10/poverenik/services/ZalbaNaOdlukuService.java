@@ -8,8 +8,10 @@ import java.util.UUID;
 import javax.xml.bind.Marshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import projectXML.team10.poverenik.models.korisnik.Korisnik;
 import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team10.poverenik.repositories.ZalbaNaOdlukuRepository;
 import projectXML.team10.poverenik.util.FusekiWriter;
@@ -34,11 +36,21 @@ public class ZalbaNaOdlukuService {
 	}
 
 	public ZalbaNaOdluku create(ZalbaNaOdluku zalba) throws Exception {
+		Korisnik current = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id = UUID.randomUUID().toString();
 		zalba.setId(id);
-		zalba.setAbout("http://www.projekat.org/zalbe-na-odluku/" + id);
 		zalba.setBrojZalbe(id.split("-")[4] + "-" + new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2020");
 		zalbaNaOdlukuRepository.save(zalba);
+		zalba.setAbout("http://localhost:4200/zalbe-na-odluku/" + id);
+		zalba.getPodaciOResenju().getNazivOrgana().setDatatype("xs:string");
+		zalba.getPodaciOResenju().getNazivOrgana().setProperty("pred:organ_koji_je_doneo_odluku");
+		zalba.getPodaciOZalbi().getPodnosilacZalbe().setProperty("pred:podnosilac_zalbe");
+		zalba.getPodaciOZalbi().getPodnosilacZalbe().setContent(current.getEmail());
+		zalba.getPodaciOZalbi().getDatumPodnosenja().setDatatype("xs:date");
+		zalba.getPodaciOZalbi().getDatumPodnosenja().setProperty("pred:datum_podnosenja");
+		zalba.getPodaciOZalbi().getMesto().setProperty("pred:mesto_podnosenja");
+		zalba.getPodaciOZalbi().getMesto().setDatatype("xs:string");
+		zalba.setVocab("http://www.projekat.org/predicate");
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(zalba, sw);

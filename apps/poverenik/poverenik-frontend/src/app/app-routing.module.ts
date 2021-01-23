@@ -40,14 +40,14 @@ const routes: Routes = [
     }
   },
   {
-    path: "zalba-cutanje/:id", component: PrikazZalbaCutanjeComponent,
+    path: "zalbe-cutanje/:id", component: PrikazZalbaCutanjeComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'gradjanin|poverenik'
     }
   },
   {
-    path: "zalba-na-odluku/:id", component: PrikazZalbaNaOdlukuComponent,
+    path: "zalbe-na-odluku/:id", component: PrikazZalbaNaOdlukuComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'gradjanin|poverenik'
