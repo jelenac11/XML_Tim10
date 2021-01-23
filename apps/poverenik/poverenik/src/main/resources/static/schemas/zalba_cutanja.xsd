@@ -13,10 +13,8 @@
                         <xs:complexContent>
                             <xs:extension base="common:TPravno_lice">
                                 <xs:attribute fixed="pred:organ_protiv_kojeg_je_zalba"
-                                    form="unqualified" name="property" type="xs:string"
-                                    use="required"/>
-                                <xs:attribute name="content" type="xs:string"
-                                    use="required"/>
+                                    form="unqualified" name="property" type="xs:string"/>
+                                <xs:attribute name="content" type="xs:string"/>
                             </xs:extension>
                         </xs:complexContent>
                     </xs:complexType>
@@ -65,10 +63,8 @@
                                         </xs:element>
                                     </xs:sequence>
                                     <xs:attribute fixed="pred:podnosilac_zalbe" name="property"
-                                        type="xs:string" use="required"/>
-                                    <xs:attribute name="id_podnosioca" type="xs:string"
-                                        use="required"/>
-                                    <xs:attribute name="content" type="xs:string" use="required"/>
+                                        type="xs:string"/>
+                                    <xs:attribute name="content" type="xs:string"/>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="datum_podnosenja">
@@ -76,9 +72,9 @@
                                     <xs:simpleContent>
                                         <xs:extension base="xs:date">
                                             <xs:attribute fixed="pred:datum_podnosenja"
-                                                name="property" type="xs:string" use="required"/>
+                                                name="property" type="xs:string"/>
                                             <xs:attribute fixed="xs:date" name="datatype"
-                                                type="xs:string" use="required"/>
+                                                type="xs:string"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
@@ -88,10 +84,9 @@
                                     <xs:simpleContent>
                                         <xs:extension base="xs:string">
                                             <xs:attribute name="property"
-                                                fixed="pred:mesto_podnosenja" type="xs:string"
-                                                use="required"/>
+                                                fixed="pred:mesto_podnosenja" type="xs:string"/>
                                             <xs:attribute name="datatype" fixed="xs:string"
-                                                type="xs:string" use="required"/>
+                                                type="xs:string"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
@@ -123,10 +118,10 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="id" type="xs:string" use="optional"/>
-            <xs:attribute name="vocab" type="xs:string" use="required"
+            <xs:attribute name="id" type="xs:string"/>
+            <xs:attribute name="vocab" type="xs:string"
                 fixed="http://www.projekat.org/predicate"/>
-            <xs:attribute name="about" type="xs:string" use="required"/>
+            <xs:attribute name="about" type="xs:string"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

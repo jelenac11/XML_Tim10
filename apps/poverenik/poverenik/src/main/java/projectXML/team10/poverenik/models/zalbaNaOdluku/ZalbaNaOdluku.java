@@ -184,9 +184,9 @@ public class ZalbaNaOdluku {
     protected String brojResenja;
     @XmlAttribute(name = "id")
     protected String id;
-    @XmlAttribute(name = "vocab", required = true)
+    @XmlAttribute(name = "vocab", required = false)
     protected String vocab;
-    @XmlAttribute(name = "about", required = true)
+    @XmlAttribute(name = "about", required = false)
     protected String about;
 
     /**
@@ -580,9 +580,9 @@ public class ZalbaNaOdluku {
 
             @XmlValue
             protected String value;
-            @XmlAttribute(name = "property", required = true)
+            @XmlAttribute(name = "property", required = false)
             protected String property;
-            @XmlAttribute(name = "datatype", required = true)
+            @XmlAttribute(name = "datatype", required = false)
             protected String datatype;
 
             /**
@@ -878,9 +878,9 @@ public class ZalbaNaOdluku {
             @XmlValue
             @XmlSchemaType(name = "date")
             protected XMLGregorianCalendar value;
-            @XmlAttribute(name = "property", required = true)
+            @XmlAttribute(name = "property", required = false)
             protected String property;
-            @XmlAttribute(name = "datatype", required = true)
+            @XmlAttribute(name = "datatype", required = false)
             protected String datatype;
 
             /**
@@ -992,9 +992,9 @@ public class ZalbaNaOdluku {
 
             @XmlValue
             protected String value;
-            @XmlAttribute(name = "property", required = true)
+            @XmlAttribute(name = "property", required = false)
             protected String property;
-            @XmlAttribute(name = "datatype", required = true)
+            @XmlAttribute(name = "datatype", required = false)
             protected String datatype;
 
             /**
@@ -1120,11 +1120,9 @@ public class ZalbaNaOdluku {
             protected TFizickoLice lice;
             @XmlElement(name = "drugi_podaci_za_kontakt", namespace = "http://www.projekat.org/zalba_na_odluku", required = true)
             protected String drugiPodaciZaKontakt;
-            @XmlAttribute(name = "property", required = true)
+            @XmlAttribute(name = "property", required = false)
             protected String property;
-            @XmlAttribute(name = "id_podnosioca", required = true)
-            protected String idPodnosioca;
-            @XmlAttribute(name = "content", required = true)
+            @XmlAttribute(name = "content", required = false)
             protected String content;
 
             /**
@@ -1201,30 +1199,6 @@ public class ZalbaNaOdluku {
              */
             public void setProperty(String value) {
                 this.property = value;
-            }
-
-            /**
-             * Gets the value of the idPodnosioca property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getIdPodnosioca() {
-                return idPodnosioca;
-            }
-
-            /**
-             * Sets the value of the idPodnosioca property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setIdPodnosioca(String value) {
-                this.idPodnosioca = value;
             }
 
             /**

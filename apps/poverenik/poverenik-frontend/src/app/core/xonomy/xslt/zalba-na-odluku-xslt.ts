@@ -203,7 +203,7 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                 
                  .c27 {
                     text-indent: 10pt;
-                    margin-top: -40pt;
+                    margin-top: -80pt;
                     margin-bottom: 30pt;
                     text-align: justify;
                     font-size: 11pt;

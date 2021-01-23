@@ -79,7 +79,12 @@ public class AuthenticationController {
 	
 	@GetMapping(value = "/trenutno-ulogovan")
 	public ResponseEntity<Korisnik> currentUser() {
-		Korisnik current = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Korisnik current = null;
+		try {
+			current = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		} catch (Exception e) {
+			
+		}
 		return new ResponseEntity<>(current, HttpStatus.OK);
 	}
 }

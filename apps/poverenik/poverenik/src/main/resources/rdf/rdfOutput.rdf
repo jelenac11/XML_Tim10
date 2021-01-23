@@ -1,14 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-cutanje/482fd639-49e7-4ee4-adad-f14a17932826">
-<pred:organ_protiv_kojeg_je_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://www.projekat.org/organ/j</pred:organ_protiv_kojeg_je_zalba>
+<rdf:Description rdf:about="http://localhost:4200/zalbe-na-odluku/bbb68893-069e-4c50-ba05-6022f78eb2b7">
+<pred:organ_koji_je_doneo_odluku xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ogi</pred:organ_koji_je_doneo_odluku>
 </rdf:Description>
-<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-cutanje/482fd639-49e7-4ee4-adad-f14a17932826">
-<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://www.projekat.org/korisnici/nekikorisnik</pred:podnosilac_zalbe>
+<rdf:Description rdf:about="http://localhost:4200/zalbe-na-odluku/bbb68893-069e-4c50-ba05-6022f78eb2b7">
+<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">lelajelenaa99@gmail.com</pred:podnosilac_zalbe>
 </rdf:Description>
-<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-cutanje/482fd639-49e7-4ee4-adad-f14a17932826">
-<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-01-10</pred:datum_podnosenja>
+<rdf:Description rdf:about="http://localhost:4200/zalbe-na-odluku/bbb68893-069e-4c50-ba05-6022f78eb2b7">
+<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-01-23</pred:datum_podnosenja>
 </rdf:Description>
-<rdf:Description rdf:about="http://www.projekat.org/zalbe-na-cutanje/482fd639-49e7-4ee4-adad-f14a17932826">
-<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nosi</pred:mesto_podnosenja>
+<rdf:Description rdf:about="http://localhost:4200/zalbe-na-odluku/bbb68893-069e-4c50-ba05-6022f78eb2b7">
+<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">so</pred:mesto_podnosenja>
 </rdf:Description>
 </rdf:RDF>
