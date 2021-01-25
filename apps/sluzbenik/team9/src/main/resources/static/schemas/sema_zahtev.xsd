@@ -104,17 +104,10 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute name="broj_zahteva" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="1"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="id" type="xs:string" use="required"/>
+            <xs:attribute name="id" type="xs:anyURI" use="required"/>
             <xs:attribute fixed="http://www.projekat.org/predicate" name="vocab" type="xs:string"
                 use="optional"/>
-            <xs:attribute name="about" type="xs:string" use="optional"/>
+            <xs:attribute name="about" type="xs:anyURI" use="optional"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

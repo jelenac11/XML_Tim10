@@ -72,10 +72,10 @@ public class ObavestenjeService {
 				.setContent(obavestenje.getInformacijeOObavestenju().getOrgan().getNaziv());
 		obavestenje.getInformacijeOObavestenju().getTrazilac().setProperty();
 		obavestenje.getInformacijeOObavestenju().getTrazilac()
-				.setContent(zahtevService.getZahtev(obavestenje.getBrojZahteva()).getTrazilac().getContent());
+				.setContent(zahtevService.getZahtev(obavestenje.getBrojZahteva().split("/")[4]).getTrazilac().getContent());
 		obavestenje.getInformacijeOObavestenju().getDatumObavestenja().setProperty();
 		obavestenje.getInformacijeOObavestenju().getDatumObavestenja().setDatatype("xs:date");
-		obavestenjeRepository.save(obavestenje);
+		obavestenjeRepository.save(obavestenje, id);
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(obavestenje, sw);

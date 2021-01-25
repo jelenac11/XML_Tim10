@@ -48,8 +48,11 @@ export class ObavestenjeComponent implements OnInit {
   private obradaOrganaiLica(): string {
     let organTrazilac: string = Xonomy.js2xml(this.zahtev.getDescendantElements("za:organ")[0]);
     let lice: string = Xonomy.js2xml(this.zahtev.getDescendantElements("za:lice")[0]);
+    lice = `<ob:trazilac 
+    property="${this.zahtev.getDescendantElements("za:lice")[0].getAttributeValue('property', null)}" 
+    content="${this.zahtev.getDescendantElements("za:lice")[0].getAttributeValue('content', null)}}">` + lice + "</ob:trazilac>";
     organTrazilac = organTrazilac.replace("za:organ", "ob:organ").replace("/za:organ", "/ob:organ");
-    lice = lice.replace("za:lice", "ob:trazilac").replace("/za:lice", "/ob:trazilac");
+    lice = lice.replace("za:lice", "ob:lice").replace("/za:lice", "/ob:lice");
     return organTrazilac + lice;
   }
   private obradaInformacijaOZahtevu(): string {

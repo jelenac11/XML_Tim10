@@ -1,9 +1,7 @@
 package projectXML.team9.services;
 
 import java.io.StringWriter;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
@@ -57,8 +55,6 @@ public class ZahtevService {
 	public ZahtevGradjana create(ZahtevGradjana zahtevGradjana, String email) throws Exception {
 		String id = UUID.randomUUID().toString();
 		zahtevGradjana.setId(id);
-		zahtevGradjana.setBrojZahteva(id.split("-")[4] + "-"
-				+ new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2020");
 		zahtevGradjana.setVocab();
 		zahtevGradjana.setAbout(id);
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getMesto().setProperty();
@@ -69,7 +65,7 @@ public class ZahtevService {
 		zahtevGradjana.getOrgan().setContent(zahtevGradjana.getOrgan().getNaziv());
 		zahtevGradjana.getTrazilac().setProperty();
 		zahtevGradjana.getTrazilac().setContent(email);
-		zahtevRepository.save(zahtevGradjana);
+		zahtevRepository.save(zahtevGradjana, id);
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(zahtevGradjana, sw);

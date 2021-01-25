@@ -352,7 +352,7 @@ public class Obavestenje {
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.id = "http://localhost:4200/obavestenje/" + id;
 	}
 
 	public String getVocab() {
@@ -2024,8 +2024,11 @@ public class Obavestenje {
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)
-	@XmlType(name = "")
-	public static class Trazilac extends TLice {
+	@XmlType(name = "", propOrder = { "lice" })
+	public static class Trazilac {
+
+		@XmlElement(required = true)
+		protected TLice lice;
 		@XmlAttribute(name = "property", required = false)
 		protected String property;
 		@XmlAttribute(name = "content", required = false)
@@ -2037,6 +2040,26 @@ public class Obavestenje {
 			} else {
 				return property;
 			}
+		}
+
+		/**
+		 * Gets the value of the lice property.
+		 * 
+		 * @return possible object is {@link TLice }
+		 * 
+		 */
+		public TLice getLice() {
+			return lice;
+		}
+
+		/**
+		 * Sets the value of the lice property.
+		 * 
+		 * @param value allowed object is {@link TLice }
+		 * 
+		 */
+		public void setLice(TLice value) {
+			this.lice = value;
 		}
 
 		/**

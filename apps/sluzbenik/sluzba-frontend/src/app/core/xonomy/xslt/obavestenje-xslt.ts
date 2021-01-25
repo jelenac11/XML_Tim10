@@ -212,11 +212,11 @@ export const obavestenjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                     <xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:organ/common:adresa/common:ulica, ' ')"></xsl:value-of><xsl:value-of select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:organ/common:adresa/common:broj"></xsl:value-of>, <xsl:value-of select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:organ/common:adresa/common:mesto"></xsl:value-of>
                     </textarea>
                     <p class="c44">(назив и седиште органа)</p>
-                    <p class="c40">Број предмета: <xsl:value-of select="/ob:obavestenje/@broj_zahteva"></xsl:value-of></p>
+                    <p class="c40">Број предмета: <xsl:value-of select="/ob:obavestenje/@broj_obavestenja"></xsl:value-of></p>
                     <p class="c40">Датум: <span class="c41"><tab1><xsl:value-of select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:datum_obavestenja"></xsl:value-of></tab1></span></p>
                     <textarea class="c45">
-                        <xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:naziv, ' ')"></xsl:value-of><xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:ime, ' ')"></xsl:value-of><xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:prezime, ' ')"></xsl:value-of>
-                        <xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:adresa/common:ulica, ' ')"></xsl:value-of><xsl:value-of select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:adresa/common:broj"></xsl:value-of>, <xsl:value-of select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:adresa/common:mesto"></xsl:value-of>
+                        <xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:naziv, ' ')"></xsl:value-of><xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:ime, ' ')"></xsl:value-of><xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:prezime, ' ')"></xsl:value-of>
+                        <xsl:value-of select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:adresa/common:ulica, ' ')"></xsl:value-of><xsl:value-of select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:adresa/common:broj"></xsl:value-of>, <xsl:value-of select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:adresa/common:mesto"></xsl:value-of>
                     </textarea>
                     <p class="c44">Име и презиме / назив / и адреса подносиоца захтева</p>
                     <br/>
@@ -325,7 +325,7 @@ export const obavestenjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                             </xsl:otherwise> 
                         </xsl:choose>
                     </xsl:if>
-                    <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
+                    <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije">
                         <xsl:choose>
                             <xsl:when test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije/@status,'true')">
                                 <p class="c39">
@@ -343,7 +343,7 @@ export const obavestenjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                             </xsl:otherwise> 
                         </xsl:choose>
                     </xsl:if>
-                    <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
+                    <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta">
                         <xsl:choose>
                             <xsl:when test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta/@status,'true')">
                                 <p class="c39">

@@ -75,7 +75,12 @@ export class ObavestenjeXonomyService {
               return jsElement.hasChildElement("ob:dostavljeno");
             }
           },
-        ]
+        ],
+        attributes: {
+          "id_zahteva": {
+            isInvisible: true,
+          }
+        },
       },
       "ob:informacije_o_obavestenju": {
         menu: [
@@ -142,6 +147,14 @@ export class ObavestenjeXonomyService {
             }
           }
         ],
+        attributes: {
+          "property": {
+            isInvisible: true,
+          },
+          "content": {
+            isInvisible: true,
+          }
+        },
         isReadOnly: true
       },
       "common:adresa": {
@@ -239,6 +252,17 @@ export class ObavestenjeXonomyService {
         hasText: true
       },
       "ob:trazilac": {
+        attributes: {
+          "property": {
+            isInvisible: true,
+          },
+          "content": {
+            isInvisible: true,
+          }
+        },
+        isReadOnly: true
+      },
+      "ob:lice": {
         validate: function (jsElement) {
           if (jsElement.hasAttribute("xsi:type") == "") {
             Xonomy.warnings.push({
@@ -324,20 +348,7 @@ export class ObavestenjeXonomyService {
         mustBeBefore: ["ob:datum_obavestenja"],
         attributes: {
           "xsi:type": {
-            asker: Xonomy.askPicklist,
-            askerParameter: [
-              { value: "common:TFizicko_lice" },
-              { value: "common:TPravno_lice" }
-            ],
-            validate: function (jsAttribute) {
-              if (jsAttribute.value == "") {
-                Xonomy.warnings.push({
-                  htmlID: jsAttribute.htmlID,
-                  text: "This attribute must not be empty."
-                }
-                );
-              }
-            }
+            isInvisible: true
           }
         },
         isReadOnly: true

@@ -142,7 +142,6 @@ public class Fuseki {
 		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
 		for (String id : all) {
 			boolean exist = false;
-			id = id.split("/")[4];
 			for (String answeredId : answeredZahtev) {
 				answeredId = answeredId.split("\\^\\^")[0];
 				if (id.equals(answeredId)) {

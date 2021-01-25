@@ -52,7 +52,7 @@ public class ObavestenjeRepository {
 		}
 	}
 
-	public void save(Obavestenje obavestenje) throws Exception {
+	public void save(Obavestenje obavestenje, String id) throws Exception {
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 
 		Collection col = null;
@@ -61,7 +61,7 @@ public class ObavestenjeRepository {
 
 		try {
 			col = databaseConnector.getOrCreateCollection(collectionId, 0);
-			res = databaseConnector.createResource(col, obavestenje.getId());
+			res = databaseConnector.createResource(col, id);
 			marshaller.marshal(obavestenje, os);
 
 			res.setContent(os);

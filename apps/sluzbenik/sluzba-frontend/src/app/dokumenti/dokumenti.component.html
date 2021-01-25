@@ -19,7 +19,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of dokumenta; let i=index">
-      <td><a [href]="'http://localhost:4200/novo-obavestenje/'+item">{{item}}</a></td>
+      <td><a [href]="'http://localhost:4200/novo-obavestenje/'+item.split('/')[4]">{{item}}</a></td>
     </tr>
   </tbody>
 </table>

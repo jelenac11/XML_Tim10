@@ -39,7 +39,7 @@
 					<fo:block font-family="Times New Roman" text-align="left"
 						font-size="11pt">
 						Број предмета:
-						<xsl:value-of select="/ob:obavestenje/@broj_zahteva"></xsl:value-of>
+						<xsl:value-of select="/ob:obavestenje/@broj_obavestenja"></xsl:value-of>
 					</fo:block>
 					<fo:block font-family="Times New Roman" text-align="left"
 						font-size="11pt">
@@ -52,21 +52,21 @@
 					<fo:block font-family="Times New Roman" text-align="left"
 						font-size="11pt" margin-top="11pt">
 						<xsl:value-of
-							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:naziv"></xsl:value-of>
+							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:naziv"></xsl:value-of>
 						<xsl:value-of
-							select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:ime, ' ')"></xsl:value-of>
+							select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:ime, ' ')"></xsl:value-of>
 						<xsl:value-of
-							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:prezime"></xsl:value-of>
+							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:prezime"></xsl:value-of>
 					</fo:block>
 					<fo:block font-family="Times New Roman" text-align="left"
 						font-size="11pt">
 						<xsl:value-of
-							select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:adresa/common:ulica, ' ')"></xsl:value-of>
+							select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:adresa/common:ulica, ' ')"></xsl:value-of>
 						<xsl:value-of
-							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:adresa/common:broj"></xsl:value-of>
+							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:adresa/common:broj"></xsl:value-of>
 						<xsl:text>,</xsl:text>
 						<xsl:value-of
-							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:adresa/common:mesto"></xsl:value-of>
+							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/ob:lice/common:adresa/common:mesto"></xsl:value-of>
 					</fo:block>
 					<fo:block font-family="Times New Roman" text-align="left"
 						font-size="11pt">

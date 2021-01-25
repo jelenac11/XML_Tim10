@@ -136,7 +136,7 @@ public class ZahtevGradjana {
 
 	@Override
 	public String toString() {
-		String obavestenje = String.format("!Dokument zahtev!\nId zahteva je: %s.\n", brojZahteva);
+		String obavestenje = String.format("!Dokument zahtev!\n");
 		obavestenje += "Organ:\n\t" + organ.toString();
 		obavestenje += "\nPodnosilac zahteva:\n\t" + trazilac.toString();
 		obavestenje += "\n" + informacijeVezaneZaZahtev.toString();
@@ -149,13 +149,13 @@ public class ZahtevGradjana {
 	protected ZahtevGradjana.Trazilac trazilac;
 	@XmlElement(name = "informacije_vezane_za_zahtev", required = true)
 	protected ZahtevGradjana.InformacijeVezaneZaZahtev informacijeVezaneZaZahtev;
-	@XmlAttribute(name = "broj_zahteva", required = false)
-	protected String brojZahteva;
 	@XmlAttribute(name = "id", required = false)
+	@XmlSchemaType(name = "anyURI")
 	protected String id;
 	@XmlAttribute(name = "vocab", required = false)
 	protected String vocab;
 	@XmlAttribute(name = "about", required = false)
+	@XmlSchemaType(name = "anyURI")
 	protected String about;
 
 	/**
@@ -219,32 +219,12 @@ public class ZahtevGradjana {
 		this.informacijeVezaneZaZahtev = value;
 	}
 
-	/**
-	 * Gets the value of the brojZahteva property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getBrojZahteva() {
-		return brojZahteva;
-	}
-
-	/**
-	 * Sets the value of the brojZahteva property.
-	 * 
-	 * @param value allowed object is {@link String }
-	 * 
-	 */
-	public void setBrojZahteva(String value) {
-		this.brojZahteva = value;
-	}
-
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		this.id = "http://localhost:4200/zahtev/" + id;
 	}
 
 	public String getVocab() {
@@ -282,7 +262,7 @@ public class ZahtevGradjana {
 	 * 
 	 */
 	public void setAbout(String value) {
-		this.about = "http://localhost:4200/zahtev/"+value;
+		this.about = "http://localhost:4200/zahtev/" + value;
 	}
 
 	@XmlAccessorType(XmlAccessType.FIELD)
@@ -526,103 +506,88 @@ public class ZahtevGradjana {
 			this.datum = value;
 		}
 
-		
 		@XmlAccessorType(XmlAccessType.FIELD)
-        @XmlType(name = "", propOrder = {
-            "value"
-        })
-        public static class Mesto {
+		@XmlType(name = "", propOrder = { "value" })
+		public static class Mesto {
 
-            @XmlValue
-            protected String value;
-            @XmlAttribute(name = "property", required = true)
-            protected String property;
-            @XmlAttribute(name = "datatype", required = true)
-            protected String datatype;
+			@XmlValue
+			protected String value;
+			@XmlAttribute(name = "property", required = true)
+			protected String property;
+			@XmlAttribute(name = "datatype", required = true)
+			protected String datatype;
 
-            /**
-             * Gets the value of the value property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getValue() {
-                return value;
-            }
+			/**
+			 * Gets the value of the value property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getValue() {
+				return value;
+			}
 
-            /**
-             * Sets the value of the value property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setValue(String value) {
-                this.value = value;
-            }
+			/**
+			 * Sets the value of the value property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setValue(String value) {
+				this.value = value;
+			}
 
-            /**
-             * Gets the value of the property property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getProperty() {
-                if (property == null) {
-                    return "pred:mesto_podnosenja";
-                } else {
-                    return property;
-                }
-            }
+			/**
+			 * Gets the value of the property property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getProperty() {
+				if (property == null) {
+					return "pred:mesto_podnosenja";
+				} else {
+					return property;
+				}
+			}
 
-            /**
-             * Sets the value of the property property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setProperty() {
-                this.property = "pred:mesto_podnosenja";;
-            }
+			/**
+			 * Sets the value of the property property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setProperty() {
+				this.property = "pred:mesto_podnosenja";
+				;
+			}
 
-            /**
-             * Gets the value of the datatype property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
-             */
-            public String getDatatype() {
-                if (datatype == null) {
-                    return "xs:string";
-                } else {
-                    return datatype;
-                }
-            }
+			/**
+			 * Gets the value of the datatype property.
+			 * 
+			 * @return possible object is {@link String }
+			 * 
+			 */
+			public String getDatatype() {
+				if (datatype == null) {
+					return "xs:string";
+				} else {
+					return datatype;
+				}
+			}
 
-            /**
-             * Sets the value of the datatype property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
-             */
-            public void setDatatype(String value) {
-                this.datatype = value;
-            }
+			/**
+			 * Sets the value of the datatype property.
+			 * 
+			 * @param value allowed object is {@link String }
+			 * 
+			 */
+			public void setDatatype(String value) {
+				this.datatype = value;
+			}
 
-        }
+		}
 
-		
 		@XmlAccessorType(XmlAccessType.FIELD)
 		@XmlType(name = "", propOrder = { "value" })
 		public static class DatumPodnosenja {

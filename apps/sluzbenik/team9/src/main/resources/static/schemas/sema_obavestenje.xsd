@@ -25,15 +25,13 @@
                             </xs:element>
                             <xs:element name="trazilac">
                                 <xs:complexType>
-                                    <xs:complexContent>
-                                        <xs:extension base="common:TLice">
-                                            <xs:attribute fixed="pred:trazilac_informacija"
-                                                form="unqualified" name="property" type="xs:string"
-                                                use="optional"/>
-                                            <xs:attribute name="content" type="xs:string"
-                                                use="optional"/>
-                                        </xs:extension>
-                                    </xs:complexContent>
+                                    <xs:sequence>
+                                        <xs:element name="lice" type="common:TLice"/>
+                                    </xs:sequence>
+                                    <xs:attribute fixed="pred:trazilac_informacija"
+                                        form="unqualified" name="property" type="xs:string"
+                                        use="optional"/>
+                                    <xs:attribute name="content" type="xs:string" use="optional"/>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="datum_obavestenja">
@@ -218,20 +216,14 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="id_zahteva" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="1"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="id" type="xs:string" use="required"/>
-            <xs:attribute name="about" type="xs:string" use="optional"/>
+            <xs:attribute name="id_zahteva" use="required" type="xs:anyURI"> </xs:attribute>
+            <xs:attribute name="id" type="xs:anyURI" use="required"/>
+            <xs:attribute name="about" type="xs:anyURI" use="optional"/>
             <xs:attribute fixed="http://www.projekat.org/predicate" name="vocab" type="xs:string"
                 use="optional"/>
             <xs:attribute fixed="pred:zahtev_na_koji_se_odnosi_obavestenje" form="unqualified"
                 name="property" type="xs:string" use="optional"/>
-            <xs:attribute name="content" type="xs:string" use="optional"/>
+            <xs:attribute name="content" type="xs:anyURI" use="optional"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="TUplatnica">

@@ -53,7 +53,7 @@ public class ZahtevRepository {
 		}
 	}
 
-	public void save(ZahtevGradjana zahtev) throws Exception {
+	public void save(ZahtevGradjana zahtev, String id) throws Exception {
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 
 		Collection col = null;
@@ -62,7 +62,7 @@ public class ZahtevRepository {
 
 		try {
 			col = databaseConnector.getOrCreateCollection(collectionId, 0);
-			res = databaseConnector.createResource(col, zahtev.getId());
+			res = databaseConnector.createResource(col, id);
 			marshaller.marshal(zahtev, os);
 
 			res.setContent(os);
