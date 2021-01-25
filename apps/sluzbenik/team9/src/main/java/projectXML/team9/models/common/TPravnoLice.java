@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;pre&gt;
  * &amp;lt;complexType name="TPravno_lice"&amp;gt;
  *   &amp;lt;complexContent&amp;gt;
- *     &amp;lt;extension base="{http://www.projekat.org/obavestenje}TLice"&amp;gt;
+ *     &amp;lt;extension base="{http://www.projekat.org/common}TLice"&amp;gt;
  *       &amp;lt;sequence&amp;gt;
  *         &amp;lt;element name="naziv"&amp;gt;
  *           &amp;lt;simpleType&amp;gt;

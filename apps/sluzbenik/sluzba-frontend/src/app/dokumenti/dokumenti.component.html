@@ -1,0 +1,25 @@
+<table *ngIf="role === 'gradjanin'">
+  <thead>
+    <tr>
+      <th>Dokument</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of dokumenta; let i=index">
+      <td><a [href]="item">{{item}}</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<table *ngIf="role === 'sluzbenik'">
+  <thead>
+    <tr>
+      <th>Dokument</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of dokumenta; let i=index">
+      <td><a [href]="'http://localhost:4200/novo-obavestenje/'+item">{{item}}</a></td>
+    </tr>
+  </tbody>
+</table>

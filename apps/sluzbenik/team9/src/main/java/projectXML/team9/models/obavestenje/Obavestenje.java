@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import projectXML.team9.models.common.TAdresa;
@@ -202,10 +203,18 @@ public class Obavestenje {
 	protected Obavestenje.Dostavljeno dostavljeno;
 	@XmlAttribute(name = "broj_obavestenja", required = false)
 	protected String brojObavestenja;
-	@XmlAttribute(name = "broj_zahteva", required = true)
+	@XmlAttribute(name = "id_zahteva", required = true)
 	protected String brojZahteva;
 	@XmlAttribute(name = "id", required = false)
 	protected String id;
+	@XmlAttribute(name = "vocab", required = false)
+	protected String vocab;
+	@XmlAttribute(name = "about", required = false)
+	protected String about;
+	@XmlAttribute(name = "property", required = false)
+	protected String property;
+	@XmlAttribute(name = "content", required = false)
+	protected String content;
 
 	@Override
 	public String toString() {
@@ -346,6 +355,88 @@ public class Obavestenje {
 		this.id = id;
 	}
 
+	public String getVocab() {
+		if (vocab == null) {
+			return "http://www.projekat.org/predicate";
+		} else {
+			return vocab;
+		}
+	}
+
+	/**
+	 * Sets the value of the vocab property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setVocab() {
+		this.vocab = "http://www.projekat.org/predicate";
+	}
+
+	/**
+	 * Gets the value of the about property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getAbout() {
+		return about;
+	}
+
+	/**
+	 * Sets the value of the about property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setAbout(String value) {
+		this.about = "http://localhost:4200/obavestenje/" + value;
+	}
+
+	/**
+	 * Gets the value of the property property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getProperty() {
+		if (property == null) {
+			return "pred:zahtev_na_koji_se_odnosi_obavestenje";
+		} else {
+			return property;
+		}
+	}
+
+	/**
+	 * Sets the value of the property property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setProperty() {
+		this.property = "pred:zahtev_na_koji_se_odnosi_obavestenje";
+	}
+
+	/**
+	 * Gets the value of the datatype property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * Sets the value of the datatype property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setContent(String value) {
+		this.content = value;
+	}
+
 	/**
 	 * &lt;p&gt;Java class for anonymous complex type.
 	 * 
@@ -371,9 +462,9 @@ public class Obavestenje {
 
 		@Override
 		public String toString() {
-			return "Dostavljeno:\n\t" + (imenovanom == null ? "" : imenovanom+"\n\t") + (arhivi == null ? "" : arhivi+"\n");
-			
-			
+			return "Dostavljeno:\n\t" + (imenovanom == null ? "" : imenovanom + "\n\t")
+					+ (arhivi == null ? "" : arhivi + "\n");
+
 		}
 
 		/**
@@ -448,12 +539,12 @@ public class Obavestenje {
 		}
 
 		@XmlElement(required = true)
-		protected TPravnoLice organ;
+		protected OrganOdKojegSeTrazi organ;
 		@XmlElement(required = true)
-		protected TLice trazilac;
+		protected Trazilac trazilac;
 		@XmlElement(name = "datum_obavestenja", required = true)
 		@XmlSchemaType(name = "date")
-		protected XMLGregorianCalendar datumObavestenja;
+		protected DatumPodnosenja datumObavestenja;
 
 		/**
 		 * Gets the value of the organ property.
@@ -461,7 +552,7 @@ public class Obavestenje {
 		 * @return possible object is {@link TPravnoLice }
 		 * 
 		 */
-		public TPravnoLice getOrgan() {
+		public OrganOdKojegSeTrazi getOrgan() {
 			return organ;
 		}
 
@@ -471,7 +562,7 @@ public class Obavestenje {
 		 * @param value allowed object is {@link TPravnoLice }
 		 * 
 		 */
-		public void setOrgan(TPravnoLice value) {
+		public void setOrgan(OrganOdKojegSeTrazi value) {
 			this.organ = value;
 		}
 
@@ -481,7 +572,7 @@ public class Obavestenje {
 		 * @return possible object is {@link TLice }
 		 * 
 		 */
-		public TLice getTrazilac() {
+		public Trazilac getTrazilac() {
 			return trazilac;
 		}
 
@@ -491,7 +582,7 @@ public class Obavestenje {
 		 * @param value allowed object is {@link TLice }
 		 * 
 		 */
-		public void setTrazilac(TLice value) {
+		public void setTrazilac(Trazilac value) {
 			this.trazilac = value;
 		}
 
@@ -501,7 +592,7 @@ public class Obavestenje {
 		 * @return possible object is {@link XMLGregorianCalendar }
 		 * 
 		 */
-		public XMLGregorianCalendar getDatumObavestenja() {
+		public DatumPodnosenja getDatumObavestenja() {
 			return datumObavestenja;
 		}
 
@@ -511,8 +602,145 @@ public class Obavestenje {
 		 * @param value allowed object is {@link XMLGregorianCalendar }
 		 * 
 		 */
-		public void setDatumObavestenja(XMLGregorianCalendar value) {
+		public void setDatumObavestenja(DatumPodnosenja value) {
 			this.datumObavestenja = value;
+		}
+
+	}
+
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "")
+	public static class OrganOdKojegSeTrazi extends TPravnoLice {
+
+		@XmlAttribute(name = "property", required = false)
+		protected String property;
+		@XmlAttribute(name = "content", required = false)
+		protected String content;
+
+		/**
+		 * Gets the value of the property property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getProperty() {
+			if (property == null) {
+				return "pred:kreator_obavestenja";
+			} else {
+				return property;
+			}
+		}
+
+		/**
+		 * Sets the value of the property property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setProperty() {
+			this.property = "pred:kreator_obavestenja";
+		}
+
+		/**
+		 * Gets the value of the datatype property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getContent() {
+			return content;
+		}
+
+		/**
+		 * Sets the value of the datatype property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setContent(String value) {
+			this.content = value;
+		}
+
+	}
+
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "", propOrder = { "value" })
+	public static class DatumPodnosenja {
+
+		@XmlValue
+		@XmlSchemaType(name = "date")
+		protected XMLGregorianCalendar value;
+		@XmlAttribute(name = "property", required = false)
+		protected String property;
+		@XmlAttribute(name = "datatype", required = false)
+		protected String datatype;
+
+		/**
+		 * Gets the value of the value property.
+		 * 
+		 * @return possible object is {@link XMLGregorianCalendar }
+		 * 
+		 */
+		public XMLGregorianCalendar getValue() {
+			return value;
+		}
+
+		/**
+		 * Sets the value of the value property.
+		 * 
+		 * @param value allowed object is {@link XMLGregorianCalendar }
+		 * 
+		 */
+		public void setValue(XMLGregorianCalendar value) {
+			this.value = value;
+		}
+
+		/**
+		 * Gets the value of the property property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getProperty() {
+			if (property == null) {
+				return "pred:datum_donosenja";
+			} else {
+				return property;
+			}
+		}
+
+		/**
+		 * Sets the value of the property property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setProperty() {
+			this.property = "pred:datum_donosenja";
+		}
+
+		/**
+		 * Gets the value of the datatype property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getDatatype() {
+			if (datatype == null) {
+				return "xs:date";
+			} else {
+				return datatype;
+			}
+		}
+
+		/**
+		 * Sets the value of the datatype property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setDatatype(String value) {
+			this.datatype = value;
 		}
 
 	}
@@ -743,8 +971,7 @@ public class Obavestenje {
 
 			@Override
 			public String toString() {
-				return "\tTroskovi koje je potrebno platiti su:\n" + troskovi.toString()
-						+ uplatnica.toString();
+				return "\tTroskovi koje je potrebno platiti su:\n" + troskovi.toString() + uplatnica.toString();
 			}
 
 			/**
@@ -885,7 +1112,8 @@ public class Obavestenje {
 
 					@Override
 					public String toString() {
-						return String.format("\t\t%s: %d kom. %.2f dinara po komadu\n", stavka, kolicina, jedinicnaCijena);
+						return String.format("\t\t%s: %d kom. %.2f dinara po komadu\n", stavka, kolicina,
+								jedinicnaCijena);
 					}
 
 					/**
@@ -1055,13 +1283,13 @@ public class Obavestenje {
 					obavestenje += informacijeOUvidu.toString();
 				}
 				if (informacijeOIzradiKopije != null) {
-					obavestenje += "\t"+informacijeOIzradiKopije.toString();
+					obavestenje += "\t" + informacijeOIzradiKopije.toString();
 				}
 				if (informacijeOPosedovanju != null) {
-					obavestenje += "\t"+informacijeOPosedovanju.toString();
+					obavestenje += "\t" + informacijeOPosedovanju.toString();
 				}
 				if (informacijeODostavljanjuDokumenta != null) {
-					obavestenje += "\t"+informacijeODostavljanjuDokumenta.toString();
+					obavestenje += "\t" + informacijeODostavljanjuDokumenta.toString();
 				}
 				;
 				return obavestenje;
@@ -1188,7 +1416,7 @@ public class Obavestenje {
 						return "Zahtev za dostavljanje trazenih dokumenata je odbijen.\n\n";
 					}
 				}
-				
+
 				/**
 				 * Gets the value of the status property.
 				 * 
@@ -1238,7 +1466,7 @@ public class Obavestenje {
 						return "Zahtev za izradom kopija trazenih dokumenata je odbijen.\n\n";
 					}
 				}
-				
+
 				/**
 				 * Gets the value of the status property.
 				 * 
@@ -1281,7 +1509,7 @@ public class Obavestenje {
 				protected Boolean poseduje;
 				@XmlAttribute(name = "status", required = true)
 				protected boolean status;
-				
+
 				@Override
 				public String toString() {
 					if (!status) {
@@ -1296,6 +1524,7 @@ public class Obavestenje {
 						return zahtev;
 					}
 				}
+
 				/**
 				 * Gets the value of the poseduje property.
 				 * 
@@ -1403,8 +1632,9 @@ public class Obavestenje {
 				@Override
 				public String toString() {
 					if (status) {
-						return String.format("Zahtev za uvid u trazene informacije je prihvacen.\n\t\tDatum uvida: %s\n\t"
-								+ vremeUvida.toString() + mestoUvida.toString()+"\n", datumUvida);
+						return String
+								.format("Zahtev za uvid u trazene informacije je prihvacen.\n\t\tDatum uvida: %s\n\t"
+										+ vremeUvida.toString() + mestoUvida.toString() + "\n", datumUvida);
 					} else {
 						return "Zahtev za uvid u trazene informacije je odbijen.\n";
 					}
@@ -1670,7 +1900,7 @@ public class Obavestenje {
 
 						@Override
 						public String toString() {
-							return String.format("od %dh do %dh\n",od,_do);
+							return String.format("od %dh do %dh\n", od, _do);
 						}
 
 						/**
@@ -1789,6 +2019,58 @@ public class Obavestenje {
 		 */
 		public void setOpisTrazeneInformacije(String value) {
 			this.opisTrazeneInformacije = value;
+		}
+
+	}
+
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "")
+	public static class Trazilac extends TLice {
+		@XmlAttribute(name = "property", required = false)
+		protected String property;
+		@XmlAttribute(name = "content", required = false)
+		protected String content;
+
+		public String getProperty() {
+			if (property == null) {
+				return "pred:trazilac_informacija";
+			} else {
+				return property;
+			}
+		}
+
+		/**
+		 * Sets the value of the property property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setProperty() {
+			this.property = "pred:trazilac_informacija";
+		}
+
+		/**
+		 * Gets the value of the resource property.
+		 * 
+		 * @return possible object is {@link String }
+		 * 
+		 */
+		public String getContent() {
+			return content;
+		}
+
+		/**
+		 * Sets the value of the resource property.
+		 * 
+		 * @param value allowed object is {@link String }
+		 * 
+		 */
+		public void setContent(String value) {
+			this.content = value;
+		}
+
+		public Trazilac() {
+			super();
 		}
 
 	}

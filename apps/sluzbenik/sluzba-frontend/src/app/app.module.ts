@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DokumentiComponent } from './dokumenti/dokumenti.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ZahtevComponent,
     ObavestenjeComponent,
     ZahtevPrikazComponent,
-    ObavestenjePrikazComponent
+    ObavestenjePrikazComponent,
+    DokumentiComponent
   ],
   imports: [
     BrowserModule,

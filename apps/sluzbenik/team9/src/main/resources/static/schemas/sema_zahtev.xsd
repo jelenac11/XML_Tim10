@@ -2,12 +2,24 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified"
     vc:minVersion="1.0" vc:maxVersion="1.1" targetNamespace="http://www.projekat.org/zahtev"
-    xmlns:za="http://www.projekat.org/zahtev" xmlns:common="http://www.projekat.org/common">
+    xmlns:za="http://www.projekat.org/zahtev" xmlns:common="http://www.projekat.org/common"
+    xmlns:pred="http://www.projekat.org/predicate/">
     <xs:import namespace="http://www.projekat.org/common" schemaLocation="common.xsd"/>
     <xs:element name="zahtev_gradjana">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="organ" type="common:TPravno_lice"/>
+                <xs:element name="organ">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="common:TPravno_lice">
+                                <xs:attribute fixed="pred:organ_od_kojeg_se_trazi"
+                                    form="unqualified" name="property" type="xs:string"
+                                    use="optional"/>
+                                <xs:attribute name="content" type="xs:string" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element name="trazilac">
                     <xs:complexType>
                         <xs:sequence>
@@ -22,6 +34,9 @@
                                 </xs:simpleType>
                             </xs:element>
                         </xs:sequence>
+                        <xs:attribute fixed="pred:podnosilac_zahteva" form="unqualified"
+                            name="property" type="xs:string" use="optional"/>
+                        <xs:attribute name="content" type="xs:string" use="optional"/>
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="informacije_vezane_za_zahtev">
@@ -61,8 +76,30 @@
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="opis_zahteva" type="xs:string"/>
-                            <xs:element name="mesto" type="xs:string"/>
-                            <xs:element name="datum" type="xs:date"/>
+                            <xs:element name="mesto">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute fixed="pred:mesto_podnosenja"
+                                                name="property" type="xs:string" use="optional"/>
+                                            <xs:attribute fixed="xs:string" name="datatype"
+                                                type="xs:string" use="optional"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="datum">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:date">
+                                            <xs:attribute fixed="pred:datum_podnosenja"
+                                                name="property" type="xs:string" use="optional"/>
+                                            <xs:attribute fixed="xs:date" name="datatype"
+                                                type="xs:string" use="optional"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -75,6 +112,9 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="id" type="xs:string" use="required"/>
+            <xs:attribute fixed="http://www.projekat.org/predicate" name="vocab" type="xs:string"
+                use="optional"/>
+            <xs:attribute name="about" type="xs:string" use="optional"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

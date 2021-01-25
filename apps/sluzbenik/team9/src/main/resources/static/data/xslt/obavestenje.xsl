@@ -27,8 +27,7 @@
 					}
 
 					.c6 {
-					font-family: 'Times New
-					Roman';
+					font-family: 'Times New Roman';
 					font-size: 12pt;
 					text-align: center;
 					}
@@ -50,8 +49,7 @@
 					margin-bottom: 0pt;
 					text-align: center;
 					font-size: 11pt;
-					font-family:
-					'Times New Roman';
+					font-family: 'Times New Roman';
 					}
 
 					.c17 {
@@ -146,15 +144,13 @@
 					}
 
 					.c36 {
-					font-family:
-					'Times New Roman';
+					font-family: 'Times New Roman';
 					width: 80%;
 					border: none
 					}
 
 					.c37 {
-					font-family: 'Times
-					New Roman';
+					font-family: 'Times New Roman';
 					font-size: 11pt;
 					text-align:
 					center;
@@ -193,8 +189,7 @@
 					-10pt;
 					margin-left: -6pt;
 					font-size: 11pt;
-					font-family: 'Times New
-					Roman';
+					font-family: 'Times New Roman';
 					}
 
 					.c42 {
@@ -203,8 +198,7 @@
 					}
 
 					.c43 {
-					font-family: 'Times New
-					Roman';
+					font-family: 'Times New Roman';
 					font-size: 11pt;
 					text-align: center;
 					margin-top: -10pt;
@@ -215,12 +209,17 @@
 					}
 					.c46 {
 					font-family: 'Times New Roman';
-					margin-top:-10pt;
+					}
+
+					.c47 {
+					font-family: 'Times New Roman';
+					margin-top: -10pt;
 					}
 
 					tab1 {
 					padding-left: 4em; }
-					tab2 { padding-left: 8em; }
+					tab2 {
+					padding-left: 8em; }
 				</style>
 			</head>
 			<body>
@@ -229,7 +228,7 @@
 						<xsl:value-of
 							select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:organ/common:naziv, ' ')"></xsl:value-of>
 					</p>
-					<p class="c46">
+					<p class="c47">
 						<xsl:value-of
 							select="concat(/ob:obavestenje/ob:informacije_o_obavestenju/ob:organ/common:adresa/common:ulica, ' ')"></xsl:value-of>
 						<xsl:value-of
@@ -238,10 +237,11 @@
 						<xsl:value-of
 							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:organ/common:adresa/common:mesto"></xsl:value-of>
 					</p>
-					<p class="c46">(назив и седиште органа)</p>
+					<p class="c47">(назив и седиште органа)</p>
 					<p class="c40">
 						Број предмета:
-						<xsl:value-of select="/ob:obavestenje/@broj_zahteva"></xsl:value-of>
+						<xsl:value-of
+							select="/ob:obavestenje/@broj_obavestenja"></xsl:value-of>
 					</p>
 					<p class="c40">
 						Датум:
@@ -269,7 +269,7 @@
 						<xsl:value-of
 							select="/ob:obavestenje/ob:informacije_o_obavestenju/ob:trazilac/common:adresa/common:mesto"></xsl:value-of>
 					</p>
-					<p class="c46">Име и презиме / назив / и адреса подносиоца захтева</p>
+					<p class="c47">Име и презиме / назив / и адреса подносиоца захтева</p>
 					<br />
 					<p class="c6">
 						<strong>О Б А В Е Ш Т Е Њ Е</strong>
@@ -457,7 +457,7 @@
 						</xsl:choose>
 					</xsl:if>
 					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
+						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije">
 						<xsl:choose>
 							<xsl:when
 								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije/@status,'true')">
@@ -486,7 +486,7 @@
 						</xsl:choose>
 					</xsl:if>
 					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
+						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta">
 						<xsl:choose>
 							<xsl:when
 								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta/@status,'true')">

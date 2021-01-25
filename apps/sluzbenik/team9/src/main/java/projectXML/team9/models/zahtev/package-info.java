@@ -5,5 +5,6 @@
 // Generated on: 2020.12.01 at 02:49:33 PM CET 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.projekat.org/zahtev", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.projekat.org/zahtev", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED, xmlns={@XmlNs(prefix="za", namespaceURI="http://www.projekat.org/zahtev"), @XmlNs(prefix="xs", namespaceURI="http://www.w3.org/2001/XMLSchema#"), @XmlNs(prefix="pred", namespaceURI="http://www.projekat.org/predicate/"), @XmlNs(prefix="common", namespaceURI = "http://www.projekat.org/common")})
 package projectXML.team9.models.zahtev;
+import javax.xml.bind.annotation.XmlNs;

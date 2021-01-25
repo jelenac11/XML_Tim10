@@ -1,16 +1,28 @@
 package projectXML.team9.services;
 
+import java.io.StringWriter;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
+
+import javax.xml.bind.Marshaller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.repositories.ZahtevRepository;
+import projectXML.team9.util.Fuseki;
+import projectXML.team9.util.MarshallerFactory;
+import projectXML.team9.util.MetadataExtractor;
 import projectXML.team9.util.XMLTransformations;
 
 @Service
 public class ZahtevService {
+
+	private static String schemaPath = "src/main/resources/static/schemas/sema_zahtev.xsd";
+
+	private static String contextPath = "projectXML.team9.models.zahtev";
 
 	private static final String INPUT_FILE = "src/main/resources/static/data/documents/zahtev.xml";
 
@@ -23,6 +35,15 @@ public class ZahtevService {
 	private static final String OUTPUT_FILE = "src/main/resources/static/gen/fo/";
 
 	@Autowired
+	private MetadataExtractor metadataExtractor;
+
+	@Autowired
+	private MarshallerFactory marshallerFactory;
+
+	@Autowired
+	private Fuseki fusekiWriter;
+
+	@Autowired
 	private ZahtevRepository zahtevRepository;
 
 	@Autowired
@@ -33,12 +54,28 @@ public class ZahtevService {
 		return zahtev;
 	}
 
-	public ZahtevGradjana create(ZahtevGradjana zahtevGradjana) throws Exception {
+	public ZahtevGradjana create(ZahtevGradjana zahtevGradjana, String email) throws Exception {
 		String id = UUID.randomUUID().toString();
 		zahtevGradjana.setId(id);
 		zahtevGradjana.setBrojZahteva(id.split("-")[4] + "-"
 				+ new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2020");
+		zahtevGradjana.setVocab();
+		zahtevGradjana.setAbout(id);
+		zahtevGradjana.getInformacijeVezaneZaZahtev().getMesto().setProperty();
+		zahtevGradjana.getInformacijeVezaneZaZahtev().getMesto().setDatatype("xs:string");
+		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setDatatype("xs:date");
+		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setProperty();
+		zahtevGradjana.getOrgan().setProperty();
+		zahtevGradjana.getOrgan().setContent(zahtevGradjana.getOrgan().getNaziv());
+		zahtevGradjana.getTrazilac().setProperty();
+		zahtevGradjana.getTrazilac().setContent(email);
 		zahtevRepository.save(zahtevGradjana);
+		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(zahtevGradjana, sw);
+		String xmlString = sw.toString();
+		metadataExtractor.extractMetadata(xmlString);
+		fusekiWriter.saveRDF("/zahtevi");
 		return zahtevGradjana;
 	}
 
@@ -46,7 +83,7 @@ public class ZahtevService {
 		ZahtevGradjana zahtev = getZahtev(id);
 		zahtevRepository.saveToFile(zahtev, INPUT_FILE);
 		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
-		return OUTPUT_FILE + id + ".pdf";// TODO Auto-generated method stub
+		return OUTPUT_FILE + id + ".pdf";
 	}
 
 	public String generateHTMLZahtev(String id) throws Exception {
@@ -54,5 +91,13 @@ public class ZahtevService {
 		zahtevRepository.saveToFile(zahtev, INPUT_FILE);
 		xmlTransformations.generateHTML(INPUT_FILE, XSLT_FILE, HTML_FILE + id + ".html");
 		return HTML_FILE + id + ".html";
+	}
+
+	public ArrayList<String> getZahtevi(String email) {
+		return fusekiWriter.readAllZahteviIdByEmail("/zahtevi", email);
+	}
+
+	public ArrayList<String> getUnansweredZahtevi() {
+		return fusekiWriter.readAllUnansweredZahteviId("/zahtevi");
 	}
 }

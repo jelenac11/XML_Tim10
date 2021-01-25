@@ -4,6 +4,7 @@ import { NoAuthGuard } from './auth/guards/no-auth.guard';
 import { RoleGuard } from './auth/guards/role.guard';
 import { PrijavaComponent } from './auth/prijava/prijava.component';
 import { RegistracijaComponent } from './auth/registracija/registracija.component';
+import { DokumentiComponent } from './dokumenti/dokumenti.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
@@ -43,7 +44,7 @@ const routes: Routes = [
     path: "novo-obavestenje/:id", component: ObavestenjeComponent,
     canActivate: [RoleGuard],
     data: {
-        expectedRoles: 'gradjanin'
+        expectedRoles: 'sluzbenik'
     }
   },
   {
@@ -52,7 +53,15 @@ const routes: Routes = [
     data: {
         expectedRoles: 'gradjanin|sluzbenik'
     }
+  },
+  {
+    path: "dokumenta", component: DokumentiComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin|sluzbenik'
+    }
   }
+
 ];
 
 @NgModule({

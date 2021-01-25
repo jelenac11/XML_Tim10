@@ -22,7 +22,7 @@ export class ZahtevComponent implements OnInit {
   
   ngAfterViewInit(): void {
     let element = document.getElementById("zahtev");
-    let xmlString = `<?xml version='1.0' encoding='UTF-8'?><za:zahtev_gradjana xmlns:common="http://www.projekat.org/common" xmlns:za="http://www.projekat.org/zahtev" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><za:organ><common:adresa><common:mesto></common:mesto><common:ulica/><common:broj/></common:adresa><common:naziv></common:naziv></za:organ><za:trazilac><za:lice/><za:drugi_podatak_za_kontakt></za:drugi_podatak_za_kontakt></za:trazilac><za:informacije_vezane_za_zahtev><za:tip_zahteva></za:tip_zahteva><za:opis_zahteva></za:opis_zahteva><za:mesto></za:mesto><za:datum>${new Date().toISOString().slice(0, 10)}</za:datum></za:informacije_vezane_za_zahtev></za:zahtev_gradjana>`;
+    let xmlString = `<?xml version='1.0' encoding='UTF-8'?><za:zahtev_gradjana xmlns:common="http://www.projekat.org/common" xmlns:za="http://www.projekat.org/zahtev" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pred="http://www.projekat.org/predicate/"><za:organ><common:adresa><common:mesto></common:mesto><common:ulica/><common:broj/></common:adresa><common:naziv></common:naziv></za:organ><za:trazilac><za:lice/><za:drugi_podatak_za_kontakt></za:drugi_podatak_za_kontakt></za:trazilac><za:informacije_vezane_za_zahtev><za:tip_zahteva></za:tip_zahteva><za:opis_zahteva></za:opis_zahteva><za:mesto></za:mesto><za:datum>${new Date().toISOString().slice(0, 10)}</za:datum></za:informacije_vezane_za_zahtev></za:zahtev_gradjana>`;
     Xonomy.render(xmlString, element, {
       validate: this.xonomyService.zahtevGradjanaSpecification.validate,
       elements: this.xonomyService.zahtevGradjanaSpecification.elements,

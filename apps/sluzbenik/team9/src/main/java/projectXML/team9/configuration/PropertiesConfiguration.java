@@ -12,9 +12,12 @@ import lombok.Setter;
 public class PropertiesConfiguration {
 
 	private ExistDBConfiguration existDBConfiguration;
-	
+
+	private FusekiConfiguration fusekiConfiguration;
+
 	@Autowired
-	public PropertiesConfiguration(ExistDBConfiguration existDBConfiguration) {
+	public PropertiesConfiguration(ExistDBConfiguration existDBConfiguration, FusekiConfiguration fusekiConfiguration) {
 		this.existDBConfiguration = existDBConfiguration;
+		this.fusekiConfiguration = fusekiConfiguration;
 	}
 }

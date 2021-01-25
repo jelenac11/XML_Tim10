@@ -1,53 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:obavestenje xmlns="http://www.projekat.org/common" xmlns:ns2="http://www.projekat.org/obavestenje" broj_obavestenja="a49d1ebb8732-1/2020" broj_zahteva="ccb20c78b24d-1/2020" id="28a10530-3a26-40b8-9443-a49d1ebb8732">
-    <ns2:informacije_o_obavestenju>
-        <ns2:organ>
-            <adresa>
-                <mesto>nesto</mesto>
-                <ulica>nesto</ulica>
-                <broj>nesto</broj>
-            </adresa>
-            <naziv>nesto</naziv>
-        </ns2:organ>
-        <ns2:trazilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TFizicko_lice">
-            <adresa>
-                <mesto>nesto</mesto>
-                <ulica>nesto</ulica>
-                <broj>nesto</broj>
-            </adresa>
-            <ime>nesto</ime>
-            <prezime>nesto</prezime>
-        </ns2:trazilac>
-        <ns2:datum_obavestenja>2021-01-14</ns2:datum_obavestenja>
-    </ns2:informacije_o_obavestenju>
-    <ns2:zahtev>
-        <ns2:datum_trazenja_informacija>2021-01-13</ns2:datum_trazenja_informacija>
-        <ns2:opis_trazene_informacije>nesto</ns2:opis_trazene_informacije>
-    </ns2:zahtev>
-    <ns2:odgovor_na_zahtev>
-        <ns2:zahtevi>
-            <ns2:informacije_o_uvidu status="true">
-                <ns2:datum_uvida>2021-01-18</ns2:datum_uvida>
-                <ns2:vreme_uvida>
-                    <ns2:interval_uvida>
-                        <ns2:od>7</ns2:od>
-                        <ns2:do>14</ns2:do>
-                    </ns2:interval_uvida>
-                </ns2:vreme_uvida>
-                <ns2:mesto_uvida>
-                    <mesto>beograd</mesto>
-                    <ulica>ddvdsf</ulica>
-                    <broj>452a</broj>
-                    <ns2:kancelarija>15</ns2:kancelarija>
-                </ns2:mesto_uvida>
-            </ns2:informacije_o_uvidu>
-            <ns2:informacije_o_posedovanju poseduje="false" status="false"/>
-            <ns2:informacije_o_izradi_kopije status="true"/>
-            <ns2:informacije_o_dostavljanju_dokumenta status="false"/>
-        </ns2:zahtevi>
-    </ns2:odgovor_na_zahtev>
-    <ns2:dostavljeno>
-        <ns2:imenovanom>Imenovanom</ns2:imenovanom>
-        <ns2:arhivi>Arhivi</ns2:arhivi>
-    </ns2:dostavljeno>
-</ns2:obavestenje>
+<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="fc92bdea358f-1/2020" id_zahteva="68a95ebe-bcf4-4bfa-abab-3100cd242fd3" id="2fe3e089-e481-47f3-980a-fc92bdea358f" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/2fe3e089-e481-47f3-980a-fc92bdea358f" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="68a95ebe-bcf4-4bfa-abab-3100cd242fd3">
+    <ob:informacije_o_obavestenju>
+        <ob:organ property="pred:kreator_obavestenja" content="Nesto">
+            <common:adresa>
+                <common:mesto>Nesto</common:mesto>
+                <common:ulica>Nesto</common:ulica>
+                <common:broj>Nesto</common:broj>
+            </common:adresa>
+            <common:naziv>Nesto</common:naziv>
+        </ob:organ>
+        <ob:trazilac property="pred:trazilac_informacija" content="sluzbenik@gmail.com">
+            <common:adresa>
+                <common:mesto>Nesto</common:mesto>
+                <common:ulica>Nesto</common:ulica>
+                <common:broj>Nesto</common:broj>
+            </common:adresa>
+        </ob:trazilac>
+        <ob:datum_obavestenja property="pred:datum_donosenja" datatype="xs:date">2021-01-23</ob:datum_obavestenja>
+    </ob:informacije_o_obavestenju>
+    <ob:zahtev>
+        <ob:datum_trazenja_informacija>2021-01-23</ob:datum_trazenja_informacija>
+        <ob:opis_trazene_informacije>Nesto</ob:opis_trazene_informacije>
+    </ob:zahtev>
+    <ob:odgovor_na_zahtev>
+        <ob:zahtevi>
+            <ob:informacije_o_uvidu status="false"/>
+        </ob:zahtevi>
+    </ob:odgovor_na_zahtev>
+    <ob:dostavljeno>
+        <ob:imenovanom>Imenovanom</ob:imenovanom>
+        <ob:arhivi>Arhivi</ob:arhivi>
+    </ob:dostavljeno>
+</ob:obavestenje>

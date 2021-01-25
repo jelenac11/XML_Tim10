@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<zahtev_gradjana xmlns="http://www.projekat.org/zahtev" xmlns:ns2="http://www.projekat.org/common" xmlns:ns3="http://www.projekat.org/obavestenje" broj_zahteva="b83a0be1e785-1/2020" id="7d0d10c2-5320-4d1d-a332-b83a0be1e785">
-    <organ>
-        <ns2:adresa>
-            <ns2:mesto>nesto</ns2:mesto>
-            <ns2:ulica>nesto</ns2:ulica>
-            <ns2:broj>nesto</ns2:broj>
-        </ns2:adresa>
-        <ns2:naziv>nesto</ns2:naziv>
-    </organ>
-    <trazilac>
-        <lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:TPravno_lice">
-            <ns2:adresa>
-                <ns2:mesto>nesto</ns2:mesto>
-                <ns2:ulica>nesto</ns2:ulica>
-                <ns2:broj>nesto</ns2:broj>
-            </ns2:adresa>
-            <ns2:naziv>nesto</ns2:naziv>
-        </lice>
-        <drugi_podatak_za_kontakt>nesto</drugi_podatak_za_kontakt>
-    </trazilac>
-    <informacije_vezane_za_zahtev>
-        <tip_zahteva>
-            <obavestenje_posedovanja_informacije/>
-            <uvid_u_dokument/>
-            <kopiju_dokumenta/>
-            <dostavljanje_kopije>
-                <posta/>
-            </dostavljanje_kopije>
-        </tip_zahteva>
-        <opis_zahteva>nesto</opis_zahteva>
-        <mesto>nesto</mesto>
-        <datum>2021-01-13</datum>
-    </informacije_vezane_za_zahtev>
-</zahtev_gradjana>
+<za:zahtev_gradjana xmlns:za="http://www.projekat.org/zahtev" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_zahteva="3100cd242fd3-1/2020" id="68a95ebe-bcf4-4bfa-abab-3100cd242fd3" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/zahtev/68a95ebe-bcf4-4bfa-abab-3100cd242fd3">
+    <za:organ property="pred:organ_od_kojeg_se_trazi" content="Nesto">
+        <common:adresa>
+            <common:mesto>Nesto</common:mesto>
+            <common:ulica>Nesto</common:ulica>
+            <common:broj>Nesto</common:broj>
+        </common:adresa>
+        <common:naziv>Nesto</common:naziv>
+    </za:organ>
+    <za:trazilac property="pred:podnosilac_zahteva" content="sluzbenik@gmail.com">
+        <za:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
+            <common:adresa>
+                <common:mesto>Nesto</common:mesto>
+                <common:ulica>Nesto</common:ulica>
+                <common:broj>Nesto</common:broj>
+            </common:adresa>
+            <common:ime>Nesto</common:ime>
+            <common:prezime>Nesto</common:prezime>
+        </za:lice>
+        <za:drugi_podatak_za_kontakt>Nesto</za:drugi_podatak_za_kontakt>
+    </za:trazilac>
+    <za:informacije_vezane_za_zahtev>
+        <za:tip_zahteva>
+            <za:uvid_u_dokument/>
+        </za:tip_zahteva>
+        <za:opis_zahteva>Nesto</za:opis_zahteva>
+        <za:mesto property="pred:mesto_podnosenja" datatype="xs:string">Nesto</za:mesto>
+        <za:datum property="pred:datum_podnosenja" datatype="xs:date">2021-01-23</za:datum>
+    </za:informacije_vezane_za_zahtev>
+</za:zahtev_gradjana>

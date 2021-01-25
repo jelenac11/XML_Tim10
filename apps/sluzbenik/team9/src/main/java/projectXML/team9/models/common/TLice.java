@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &amp;lt;complexContent&amp;gt;
  *     &amp;lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&amp;gt;
  *       &amp;lt;sequence&amp;gt;
- *         &amp;lt;element name="adresa" type="{http://www.projekat.org/obavestenje}TAdresa"/&amp;gt;
+ *         &amp;lt;element name="adresa" type="{http://www.projekat.org/common}TAdresa"/&amp;gt;
  *       &amp;lt;/sequence&amp;gt;
  *     &amp;lt;/restriction&amp;gt;
  *   &amp;lt;/complexContent&amp;gt;

@@ -12,6 +12,10 @@ export class ObavestenjeService {
     return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
   }
 
+  getAllDocumentsIdByGradjanin(path: string): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}`, { responseType: 'text' });
+  }
+
   download(path: string, id: string): any {
     return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'arraybuffer' as 'text' });
   }
