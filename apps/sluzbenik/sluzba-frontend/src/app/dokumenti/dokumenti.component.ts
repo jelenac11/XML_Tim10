@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtService } from '../core/services/jwt.service';
 import { ObavestenjeService } from '../core/services/obavestenje.service';
 import { ZahtevService } from '../core/services/zahtev.service';
@@ -17,7 +18,8 @@ export class DokumentiComponent implements OnInit {
 
   constructor(private zahtevService: ZahtevService,
     private obavestenjeService: ObavestenjeService,
-    private jwtService: JwtService) { }
+    private jwtService: JwtService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.role = this.jwtService.getRole();
@@ -51,5 +53,18 @@ export class DokumentiComponent implements OnInit {
       this.dokumenta.push(zahtevi[i].getText());
     }
   };
+
+  odbijZahtev(zahtevId: string): void {
+    let dokument = `<zahtevi><zahtev>${zahtevId}</zahtev></zahtevi>`;
+    this.zahtevService.put(`zahtevi`, dokument).subscribe(res => {
+
+    }, err => {
+      console.log(err);
+    });
+  };
+
+  prihvatiZahtev(zahtevId: string): void {
+    this.router.navigateByUrl(`/novo-obavestenje/${zahtevId}`);
+  }
 
 }

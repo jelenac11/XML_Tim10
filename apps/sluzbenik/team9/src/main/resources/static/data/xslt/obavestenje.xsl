@@ -326,12 +326,9 @@
 							select="/ob:obavestenje/ob:zahtev/ob:opis_trazene_informacije"></xsl:value-of>
 					</p>
 					<p class="c43">(опис тражене информације)</p>
-					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
-						<xsl:choose>
-							<xsl:when
-								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/@status,'true')">
-								<p class="c39">
+						<xsl:if
+							test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
+							<p class="c39">
 									<tab1>
 										Oбавештавамо вас да дана
 										<u>
@@ -399,123 +396,59 @@
 										информација.
 									</tab1>
 								</p>
-							</xsl:when>
-							<xsl:otherwise>
-								<p class="c39">
-									<tab1>
-										Обавештавамо вас да ваш захтев за увид у документ/е у
-										коме је
-										садржана
-										тражена информација
-										<b>није прихваћен</b>
-										.
-									</tab1>
-								</p>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:if>
-					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju">
-						<xsl:choose>
-							<xsl:when
-								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@status,'true')">
-								<xsl:choose>
-									<xsl:when
-										test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@poseduje,'true')">
-										<p class="c39">
-											<tab1>
-												Овом приликом вас обавештавамо да
-												<b>поседујемо</b>
-												информације које
-												сте навели у захтеву.
-											</tab1>
-										</p>
-									</xsl:when>
-									<xsl:otherwise>
-										<p class="c39">
-											<tab1>
-												Нажалост,
-												<b>не поседујемо</b>
-												информације које сте навели у
-												захтеву.
-											</tab1>
-										</p>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:when>
-							<xsl:otherwise>
-								<p class="c39">
-									<tab1>
-										Нажалост,
-										<b>не можемо вам рећи</b>
-										да ли поседујемо информације
-										које сте
-										тражили у захтеву.
-									</tab1>
-								</p>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:if>
-					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije">
-						<xsl:choose>
-							<xsl:when
-								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije/@status,'true')">
-								<p class="c39">
-									<tab1>
-										Обавештавамо вас да је ваш захтев за издавњем копије
-										документа/ата у коме
-										је садржана тражена информација
-										<b>прихваћен</b>
-										.
-									</tab1>
-								</p>
-							</xsl:when>
-							<xsl:otherwise>
-								<p class="c39">
-									<tab1>
-										Обавештавамо вас да ваш захтев за издавњем копије
-										документа/ата у коме је
-										садржана тражена информација
-										<b>није
-											прихваћен</b>
-										.
-									</tab1>
-								</p>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:if>
-					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta">
-						<xsl:choose>
-							<xsl:when
-								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta/@status,'true')">
-								<p class="c39">
-									<tab1>
-										Обавештавамо вас да је ваш захтев за достављање
-										документа/ата у
-										коме је
-										садржана тражена информација
-										<b>прихваћен</b>
-										.
-									</tab1>
-								</p>
-							</xsl:when>
-							<xsl:otherwise>
-								<p class="c39">
-									<tab1>
-										Обавештавамо вас да ваш захтев за достављање
-										документа/ата у
-										коме је
-										садржана тражена информација
-										<b>није
-											прихваћен</b>
-										.
-									</tab1>
-								</p>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:if>
+						</xsl:if>
+						<xsl:if
+							test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju">
+									<xsl:choose>
+										<xsl:when
+											test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@poseduje,'true')">
+											<p class="c39">
+												<tab1>
+													Овом приликом вас обавештавамо да
+													<b>поседујемо</b>
+													информације које
+													сте навели у захтеву.
+												</tab1>
+											</p>
+										</xsl:when>
+										<xsl:otherwise>
+											<p class="c39">
+												<tab1>
+													Нажалост,
+													<b>не поседујемо</b>
+													информације које сте навели у
+													захтеву.
+												</tab1>
+											</p>
+										</xsl:otherwise>
+									</xsl:choose>
+						</xsl:if>
+						<xsl:if
+							test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije">
+									<p class="c39">
+										<tab1>
+											Обавештавамо вас да је ваш захтев за издавњем копије
+											документа/ата у коме
+											је садржана тражена информација
+											<b>прихваћен</b>
+											.
+										</tab1>
+									</p>
+								
+						</xsl:if>
+						<xsl:if
+							test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta">
+									<p class="c39">
+										<tab1>
+											Обавештавамо вас да је ваш захтев за достављање
+											документа/ата у
+											коме је
+											садржана тражена информација
+											<b>прихваћен</b>
+											.
+										</tab1>
+									</p>
+						</xsl:if>
 					<xsl:if
 						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:uplata_troskova">
 						<p class="c39">

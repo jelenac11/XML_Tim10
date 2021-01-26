@@ -137,196 +137,126 @@
 						text-align="center" font-size="11pt">
 						(опис тражене информације)
 					</fo:block>
-					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
-						<xsl:choose>
-							<xsl:when
-								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/@status,'true')">
-								<fo:block font-family="Times New Roman"
-									text-align="justify" font-size="11pt" text-indent="4em"
-									margin-top="11pt">
-									Oбавештавамо вас да дана
-									<fo:inline text-decoration="underline">
-										<xsl:value-of
-											select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:datum_uvida"></xsl:value-of>
-									</fo:inline>
-									,
-									у
-									<xsl:choose>
+						<xsl:if
+							test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
+							<fo:block font-family="Times New Roman"
+										text-align="justify" font-size="11pt" text-indent="4em"
+										margin-top="11pt">
+										Oбавештавамо вас да дана
+										<fo:inline text-decoration="underline">
+											<xsl:value-of
+												select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:datum_uvida"></xsl:value-of>
+										</fo:inline>
+										,
+										у
+										<xsl:choose>
+											<xsl:when
+												test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:tacno_vreme_uvida">
+												<fo:inline text-decoration="underline">
+													<xsl:value-of
+														select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:tacno_vreme_uvida"></xsl:value-of>
+												</fo:inline>
+											</xsl:when>
+											<xsl:otherwise>
+												/
+											</xsl:otherwise>
+										</xsl:choose>
+										часова,
+										односно у времену
+										<xsl:choose>
+											<xsl:when
+												test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:interval_uvida">
+												од
+												<fo:inline text-decoration="underline">
+													<xsl:value-of
+														select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:interval_uvida/ob:od"></xsl:value-of>
+												</fo:inline>
+												до
+												<fo:inline text-decoration="underline">
+													<xsl:value-of
+														select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:interval_uvida/ob:do"></xsl:value-of>
+												</fo:inline>
+											</xsl:when>
+											<xsl:otherwise>
+												од / до /
+											</xsl:otherwise>
+										</xsl:choose>
+										часова, у просторијама органа у
+										<fo:inline text-decoration="underline">
+											<xsl:value-of
+												select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/common:mesto"></xsl:value-of>
+										</fo:inline>
+										ул.
+										<fo:inline text-decoration="underline">
+											<xsl:value-of
+												select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/common:ulica"></xsl:value-of>
+										</fo:inline>
+										бр.
+										<fo:inline text-decoration="underline">
+											<xsl:value-of
+												select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/common:broj"></xsl:value-of>
+										</fo:inline>
+										,
+										канцеларија бр.
+										<fo:inline text-decoration="underline">
+											<xsl:value-of
+												select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/ob:kancelarija"></xsl:value-of>
+										</fo:inline>
+										можете
+										<fo:inline font-weight="bold">извршити увид</fo:inline>
+										у документ/е у коме је садржана тражена
+										информација.
+									</fo:block>
+						</xsl:if>
+						<xsl:if
+							test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju">
+							<xsl:choose>
 										<xsl:when
-											test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:tacno_vreme_uvida">
-											<fo:inline text-decoration="underline">
-												<xsl:value-of
-													select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:tacno_vreme_uvida"></xsl:value-of>
-											</fo:inline>
+											test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@poseduje,'true')">
+											<fo:block font-family="Times New Roman"
+												text-align="justify" font-size="11pt" text-indent="4em"
+												margin-top="11pt">
+												Овом приликом вас обавештавамо да
+												<fo:inline font-weight="bold">поседујемо</fo:inline>
+												информације које
+												сте навели у захтеву.
+											</fo:block>
 										</xsl:when>
 										<xsl:otherwise>
-											/
+											<fo:block font-family="Times New Roman"
+												text-align="justify" font-size="11pt" text-indent="4em"
+												margin-top="11pt">
+												Нажалост,
+												<fo:inline font-weight="bold">не поседујемо</fo:inline>
+												информације које сте навели у
+												захтеву.
+											</fo:block>
 										</xsl:otherwise>
 									</xsl:choose>
-									часова,
-									односно у времену
-									<xsl:choose>
-										<xsl:when
-											test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:interval_uvida">
-											од
-											<fo:inline text-decoration="underline">
-												<xsl:value-of
-													select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:interval_uvida/ob:od"></xsl:value-of>
-											</fo:inline>
-											до
-											<fo:inline text-decoration="underline">
-												<xsl:value-of
-													select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:vreme_uvida/ob:interval_uvida/ob:do"></xsl:value-of>
-											</fo:inline>
-										</xsl:when>
-										<xsl:otherwise>
-											од / до /
-										</xsl:otherwise>
-									</xsl:choose>
-									часова, у просторијама органа у
-									<fo:inline text-decoration="underline">
-										<xsl:value-of
-											select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/common:mesto"></xsl:value-of>
-									</fo:inline>
-									ул.
-									<fo:inline text-decoration="underline">
-										<xsl:value-of
-											select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/common:ulica"></xsl:value-of>
-									</fo:inline>
-									бр.
-									<fo:inline text-decoration="underline">
-										<xsl:value-of
-											select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/common:broj"></xsl:value-of>
-									</fo:inline>
-									,
-									канцеларија бр.
-									<fo:inline text-decoration="underline">
-										<xsl:value-of
-											select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/ob:kancelarija"></xsl:value-of>
-									</fo:inline>
-									можете
-									<fo:inline font-weight="bold">извршити увид</fo:inline>
-									у документ/е у коме је садржана тражена
-									информација.
-								</fo:block>
-							</xsl:when>
-							<xsl:otherwise>
-								<fo:block font-family="Times New Roman"
-									text-align="justify" font-size="11pt" text-indent="4em"
-									margin-top="11pt">
-									Обавештавамо вас да ваш захтев за увид у документ/е
-									у
-									коме је
-									садржана
-									тражена информација
-									<fo:inline font-weight="bold">није прихваћен</fo:inline>
-									.
-								</fo:block>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:if>
-					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju">
-						<xsl:choose>
-							<xsl:when
-								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@status,'true')">
-								<xsl:choose>
-									<xsl:when
-										test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@poseduje,'true')">
-										<fo:block font-family="Times New Roman"
-											text-align="justify" font-size="11pt" text-indent="4em"
-											margin-top="11pt">
-											Овом приликом вас обавештавамо да
-											<fo:inline font-weight="bold">поседујемо</fo:inline>
-											информације које
-											сте навели у захтеву.
-										</fo:block>
-									</xsl:when>
-									<xsl:otherwise>
-										<fo:block font-family="Times New Roman"
-											text-align="justify" font-size="11pt" text-indent="4em"
-											margin-top="11pt">
-											Нажалост,
-											<fo:inline font-weight="bold">не поседујемо</fo:inline>
-											информације које сте навели у
-											захтеву.
-										</fo:block>
-									</xsl:otherwise>
-								</xsl:choose>
-							</xsl:when>
-							<xsl:otherwise>
-								<fo:block font-family="Times New Roman"
-									text-align="justify" font-size="11pt" text-indent="4em"
-									margin-top="11pt">
-									Нажалост,
-									<fo:inline font-weight="bold">не можемо вам рећи</fo:inline>
-									да ли поседујемо информације
-									које сте
-									тражили у захтеву.
-								</fo:block>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:if>
-					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije">
-						<xsl:choose>
-							<xsl:when
-								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije/@status,'true')">
-								<fo:block font-family="Times New Roman"
-									text-align="justify" font-size="11pt" text-indent="4em"
-									margin-top="11pt">
-									Обавештавамо вас да је ваш захтев за издавaњем копије
-									документа/ата у коме
-									је садржана тражена информација
-									<fo:inline font-weight="bold">прихваћен</fo:inline>.
-								</fo:block>
-							</xsl:when>
-							<xsl:otherwise>
-								<fo:block font-family="Times New Roman"
-									text-align="justify" font-size="11pt" text-indent="4em"
-									margin-top="11pt">
-									Обавештавамо вас да ваш захтев за издавaњем копије
-									документа/ата
-									у коме је
-									садржана тражена информација
-									<fo:inline font-weight="bold">није
-										прихваћен
-									</fo:inline>.
-								</fo:block>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:if>
-					<xsl:if
-						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta">
-						<xsl:choose>
-							<xsl:when
-								test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta/@status,'true')">
-								<fo:block font-family="Times New Roman"
-									text-align="justify" font-size="11pt" text-indent="4em"
-									margin-top="11pt">
-									Обавештавамо вас да је ваш захтев за достављање
-									документа/ата у
-									коме је
-									садржана тражена информација
-									<fo:inline font-weight="bold">прихваћен</fo:inline>.
-								</fo:block>
-							</xsl:when>
-							<xsl:otherwise>
-								<fo:block font-family="Times New Roman"
-									text-align="justify" font-size="11pt" text-indent="4em"
-									margin-top="11pt">
-									Обавештавамо вас да ваш захтев за достављање
-									документа/ата у
-									коме је
-									садржана тражена информација
-									<fo:inline font-weight="bold">није
-										прихваћен
-									</fo:inline>.
-								</fo:block>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:if>
+						</xsl:if>
+						<xsl:if
+							test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije">
+							<fo:block font-family="Times New Roman"
+										text-align="justify" font-size="11pt" text-indent="4em"
+										margin-top="11pt">
+										Обавештавамо вас да је ваш захтев за издавaњем копије
+										документа/ата у коме
+										је садржана тражена информација
+										<fo:inline font-weight="bold">прихваћен</fo:inline>.
+									</fo:block>
+						</xsl:if>
+						<xsl:if
+							test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta">
+							<fo:block font-family="Times New Roman"
+										text-align="justify" font-size="11pt" text-indent="4em"
+										margin-top="11pt">
+										Обавештавамо вас да је ваш захтев за достављање
+										документа/ата у
+										коме је
+										садржана тражена информација
+										<fo:inline font-weight="bold">прихваћен</fo:inline>.
+									</fo:block>
+						</xsl:if>
 					<xsl:if
 						test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:uplata_troskova">
 						<fo:block font-family="Times New Roman"

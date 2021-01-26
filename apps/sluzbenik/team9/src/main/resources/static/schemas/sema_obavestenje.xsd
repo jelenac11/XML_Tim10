@@ -111,7 +111,7 @@
                                     <xs:sequence>
                                         <xs:element name="informacije_o_uvidu" minOccurs="0">
                                             <xs:complexType>
-                                                <xs:sequence minOccurs="0">
+                                                <xs:sequence minOccurs="1">
                                                   <xs:element name="datum_uvida" type="xs:date"/>
                                                   <xs:element name="vreme_uvida">
                                                   <xs:complexType>
@@ -167,30 +167,18 @@
                                                   </xs:complexType>
                                                   </xs:element>
                                                 </xs:sequence>
-                                                <xs:attribute name="status" type="xs:boolean"
-                                                  use="required"/>
                                             </xs:complexType>
                                         </xs:element>
                                         <xs:element minOccurs="0" name="informacije_o_posedovanju">
                                             <xs:complexType>
                                                 <xs:attribute name="poseduje" type="xs:boolean"
-                                                  use="optional"/>
-                                                <xs:attribute name="status" type="xs:boolean"
                                                   use="required"/>
                                             </xs:complexType>
                                         </xs:element>
-                                        <xs:element name="informacije_o_izradi_kopije" minOccurs="0">
-                                            <xs:complexType>
-                                                <xs:attribute name="status" type="xs:boolean"
-                                                  use="required"/>
-                                            </xs:complexType>
-                                        </xs:element>
+                                        <xs:element name="informacije_o_izradi_kopije" minOccurs="0"
+                                            > </xs:element>
                                         <xs:element minOccurs="0"
                                             name="informacije_o_dostavljanju_dokumenta">
-                                            <xs:complexType>
-                                                <xs:attribute name="status" type="xs:boolean"
-                                                  use="required"/>
-                                            </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
                                 </xs:complexType>
@@ -216,8 +204,8 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="id_zahteva" use="required" type="xs:anyURI"> </xs:attribute>
             <xs:attribute name="id" type="xs:anyURI" use="required"/>
+            <xs:attribute name="id_zahteva" type="xs:anyURI"/>
             <xs:attribute name="about" type="xs:anyURI" use="optional"/>
             <xs:attribute fixed="http://www.projekat.org/predicate" name="vocab" type="xs:string"
                 use="optional"/>

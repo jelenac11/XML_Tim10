@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import projectXML.team9.models.obavestenje.Obavestenje;
 import projectXML.team9.repositories.ObavestenjeRepository;
+import projectXML.team9.util.AmazonSESSample;
 import projectXML.team9.util.Fuseki;
 import projectXML.team9.util.MarshallerFactory;
 import projectXML.team9.util.MetadataExtractor;
@@ -53,6 +54,9 @@ public class ObavestenjeService {
 	@Autowired
 	private ZahtevService zahtevService;
 
+	@Autowired
+	private AmazonSESSample amazonSESSample;
+
 	public Obavestenje getObavestenje(String id) throws Exception {
 		Obavestenje obavestenje = obavestenjeRepository.getById(id);
 		return obavestenje;
@@ -71,8 +75,8 @@ public class ObavestenjeService {
 		obavestenje.getInformacijeOObavestenju().getOrgan()
 				.setContent(obavestenje.getInformacijeOObavestenju().getOrgan().getNaziv());
 		obavestenje.getInformacijeOObavestenju().getTrazilac().setProperty();
-		obavestenje.getInformacijeOObavestenju().getTrazilac()
-				.setContent(zahtevService.getZahtev(obavestenje.getBrojZahteva().split("/")[4]).getTrazilac().getContent());
+		obavestenje.getInformacijeOObavestenju().getTrazilac().setContent(
+				zahtevService.getZahtev(obavestenje.getBrojZahteva().split("/")[4]).getTrazilac().getContent());
 		obavestenje.getInformacijeOObavestenju().getDatumObavestenja().setProperty();
 		obavestenje.getInformacijeOObavestenju().getDatumObavestenja().setDatatype("xs:date");
 		obavestenjeRepository.save(obavestenje, id);
@@ -82,32 +86,34 @@ public class ObavestenjeService {
 		String xmlString = sw.toString();
 		metadataExtractor.extractMetadata(xmlString);
 		fusekiWriter.saveRDF("/obavestenja");
+		fusekiWriter.updateZahtevWithStatus(true, obavestenje.getBrojZahteva());
+		sendMail(obavestenje.getInformacijeOObavestenju().getTrazilac().getContent(), id);
+		
 		return obavestenje;
 	}
 
-	public String generatePDFAndHTMLZahtev(String id) throws Exception {
-		Obavestenje obavestenje = getObavestenje(id);
-		obavestenjeRepository.saveToFile(obavestenje, INPUT_FILE);
-		xmlTransformations.generateHTML(INPUT_FILE, XSLT_FILE, HTML_FILE + id + ".html");
-		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
-		return OUTPUT_FILE + id + ".pdf";
-	}
-
-	public String generatePDFZahtev(String id) throws Exception {
+	public String generatePDFObavestenje(String id) throws Exception {
 		Obavestenje obavestenje = getObavestenje(id);
 		obavestenjeRepository.saveToFile(obavestenje, INPUT_FILE);
 		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
 		return OUTPUT_FILE + id + ".pdf";
 	}
 
-	public String generateHTMLZahtev(String id) throws Exception {
+	public String generateHTMLObavestenje(String id) throws Exception {
 		Obavestenje obavestenje = getObavestenje(id);
 		obavestenjeRepository.saveToFile(obavestenje, INPUT_FILE);
 		xmlTransformations.generateHTML(INPUT_FILE, XSLT_FILE, HTML_FILE + id + ".html");
 		return HTML_FILE + id + ".html";
 	}
 
-	public ArrayList<String> getZahtevi(String email) {
-		return fusekiWriter.readAllObavestenjaIdByEmail("/obavestenja", email);
+	public ArrayList<String> getObavestenjaByCitizenEmail(String email) {
+		return fusekiWriter.readAllObavestenjaIdByCitizenEmail("/obavestenja", email);
+	}
+
+	private void sendMail(String recipient, String obavestenjeId) throws Exception {
+		String htmlPath = generateHTMLObavestenje(obavestenjeId);
+		String pdfPath = generatePDFObavestenje(obavestenjeId);
+
+		amazonSESSample.sendMail(recipient, htmlPath, pdfPath);
 	}
 }

@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import projectXML.team9.dto.ZahteviDTO;
+import projectXML.team9.dto.DocumentsIDDTO;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.services.ZahtevService;
@@ -75,7 +76,7 @@ public class ZahtevController {
 	@GetMapping
 	@CrossOrigin
 	public ResponseEntity getZahtevi() {
-		ZahteviDTO zahtevi = new ZahteviDTO();
+		DocumentsIDDTO zahtevi = new DocumentsIDDTO();
 		try {
 			Korisnik user = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			ArrayList<String> idsZahteva = zahtevService.getZahtevi(user.getEmail());
@@ -85,11 +86,11 @@ public class ZahtevController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
-	
+
 	@GetMapping(value = "/unanswered-zahtevi")
 	@CrossOrigin
 	public ResponseEntity getUnansweredZahtevi() {
-		ZahteviDTO zahtevi = new ZahteviDTO();
+		DocumentsIDDTO zahtevi = new DocumentsIDDTO();
 		try {
 			ArrayList<String> idsZahteva = zahtevService.getUnansweredZahtevi();
 			zahtevi.setZahtev(idsZahteva);
@@ -109,5 +110,11 @@ public class ZahtevController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
+	}
+
+	@PutMapping(consumes = MediaType.APPLICATION_XML_VALUE)
+	@CrossOrigin
+	public void declineZahtev(@RequestBody DocumentsIDDTO zahtevi) {
+		zahtevService.declineZahtev(zahtevi.getZahtev().get(0));
 	}
 }

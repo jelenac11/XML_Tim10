@@ -9,12 +9,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "conn.fuseki")
-public class FusekiConfiguration {
+@ConfigurationProperties(prefix = "aws")
+public class AWSConfiguration {
 
-	private String endpoint;
-	private String dataset;
-	private String query;
-	private String update;
-	private String data;
+	private String accessKey;
+	private String secretKey;
+	private String from;
 }

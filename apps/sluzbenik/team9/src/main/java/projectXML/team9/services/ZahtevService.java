@@ -96,4 +96,14 @@ public class ZahtevService {
 	public ArrayList<String> getUnansweredZahtevi() {
 		return fusekiWriter.readAllUnansweredZahteviId("/zahtevi");
 	}
+
+	public void declineZahtev(String zahtevId) {
+		fusekiWriter.updateZahtevWithStatus(false, zahtevId);
+		
+	}
+	
+	public void acceptZahtev(String zahtevId) {
+		fusekiWriter.updateZahtevWithStatus(true, zahtevId);
+		
+	}
 }

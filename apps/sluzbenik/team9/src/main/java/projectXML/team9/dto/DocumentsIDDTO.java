@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @XmlRootElement(name = "zahtevi")
-public class ZahteviDTO {
+public class DocumentsIDDTO {
 
 	@XmlElement(required = true)
 	ArrayList<String> zahtev = new ArrayList<String>();

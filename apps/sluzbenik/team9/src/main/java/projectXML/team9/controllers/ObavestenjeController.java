@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import projectXML.team9.dto.ZahteviDTO;
+import projectXML.team9.dto.DocumentsIDDTO;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.obavestenje.Obavestenje;
 import projectXML.team9.services.ObavestenjeService;
@@ -42,9 +42,9 @@ public class ObavestenjeController {
 
 	@GetMapping(value = "/generate-pdf/{id}")
 	@CrossOrigin
-	public byte[] generatePDFZahtev(@PathVariable String id) {
+	public byte[] generatePDFObavestenje(@PathVariable String id) {
 		try {
-			String path = obavestenjeService.generatePDFZahtev(id);
+			String path = obavestenjeService.generatePDFObavestenje(id);
 			File file = new File(path);
 			FileInputStream fileInputStream = new FileInputStream(file);
 			return IOUtils.toByteArray(fileInputStream);
@@ -57,9 +57,9 @@ public class ObavestenjeController {
 
 	@GetMapping(value = "/generate-html/{id}")
 	@CrossOrigin
-	public byte[] generateXHTMLZahtev(@PathVariable String id) {
+	public byte[] generateHTMLObavestenje(@PathVariable String id) {
 		try {
-			String path = obavestenjeService.generateHTMLZahtev(id);
+			String path = obavestenjeService.generateHTMLObavestenje(id);
 			File file = new File(path);
 			FileInputStream fileInputStream = new FileInputStream(file);
 			return IOUtils.toByteArray(fileInputStream);
@@ -74,7 +74,6 @@ public class ObavestenjeController {
 	@CrossOrigin
 	public ResponseEntity getObavestenje(@PathVariable String id) {
 		Obavestenje obavestenje;
-
 		try {
 			obavestenje = obavestenjeService.getObavestenje(id);
 		} catch (Exception e) {
@@ -93,16 +92,16 @@ public class ObavestenjeController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
-	
+
 	@GetMapping
 	@CrossOrigin
-	public ResponseEntity getObavestenja() {
-		ZahteviDTO zahtevi = new ZahteviDTO();
+	public ResponseEntity getObavestenjaByCitizenEmail() {
+		DocumentsIDDTO documents = new DocumentsIDDTO();
 		try {
 			Korisnik user = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			ArrayList<String> idsZahteva = obavestenjeService.getZahtevi(user.getEmail());
-			zahtevi.setZahtev(idsZahteva);
-			return ResponseEntity.ok(zahtevi);
+			ArrayList<String> documentsID = obavestenjeService.getObavestenjaByCitizenEmail(user.getEmail());
+			documents.setZahtev(documentsID);
+			return ResponseEntity.ok(documents);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}

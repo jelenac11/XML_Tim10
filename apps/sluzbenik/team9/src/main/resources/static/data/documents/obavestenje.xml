@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="7d5778f19fac-1/2020" id_zahteva="http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45" id="http://localhost:4200/obavestenje/741c7262-91ae-4c97-bd8a-7d5778f19fac" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/741c7262-91ae-4c97-bd8a-7d5778f19fac" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45">
+<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="f9b1fcc491e4-1/2020" id_zahteva="http://localhost:4200/zahtev/7260c2cc-84d8-4d53-8c21-998964cf5580" id="http://localhost:4200/obavestenje/f31f38f8-94e9-4906-8a2a-f9b1fcc491e4" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/f31f38f8-94e9-4906-8a2a-f9b1fcc491e4" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="http://localhost:4200/zahtev/7260c2cc-84d8-4d53-8c21-998964cf5580">
     <ob:informacije_o_obavestenju>
-        <ob:organ property="pred:kreator_obavestenja" content="Poreska uprava">
+        <ob:organ property="pred:kreator_obavestenja" content="PU Backa Palanka">
             <common:adresa>
-                <common:mesto>Beograd</common:mesto>
-                <common:ulica>Koste Pecanca</common:ulica>
-                <common:broj>12</common:broj>
+                <common:mesto>Backa Palanka</common:mesto>
+                <common:ulica>Mise Dimitrijevica</common:ulica>
+                <common:broj>10</common:broj>
             </common:adresa>
-            <common:naziv>Poreska uprava</common:naziv>
+            <common:naziv>PU Backa Palanka</common:naziv>
         </ob:organ>
-        <ob:trazilac property="pred:trazilac_informacija" content="sluzbenik@gmail.com">
+        <ob:trazilac property="pred:trazilac_informacija" content="noreply.kts.l9@gmail.com">
             <ob:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
                 <common:adresa>
-                    <common:mesto>Crkvina</common:mesto>
+                    <common:mesto>Gornja Crkvina</common:mesto>
                     <common:ulica>Crkvina</common:ulica>
-                    <common:broj>10</common:broj>
+                    <common:broj>15</common:broj>
                 </common:adresa>
-                <common:ime>Milan</common:ime>
-                <common:prezime>Marinkovic</common:prezime>
+                <common:ime>Janko</common:ime>
+                <common:prezime>Veselinovic</common:prezime>
             </ob:lice>
         </ob:trazilac>
-        <ob:datum_obavestenja property="pred:datum_donosenja" datatype="xs:date">2021-01-25</ob:datum_obavestenja>
+        <ob:datum_obavestenja property="pred:datum_donosenja" datatype="xs:date">2021-01-26</ob:datum_obavestenja>
     </ob:informacije_o_obavestenju>
     <ob:zahtev>
-        <ob:datum_trazenja_informacija>2021-01-25</ob:datum_trazenja_informacija>
-        <ob:opis_trazene_informacije>Neki podatak</ob:opis_trazene_informacije>
+        <ob:datum_trazenja_informacija>2021-01-26</ob:datum_trazenja_informacija>
+        <ob:opis_trazene_informacije>potvrda o polozenom vozackom ispitu, Marinkovic Milan, polozio 10.08.2018.</ob:opis_trazene_informacije>
     </ob:zahtev>
     <ob:odgovor_na_zahtev>
         <ob:zahtevi>
-            <ob:informacije_o_posedovanju poseduje="false" status="true"/>
-            <ob:informacije_o_izradi_kopije status="false"/>
+            <ob:informacije_o_posedovanju poseduje="true"/>
+            <ob:informacije_o_izradi_kopije/>
         </ob:zahtevi>
     </ob:odgovor_na_zahtev>
     <ob:dostavljeno>
         <ob:imenovanom>Imenovanom</ob:imenovanom>
-        <ob:arhivi>Arhivi</ob:arhivi>
     </ob:dostavljeno>
 </ob:obavestenje>

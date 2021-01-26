@@ -62,16 +62,16 @@ export class ObavestenjeComponent implements OnInit {
   private obradaTrazenihZahteva(): string {
     let trazeneInformacije = "";
     if (this.zahtev.getDescendantElements("za:uvid_u_dokument")[0]) {
-      trazeneInformacije += "<ob:informacije_o_uvidu status='false'/>";
+      trazeneInformacije += "<ob:informacije_o_uvidu/>";
     }
     if (this.zahtev.getDescendantElements("za:obavestenje_posedovanja_informacije")[0]) {
-      trazeneInformacije += "<ob:informacije_o_posedovanju status='false'/>";
+      trazeneInformacije += "<ob:informacije_o_posedovanju/>";
     }
     if (this.zahtev.getDescendantElements("za:kopiju_dokumenta")[0]) {
-      trazeneInformacije += "<ob:informacije_o_izradi_kopije status='false'/>";
+      trazeneInformacije += "<ob:informacije_o_izradi_kopije/>";
     }
     if (this.zahtev.getDescendantElements("za:dostavljanje_kopije")[0]) {
-      trazeneInformacije += "<ob:informacije_o_dostavljanju_dokumenta status='false'/>";
+      trazeneInformacije += "<ob:informacije_o_dostavljanju_dokumenta/>";
     }
     return trazeneInformacije;
   }

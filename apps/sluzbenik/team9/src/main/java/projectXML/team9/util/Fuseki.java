@@ -4,7 +4,6 @@ import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
-import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
@@ -37,7 +36,6 @@ public class Fuseki {
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		model.write(out, SparqlUtil.NTRIPLES);
-		model.write(System.out, SparqlUtil.RDF_XML);
 
 		UpdateRequest request = UpdateFactory.create();
 		UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,
@@ -45,12 +43,12 @@ public class Fuseki {
 						propertiesConfiguration.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getUpdate()));
 		processor.execute();
+
 		String sparqlUpdate = SparqlUtil.insertData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 				new String(out.toByteArray()));
-
 		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
 		processor = UpdateExecutionFactory.createRemote(update,
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
@@ -58,32 +56,11 @@ public class Fuseki {
 						propertiesConfiguration.getFusekiConfiguration().getUpdate()));
 		processor.execute();
 
-		String sparqlQuery = SparqlUtil
-				.selectData(
-						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
-								propertiesConfiguration.getFusekiConfiguration().getDataset(),
-								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
-						"?s ?p ?o");
-		// Create a QueryExecution that will access a SPARQL service over HTTP
-		QueryExecution query = QueryExecutionFactory
-				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
-						propertiesConfiguration.getFusekiConfiguration().getDataset(),
-						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
-
-		// Query the collection, dump output response as XML
-		ResultSet results = query.execSelect();
-
-		ResultSetFormatter.outputAsXML(System.out, results);
-
-		query.close();
-
-		System.out.println("[INFO] End.");
-
 	}
 
 	public ArrayList<String> getDocumentsId(String sparqlQuery) {
-		ArrayList<String> zahtevi = new ArrayList<String>();
-		// Create a QueryExecution that will access a SPARQL service over HTTP
+		ArrayList<String> ids = new ArrayList<String>();
+
 		QueryExecution queryExecution = QueryExecutionFactory
 				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration.getFusekiConfiguration().getDataset(),
@@ -105,10 +82,10 @@ public class Fuseki {
 				varName = variableBindings.next();
 				varValue = querySolution.get(varName);
 
-				zahtevi.add(varValue.toString());
+				ids.add(varValue.toString());
 			}
 		}
-		return zahtevi;
+		return ids;
 	}
 
 	public ArrayList<String> readAllZahteviIdByEmail(String type, String email) {
@@ -124,38 +101,18 @@ public class Fuseki {
 	}
 
 	public ArrayList<String> readAllUnansweredZahteviId(String type) {
-		ArrayList<String> unansweredZahtev = new ArrayList<String>();
-
-		String sparqlQuery = SparqlUtil
-				.selectDistinctData(
-						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
-								propertiesConfiguration.getFusekiConfiguration().getDataset(),
-								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
-						"?s ?p ?o");
-		ArrayList<String> all = getDocumentsId(sparqlQuery);
-
-		sparqlQuery = SparqlUtil.selectObjectData(
+		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration.getFusekiConfiguration().getDataset(),
-						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/obavestenja",
-				"?s <http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_obavestenje> ?o");
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
+				" ?s ?o ?p \r\n" + "MINUS \r\n" + "  {\r\n" + "  select ?s WHERE { \r\n"
+						+ "    ?s <http://www.projekat.org/predicate/status> ?o }\r\n" + "  }");
 		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
-		for (String id : all) {
-			boolean exist = false;
-			for (String answeredId : answeredZahtev) {
-				answeredId = answeredId.split("\\^\\^")[0];
-				if (id.equals(answeredId)) {
-					exist = true;
-				}
-			}
-			if (!exist) {
-				unansweredZahtev.add(id);
-			}
-		}
-		return unansweredZahtev;
+
+		return answeredZahtev;
 	}
 
-	public ArrayList<String> readAllObavestenjaIdByEmail(String type, String email) {
+	public ArrayList<String> readAllObavestenjaIdByCitizenEmail(String type, String email) {
 		String sparqlQuery = SparqlUtil.selectData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration
@@ -165,5 +122,23 @@ public class Fuseki {
 						"?s <http://www.projekat.org/predicate/trazilac_informacija> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
 						email));
 		return getDocumentsId(sparqlQuery);
+	}
+
+	public void updateZahtevWithStatus(boolean status, String zahtevId) {
+		String sparqlUpdate = SparqlUtil.insertData(
+				"http://localhost:8080/fuseki/SluzbenikDataset/data/metadata/zahtevi",
+				String.format("<%s>  <http://www.projekat.org/predicate/status>  %b", zahtevId, status));
+		update(sparqlUpdate);
+	}
+
+	public void update(String sparqlUpdate) {
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+		// UpdateProcessor sends update request to a remote SPARQL update service.
+		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update,
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getUpdate()));
+		processor.execute();
 	}
 }

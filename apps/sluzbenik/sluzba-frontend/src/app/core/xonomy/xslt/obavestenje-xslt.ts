@@ -255,9 +255,7 @@ export const obavestenjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                     </textarea>
                     <p class="c43">(опис тражене информације)</p>
                     <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu">
-                        <xsl:choose>
-                            <xsl:when test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/@status,'true')">
-                                <p class="c39">
+                        <p class="c39">
                                     <tab1>Oбавештавамо вас да дана <u><xsl:value-of select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:datum_uvida"></xsl:value-of></u>, 
                                     у 
                                     <xsl:choose>
@@ -286,19 +284,8 @@ export const obavestenjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                                     канцеларија бр. <u><xsl:value-of select="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_uvidu/ob:mesto_uvida/ob:kancelarija"></xsl:value-of></u> можете извршити увид у документ/е у коме је садржана тражена информација. 
                                     </tab1>
                                 </p>
-                            </xsl:when>   
-                            <xsl:otherwise>
-                                <p class="c39">
-                                    <tab1>
-                                    Обавештавамо вас да ваш захтев за увид у документ/е у коме је садржана тражена информација није прихваћен.
-                                    </tab1>
-                                </p>
-                            </xsl:otherwise> 
-                        </xsl:choose>
                     </xsl:if>
                     <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju">
-                        <xsl:choose>
-                            <xsl:when test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@status,'true')">                                
                                 <xsl:choose>
                                     <xsl:when test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_posedovanju/@poseduje,'true')">
                                         <p class="c39">
@@ -315,51 +302,20 @@ export const obavestenjeXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                                         </p>
                                     </xsl:otherwise> 
                                 </xsl:choose>                               
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <p class="c39">
-                                    <tab1>
-                                    Нажалост, не можемо вам рећи да ли поседујемо информације које сте тражили у захтеву.
-                                    </tab1>
-                                </p>
-                            </xsl:otherwise> 
-                        </xsl:choose>
                     </xsl:if>
                     <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije">
-                        <xsl:choose>
-                            <xsl:when test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_izradi_kopije/@status,'true')">
-                                <p class="c39">
+                        <p class="c39">
                                     <tab1>
                                     Обавештавамо вас да је ваш захтев за издавњем копије документа/ата у коме је садржана тражена информација прихваћен.
                                     </tab1>
                                 </p>
-                            </xsl:when>   
-                            <xsl:otherwise>
-                                <p class="c39">
-                                    <tab1>
-                                    Обавештавамо вас да ваш захтев за издавњем копије документа/ата у коме је садржана тражена информација није прихваћен.
-                                    </tab1>
-                                </p>
-                            </xsl:otherwise> 
-                        </xsl:choose>
                     </xsl:if>
                     <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta">
-                        <xsl:choose>
-                            <xsl:when test="contains(/ob:obavestenje/ob:odgovor_na_zahtev/ob:zahtevi/ob:informacije_o_dostavljanju_dokumenta/@status,'true')">
-                                <p class="c39">
+                        <p class="c39">
                                     <tab1>
                                     Обавештавамо вас да је ваш захтев за достављање документа/ата у коме је садржана тражена информација прихваћен.
                                     </tab1>
                                 </p>
-                            </xsl:when>   
-                            <xsl:otherwise>
-                                <p class="c39">
-                                    <tab1>
-                                    Обавештавамо вас да ваш захтев за достављање документа/ата у коме је садржана тражена информација није прихваћен.
-                                    </tab1>
-                                </p>
-                            </xsl:otherwise> 
-                        </xsl:choose>
                     </xsl:if>
                     <xsl:if test="/ob:obavestenje/ob:odgovor_na_zahtev/ob:uplata_troskova">
                         <p class="c39">

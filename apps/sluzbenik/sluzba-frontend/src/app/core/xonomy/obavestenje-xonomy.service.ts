@@ -79,7 +79,7 @@ export class ObavestenjeXonomyService {
         attributes: {
           "id_zahteva": {
             isInvisible: true,
-          }
+          },
         },
       },
       "ob:informacije_o_obavestenju": {
@@ -654,26 +654,14 @@ export class ObavestenjeXonomyService {
       "ob:informacije_o_uvidu":
       {
         validate: function (jsElement) {
-          if (jsElement.getAttributeValue("status", null) == "true" && !jsElement.hasElements()) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element must not be empty when @status is 'true'."
-            }
-            );
-          }
-          if (jsElement.getAttributeValue("status", null) == "true" && !(jsElement.hasChildElement("ob:datum_uvida") && jsElement.hasChildElement("ob:vreme_uvida") && jsElement.hasChildElement("ob:mesto_uvida"))) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element must have <mesto_uvida>, <vreme_uvida> and <datum_uvida> when @status is 'true'."
-            }
-            );
-          }
-          if (jsElement.getAttributeValue("status", null) == "false" && (jsElement.hasChildElement("ob:datum_uvida") || jsElement.hasChildElement("ob:vreme_uvida") || jsElement.hasChildElement("ob:mesto_uvida"))) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element must be empty when @status is 'false'."
-            }
-            );
+          if (!jsElement.hasChildElement("ob:datum_uvida") ||
+            !jsElement.hasChildElement("ob:vreme_uvida") ||
+            !jsElement.hasChildElement("ob:mesto_uvida")) {
+              Xonomy.warnings.push({
+                htmlID: jsElement.htmlID,
+                text: "This element must have elements <datum_uvida>, <vreme_uvida> and <mesto_uvida>."
+              }
+              );
           }
         },
         menu: [
@@ -682,7 +670,7 @@ export class ObavestenjeXonomyService {
             action: Xonomy.newElementChild,
             actionParameter: `<ob:datum_uvida ${ob}></ob:datum_uvida>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("ob:datum_uvida") || jsElement.getAttributeValue("status", null) == "false";
+              return jsElement.hasChildElement("ob:datum_uvida");
             }
           },
           {
@@ -690,7 +678,7 @@ export class ObavestenjeXonomyService {
             action: Xonomy.newElementChild,
             actionParameter: `<ob:vreme_uvida ${ob}></ob:vreme_uvida>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("ob:vreme_uvida") || jsElement.getAttributeValue("status", null) == "false";
+              return jsElement.hasChildElement("ob:vreme_uvida");
             }
           },
           {
@@ -698,35 +686,11 @@ export class ObavestenjeXonomyService {
             action: Xonomy.newElementChild,
             actionParameter: `<ob:mesto_uvida ${ob}><common:mesto ${common}/><common:ulica ${common}/><common:broj ${common}/><ob:kancelarija ${ob}/></ob:mesto_uvida>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement("ob:mesto_uvida") || jsElement.getAttributeValue("status", null) == "false";
-            }
-          },
-          {
-            caption: "Add @status",
-            action: Xonomy.newAttribute,
-            actionParameter: { name: "status", value: "" },
-            hideIf: function (jsElement) {
-              return jsElement.hasAttribute("status");
+              return jsElement.hasChildElement("ob:mesto_uvida");
             }
           },
         ],
         attributes: {
-          "status": {
-            asker: Xonomy.askPicklist,
-            askerParameter: [
-              { value: "true" },
-              { value: "false" }
-            ],
-            validate: function (jsAttribute) {
-              if (jsAttribute.value == "") {
-                Xonomy.warnings.push({
-                  htmlID: jsAttribute.htmlID,
-                  text: "This attribute must not be empty."
-                }
-                );
-              }
-            }
-          }
         }
       },
       "ob:datum_uvida":
@@ -912,56 +876,24 @@ export class ObavestenjeXonomyService {
       "ob:informacije_o_posedovanju":
       {
         validate: function (jsElement) {
-          if (jsElement.getAttributeValue("status", null) == "true" && !jsElement.hasAttribute("poseduje")) {
+          if (!jsElement.hasAttribute("poseduje")) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
-              text: "This element must have attribute @poseduje when @status is 'true'."
-            }
-            );
-          }
-          if (jsElement.getAttributeValue("status", null) == "false" && jsElement.hasAttribute("poseduje")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element must not have attribute @poseduje when @status is 'false'."
-            }
-            );
+              text: "This element must have attribute @poseduje."
+            });
           }
         },
         menu: [
-          {
-            caption: "Add @status",
-            action: Xonomy.newAttribute,
-            actionParameter: { name: "status", value: "" },
-            hideIf: function (jsElement) {
-              return jsElement.hasAttribute("status");
-            }
-          },
           {
             caption: "Add @poseduje",
             action: Xonomy.newAttribute,
             actionParameter: { name: "poseduje", value: "" },
             hideIf: function (jsElement) {
-              return jsElement.hasAttribute("poseduje") || jsElement.getAttributeValue("status", null) == "false";
+              return jsElement.hasAttribute("poseduje");
             }
           },
         ],
         attributes: {
-          "status": {
-            asker: Xonomy.askPicklist,
-            askerParameter: [
-              { value: "true" },
-              { value: "false" }
-            ],
-            validate: function (jsAttribute) {
-              if (jsAttribute.value == "") {
-                Xonomy.warnings.push({
-                  htmlID: jsAttribute.htmlID,
-                  text: "This attribute must not be empty."
-                }
-                );
-              }
-            }
-          },
           "poseduje": {
             menu: [{
               caption: "Delete attribute @poseduje",
@@ -987,64 +919,12 @@ export class ObavestenjeXonomyService {
       "ob:informacije_o_izradi_kopije":
       {
         menu: [
-          {
-            caption: "Add @status",
-            action: Xonomy.newAttribute,
-            actionParameter: { name: "status", value: "" },
-            hideIf: function (jsElement) {
-              return jsElement.hasAttribute("status");
-            }
-          },
         ],
-        attributes: {
-          "status": {
-            asker: Xonomy.askPicklist,
-            askerParameter: [
-              { value: "true" },
-              { value: "false" }
-            ],
-            validate: function (jsAttribute) {
-              if (jsAttribute.value == "") {
-                Xonomy.warnings.push({
-                  htmlID: jsAttribute.htmlID,
-                  text: "This attribute must not be empty."
-                }
-                );
-              }
-            }
-          }
-        }
       },
       "ob:informacije_o_dostavljanju_dokumenta":
       {
         menu: [
-          {
-            caption: "Add @status",
-            action: Xonomy.newAttribute,
-            actionParameter: { name: "status", value: "" },
-            hideIf: function (jsElement) {
-              return jsElement.hasAttribute("status");
-            }
-          },
         ],
-        attributes: {
-          "status": {
-            asker: Xonomy.askPicklist,
-            askerParameter: [
-              { value: "true" },
-              { value: "false" }
-            ],
-            validate: function (jsAttribute) {
-              if (jsAttribute.value == "") {
-                Xonomy.warnings.push({
-                  htmlID: jsAttribute.htmlID,
-                  text: "This attribute must not be empty."
-                }
-                );
-              }
-            }
-          }
-        }
       },
       "ob:dostavljeno":
       {

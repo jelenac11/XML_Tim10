@@ -26,4 +26,9 @@ export class ZahtevService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
     return this.http.post(`${environment.api_url}${path}`, body, { headers: headers, responseType: 'arraybuffer' });
   }
+
+  put(path: string, body: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
+    return this.http.put(`${environment.api_url}${path}`, body, { headers: headers, responseType: 'text' });
+  }
 }

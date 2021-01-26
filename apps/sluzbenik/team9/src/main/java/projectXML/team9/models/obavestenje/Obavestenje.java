@@ -203,7 +203,7 @@ public class Obavestenje {
 	protected Obavestenje.Dostavljeno dostavljeno;
 	@XmlAttribute(name = "broj_obavestenja", required = false)
 	protected String brojObavestenja;
-	@XmlAttribute(name = "id_zahteva", required = true)
+	@XmlAttribute(name = "id_zahteva", required = false)
 	protected String brojZahteva;
 	@XmlAttribute(name = "id", required = false)
 	protected String id;
@@ -218,8 +218,7 @@ public class Obavestenje {
 
 	@Override
 	public String toString() {
-		String obavestenje = String.format("!Dokument obavestenje!\nId obavestenja je: %s.\nId zahteva je: %s.\n",
-				brojObavestenja, brojZahteva);
+		String obavestenje = String.format("!Dokument obavestenje!\nId obavestenja je: %s.\n", brojObavestenja);
 		obavestenje += informacijeOObavestenju.toString();
 		obavestenje += zahtev.toString();
 		obavestenje += odgovorNaZahtev.toString();
@@ -327,26 +326,6 @@ public class Obavestenje {
 		this.brojObavestenja = value;
 	}
 
-	/**
-	 * Gets the value of the brojZahteva property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getBrojZahteva() {
-		return brojZahteva;
-	}
-
-	/**
-	 * Sets the value of the brojZahteva property.
-	 * 
-	 * @param value allowed object is {@link String }
-	 * 
-	 */
-	public void setBrojZahteva(String value) {
-		this.brojZahteva = value;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -435,6 +414,14 @@ public class Obavestenje {
 	 */
 	public void setContent(String value) {
 		this.content = value;
+	}
+
+	public String getBrojZahteva() {
+		return brojZahteva;
+	}
+
+	public void setBrojZahteva(String brojZahteva) {
+		this.brojZahteva = brojZahteva;
 	}
 
 	/**
@@ -1404,35 +1391,11 @@ public class Obavestenje {
 			@XmlType(name = "")
 			public static class InformacijeODostavljanjuDokumenta {
 
-				@XmlAttribute(name = "status", required = true)
-				protected boolean status;
-
 				@Override
 				public String toString() {
-					if (status) {
-						return "Zahtev za dostavljanje trazenih dokumenata je prihvacen.\n"
-								+ "\t\tPotrebno je platiti troskove dostavljanja.\n\n";
-					} else {
-						return "Zahtev za dostavljanje trazenih dokumenata je odbijen.\n\n";
-					}
+					return "Zahtev za dostavljanje trazenih dokumenata je prihvacen.\n"
+							+ "\t\tPotrebno je platiti troskove dostavljanja.\n\n";
 				}
-
-				/**
-				 * Gets the value of the status property.
-				 * 
-				 */
-				public boolean isStatus() {
-					return status;
-				}
-
-				/**
-				 * Sets the value of the status property.
-				 * 
-				 */
-				public void setStatus(boolean value) {
-					this.status = value;
-				}
-
 			}
 
 			/**
@@ -1454,33 +1417,10 @@ public class Obavestenje {
 			@XmlType(name = "")
 			public static class InformacijeOIzradiKopije {
 
-				@XmlAttribute(name = "status", required = true)
-				protected boolean status;
-
 				@Override
 				public String toString() {
-					if (status) {
-						return "Zahtev za izradom kopija trazenih dokumenata je prihvacen.\n"
-								+ "\tPotrebno je platiti troskove kopiranja dokumenata.\n\n";
-					} else {
-						return "Zahtev za izradom kopija trazenih dokumenata je odbijen.\n\n";
-					}
-				}
-
-				/**
-				 * Gets the value of the status property.
-				 * 
-				 */
-				public boolean isStatus() {
-					return status;
-				}
-
-				/**
-				 * Sets the value of the status property.
-				 * 
-				 */
-				public void setStatus(boolean value) {
-					this.status = value;
+					return "Zahtev za izradom kopija trazenih dokumenata je prihvacen.\n"
+							+ "\tPotrebno je platiti troskove kopiranja dokumenata.\n\n";
 				}
 
 			}
@@ -1505,24 +1445,18 @@ public class Obavestenje {
 			@XmlType(name = "")
 			public static class InformacijeOPosedovanju {
 
-				@XmlAttribute(name = "poseduje")
+				@XmlAttribute(name = "poseduje", required = true)
 				protected Boolean poseduje;
-				@XmlAttribute(name = "status", required = true)
-				protected boolean status;
 
 				@Override
 				public String toString() {
-					if (!status) {
-						return "Zahtev za dobijanje informacije o posedovanju trazenog dokumenta kod navedenog organa je odbijen.\n";
+					String zahtev = "Zahtev za dobijanje informacije o posedovanju trazenog dokumenta kod navedenog organa je prihvacen.\n";
+					if (poseduje) {
+						zahtev += "\t\tNavedeni organ poseduje trazenu informaciju.\n\n";
 					} else {
-						String zahtev = "Zahtev za dobijanje informacije o posedovanju trazenog dokumenta kod navedenog organa je prihvacen.\n";
-						if (poseduje) {
-							zahtev += "\t\tNavedeni organ poseduje trazenu informaciju.\n\n";
-						} else {
-							zahtev += "\t\tNavedeni organ ne poseduje trazenu informaciju.\n\n";
-						}
-						return zahtev;
+						zahtev += "\t\tNavedeni organ ne poseduje trazenu informaciju.\n\n";
 					}
+					return zahtev;
 				}
 
 				/**
@@ -1543,22 +1477,6 @@ public class Obavestenje {
 				 */
 				public void setPoseduje(Boolean value) {
 					this.poseduje = value;
-				}
-
-				/**
-				 * Gets the value of the status property.
-				 * 
-				 */
-				public boolean isStatus() {
-					return status;
-				}
-
-				/**
-				 * Sets the value of the status property.
-				 * 
-				 */
-				public void setStatus(boolean value) {
-					this.status = value;
 				}
 
 			}
@@ -1626,18 +1544,11 @@ public class Obavestenje {
 				protected Obavestenje.OdgovorNaZahtev.Zahtevi.InformacijeOUvidu.VremeUvida vremeUvida;
 				@XmlElement(name = "mesto_uvida")
 				protected Obavestenje.OdgovorNaZahtev.Zahtevi.InformacijeOUvidu.MestoUvida mestoUvida;
-				@XmlAttribute(name = "status", required = true)
-				protected boolean status;
 
 				@Override
 				public String toString() {
-					if (status) {
-						return String
-								.format("Zahtev za uvid u trazene informacije je prihvacen.\n\t\tDatum uvida: %s\n\t"
-										+ vremeUvida.toString() + mestoUvida.toString() + "\n", datumUvida);
-					} else {
-						return "Zahtev za uvid u trazene informacije je odbijen.\n";
-					}
+					return String.format("Zahtev za uvid u trazene informacije je prihvacen.\n\t\tDatum uvida: %s\n\t"
+							+ vremeUvida.toString() + mestoUvida.toString() + "\n", datumUvida);
 				}
 
 				/**
@@ -1702,22 +1613,6 @@ public class Obavestenje {
 				 */
 				public void setMestoUvida(Obavestenje.OdgovorNaZahtev.Zahtevi.InformacijeOUvidu.MestoUvida value) {
 					this.mestoUvida = value;
-				}
-
-				/**
-				 * Gets the value of the status property.
-				 * 
-				 */
-				public boolean isStatus() {
-					return status;
-				}
-
-				/**
-				 * Sets the value of the status property.
-				 * 
-				 */
-				public void setStatus(boolean value) {
-					this.status = value;
 				}
 
 				/**
