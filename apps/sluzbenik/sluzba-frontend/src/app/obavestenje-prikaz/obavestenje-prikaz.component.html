@@ -1,5 +1,11 @@
+<div class="mt-3 ml-3">
+  <button mat-raised-button (click)="downloadPDF()">
+    <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+  </button>
+  <button class="ml-3" mat-raised-button (click)="downloadHTML()">
+    <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+  </button>
+</div>
 <div class="container">
   <div #obavestenjeHTML class="htmlView"></div>
-  <button (click)="downloadPDF()">Download as PDF</button>
-  <button (click)="downloadHTML()">Download as HTML</button>
 </div>

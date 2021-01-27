@@ -1,27 +1,182 @@
-<table *ngIf="role === 'gradjanin'">
-  <thead>
-    <tr>
-      <th>Dokument</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of dokumenta; let i=index">
-      <td><a [href]="item">{{item}}</a></td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="role === 'gradjanin'">
+  <div class="mt-3 ml-3">
+    <button mat-raised-button color="primary" [routerLink]="'/novi-zahtev'">
+      Kreiraj novi zahtev
+    </button>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <!--PRVA TABELA-->
+    <div class="table-wrap col-10 mt-3">
+      <table class="table table-hover border" bordered="true">
+        <thead>
+          <tr>
+            <th colspan="4">Zahtevi</th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Naziv dokumenta</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of zahtevi; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <a [href]="item">{{ item }}</a>
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                (click)="downloadPDF(item.split('/')[4], 'zahtevi')"
+              >
+                <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+              </button>
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                (click)="downloadHTML(item.split('/')[4], 'zahtevi')"
+              >
+                <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="zahtevi.length == 0">
+            <td colspan="4">Nema podnetih zahteva</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<table *ngIf="role === 'sluzbenik'">
-  <thead>
-    <tr>
-      <th>Dokument</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of dokumenta; let i=index">
-      <td><a [href]="item">{{item}}</a></td>
-      <td><button (click)="prihvatiZahtev(item.split('/')[4])">Prihvati zahtev</button></td>
-      <td><button (click)="odbijZahtev(item)">Odbij zahtev</button></td>
-    </tr>
-  </tbody>
-</table>
+    <!--DRUGA TABELA-->
+    <div class="table-wrap col-10 mt-3">
+      <table class="table table-hover border">
+        <thead>
+          <tr>
+            <th colspan="4">Obaveštenja</th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Naziv dokumenta</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of obavestenja; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <a [href]="item">{{ item }}</a>
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                (click)="downloadPDF(item.split('/')[4], 'obavestenja')"
+              >
+                <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+              </button>
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                (click)="downloadHTML(item.split('/')[4], 'obavestenja')"
+              >
+                <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="obavestenja.length == 0">
+            <td colspan="4">Nema dobijenih obaveštenja</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--TRECA TABELA-->
+    <div class="table-wrap col-10 mt-3">
+      <table class="table table-hover border">
+        <thead>
+          <tr>
+            <th colspan="4">Žalbe</th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>Naziv dokumenta</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of zalbe; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <a [href]="item">{{ item }}</a>
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                (click)="downloadPDF(item.split('/')[4], 'zalbe')"
+              >
+                <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+              </button>
+            </td>
+            <td>
+              <button
+                mat-raised-button
+                (click)="downloadHTML(item.split('/')[4], 'zalbe')"
+              >
+                <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="zalbe.length == 0">
+            <td colspan="4">Nema podnetih žalbi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row d-flex justify-content-center" *ngIf="role === 'sluzbenik'">
+  <div class="table-wrap col-10 mt-3">
+    <table class="table table-hover border">
+      <thead>
+        <tr>
+          <th colspan="4">Zahtevi</th>
+        </tr>
+        <tr>
+          <th>#</th>
+          <th>Naziv dokumenta</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of zahtevi; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <a [href]="item">{{ item }}</a>
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              (click)="prihvatiZahtev(item.split('/')[4])"
+            >
+              <mat-icon>check</mat-icon> Prihvati zahtev
+            </button>
+          </td>
+          <td>
+            <button mat-raised-button (click)="odbijZahtev(item)">
+              <mat-icon>clear</mat-icon> Odbij zahtev
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="zahtevi.length == 0">
+          <td colspan="4">Nema podnetih zahteva.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

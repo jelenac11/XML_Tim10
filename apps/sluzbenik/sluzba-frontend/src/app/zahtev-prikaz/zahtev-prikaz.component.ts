@@ -37,33 +37,28 @@ export class ZahtevPrikazComponent implements OnInit {
 
   downloadPDF(): void {
     this.zahtevService.download('zahtevi/generate-pdf', this.id).subscribe(response => {
-      let file = new Blob([response], { type: 'application/pdf' });
-      var fileURL = URL.createObjectURL(file);
-      let a = document.createElement('a');
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.href = fileURL;
-      a.download = `${this.id}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(fileURL);
-      a.remove();
+      this.startDownload(response, 'pdf', 'application/pdf');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   }
 
   downloadHTML(): void {
     this.zahtevService.download('zahtevi/generate-html', this.id).subscribe(response => {
-      let file = new Blob([response], { type: 'text/html' });
+      this.startDownload(response, 'html', 'text/html');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  startDownload(response, extension: string, fileFormat: string){
+    let file = new Blob([response], { type:  fileFormat});
       var fileURL = URL.createObjectURL(file);
       let a = document.createElement('a');
       document.body.appendChild(a);
       a.setAttribute('style', 'display: none');
       a.href = fileURL;
-      a.download = `${this.id}.html`;
+      a.download = `${this.id}.${extension}`;
       a.click();
       window.URL.revokeObjectURL(fileURL);
       a.remove();
-    }), error => console.log('Error downloading the file'),
-      () => console.info('File downloaded successfully');
   }
 }

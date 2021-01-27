@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.repositories.ZahtevRepository;
 import projectXML.team9.util.Fuseki;
+import projectXML.team9.util.GenerateHTMLAndPDF;
 import projectXML.team9.util.MarshallerFactory;
 import projectXML.team9.util.MetadataExtractor;
-import projectXML.team9.util.XMLTransformations;
 
 @Service
 public class ZahtevService {
@@ -21,16 +21,6 @@ public class ZahtevService {
 	private static String schemaPath = "src/main/resources/static/schemas/sema_zahtev.xsd";
 
 	private static String contextPath = "projectXML.team9.models.zahtev";
-
-	private static final String INPUT_FILE = "src/main/resources/static/data/documents/zahtev.xml";
-
-	private static final String XSLT_FILE = "src/main/resources/static/data/xslt/zahtev.xsl";
-
-	private static final String XSLFO_FILE = "src/main/resources/static/data/xsl-fo/zahtev_fo.xsl";
-
-	private static final String HTML_FILE = "src/main/resources/static/gen/itext/";
-
-	private static final String OUTPUT_FILE = "src/main/resources/static/gen/fo/";
 
 	@Autowired
 	private MetadataExtractor metadataExtractor;
@@ -45,7 +35,7 @@ public class ZahtevService {
 	private ZahtevRepository zahtevRepository;
 
 	@Autowired
-	private XMLTransformations xmlTransformations;
+	private GenerateHTMLAndPDF generateHTMLAndPDF;
 
 	public ZahtevGradjana getZahtev(String id) throws Exception {
 		ZahtevGradjana zahtev = zahtevRepository.getById(id);
@@ -76,17 +66,11 @@ public class ZahtevService {
 	}
 
 	public String generatePDFZahtev(String id) throws Exception {
-		ZahtevGradjana zahtev = getZahtev(id);
-		zahtevRepository.saveToFile(zahtev, INPUT_FILE);
-		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
-		return OUTPUT_FILE + id + ".pdf";
+		return generateHTMLAndPDF.generatePDFZahtev(id);
 	}
 
 	public String generateHTMLZahtev(String id) throws Exception {
-		ZahtevGradjana zahtev = getZahtev(id);
-		zahtevRepository.saveToFile(zahtev, INPUT_FILE);
-		xmlTransformations.generateHTML(INPUT_FILE, XSLT_FILE, HTML_FILE + id + ".html");
-		return HTML_FILE + id + ".html";
+		return generateHTMLAndPDF.generateHTMLZahtev(id);
 	}
 
 	public ArrayList<String> getZahtevi(String email) {
@@ -99,11 +83,11 @@ public class ZahtevService {
 
 	public void declineZahtev(String zahtevId) {
 		fusekiWriter.updateZahtevWithStatus(false, zahtevId);
-		
+
 	}
-	
+
 	public void acceptZahtev(String zahtevId) {
 		fusekiWriter.updateZahtevWithStatus(true, zahtevId);
-		
+
 	}
 }

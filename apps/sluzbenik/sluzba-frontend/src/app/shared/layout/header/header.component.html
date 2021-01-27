@@ -12,6 +12,16 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a
+          *ngIf="role === 'sluzbenik'"
+          class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
+          routerLink="/"
+          routerLinkActive="active"
+          mdbWavesEffect
+          >Zahtevi na čekanju</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
           *ngIf="role === 'gradjanin'"
           class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
           routerLink="/novi-zahtev"
@@ -24,7 +34,7 @@
         <a
           *ngIf="role === 'gradjanin'"
           class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
-          routerLink="/moji-dokumenti"
+          routerLink="/"
           routerLinkActive="active"
           mdbWavesEffect
           >Moji dokumenti</a
@@ -34,17 +44,7 @@
         <a
           *ngIf="role === 'sluzbenik'"
           class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
-          routerLink="/zahtevi"
-          routerLinkActive="active"
-          mdbWavesEffect
-          >Zahtevi za pristup informacijama od javnog značaja</a
-        >
-      </li>
-      <li class="nav-item">
-        <a
-          *ngIf="role === 'sluzbenik'"
-          class="nav-link waves-light font-weight-bolder ml-2 mt-2 h6"
-          routerLink="/dokumenta"
+          routerLink=""
           routerLinkActive="active"
           mdbWavesEffect
           >Pregled dokumenata</a

@@ -2,7 +2,6 @@ package projectXML.team9.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.util.Properties;
 import javax.activation.DataHandler;
@@ -18,6 +17,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -30,6 +31,7 @@ import com.amazonaws.services.simpleemail.model.SendRawEmailRequest;
 
 import projectXML.team9.configuration.PropertiesConfiguration;
 
+@EnableAsync
 @Component
 public class AmazonSESSample {
 
@@ -43,6 +45,7 @@ public class AmazonSESSample {
 	@Autowired
 	private PropertiesConfiguration configuration;
 
+	@Async
 	public void sendMail(String recipient, String htmlURL, String pdfURL)
 			throws AddressException, MessagingException, IOException {
 

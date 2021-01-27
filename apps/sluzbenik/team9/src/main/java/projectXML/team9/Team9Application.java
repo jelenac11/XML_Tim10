@@ -20,6 +20,13 @@ public class Team9Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	    Korisnik k2 = new Korisnik("Mico", "Micic", "milanm2998@gmail.com", "sifra123", "gradjanin", "");
+	    try {
+	    	if (service.findByEmail("milanm2998@gmail.com") == null)
+	    		service.create(k2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -19,6 +19,8 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DokumentiComponent } from './dokumenti/dokumenti.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { DokumentiComponent } from './dokumenti/dokumenti.component';
     SharedModule,
     AuthModule,
     MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [ZahtevService, ObavestenjeService, ZahtevXonomyService, ObavestenjeXonomyService],
   bootstrap: [AppComponent]
