@@ -15,13 +15,9 @@ public class PropertiesConfiguration {
 
 	private FusekiConfiguration fusekiConfiguration;
 
-	private AWSConfiguration awsConfiguration;
-
 	@Autowired
-	public PropertiesConfiguration(ExistDBConfiguration existDBConfiguration, FusekiConfiguration fusekiConfiguration,
-			AWSConfiguration awsConfiguration) {
+	public PropertiesConfiguration(ExistDBConfiguration existDBConfiguration, FusekiConfiguration fusekiConfiguration) {
 		this.existDBConfiguration = existDBConfiguration;
 		this.fusekiConfiguration = fusekiConfiguration;
-		this.awsConfiguration = awsConfiguration;
 	}
 }

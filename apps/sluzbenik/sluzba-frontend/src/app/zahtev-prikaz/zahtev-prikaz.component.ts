@@ -25,45 +25,37 @@ export class ZahtevPrikazComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zahtevService.get('zahtevi', this.id).subscribe(res => {
-      this.zahtev = res;
-      this.zahtevHTML.nativeElement.innerHTML = this.xonomyService.convertZahtevXSLT(this.zahtev);
+    this.zahtevService.get('zahtevi/XSLTDocument', this.id).subscribe(res => {
+      let something = Xonomy.xml2js(res);
+      something = something.children[0].getText();
+      this.zahtevHTML.nativeElement.innerHTML = something;
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.zahtevHTML.nativeElement.innerHTML = this.xonomyService.convertZahtevXSLT(this.zahtev);
   }
 
   downloadPDF(): void {
     this.zahtevService.download('zahtevi/generate-pdf', this.id).subscribe(response => {
-      let file = new Blob([response], { type: 'application/pdf' });
-      var fileURL = URL.createObjectURL(file);
-      let a = document.createElement('a');
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.href = fileURL;
-      a.download = `${this.id}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(fileURL);
-      a.remove();
+      this.startDownload(response, 'pdf', 'application/pdf');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   }
 
   downloadHTML(): void {
     this.zahtevService.download('zahtevi/generate-html', this.id).subscribe(response => {
-      let file = new Blob([response], { type: 'text/html' });
-      var fileURL = URL.createObjectURL(file);
-      let a = document.createElement('a');
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.href = fileURL;
-      a.download = `${this.id}.html`;
-      a.click();
-      window.URL.revokeObjectURL(fileURL);
-      a.remove();
+      this.startDownload(response, 'html', 'text/html');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
+  }
+
+  startDownload(response, extension: string, fileFormat: string) {
+    let file = new Blob([response], { type: fileFormat });
+    var fileURL = URL.createObjectURL(file);
+    let a = document.createElement('a');
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.href = fileURL;
+    a.download = `${this.id}.${extension}`;
+    a.click();
+    window.URL.revokeObjectURL(fileURL);
+    a.remove();
   }
 }

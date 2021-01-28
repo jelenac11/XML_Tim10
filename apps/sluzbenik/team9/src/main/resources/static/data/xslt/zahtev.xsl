@@ -22,7 +22,7 @@
 					padding-top: 60pt;
 					padding-bottom: 60pt;
 					box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-					width: 40%;
+					width: 50%;
 					position: sticky;
 					top: 25pt;
 					}
@@ -37,15 +37,13 @@
 					.c8 {
 					font-family: "Times New Roman";
 					margin-top: 10pt;
-					text-align:
-					center;
+					text-align: center;
 					}
 
 					.c9 {
 					text-align: center;
 					font-size: 12pt;
-					font-family:
-					"Times New Roman";
+					font-family: "Times New Roman";
 					margin-top:-10pt;
 					}
 
@@ -157,8 +155,22 @@
 				</style>
 			</head>
 			<body>
-				<div class="c1">
-					<p class="c8">
+				<div style="padding-left: 50pt;
+					margin: 0 auto;
+					margin-top: 20pt;
+					margin-bottom: 20pt;
+					background-color: white;
+					padding-right: 50pt;
+					padding-top: 60pt;
+					padding-bottom: 60pt;
+					box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+					margin-left:265pt;
+					margin-right:265pt;
+					position: sticky;
+					top: 25pt;">
+					<p style="font-family: 'Times New Roman';
+					margin-top: 10pt;
+					text-align: center;">
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:organ/common:naziv"></xsl:value-of>
 						,
@@ -170,20 +182,33 @@
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:organ/common:adresa/common:mesto"></xsl:value-of>
 					</p>
-					<p class="c9">назив и седиште органа коме се захтев упућује</p>
-					<p class="c6">
+					<p style="text-align:center;font-size:12pt;font-family:'Times New Roman';margin-top:-10pt;">назив и седиште органа коме се захтев упућује</p>
+					<p style="font-family: 'Times New Roman';
+					font-size: 14pt;
+					text-align: center;
+					margin-top:48pt;">
 						<strong>З А Х Т Е В</strong>
 					</p>
-					<p class="c37">
+					<p style="font-family: 'Times New Roman';
+					font-size: 14pt;
+					text-align: center;
+					margin-top: -10pt;">
 						<strong>за приступ информацији од јавног значаја</strong>
 					</p>
-					<p class="c20">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-align:justify;
+					text-indent:4em;
+					margin-top:28pt;">
 						На основу члана 15. ст. 1. Закона о слободном приступу
 						информацијама од јавног значаја („Службени гласник РС“, бр.
 						120/04, 54/07, 104/09 и 36/10), од горе наведеног органа
 						захтевам:*
 					</p>
-					<p class="c45">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-indent:4em;
+					margin-top:12pt;">
 						<xsl:choose>
 							<xsl:when
 								test="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:obavestenje_posedovanja_informacije">
@@ -199,7 +224,10 @@
 						</xsl:choose>
 						обавештење да ли поседује тражену информацију;
 					</p>
-					<p class="c43">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-indent:4em;
+					margin-top:-10pt;">
 						<xsl:choose>
 							<xsl:when
 								test="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:uvid_u_dokument">
@@ -215,7 +243,10 @@
 						</xsl:choose>
 						увид у документ који садржи тражену информацију;
 					</p>
-					<p class="c43">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-indent:4em;
+					margin-top:-10pt;">
 						<xsl:choose>
 							<xsl:when
 								test="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:kopiju_dokumenta">
@@ -231,7 +262,10 @@
 						</xsl:choose>
 						копију документа који садржи тражену информацију;
 					</p>
-					<p class="c43">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-indent:4em;
+					margin-top:-10pt;">
 						<xsl:choose>
 							<xsl:when
 								test="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:dostavljanje_kopije">
@@ -247,7 +281,10 @@
 						</xsl:choose>
 						достављање копије документа који садржи тражену информацију:**
 					</p>
-					<p class="c44">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-indent:8em;
+					margin-top:-10pt;">
 						<xsl:choose>
 							<xsl:when
 								test="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:dostavljanje_kopije/za:posta">
@@ -263,7 +300,10 @@
 						</xsl:choose>
 						поштом
 					</p>
-					<p class="c44">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-indent:8em;
+					margin-top:-10pt;">
 						<xsl:choose>
 							<xsl:when
 								test="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:dostavljanje_kopije/za:faks">
@@ -279,7 +319,10 @@
 						</xsl:choose>
 						факсом
 					</p>
-					<p class="c44">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-indent:8em;
+					margin-top:-10pt;">
 						<xsl:choose>
 							<xsl:when
 								test="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:dostavljanje_kopije/za:eposta">
@@ -295,7 +338,10 @@
 						</xsl:choose>
 						електронском поштом
 					</p>
-					<p class="c44">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-indent:8em;
+					margin-top:-10pt;">
 						<xsl:choose>
 							<xsl:when
 								test="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:dostavljanje_kopije/za:drugi_nacin">
@@ -313,22 +359,35 @@
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:tip_zahteva/za:dostavljanje_kopije/za:drugi_nacin"></xsl:value-of>
 					</p>
-					<p class="c42">
+					<p style="font-family:'Times New Roman';
+					font-size:12pt;
+					text-align:justify;
+					text-indent:4em;">
 						Овај захтев се
 						односи на следеће информације:
 					</p>
-					<p class="c41">
+					<p style="margin-top:-10pt;
+					font-family:'Times New Roman';
+					font-size:12pt;
+					text-align:justify;
+					text-indent:4em;">
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:opis_zahteva"></xsl:value-of>
 					</p>
-					<p class="c40">(навести што прецизнији опис
+					<p style="margin-top:-10pt;
+					font-family:'Times New Roman';
+					font-size:9pt;
+					text-align:justify;">(навести што прецизнији опис
 						информације која се
 						тражи
 						као
 						и друге податке који олакшавају
 						проналажење тражене
 						информације)</p>
-					<p class="c46">
+					<p style="font-family:'Times New Roman';
+					font-size:10pt;
+					text-align:right;
+					margin-top:27pt;">
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:trazilac/za:lice/common:naziv"></xsl:value-of>
 						<xsl:value-of
@@ -336,8 +395,13 @@
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:trazilac/za:lice/common:prezime"></xsl:value-of>
 					</p>
-					<p class="c24">Тражилац информације/Име и презиме</p>
-					<p class="c25">
+					<p style="text-align:right;
+					font-size: 10pt;
+					font-family: 'Times New Roman';
+					margin-top:-10pt;">Тражилац информације/Име и презиме</p>
+					<p style="font-family:'Times New Roman';
+					font-size:10pt;
+					text-align:right;">
 						<xsl:value-of
 							select="concat(/za:zahtev_gradjana/za:trazilac/za:lice/common:adresa/common:ulica, ' ')"></xsl:value-of>
 						<xsl:value-of
@@ -346,20 +410,34 @@
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:trazilac/za:lice/common:adresa/common:mesto"></xsl:value-of>
 					</p>
-					<p class="c24">адресa</p>
-					<p class="c25">
+					<p style="text-align:right;
+					font-size: 10pt;
+					font-family: 'Times New Roman';
+					margin-top:-10pt;">адресa</p>
+					<p style="font-family:'Times New Roman';
+					font-size:10pt;
+					text-align:right;">
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:trazilac/za:drugi_podatak_za_kontakt"></xsl:value-of>
 					</p>
-					<p class="c24">други подаци за контакт</p>
-					<p class="c27">
+					<p style="text-align:right;
+					font-size: 10pt;
+					font-family: 'Times New Roman';
+					margin-top:-10pt;">други подаци за контакт</p>
+					<p style="font-family:'Times New Roman';
+					font-size:10pt;
+					text-align:left;
+					margin-top:-50pt;">
 						У
 						<xsl:value-of
 							select="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:mesto"></xsl:value-of>
 						,
 
 					</p>
-					<p class="c29">
+					<p style="font-family:'Times New Roman';
+					font-size:10pt;
+					text-align:left;
+					margin-top:20pt;">
 						дана
 						<xsl:variable name="currenttime"
 							select="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:datum" as="xs:date" />
@@ -382,12 +460,24 @@
 							select="format-date($currenttime,'[Y]')" />
 						. године
 					</p>
-					<p class="c39">__________________________________________</p>
-					<p class="c38">* У кућици означити која законска права на приступ
+					<p style="font-family: 'Times New Roman';
+					font-size: 9pt;
+					margin-top: 40pt;
+					text-align:justify;">__________________________________________</p>
+					<p style="font-family: 'Times New Roman';
+					font-size:9pt;
+					margin-top: -10pt;
+					text-align:justify;">* У кућици означити која законска права на приступ
 						информацијама желите да остварите.</p>
-					<p class="c38">** У кућици означити начин достављања копије
+					<p style="font-family: 'Times New Roman';
+					font-size:9pt;
+					margin-top: -10pt;
+					text-align:justify;">** У кућици означити начин достављања копије
 						докумената.</p>
-					<p class="c38">*** Када захтевате други начин достављања обавезно
+					<p style="font-family: 'Times New Roman';
+					font-size:9pt;
+					margin-top: -10pt;
+					text-align:justify;">*** Када захтевате други начин достављања обавезно
 						уписати који начин достављања захтевате.</p>
 				</div>
 			</body>

@@ -2,9 +2,8 @@ package projectXML.team9.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.ByteBuffer;
 import java.util.Properties;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -18,18 +17,18 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
-import com.amazonaws.services.simpleemail.model.RawMessage;
-import com.amazonaws.services.simpleemail.model.SendRawEmailRequest;
+import projectXML.team9.dto.EmailDTO;
 
-import projectXML.team9.configuration.PropertiesConfiguration;
-
+@EnableAsync
 @Component
 public class AmazonSESSample {
 
@@ -40,10 +39,15 @@ public class AmazonSESSample {
 	private static String BODY_HTML = "<html>" + "<head></head>" + "<body>" + "<h1>Hello!</h1>"
 			+ "<p>Please see the attached file for a " + "list of customers to contact.</p>" + "</body>" + "</html>";
 
-	@Autowired
-	private PropertiesConfiguration configuration;
+	private RestTemplate restTemplate;
 
-	public void sendMail(String recipient, String htmlURL, String pdfURL)
+	@Autowired
+	public AmazonSESSample(RestTemplateBuilder restTemplateBuilder) {
+		this.restTemplate = restTemplateBuilder.build();
+	}
+
+	@Async
+	public void sendMailWhenZahtevIsAccepted(String recipient, String htmlURL, String pdfURL)
 			throws AddressException, MessagingException, IOException {
 
 		Session session = Session.getDefaultInstance(new Properties());
@@ -51,7 +55,7 @@ public class AmazonSESSample {
 		// Create a new MimeMessage object.
 		MimeMessage message = new MimeMessage(session);
 
-		String sender = String.format(SENDER, configuration.getAwsConfiguration().getFrom());
+		String sender = String.format(SENDER, "milan_marinkovic98@hotmail.com");
 		// Add subject, from and to lines.
 		message.setSubject(SUBJECT, "UTF-8");
 		message.setFrom(new InternetAddress(sender));
@@ -78,14 +82,7 @@ public class AmazonSESSample {
 		// Add the child container to the wrapper object.
 		wrap.setContent(msg_body);
 
-		// Create a multipart/mixed parent container.
 		MimeMultipart msg = new MimeMultipart("mixed");
-
-		// Add the parent container to the message.
-		message.setContent(msg);
-
-		// Add the multipart/alternative part to the message.
-		msg.addBodyPart(wrap);
 
 		// Define the attachments
 		MimeBodyPart att = new MimeBodyPart();
@@ -102,23 +99,74 @@ public class AmazonSESSample {
 		msg.addBodyPart(att);
 		msg.addBodyPart(attHtml);
 		// Try to send the email.
-		try {
-			AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
-					.withCredentials(new AWSStaticCredentialsProvider(
-							new BasicAWSCredentials(configuration.getAwsConfiguration().getAccessKey(),
-									configuration.getAwsConfiguration().getSecretKey())))
-					.withRegion(Regions.US_EAST_2).build();
 
-			// Send the email.
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-			message.writeTo(outputStream);
-			RawMessage rawMessage = new RawMessage(ByteBuffer.wrap(outputStream.toByteArray()));
-			SendRawEmailRequest rawEmailRequest = new SendRawEmailRequest(rawMessage);
-			client.sendRawEmail(rawEmailRequest);
-		} catch (Exception ex) {
-			System.out.println("Email Failed");
-			System.err.println("Error message: " + ex.getMessage());
-			ex.printStackTrace();
-		}
+		message.setContent(msg);
+
+		msg.addBodyPart(wrap);
+
+		sendMail(message);
+	}
+
+	public void sendMailWhenZahtevIsDenied(String recipient) throws AddressException, MessagingException, IOException {
+		Session session = Session.getDefaultInstance(new Properties());
+
+		// Create a new MimeMessage object.
+		MimeMessage message = new MimeMessage(session);
+
+		String sender = String.format(SENDER, "milan_marinkovic98@hotmail.com");
+		// Add subject, from and to lines.
+		message.setSubject(SUBJECT, "UTF-8");
+		message.setFrom(new InternetAddress(sender));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
+
+		// Create a multipart/alternative child container.
+		MimeMultipart msg_body = new MimeMultipart("alternative");
+
+		// Create a wrapper for the HTML and text parts.
+		MimeBodyPart wrap = new MimeBodyPart();
+
+		// Define the text part.
+		MimeBodyPart textPart = new MimeBodyPart();
+		textPart.setContent(BODY_TEXT, "text/plain; charset=UTF-8");
+
+		// Define the HTML part.
+		MimeBodyPart htmlPart = new MimeBodyPart();
+		htmlPart.setContent(BODY_HTML, "text/html; charset=UTF-8");
+
+		// Add the text and HTML parts to the child container.
+		msg_body.addBodyPart(textPart);
+		msg_body.addBodyPart(htmlPart);
+
+		// Add the child container to the wrapper object.
+		wrap.setContent(msg_body);
+
+		MimeMultipart msg = new MimeMultipart("mixed");
+
+		MimeBodyPart attHtml = new MimeBodyPart();
+		attHtml.setText("");
+		
+		msg.addBodyPart(attHtml);
+
+		message.setContent(msg);
+
+		msg.addBodyPart(wrap);
+
+		sendMail(message);
+	}
+
+	private void sendMail(MimeMessage message) throws IOException, MessagingException {
+		// Create a multipart/mixed parent container.
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_XML);
+
+		ByteArrayOutputStream str = new ByteArrayOutputStream();
+		message.writeTo(str);
+
+		EmailDTO emailDTO = new EmailDTO();
+		emailDTO.setMime(str.toByteArray());
+
+		HttpEntity<EmailDTO> request = new HttpEntity<EmailDTO>(emailDTO, headers);
+
+		restTemplate.postForEntity("http://localhost:8083/api/emails", request, Void.class);
 	}
 }

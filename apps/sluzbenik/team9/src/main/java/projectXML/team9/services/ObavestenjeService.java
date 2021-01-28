@@ -1,5 +1,7 @@
 package projectXML.team9.services;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.StringWriter;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -8,16 +10,17 @@ import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import projectXML.team9.models.obavestenje.Obavestenje;
 import projectXML.team9.repositories.ObavestenjeRepository;
-import projectXML.team9.util.AmazonSESSample;
 import projectXML.team9.util.Fuseki;
+import projectXML.team9.util.GenerateHTMLAndPDF;
 import projectXML.team9.util.MarshallerFactory;
 import projectXML.team9.util.MetadataExtractor;
-import projectXML.team9.util.XMLTransformations;
+import projectXML.team9.util.PreProcessDataForEmail;
 
 @Service
 public class ObavestenjeService {
@@ -26,21 +29,8 @@ public class ObavestenjeService {
 
 	private static String contextPath = "projectXML.team9.models.obavestenje";
 
-	private static final String INPUT_FILE = "src/main/resources/static/data/documents/obavestenje.xml";
-
-	private static final String XSLT_FILE = "src/main/resources/static/data/xslt/obavestenje.xsl";
-
-	private static final String XSLFO_FILE = "src/main/resources/static/data/xsl-fo/obavestenje_fo.xsl";
-
-	private static final String HTML_FILE = "src/main/resources/static/gen/itext/";
-
-	private static final String OUTPUT_FILE = "src/main/resources/static/gen/fo/";
-
 	@Autowired
 	private ObavestenjeRepository obavestenjeRepository;
-
-	@Autowired
-	private XMLTransformations xmlTransformations;
 
 	@Autowired
 	private MetadataExtractor metadataExtractor;
@@ -55,7 +45,10 @@ public class ObavestenjeService {
 	private ZahtevService zahtevService;
 
 	@Autowired
-	private AmazonSESSample amazonSESSample;
+	private PreProcessDataForEmail preProcessDataForEmail;
+
+	@Autowired
+	private GenerateHTMLAndPDF generateHTMLAndPDF;
 
 	public Obavestenje getObavestenje(String id) throws Exception {
 		Obavestenje obavestenje = obavestenjeRepository.getById(id);
@@ -87,33 +80,27 @@ public class ObavestenjeService {
 		metadataExtractor.extractMetadata(xmlString);
 		fusekiWriter.saveRDF("/obavestenja");
 		fusekiWriter.updateZahtevWithStatus(true, obavestenje.getBrojZahteva());
-		sendMail(obavestenje.getInformacijeOObavestenju().getTrazilac().getContent(), id);
-		
+		preProcessDataForEmail.sendMailWhenZahtevIsAccepted(obavestenje.getInformacijeOObavestenju().getTrazilac().getContent(), id);
 		return obavestenje;
 	}
 
 	public String generatePDFObavestenje(String id) throws Exception {
-		Obavestenje obavestenje = getObavestenje(id);
-		obavestenjeRepository.saveToFile(obavestenje, INPUT_FILE);
-		xmlTransformations.generatePDF(INPUT_FILE, XSLFO_FILE, OUTPUT_FILE + id + ".pdf");
-		return OUTPUT_FILE + id + ".pdf";
+		return generateHTMLAndPDF.generatePDFObavestenje(id);
 	}
 
 	public String generateHTMLObavestenje(String id) throws Exception {
-		Obavestenje obavestenje = getObavestenje(id);
-		obavestenjeRepository.saveToFile(obavestenje, INPUT_FILE);
-		xmlTransformations.generateHTML(INPUT_FILE, XSLT_FILE, HTML_FILE + id + ".html");
-		return HTML_FILE + id + ".html";
+		return generateHTMLAndPDF.generateHTMLObavestenje(id);
 	}
 
 	public ArrayList<String> getObavestenjaByCitizenEmail(String email) {
 		return fusekiWriter.readAllObavestenjaIdByCitizenEmail("/obavestenja", email);
 	}
 
-	private void sendMail(String recipient, String obavestenjeId) throws Exception {
-		String htmlPath = generateHTMLObavestenje(obavestenjeId);
-		String pdfPath = generatePDFObavestenje(obavestenjeId);
-
-		amazonSESSample.sendMail(recipient, htmlPath, pdfPath);
+	public String getXSLTObavestenje(String id) throws Exception {
+		String url = generateHTMLAndPDF.generateHTMLObavestenje(id);
+		File file = new File(url);
+		FileInputStream fileInputStream = new FileInputStream(file);
+		return IOUtils.toString(fileInputStream, "UTF-8");
 	}
+
 }

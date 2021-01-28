@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team9.dto.DocumentsIDDTO;
+import projectXML.team9.dto.XSLTDocumentDTO;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.services.ZahtevService;
@@ -62,12 +63,27 @@ public class ZahtevController {
 	}
 
 	@GetMapping(value = "/{id}")
+
 	@CrossOrigin
 	public ResponseEntity getZahtev(@PathVariable String id) {
 		ZahtevGradjana zahtev;
 		try {
 			zahtev = zahtevService.getZahtev(id);
 			return ResponseEntity.ok(zahtev);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+
+	@GetMapping(value = "XSLTDocument/{id}")
+	@CrossOrigin
+	public ResponseEntity getXSLTZahtev(@PathVariable String id) {
+		String zahtevXSLT;
+		try {
+			zahtevXSLT = zahtevService.getXSLTZahtev(id);
+			XSLTDocumentDTO document = new XSLTDocumentDTO();
+			document.setXslt(zahtevXSLT);
+			return ResponseEntity.ok(document);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
@@ -115,6 +131,10 @@ public class ZahtevController {
 	@PutMapping(consumes = MediaType.APPLICATION_XML_VALUE)
 	@CrossOrigin
 	public void declineZahtev(@RequestBody DocumentsIDDTO zahtevi) {
-		zahtevService.declineZahtev(zahtevi.getZahtev().get(0));
+		try {
+			zahtevService.declineZahtev(zahtevi.getZahtev().get(0));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

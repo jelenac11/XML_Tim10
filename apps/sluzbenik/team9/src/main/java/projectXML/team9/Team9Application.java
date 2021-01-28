@@ -12,14 +12,21 @@ public class Team9Application {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext appContext = SpringApplication.run(Team9Application.class, args);
-	    KorisnikService service = appContext.getBean(KorisnikService.class);
-	    Korisnik k = new Korisnik("Marko", "Marković", "noreply.kts.l9@gmail.com", "sifra123", "sluzbenik", "");
-	    try {
-	    	if (service.findByEmail("noreply.kts.l9@gmail.com") == null)
-	    		service.create(k);
+		KorisnikService service = appContext.getBean(KorisnikService.class);
+		Korisnik k = new Korisnik("Marko", "Marković", "noreply.kts.l9@gmail.com", "sifra123", "sluzbenik", "");
+		try {
+			if (service.findByEmail("noreply.kts.l9@gmail.com") == null)
+				service.create(k);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Korisnik k2 = new Korisnik("Mico", "Micic", "milanm2998@gmail.com", "sifra123", "gradjanin", "");
+		try {
+			if (service.findByEmail("milanm2998@gmail.com") == null)
+				service.create(k2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

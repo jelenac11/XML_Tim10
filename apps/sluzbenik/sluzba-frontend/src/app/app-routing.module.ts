@@ -12,10 +12,10 @@ import { ZahtevComponent } from './zahtev/zahtev.component';
 
 const routes: Routes = [
   {
-    path: "", component: ZahtevComponent, //ovde ce inace da ide na moji dokumenti kad se napravi ta stranica i treba da ima rolu gradjanin
+    path: "", component: DokumentiComponent,
     canActivate: [RoleGuard],
     data: {
-        expectedRoles: 'gradjanin|sluzbenik'
+      expectedRoles: 'gradjanin|sluzbenik'
     }
   },
   {
@@ -30,38 +30,30 @@ const routes: Routes = [
     path: "novi-zahtev", component: ZahtevComponent,
     canActivate: [RoleGuard],
     data: {
-        expectedRoles: 'gradjanin'
+      expectedRoles: 'gradjanin'
     }
   },
   {
     path: "zahtev/:id", component: ZahtevPrikazComponent,
     canActivate: [RoleGuard],
     data: {
-        expectedRoles: 'gradjanin|sluzbenik'
+      expectedRoles: 'gradjanin|sluzbenik'
     }
   },
   {
     path: "novo-obavestenje/:id", component: ObavestenjeComponent,
     canActivate: [RoleGuard],
     data: {
-        expectedRoles: 'sluzbenik'
+      expectedRoles: 'sluzbenik'
     }
   },
   {
     path: "obavestenje/:id", component: ObavestenjePrikazComponent,
     canActivate: [RoleGuard],
     data: {
-        expectedRoles: 'gradjanin|sluzbenik'
+      expectedRoles: 'gradjanin|sluzbenik'
     }
   },
-  {
-    path: "dokumenta", component: DokumentiComponent,
-    canActivate: [RoleGuard],
-    data: {
-        expectedRoles: 'gradjanin|sluzbenik'
-    }
-  }
-
 ];
 
 @NgModule({
