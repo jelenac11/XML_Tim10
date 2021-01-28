@@ -25,14 +25,11 @@ export class ZahtevPrikazComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zahtevService.get('zahtevi', this.id).subscribe(res => {
-      this.zahtev = res;
-      this.zahtevHTML.nativeElement.innerHTML = this.xonomyService.convertZahtevXSLT(this.zahtev);
+    this.zahtevService.get('zahtevi/XSLTDocument', this.id).subscribe(res => {
+      let something = Xonomy.xml2js(res);
+      something = something.children[0].getText();
+      this.zahtevHTML.nativeElement.innerHTML = something;
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.zahtevHTML.nativeElement.innerHTML = this.xonomyService.convertZahtevXSLT(this.zahtev);
   }
 
   downloadPDF(): void {
@@ -49,16 +46,16 @@ export class ZahtevPrikazComponent implements OnInit {
       () => console.info('File downloaded successfully');
   }
 
-  startDownload(response, extension: string, fileFormat: string){
-    let file = new Blob([response], { type:  fileFormat});
-      var fileURL = URL.createObjectURL(file);
-      let a = document.createElement('a');
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.href = fileURL;
-      a.download = `${this.id}.${extension}`;
-      a.click();
-      window.URL.revokeObjectURL(fileURL);
-      a.remove();
+  startDownload(response, extension: string, fileFormat: string) {
+    let file = new Blob([response], { type: fileFormat });
+    var fileURL = URL.createObjectURL(file);
+    let a = document.createElement('a');
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.href = fileURL;
+    a.download = `${this.id}.${extension}`;
+    a.click();
+    window.URL.revokeObjectURL(fileURL);
+    a.remove();
   }
 }

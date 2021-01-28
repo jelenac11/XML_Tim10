@@ -11,15 +11,19 @@ public class PreProcessDataForEmail {
 
 	@Autowired
 	private GenerateHTMLAndPDF generateHTMLAndPDF;
-	
+
 	@Autowired
 	private AmazonSESSample amazonSESSample;
-	
+
 	@Async
-	public void sendMail(String recipient, String obavestenjeId) throws Exception {
+	public void sendMailWhenZahtevIsAccepted(String recipient, String obavestenjeId) throws Exception {
 		String htmlPath = generateHTMLAndPDF.generateHTMLObavestenje(obavestenjeId);
 		String pdfPath = generateHTMLAndPDF.generatePDFObavestenje(obavestenjeId);
 
-		amazonSESSample.sendMail(recipient, htmlPath, pdfPath);
+		amazonSESSample.sendMailWhenZahtevIsAccepted(recipient, htmlPath, pdfPath);
+	}
+
+	public void sendMailWhenZahtevIsDenied(String recipient) throws Exception {
+		amazonSESSample.sendMailWhenZahtevIsDenied(recipient);
 	}
 }

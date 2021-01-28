@@ -1,5 +1,7 @@
 package projectXML.team9.services;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.StringWriter;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +80,7 @@ public class ObavestenjeService {
 		metadataExtractor.extractMetadata(xmlString);
 		fusekiWriter.saveRDF("/obavestenja");
 		fusekiWriter.updateZahtevWithStatus(true, obavestenje.getBrojZahteva());
-		preProcessDataForEmail.sendMail(obavestenje.getInformacijeOObavestenju().getTrazilac().getContent(), id);
+		preProcessDataForEmail.sendMailWhenZahtevIsAccepted(obavestenje.getInformacijeOObavestenju().getTrazilac().getContent(), id);
 		return obavestenje;
 	}
 
@@ -91,6 +94,13 @@ public class ObavestenjeService {
 
 	public ArrayList<String> getObavestenjaByCitizenEmail(String email) {
 		return fusekiWriter.readAllObavestenjaIdByCitizenEmail("/obavestenja", email);
+	}
+
+	public String getXSLTObavestenje(String id) throws Exception {
+		String url = generateHTMLAndPDF.generateHTMLObavestenje(id);
+		File file = new File(url);
+		FileInputStream fileInputStream = new FileInputStream(file);
+		return IOUtils.toString(fileInputStream, "UTF-8");
 	}
 
 }

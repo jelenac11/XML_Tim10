@@ -1,11 +1,14 @@
 package projectXML.team9.services;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
@@ -14,6 +17,7 @@ import projectXML.team9.util.Fuseki;
 import projectXML.team9.util.GenerateHTMLAndPDF;
 import projectXML.team9.util.MarshallerFactory;
 import projectXML.team9.util.MetadataExtractor;
+import projectXML.team9.util.PreProcessDataForEmail;
 
 @Service
 public class ZahtevService {
@@ -37,9 +41,19 @@ public class ZahtevService {
 	@Autowired
 	private GenerateHTMLAndPDF generateHTMLAndPDF;
 
+	@Autowired
+	private PreProcessDataForEmail preProcessDataForEmail;
+
 	public ZahtevGradjana getZahtev(String id) throws Exception {
 		ZahtevGradjana zahtev = zahtevRepository.getById(id);
 		return zahtev;
+	}
+
+	public String getXSLTZahtev(String id) throws Exception {
+		String url = generateHTMLAndPDF.generateHTMLZahtev(id);
+		File file = new File(url);
+		FileInputStream fileInputStream = new FileInputStream(file);
+		return IOUtils.toString(fileInputStream, "UTF-8");
 	}
 
 	public ZahtevGradjana create(ZahtevGradjana zahtevGradjana, String email) throws Exception {
@@ -81,9 +95,10 @@ public class ZahtevService {
 		return fusekiWriter.readAllUnansweredZahteviId("/zahtevi");
 	}
 
-	public void declineZahtev(String zahtevId) {
+	public void declineZahtev(String zahtevId) throws Exception {
 		fusekiWriter.updateZahtevWithStatus(false, zahtevId);
-
+		ZahtevGradjana zahtevGradjana = getZahtev(zahtevId.split("/")[4]);
+		preProcessDataForEmail.sendMailWhenZahtevIsDenied(zahtevGradjana.getTrazilac().getContent());
 	}
 
 	public void acceptZahtev(String zahtevId) {

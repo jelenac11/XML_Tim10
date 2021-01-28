@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team9.dto.DocumentsIDDTO;
+import projectXML.team9.dto.XSLTDocumentDTO;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.obavestenje.Obavestenje;
 import projectXML.team9.services.ObavestenjeService;
@@ -80,6 +81,20 @@ public class ObavestenjeController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 		return ResponseEntity.ok(obavestenje);
+	}
+
+	@GetMapping(value = "XSLTDocument/{id}")
+	@CrossOrigin
+	public ResponseEntity getXSLTObavestenje(@PathVariable String id) {
+		String obavestenjeXSLT;
+		try {
+			obavestenjeXSLT = obavestenjeService.getXSLTObavestenje(id);
+			XSLTDocumentDTO document = new XSLTDocumentDTO();
+			document.setXslt(obavestenjeXSLT);
+			return ResponseEntity.ok(document);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_XML_VALUE)
