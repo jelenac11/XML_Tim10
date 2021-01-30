@@ -65,7 +65,7 @@ public class ZahtevController {
 	@GetMapping(value = "/{id}")
 
 	@CrossOrigin
-	public ResponseEntity getZahtev(@PathVariable String id) {
+	public ResponseEntity<?> getZahtev(@PathVariable String id) {
 		ZahtevGradjana zahtev;
 		try {
 			zahtev = zahtevService.getZahtev(id);
@@ -77,7 +77,7 @@ public class ZahtevController {
 
 	@GetMapping(value = "XSLTDocument/{id}")
 	@CrossOrigin
-	public ResponseEntity getXSLTZahtev(@PathVariable String id) {
+	public ResponseEntity<?> getXSLTZahtev(@PathVariable String id) {
 		String zahtevXSLT;
 		try {
 			zahtevXSLT = zahtevService.getXSLTZahtev(id);
@@ -91,7 +91,7 @@ public class ZahtevController {
 
 	@GetMapping
 	@CrossOrigin
-	public ResponseEntity getZahtevi() {
+	public ResponseEntity<?> getZahtevi() {
 		DocumentsIDDTO zahtevi = new DocumentsIDDTO();
 		try {
 			Korisnik user = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -105,7 +105,7 @@ public class ZahtevController {
 
 	@GetMapping(value = "/unanswered-zahtevi")
 	@CrossOrigin
-	public ResponseEntity getUnansweredZahtevi() {
+	public ResponseEntity<?> getUnansweredZahtevi() {
 		DocumentsIDDTO zahtevi = new DocumentsIDDTO();
 		try {
 			ArrayList<String> idsZahteva = zahtevService.getUnansweredZahtevi();
@@ -118,7 +118,7 @@ public class ZahtevController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_XML_VALUE)
 	@CrossOrigin
-	public ResponseEntity createZahtev(@RequestBody ZahtevGradjana zahtevGradjana) {
+	public ResponseEntity<?> createZahtev(@RequestBody ZahtevGradjana zahtevGradjana) {
 		try {
 			Korisnik user = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			ZahtevGradjana zahtev = zahtevService.create(zahtevGradjana, user.getEmail());

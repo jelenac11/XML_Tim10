@@ -85,7 +85,6 @@ public class TokenUtils {
     // Funkcija za validaciju JWT tokena
     public boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
-        final Date created = getIssuedAtDateFromToken(token);
 
         return (username != null && username.equals(((Korisnik) userDetails).getEmail()));
     }
