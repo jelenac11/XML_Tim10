@@ -111,6 +111,19 @@ public class Fuseki {
 
 		return answeredZahtev;
 	}
+	
+	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
+				" ?s <http://www.projekat.org/predicate/status> false ; \n" + String.format(
+				"<http://www.projekat.org/predicate/podnosilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>", 
+				email));
+		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
+
+		return answeredZahtev;
+	}
 
 	public ArrayList<String> readAllObavestenjaIdByCitizenEmail(String type, String email) {
 		String sparqlQuery = SparqlUtil.selectData(

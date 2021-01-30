@@ -105,4 +105,8 @@ public class ZahtevService {
 		fusekiWriter.updateZahtevWithStatus(true, zahtevId);
 
 	}
+
+	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
+		return fusekiWriter.readAllRejectedZahteviIdByCitizenEmail(email);
+	}
 }
