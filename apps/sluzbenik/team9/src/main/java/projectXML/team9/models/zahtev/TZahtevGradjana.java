@@ -698,7 +698,7 @@ public class TZahtevGradjana {
 			 */
 			public String getDatatype() {
 				if (datatype == null) {
-					return "xs:date";
+					return "xs:dateTime";
 				} else {
 					return datatype;
 				}

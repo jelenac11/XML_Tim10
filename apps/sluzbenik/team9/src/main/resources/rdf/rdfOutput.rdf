@@ -1,14 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<rdf:Description rdf:about="http://localhost:4200/zahtev/55f170e1-569e-42f2-a882-36793f9862f3">
-<pred:organ_od_kojeg_se_trazi xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">naziv</pred:organ_od_kojeg_se_trazi>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/4d5a5ae7-fda8-4925-8f5c-1101cd8d74dc">
+<pred:organ_od_kojeg_se_trazi xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">s</pred:organ_od_kojeg_se_trazi>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zahtev/55f170e1-569e-42f2-a882-36793f9862f3">
+<rdf:Description rdf:about="http://localhost:4200/zahtev/4d5a5ae7-fda8-4925-8f5c-1101cd8d74dc">
 <pred:podnosilac_zahteva xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:podnosilac_zahteva>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zahtev/55f170e1-569e-42f2-a882-36793f9862f3">
-<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mesto3</pred:mesto_podnosenja>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/4d5a5ae7-fda8-4925-8f5c-1101cd8d74dc">
+<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">s</pred:mesto_podnosenja>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zahtev/55f170e1-569e-42f2-a882-36793f9862f3">
-<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-01-30</pred:datum_podnosenja>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/4d5a5ae7-fda8-4925-8f5c-1101cd8d74dc">
+<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-01-31T18:46:36</pred:datum_podnosenja>
 </rdf:Description>
 </rdf:RDF>

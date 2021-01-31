@@ -652,7 +652,7 @@ public class ZahtevGradjana {
 			 */
 			public String getDatatype() {
 				if (datatype == null) {
-					return "xs:date";
+					return "xs:dateTime";
 				} else {
 					return datatype;
 				}

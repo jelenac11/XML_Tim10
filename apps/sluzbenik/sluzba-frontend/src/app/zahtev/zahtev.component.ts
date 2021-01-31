@@ -36,6 +36,7 @@ export class ZahtevComponent implements OnInit {
   };
 
   public submit(): void {
+    console.log(Xonomy.harvest());
     this.zahtevService.post("zahtevi", Xonomy.harvest())
       .subscribe(res => {
         this.succesMessage('Uspešno ste poslali zahtev.');
