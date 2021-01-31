@@ -91,10 +91,10 @@
                             <xs:element name="datum">
                                 <xs:complexType>
                                     <xs:simpleContent>
-                                        <xs:extension base="xs:date">
+                                        <xs:extension base="xs:dateTime">
                                             <xs:attribute fixed="pred:datum_podnosenja"
                                                 name="property" type="xs:string" use="optional"/>
-                                            <xs:attribute fixed="xs:date" name="datatype"
+                                            <xs:attribute fixed="xs:dateTime" name="datatype"
                                                 type="xs:string" use="optional"/>
                                         </xs:extension>
                                     </xs:simpleContent>

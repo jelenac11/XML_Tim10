@@ -61,6 +61,7 @@ public class ZahtevRepository {
 		OutputStream os = new ByteArrayOutputStream();
 
 		try {
+			System.out.println(zahtev.getInformacijeVezaneZaZahtev().getDatum().getValue());
 			col = databaseConnector.getOrCreateCollection(collectionId, 0);
 			res = databaseConnector.createResource(col, id);
 			marshaller.marshal(zahtev, os);
@@ -69,6 +70,7 @@ public class ZahtevRepository {
 
 			col.storeResource(res);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw e;
 		} finally {
 			databaseConnector.closeConnections(res, col);

@@ -593,7 +593,7 @@ public class ZahtevGradjana {
 		public static class DatumPodnosenja {
 
 			@XmlValue
-			@XmlSchemaType(name = "date")
+			@XmlSchemaType(name = "dateTime")
 			protected XMLGregorianCalendar value;
 			@XmlAttribute(name = "property", required = false)
 			protected String property;
@@ -652,7 +652,7 @@ public class ZahtevGradjana {
 			 */
 			public String getDatatype() {
 				if (datatype == null) {
-					return "xs:date";
+					return "xs:dateTime";
 				} else {
 					return datatype;
 				}
