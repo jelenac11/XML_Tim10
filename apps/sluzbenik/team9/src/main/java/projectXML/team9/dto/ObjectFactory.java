@@ -1,5 +1,5 @@
 
-package net.java.dev.jaxb.array;
+package projectXML.team9.dto;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
