@@ -18,11 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.java.dev.jaxb.array.StringArray;
-import net.java.dev.jaxb.array.TStringArray;
-import projectXML.team10.poverenik.dto.TXSLTDocumentDTO;
+import projectXML.team10.poverenik.dto.StringArray;
 import projectXML.team10.poverenik.dto.XSLTDocumentDTO;
 import projectXML.team10.poverenik.models.korisnik.Korisnik;
+import projectXML.team10.poverenik.models.zahtev.ZahtevGradjana;
 import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team10.poverenik.services.ZalbaNaOdlukuService;
 import projectXML.team10.poverenik.soap.ports.ZahteviPort;
@@ -68,11 +67,10 @@ public class ZalbaNaOdlukuController {
 	    	QName portName = new QName("http://www.projekat.org/ws/zahtevi", "ZahtevPort");
 	    	
 	    	Service service = Service.create(wsdl, serviceName);
-	    	
 	        ZahteviPort zahteviPort = service.getPort(portName, ZahteviPort.class);
-	        TStringArray items = zahteviPort.getOdbijeniZahtevi(current.getEmail());
-			StringArray sa = new StringArray(items.getItem());
-			return ResponseEntity.ok(sa);
+
+	        StringArray items = zahteviPort.getOdbijeniZahtevi(current.getEmail());
+			return ResponseEntity.ok(items);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -87,12 +85,30 @@ public class ZalbaNaOdlukuController {
 	    	QName portName = new QName("http://www.projekat.org/ws/zahtevi", "ZahtevPort");
 	    	
 	    	Service service = Service.create(wsdl, serviceName);
-	    	
 	        ZahteviPort zahteviPort = service.getPort(portName, ZahteviPort.class);
-	        TXSLTDocumentDTO zahtevXSLT = zahteviPort.getZahtevById(id);
-	        XSLTDocumentDTO zahtev = new XSLTDocumentDTO(zahtevXSLT.getXslt());
+
+	        XSLTDocumentDTO zahtevXSLT = zahteviPort.getZahtevById(id);
+			return ResponseEntity.ok(zahtevXSLT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value = "/zahtev/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getZahtev(@PathVariable String id) {
+		try {
+			URL wsdl = new URL("http://localhost:8081/ws/zahtevi?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/zahtevi", "ZahteviService");
+	    	QName portName = new QName("http://www.projekat.org/ws/zahtevi", "ZahtevPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        ZahteviPort zahteviPort = service.getPort(portName, ZahteviPort.class);
+
+	        ZahtevGradjana zahtev = zahteviPort.getZahtev(id);
 			return ResponseEntity.ok(zahtev);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

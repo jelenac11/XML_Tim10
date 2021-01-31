@@ -1,5 +1,5 @@
 
-package net.java.dev.jaxb.array;
+package projectXML.team10.poverenik.dto;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

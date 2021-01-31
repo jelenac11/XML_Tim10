@@ -1,7 +1,7 @@
-package net.java.dev.jaxb.array;
+package projectXML.team10.poverenik.dto;
 
-import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -22,16 +22,8 @@ import lombok.Setter;
     "item"
 })
 @XmlRootElement(name = "array_string")
-public class TStringArray {
+public class StringArray {
 
-    @XmlElement(nillable = true)
+	@XmlElement(nillable = true)
     protected List<String> item;
-
-    public List<String> getItem() {
-        if (item == null) {
-            item = new ArrayList<String>();
-        }
-        return this.item;
-    }
-	
 }

@@ -60,6 +60,7 @@ export class ZalbaNaOdlukuXonomyService {
           "broj_zahteva": {
             asker: Xonomy.askString,
             menu: [],
+            isInvisible: true,
           },
           "about": {
             isInvisible: true,
@@ -205,6 +206,7 @@ export class ZalbaNaOdlukuXonomyService {
             );
           }
         },
+        isReadOnly: true,
         menu: [
           {
             caption: "Append an <common:adresa>",
@@ -338,6 +340,7 @@ export class ZalbaNaOdlukuXonomyService {
             );
           }
         },
+        isReadOnly: true,
         attributes: {
           "property": {
             isInvisible: true,
@@ -359,11 +362,8 @@ export class ZalbaNaOdlukuXonomyService {
             }
             );
           }
-
-          // VALIDIRATI DA LI SE OVAJ DATUM POKLAPA SA DATUMOM ZAHTEVA
-          // PRE NEGO STO KRENE DA PISE ZALBU, PONUDIMO MU SAMO ZALBE NA KOJE MOZE DA SE ZALI ZBOG CUTANJA, I POPUNIMO DATUM SAMI AUTOMATSKI
-
         },
+        isReadOnly: true,
         hasText: true,
         mustBeBefore: ["zno:podaci_o_zalbi"],
         asker: Xonomy.askString,
@@ -451,6 +451,13 @@ export class ZalbaNaOdlukuXonomyService {
 
       "zno:lice": {
         validate: function (jsElement) {
+          if (jsElement.hasAttribute("xsi:type") == "") {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element needs to have attribute xsi:type."
+            }
+            );
+          }
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
@@ -458,8 +465,91 @@ export class ZalbaNaOdlukuXonomyService {
             }
             );
           }
+          if (jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice" && (!jsElement.hasChildElement("common:ime") || !jsElement.hasChildElement("common:prezime"))) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element needs to have elements <common:ime> and <common:prezime> with attribute xsi:type value common:TFizicko_lice."
+            }
+            );
+          }
+          if (jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice" && !jsElement.hasChildElement("common:naziv")) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element needs to have elements <common:naziv> with attribute xsi:type value common:TPravno_lice."
+            }
+            );
+          }
+          if (!jsElement.hasChildElement("common:adresa")) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element needs to have element <common:adresa>."
+            }
+            );
+          }
         },
-        menu: [],
+        menu: [
+          {
+            caption: "Append an <common:adresa>",
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:adresa ${common}><common:mesto ${common}></common:mesto></common:adresa>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement("common:adresa") || !jsElement.getAttributeValue("xsi:type", null);
+            }
+          },
+          {
+            caption: "Append an <common:naziv>",
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:naziv ${common}></common:naziv>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || jsElement.hasChildElement("common:prezime")
+                || !jsElement.getAttributeValue("xsi:type", null) || jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice";
+            }
+          },
+          {
+            caption: "Append an <common:ime>",
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:ime ${common}></common:ime>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || !jsElement.getAttributeValue("xsi:type", null)
+                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
+            }
+          },
+          {
+            caption: "Append an <common:prezime>",
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:prezime ${common}></common:prezime>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:prezime") || !jsElement.getAttributeValue("xsi:type", null)
+                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
+            }
+          },
+          {
+            caption: "Add @xsi:type",
+            action: Xonomy.newAttribute,
+            actionParameter: { name: "xsi:type", value: "" },
+            hideIf: function (jsElement) {
+              return jsElement.hasAttribute("xsi:type");
+            }
+          },
+        ],
+        attributes: {
+          "xsi:type": {
+            asker: Xonomy.askPicklist,
+            askerParameter: [
+              { value: "common:TFizicko_lice" },
+              { value: "common:TPravno_lice" }
+            ],
+            validate: function (jsAttribute) {
+              if (jsAttribute.value == "") {
+                Xonomy.warnings.push({
+                  htmlID: jsAttribute.htmlID,
+                  text: "This attribute must not be empty."
+                }
+                );
+              }
+            }
+          }
+        },
         mustBeBefore: ["zno:drugi_podatak_za_kontakt"],
       },
 
@@ -508,7 +598,6 @@ export class ZalbaNaOdlukuXonomyService {
           }
         },
         hasText: true,
-        mustBeBefore: ["common:prezime"],
         menu: [
           {
             caption: "Delete this <item>",
@@ -516,6 +605,7 @@ export class ZalbaNaOdlukuXonomyService {
           }
         ],
         asker: Xonomy.askString,
+        mustBeBefore: ["common:prezime"]
       },
 
       "common:prezime": {

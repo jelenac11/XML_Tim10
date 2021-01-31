@@ -58,18 +58,11 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-		</dependency>
+		
 
 		<!-- https://mvnrepository.com/artifact/javax.xml/jaxb-impl -->
 		<!-- https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl -->
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>${jaxbImpl.version}</version>
-		</dependency>
+		
 
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-xjc -->
 		<dependency>

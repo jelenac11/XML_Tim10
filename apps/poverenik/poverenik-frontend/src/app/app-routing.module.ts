@@ -4,18 +4,23 @@ import { NoAuthGuard } from './auth/guards/no-auth.guard';
 import { RoleGuard } from './auth/guards/role.guard';
 import { PrijavaComponent } from './auth/prijava/prijava.component';
 import { RegistracijaComponent } from './auth/registracija/registracija.component';
+import { MojiDokumentiComponent } from './moji-dokumenti/moji-dokumenti.component';
+import { PodnosenjeZalbeNaCutanjeComponent } from './podnosenje-zalbe-na-cutanje/podnosenje-zalbe-na-cutanje.component';
+import { PodnosenjeZalbeNaOdlukuComponent } from './podnosenje-zalbe-na-odluku/podnosenje-zalbe-na-odluku.component';
+import { PregledDokumenataComponent } from './pregled-dokumenata/pregled-dokumenata.component';
 import { PrikazZalbaCutanjeComponent } from './prikaz-zalba-cutanje/prikaz-zalba-cutanje.component';
 import { PrikazZalbaNaOdlukuComponent } from './prikaz-zalba-na-odluku/prikaz-zalba-na-odluku.component';
+import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZalbaCutanjeComponent } from './zalba-cutanje/zalba-cutanje.component';
 import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.component';
 
 const routes: Routes = [
   {
-    path: "", component: ZalbaCutanjeComponent, //ovde ce inace da ide na moji dokumenti kad se napravi ta stranica i treba da ima rolu gradjanin
+    path: "", component: MojiDokumentiComponent,
     canActivate: [RoleGuard],
     data: {
-        expectedRoles: 'gradjanin|poverenik'
-    } 
+        expectedRoles: 'role'
+    }
   },
   {
     path: "registracija", component: RegistracijaComponent,
@@ -26,14 +31,28 @@ const routes: Routes = [
     canActivate: [NoAuthGuard]
   },
   {
-    path: "nova-zalba-cutanje", component: ZalbaCutanjeComponent,
+    path: "podnosenje-zalbe-na-odluku", component: PodnosenjeZalbeNaOdlukuComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'gradjanin'
     }
   },
   {
-    path: "nova-zalba-na-odluku", component: ZalbaNaOdlukuComponent,
+    path: "podnosenje-zalbe-na-cutanje", component: PodnosenjeZalbeNaCutanjeComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin'
+    }
+  },
+  {
+    path: "nova-zalba-cutanje/:id", component: ZalbaCutanjeComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin'
+    }
+  },
+  {
+    path: "nova-zalba-na-odluku/:id", component: ZalbaNaOdlukuComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'gradjanin'
@@ -51,6 +70,27 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'gradjanin|poverenik'
+    }
+  },
+  {
+    path: "zahtev/:id", component: ZahtevPrikazComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin'
+    }
+  },
+  {
+    path: "moji-dokumenti", component: MojiDokumentiComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'gradjanin'
+    }
+  },
+  {
+    path: "pregled-dokumenata", component: PregledDokumenataComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'poverenik'
     }
   }
 ];

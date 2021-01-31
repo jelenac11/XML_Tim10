@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.java.dev.jaxb.array.StringArray;
+import projectXML.team9.dto.StringArray;
 import projectXML.team9.dto.TXSLTDocumentDTO;
+import projectXML.team9.models.zahtev.TZahtevGradjana;
+import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.services.ZahtevService;
 
 @javax.jws.WebService(
@@ -34,6 +36,18 @@ public class ZahteviPortImpl implements ZahteviPort {
 			TXSLTDocumentDTO document = new TXSLTDocumentDTO();
 			document.setXslt(zahtevXSLT);
 			return document;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public TZahtevGradjana getZahtev(String id) {
+		try {
+			ZahtevGradjana zahtev = zahtevService.getZahtev(id);
+			TZahtevGradjana tzahtev = new TZahtevGradjana(zahtev);
+			return tzahtev;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

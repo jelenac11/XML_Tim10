@@ -1117,7 +1117,7 @@ public class ZalbaNaOdluku {
         public static class PodnosilacZalbe {
 
             @XmlElement(namespace = "http://www.projekat.org/zalba_na_odluku", required = true)
-            protected TFizickoLice lice;
+            protected TLice lice;
             @XmlElement(name = "drugi_podaci_za_kontakt", namespace = "http://www.projekat.org/zalba_na_odluku", required = true)
             protected String drugiPodaciZaKontakt;
             @XmlAttribute(name = "property", required = false)
@@ -1133,7 +1133,7 @@ public class ZalbaNaOdluku {
              *     {@link TFizickoLice }
              *     
              */
-            public TFizickoLice getLice() {
+            public TLice getLice() {
                 return lice;
             }
 
@@ -1145,7 +1145,7 @@ public class ZalbaNaOdluku {
              *     {@link TFizickoLice }
              *     
              */
-            public void setLice(TFizickoLice value) {
+            public void setLice(TLice value) {
                 this.lice = value;
             }
 

@@ -42,7 +42,7 @@
                             <xs:element name="podnosilac_zalbe">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="lice" type="common:TFizicko_lice"/>
+                                        <xs:element name="lice" type="common:TLice"/>
                                         <xs:element name="drugi_podaci_za_kontakt">
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">

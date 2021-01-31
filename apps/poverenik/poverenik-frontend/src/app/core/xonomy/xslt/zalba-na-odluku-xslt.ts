@@ -22,7 +22,7 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                     padding-top: 60pt;
                     padding-bottom: 60pt;
                     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                    width: 90%;
+                    width: 850px;
                     position: sticky;
                     top: 25pt;
                  }
@@ -304,13 +304,13 @@ export const zalbaNaOdlukuXSLT = `<?xml version="1.0" encoding="UTF-8"?>
                         <span class="c17">Жалбу подносим благовремено, у законском року утврђеном у члану 22. ст. 1. Закона о слободном приступу информацијама од јавног значаја.</span>
                     </p>
                     <div class="c22">
-                        <span class="c23"><xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:ime"></xsl:value-of></span> <span style="padding-left:4px"><xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:prezime"></xsl:value-of></span>
+                        <span class="c23"><xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:naziv"></xsl:value-of><xsl:value-of select="concat(/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:ime, ' ')"></xsl:value-of><xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:prezime"></xsl:value-of></span>
                     </div>
                     <div class="c22">
                         <p class="c24">Подносилац жалбе / Име и презиме</p>
                     </div>
                     <div class="c25">
-                        <span class="c26"><xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:adresa/common:ulica"></xsl:value-of> <span style="padding-left:4px"><xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:adresa/common:broj"></xsl:value-of></span>, <xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:adresa/common:mesto"></xsl:value-of></span>
+                        <span class="c26"><xsl:value-of select="concat(/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:adresa/common:ulica, ' ')"></xsl:value-of><xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:adresa/common:broj"></xsl:value-of>, <xsl:value-of select="/zno:zalba_na_odluku/zno:podaci_o_zalbi/zno:podnosilac_zalbe/zno:lice/common:adresa/common:mesto"></xsl:value-of></span>
                     </div>
                     <div class="c25">
                         <p class="c24">адресa</p>
