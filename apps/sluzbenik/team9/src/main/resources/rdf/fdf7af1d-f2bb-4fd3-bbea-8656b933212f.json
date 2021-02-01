@@ -1,0 +1,25 @@
+{
+  "head": {
+    "vars": [ "predicate" , "object" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/datum_podnosenja" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2021-01-31" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/podnosilac_zahteva" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "milanm2998@gmail.com" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/organ_od_kojeg_se_trazi" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "Nesto" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/mesto_podnosenja" } ,
+        "object": { "type": "literal" , "value": "Nesto" }
+      }
+    ]
+  }
+}

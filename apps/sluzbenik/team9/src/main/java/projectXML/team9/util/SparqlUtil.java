@@ -25,6 +25,9 @@ public class SparqlUtil {
 	private static final String SELECT_NAMED_GRAPH_TEMPLATE = "SELECT * FROM <%1$s> WHERE { %2$s }";
 
 	/* Simple SPARQL query on a named graph */
+	private static final String SELECT_OBJECT_PREDICATE_NAMED_GRAPH_TEMPLATE = "SELECT ?predicate ?object FROM <%1$s> WHERE { %2$s }";
+
+	/* Simple SPARQL query on a named graph */
 	private static final String SELECT_DISTINCT_NAMED_GRAPH_TEMPLATE = "SELECT DISTINCT ?s FROM <%1$s> WHERE { %2$s }";
 
 	private static final String SELECT_OBJECT_GRAPH_TEMPLATE = "SELECT ?o FROM <%1$s> WHERE { %2$s }";
@@ -62,6 +65,10 @@ public class SparqlUtil {
 
 	public static String selectDistinctData(String graphURI, String sparqlCondition) {
 		return String.format(SELECT_DISTINCT_NAMED_GRAPH_TEMPLATE, graphURI, sparqlCondition);
+	}
+	
+	public static String selectPredicateObjectData(String graphURI, String sparqlCondition) {
+		return String.format(SELECT_OBJECT_PREDICATE_NAMED_GRAPH_TEMPLATE, graphURI, sparqlCondition);
 	}
 
 }
