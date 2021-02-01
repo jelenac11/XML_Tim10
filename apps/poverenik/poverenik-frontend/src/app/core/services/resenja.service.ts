@@ -13,11 +13,15 @@ export class ResenjaService {
   ) { }
 
   get(id: string): Observable<any> {
-    return this.http.get(`${environment.api_url}"resenje"/${id}`, { responseType: 'text' });
+    return this.http.get(`${environment.api_url}resenje/${id}`, { responseType: 'text' });
   }
 
   post(body: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
-    return this.http.post(`${environment.api_url}"resenje"`, body, { headers, responseType: 'text' });
+    return this.http.post(`${environment.api_url}resenje`, body, { headers, responseType: 'text' });
+  }
+
+  transform(xml: string): Observable<any> {
+    return this.http.post(`${environment.api_url}resenje/transform`, xml , { responseType: 'text' });
   }
 }
