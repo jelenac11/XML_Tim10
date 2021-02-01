@@ -69,6 +69,20 @@ public class ResenjeController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
+	
+	@PostMapping(value = "transform")
+	@CrossOrigin
+	public ResponseEntity<?> transform(@RequestBody String xml) {
+		String resenjeXSLT;
+		try {
+			resenjeXSLT = resenjeService.generateHTML(xml);
+			XSLTDocumentDTO document = new XSLTDocumentDTO();
+			document.setXslt(resenjeXSLT);
+			return ResponseEntity.ok(document);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
 
 	@GetMapping(value = "/{id}")
 	@CrossOrigin
@@ -86,11 +100,10 @@ public class ResenjeController {
 	@CrossOrigin
 	public ResponseEntity<?> createOdlukaPoverioca(@RequestBody String odluka){
 		try {
-			resenjeService.create(odluka);
+			return ResponseEntity.ok(resenjeService.create(odluka));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
-		return ResponseEntity.ok(odluka);
 	}
 	
 }

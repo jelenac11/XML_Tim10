@@ -45,6 +45,12 @@ public class GenerateHTMLAndPDF {
 		return HTML_FILE + id + ".html";
 	}
 	
+	public String generateHTMLResenjeXML(String xml) throws Exception {
+		saveToFile(xml, INPUT_FILE + "resenje.xml");
+		xmlTransformations.generateHTML(INPUT_FILE + "resenje.xml", XSLT_FILE + "resenje.xsl", HTML_FILE + "RNG" + ".html");
+		return HTML_FILE + "RNG" + ".html";
+	}
+	
 	private void saveToFile(String content, String fileName) throws IOException {
 		FileWriter fileWriter = new FileWriter(fileName);
 	    PrintWriter printWriter = new PrintWriter(fileWriter);

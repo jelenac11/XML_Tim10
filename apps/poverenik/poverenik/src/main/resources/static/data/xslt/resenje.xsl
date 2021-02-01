@@ -68,7 +68,7 @@
 						</p>
 					</xsl:for-each>
 					<p>
-						<xsl:apply-templates select="/res:odluka_poverioca/res:uputstvo"/>
+						<xsl:value-of select="/res:odluka_poverioca/res:uputstvo"/>
 					</p>
 					<p style="white-space: pre-line; text-align: right;">ПОВЕРЕНИК 
 						<xsl:value-of select="/res:odluka_poverioca/res:poverenik/common:ime"/>&#160;<xsl:value-of select="/res:odluka_poverioca/res:poverenik/common:prezime"/>
