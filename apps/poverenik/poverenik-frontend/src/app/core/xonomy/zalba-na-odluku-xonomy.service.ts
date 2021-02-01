@@ -62,12 +62,6 @@ export class ZalbaNaOdlukuXonomyService {
             menu: [],
             isInvisible: true,
           },
-          "about": {
-            isInvisible: true,
-          },
-          "vocab": {
-            isInvisible: true,
-          }
         }
       },
 

@@ -5,17 +5,12 @@ import java.io.FileInputStream;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
-import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,16 +68,12 @@ public class ZahtevService {
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getMesto().setProperty();
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getMesto().setDatatype("xs:string");
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setDatatype("xs:dateTime");
-		System.out.println("1");
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date())));
-	    System.out.println(("2"));
-		System.out.println(zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().getValue());
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setProperty();
 		zahtevGradjana.getOrgan().setProperty();
 		zahtevGradjana.getOrgan().setContent(zahtevGradjana.getOrgan().getNaziv());
 		zahtevGradjana.getTrazilac().setProperty();
 		zahtevGradjana.getTrazilac().setContent(email);
-		System.out.println(zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().getValue());
 		zahtevRepository.save(zahtevGradjana, id);
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
@@ -123,4 +114,14 @@ public class ZahtevService {
 	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
 		return fusekiWriter.readAllRejectedZahteviIdByCitizenEmail(email);
 	}
+	
+	public ArrayList<String> readAllZahteviForZalbaCutanje(String email) {
+		Date now = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-ddThh:mm:ss");
+        String strDate = dateFormat.format(now);
+        System.out.println("DAAAAAAAAAAAAAATUUUUUUUUUUUUUUUUM");
+		System.out.println(strDate);
+		return fusekiWriter.readAllZahteviForZalbaCutanje(strDate, email);
+	}
+	
 }

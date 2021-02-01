@@ -20,8 +20,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
 @Component
 public class Fuseki {
 

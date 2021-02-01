@@ -25,6 +25,13 @@ public interface ZahteviPort {
 	
 	@WebMethod
     @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zahtevi", partName = "return")
+    public StringArray getIstekliZahtevi(
+        @WebParam(partName = "email", name = "email")
+        String email
+    );
+	
+	@WebMethod
+    @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zahtevi", partName = "return")
     public XSLTDocumentDTO getZahtevById(
         @WebParam(partName = "id", name = "id")
         String id

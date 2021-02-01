@@ -30,6 +30,12 @@ public class ZahteviPortImpl implements ZahteviPort {
 	}
 	
 	@Override
+	public StringArray getIstekliZahtevi(String email) {
+		ArrayList<String> odbijeni = zahtevService.readAllZahteviForZalbaCutanje(email);
+		return new StringArray(odbijeni);
+	}
+	
+	@Override
 	public TXSLTDocumentDTO getZahtevById(String id) {
 		try {
 			String zahtevXSLT = zahtevService.getXSLTZahtev(id);
