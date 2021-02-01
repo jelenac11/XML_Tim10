@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DokumentiComponent } from './dokumenti/dokumenti.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MatIconModule } from '@angular/material/icon';
     ObavestenjeComponent,
     ZahtevPrikazComponent,
     ObavestenjePrikazComponent,
-    DokumentiComponent
+    DokumentiComponent,
+    DokumentPretragaComponent
   ],
   imports: [
     BrowserModule,

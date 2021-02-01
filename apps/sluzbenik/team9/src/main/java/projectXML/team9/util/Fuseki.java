@@ -4,6 +4,7 @@ import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
@@ -17,13 +18,18 @@ import org.springframework.stereotype.Component;
 import projectXML.team9.configuration.PropertiesConfiguration;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 @Component
 public class Fuseki {
 
 	private static final String RDF_FILEPATH = "src/main/resources/rdf/rdfOutput.rdf";
+
+	private static final String JSON_FILEPATH = "src/main/resources/rdf/";
 
 	private static final String GRAPH_URI = "/metadata";
 
@@ -67,6 +73,7 @@ public class Fuseki {
 						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
 
 		ResultSet results = queryExecution.execSelect();
+
 		String varName;
 		RDFNode varValue;
 
@@ -140,5 +147,74 @@ public class Fuseki {
 						propertiesConfiguration.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getUpdate()));
 		processor.execute();
+	}
+
+	public ResultSet getDocumentMetaDataById(String sparqlQuery) {
+		QueryExecution queryExecution = QueryExecutionFactory
+				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
+
+		return queryExecution.execSelect();
+	}
+
+	public String getZahtevMetaDataByIdAsJSON(String zahtevId) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fuseki/SluzbenikDataset/data/metadata/zahtevi",
+				String.format("<http://localhost:4200/zahtev/%s>  ?predicate  ?object", zahtevId));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.json", zahtevId);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsJSON(output, result);
+
+		return path;
+	}
+
+	public String getZahtevMetaDataByIdAsXML(String zahtevId) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fuseki/SluzbenikDataset/data/metadata/zahtevi",
+				String.format("<http://localhost:4200/zahtev/%s>  ?predicate  ?object", zahtevId));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.xml", zahtevId);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsXML(output, result);
+
+		return path;
+	}
+
+	public String getObavestenjeMetaDataByIdAsJSON(String obavestenjeId) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fuseki/SluzbenikDataset/data/metadata/obavestenja",
+				String.format("<http://localhost:4200/obavestenje/%s>  ?predicate  ?object", obavestenjeId));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.json", obavestenjeId);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsJSON(output, result);
+
+		return path;
+	}
+
+	public String getObavestenjeMetaDataByIdAsXML(String obavestenjeId) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fuseki/SluzbenikDataset/data/metadata/obavestenja",
+				String.format("<http://localhost:4200/obavestenje/%s>  ?predicate  ?object", obavestenjeId));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.xml", obavestenjeId);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsXML(output, result);
+
+		return path;
 	}
 }

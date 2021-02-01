@@ -63,7 +63,6 @@ public class ZahtevController {
 	}
 
 	@GetMapping(value = "/{id}")
-
 	@CrossOrigin
 	public ResponseEntity getZahtev(@PathVariable String id) {
 		ZahtevGradjana zahtev;
@@ -73,6 +72,34 @@ public class ZahtevController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
+	}
+
+	@GetMapping(value = "extract-metadata/json/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsJSONById(@PathVariable String id) {
+		try {
+			String path = zahtevService.getDocumentMetaDataByIdAsJSON(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@GetMapping(value = "extract-metadata/xml/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsXMLById(@PathVariable String id) {
+		try {
+			String path = zahtevService.getDocumentMetaDataByIdAsXML(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@GetMapping(value = "XSLTDocument/{id}")

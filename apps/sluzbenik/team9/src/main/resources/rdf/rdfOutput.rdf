@@ -1,14 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<rdf:Description rdf:about="http://localhost:4200/obavestenje/42615dc1-6ab0-461e-84d6-fa1ea42179fe">
-<pred:zahtev_na_koji_se_odnosi_obavestenje xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://localhost:4200/zahtev/5385ae9b-d105-40cf-91fc-b944887ad670</pred:zahtev_na_koji_se_odnosi_obavestenje>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/fdf7af1d-f2bb-4fd3-bbea-8656b933212f">
+<pred:organ_od_kojeg_se_trazi xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Nesto</pred:organ_od_kojeg_se_trazi>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/obavestenje/42615dc1-6ab0-461e-84d6-fa1ea42179fe">
-<pred:kreator_obavestenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">JKP Lišće Modriče</pred:kreator_obavestenja>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/fdf7af1d-f2bb-4fd3-bbea-8656b933212f">
+<pred:podnosilac_zahteva xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:podnosilac_zahteva>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/obavestenje/42615dc1-6ab0-461e-84d6-fa1ea42179fe">
-<pred:trazilac_informacija xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:trazilac_informacija>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/fdf7af1d-f2bb-4fd3-bbea-8656b933212f">
+<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nesto</pred:mesto_podnosenja>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/obavestenje/42615dc1-6ab0-461e-84d6-fa1ea42179fe">
-<pred:datum_donosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-01-28</pred:datum_donosenja>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/fdf7af1d-f2bb-4fd3-bbea-8656b933212f">
+<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-01-31</pred:datum_podnosenja>
 </rdf:Description>
 </rdf:RDF>

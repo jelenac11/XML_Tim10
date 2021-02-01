@@ -2,6 +2,7 @@ package projectXML.team9.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -104,5 +105,13 @@ public class ZahtevService {
 	public void acceptZahtev(String zahtevId) {
 		fusekiWriter.updateZahtevWithStatus(true, zahtevId);
 
+	}
+	
+	public String getDocumentMetaDataByIdAsJSON(String zahtevId) throws FileNotFoundException {
+		return fusekiWriter.getZahtevMetaDataByIdAsJSON(zahtevId);
+	}
+
+	public String getDocumentMetaDataByIdAsXML(String zahtevId) throws FileNotFoundException {
+		return fusekiWriter.getZahtevMetaDataByIdAsXML(zahtevId);
 	}
 }

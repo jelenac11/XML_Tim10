@@ -1,45 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="fa1ea42179fe-1/2020" id_zahteva="http://localhost:4200/zahtev/5385ae9b-d105-40cf-91fc-b944887ad670" id="http://localhost:4200/obavestenje/42615dc1-6ab0-461e-84d6-fa1ea42179fe" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/42615dc1-6ab0-461e-84d6-fa1ea42179fe" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="http://localhost:4200/zahtev/5385ae9b-d105-40cf-91fc-b944887ad670">
+<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="9848d42756e1-1/2020" id_zahteva="http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45" id="http://localhost:4200/obavestenje/537b0f28-5bdc-45d8-835d-9848d42756e1" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/537b0f28-5bdc-45d8-835d-9848d42756e1" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45">
     <ob:informacije_o_obavestenju>
-        <ob:organ property="pred:kreator_obavestenja" content="JKP Lišće Modriče">
+        <ob:organ property="pred:kreator_obavestenja" content="Poreska uprava">
             <common:adresa>
-                <common:mesto>Modriča</common:mesto>
-                <common:ulica>Kosovska</common:ulica>
-                <common:broj>10</common:broj>
+                <common:mesto>Beograd</common:mesto>
+                <common:ulica>Koste Pecanca</common:ulica>
+                <common:broj>12</common:broj>
             </common:adresa>
-            <common:naziv>JKP Lišće Modriče</common:naziv>
+            <common:naziv>Poreska uprava</common:naziv>
         </ob:organ>
-        <ob:trazilac property="pred:trazilac_informacija" content="milanm2998@gmail.com">
+        <ob:trazilac property="pred:trazilac_informacija" content="sluzbenik@gmail.com">
             <ob:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
                 <common:adresa>
-                    <common:mesto>Šamac</common:mesto>
-                    <common:ulica>Duga</common:ulica>
-                    <common:broj>32</common:broj>
+                    <common:mesto>Crkvina</common:mesto>
+                    <common:ulica>Crkvina</common:ulica>
+                    <common:broj>10</common:broj>
                 </common:adresa>
-                <common:ime>Simo</common:ime>
-                <common:prezime>Pisarević</common:prezime>
+                <common:ime>Milan</common:ime>
+                <common:prezime>Marinkovic</common:prezime>
             </ob:lice>
         </ob:trazilac>
-        <ob:datum_obavestenja property="pred:datum_donosenja" datatype="xs:date">2021-01-28</ob:datum_obavestenja>
+        <ob:datum_obavestenja property="pred:datum_donosenja" datatype="xs:date">2021-01-26</ob:datum_obavestenja>
     </ob:informacije_o_obavestenju>
     <ob:zahtev>
-        <ob:datum_trazenja_informacija>2021-01-27</ob:datum_trazenja_informacija>
-        <ob:opis_trazene_informacije>potrebni su mi podaci o necemu, podnijeti nekog datuma, u toj tamo upravi ne znam</ob:opis_trazene_informacije>
+        <ob:datum_trazenja_informacija>2021-01-25</ob:datum_trazenja_informacija>
+        <ob:opis_trazene_informacije>Neki podatak</ob:opis_trazene_informacije>
     </ob:zahtev>
     <ob:odgovor_na_zahtev>
         <ob:zahtevi>
-            <ob:informacije_o_uvidu>
-                <ob:datum_uvida>2021-02-03</ob:datum_uvida>
-                <ob:vreme_uvida>
-                    <ob:tacno_vreme_uvida>12</ob:tacno_vreme_uvida>
-                </ob:vreme_uvida>
-                <ob:mesto_uvida>
-                    <common:mesto>Srbija</common:mesto>
-                    <common:ulica>Nemanjica</common:ulica>
-                    <common:broj>2</common:broj>
-                    <ob:kancelarija>2</ob:kancelarija>
-                </ob:mesto_uvida>
-            </ob:informacije_o_uvidu>
+            <ob:informacije_o_posedovanju poseduje="true"/>
             <ob:informacije_o_izradi_kopije/>
         </ob:zahtevi>
     </ob:odgovor_na_zahtev>
