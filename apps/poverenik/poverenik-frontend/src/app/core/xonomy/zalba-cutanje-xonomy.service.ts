@@ -265,10 +265,6 @@ export class ZalbaCutanjeXonomyService {
             }
             );
           }
-
-          // VALIDIRATI DA LI SE OVAJ DATUM POKLAPA SA DATUMOM ZAHTEVA
-          // PRE NEGO STO KRENE DA PISE ZALBU, PONUDIMO MU SAMO ZALBE NA KOJE MOZE DA SE ZALI ZBOG CUTANJA, I POPUNIMO DATUM SAMI AUTOMATSKI
-
         },
         hasText: true,
         asker: Xonomy.askString,

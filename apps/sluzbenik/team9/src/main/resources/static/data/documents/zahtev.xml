@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<za:zahtev_gradjana xmlns:za="http://www.projekat.org/zahtev" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" id="http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45">
-    <za:organ property="pred:organ_od_kojeg_se_trazi" content="Poreska uprava">
+<za:zahtev_gradjana xmlns:za="http://www.projekat.org/zahtev" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" id="http://localhost:4200/zahtev/55f170e1-569e-42f2-a882-36793f9862f3" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/zahtev/55f170e1-569e-42f2-a882-36793f9862f3">
+    <za:organ property="pred:organ_od_kojeg_se_trazi" content="naziv">
         <common:adresa>
-            <common:mesto>Beograd</common:mesto>
-            <common:ulica>Koste Pecanca</common:ulica>
-            <common:broj>12</common:broj>
+            <common:mesto>mesto</common:mesto>
+            <common:ulica>ulica</common:ulica>
+            <common:broj>broj</common:broj>
         </common:adresa>
-        <common:naziv>Poreska uprava</common:naziv>
+        <common:naziv>naziv</common:naziv>
     </za:organ>
-    <za:trazilac property="pred:podnosilac_zahteva" content="sluzbenik@gmail.com">
-        <za:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
+    <za:trazilac property="pred:podnosilac_zahteva" content="milanm2998@gmail.com">
+        <za:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
             <common:adresa>
-                <common:mesto>Crkvina</common:mesto>
-                <common:ulica>Crkvina</common:ulica>
-                <common:broj>10</common:broj>
+                <common:mesto>mesto2</common:mesto>
+                <common:ulica>ulica2</common:ulica>
+                <common:broj>broj2</common:broj>
             </common:adresa>
-            <common:ime>Milan</common:ime>
-            <common:prezime>Marinkovic</common:prezime>
+            <common:naziv>naziv2</common:naziv>
         </za:lice>
-        <za:drugi_podatak_za_kontakt>Neki podatak</za:drugi_podatak_za_kontakt>
+        <za:drugi_podatak_za_kontakt>kontakt</za:drugi_podatak_za_kontakt>
     </za:trazilac>
     <za:informacije_vezane_za_zahtev>
         <za:tip_zahteva>
             <za:obavestenje_posedovanja_informacije/>
-            <za:kopiju_dokumenta/>
         </za:tip_zahteva>
-        <za:opis_zahteva>Neki podatak</za:opis_zahteva>
-        <za:mesto property="pred:mesto_podnosenja" datatype="xs:string">Beograd</za:mesto>
-        <za:datum property="pred:datum_podnosenja" datatype="xs:date">2021-01-25</za:datum>
+        <za:opis_zahteva>opis</za:opis_zahteva>
+        <za:mesto property="pred:mesto_podnosenja" datatype="xs:string">mesto3</za:mesto>
+        <za:datum property="pred:datum_podnosenja" datatype="xs:date">2021-01-30</za:datum>
     </za:informacije_vezane_za_zahtev>
 </za:zahtev_gradjana>

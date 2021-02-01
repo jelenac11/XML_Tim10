@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 @Component
 public class Fuseki {
 
@@ -114,6 +116,33 @@ public class Fuseki {
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
 				" ?s ?o ?p \r\n" + "MINUS \r\n" + "  {\r\n" + "  select ?s WHERE { \r\n"
 						+ "    ?s <http://www.projekat.org/predicate/status> ?o }\r\n" + "  }");
+		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
+
+		return answeredZahtev;
+	}
+	
+	public ArrayList<String> readAllZahteviForZalbaCutanje(String datum, String email) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
+				String.format("?s <http://www.projekat.org/predicate/trazilac_informacija> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ",email) + "\n ?s <http://www.projekat.org/predicate/datum_podnosenja> ?date" +
+					 "\n FILTER " + String.format("( ?date < \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> ",datum) +
+						"MINUS \r\n" + "  {\r\n" + "  select ?s WHERE { \r\n"
+					+ "    ?s <http://www.projekat.org/predicate/status> true|false }\r\n" + "  }");
+		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
+
+		return answeredZahtev;
+	}
+	
+	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
+				" ?s <http://www.projekat.org/predicate/status> false ; \n" + String.format(
+				"<http://www.projekat.org/predicate/podnosilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>", 
+				email));
 		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
 
 		return answeredZahtev;

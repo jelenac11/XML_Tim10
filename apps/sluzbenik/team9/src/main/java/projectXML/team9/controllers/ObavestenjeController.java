@@ -1,17 +1,8 @@
 package projectXML.team9.controllers;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.net.URLConnection;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,7 +63,7 @@ public class ObavestenjeController {
 
 	@GetMapping(value = "/{id}")
 	@CrossOrigin
-	public ResponseEntity getObavestenje(@PathVariable String id) {
+	public ResponseEntity<?> getObavestenje(@PathVariable String id) {
 		Obavestenje obavestenje;
 		try {
 			obavestenje = obavestenjeService.getObavestenje(id);
@@ -85,7 +75,7 @@ public class ObavestenjeController {
 
 	@GetMapping(value = "XSLTDocument/{id}")
 	@CrossOrigin
-	public ResponseEntity getXSLTObavestenje(@PathVariable String id) {
+	public ResponseEntity<?> getXSLTObavestenje(@PathVariable String id) {
 		String obavestenjeXSLT;
 		try {
 			obavestenjeXSLT = obavestenjeService.getXSLTObavestenje(id);
@@ -99,7 +89,7 @@ public class ObavestenjeController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_XML_VALUE)
 	@CrossOrigin
-	public ResponseEntity createObavestenje(@RequestBody Obavestenje obavestenje) {
+	public ResponseEntity<?> createObavestenje(@RequestBody Obavestenje obavestenje) {
 		try {
 			obavestenje = obavestenjeService.create(obavestenje);
 			return ResponseEntity.ok(obavestenje);
@@ -110,7 +100,7 @@ public class ObavestenjeController {
 
 	@GetMapping
 	@CrossOrigin
-	public ResponseEntity getObavestenjaByCitizenEmail() {
+	public ResponseEntity<?> getObavestenjaByCitizenEmail() {
 		DocumentsIDDTO documents = new DocumentsIDDTO();
 		try {
 			Korisnik user = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

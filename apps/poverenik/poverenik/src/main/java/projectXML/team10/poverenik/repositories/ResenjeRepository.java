@@ -50,7 +50,7 @@ public class ResenjeRepository {
 		}
 	}
 	
-	public void save(Document odluka) throws Exception {
+	public String save(Document odluka) throws Exception {
 		Collection col = null;
 		XMLResource res = null;
 		String id = odluka.getDocumentElement().getAttribute("broj_rešenja");
@@ -65,7 +65,7 @@ public class ResenjeRepository {
 			
 			metadataExtractor.extractMetadata(xmlString);
 			FusekiWriter.saveRDF("/resenja");
-			
+			return xmlString;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
