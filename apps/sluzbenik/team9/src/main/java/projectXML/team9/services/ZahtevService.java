@@ -4,11 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
@@ -17,6 +16,8 @@ import javax.xml.datatype.DatatypeFactory;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import projectXML.team9.dto.SearchDTO;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.repositories.ZahtevRepository;
 import projectXML.team9.util.Fuseki;
@@ -24,6 +25,7 @@ import projectXML.team9.util.GenerateHTMLAndPDF;
 import projectXML.team9.util.MarshallerFactory;
 import projectXML.team9.util.MetadataExtractor;
 import projectXML.team9.util.PreProcessDataForEmail;
+import projectXML.team9.util.SearchOperations;
 
 @Service
 public class ZahtevService {
@@ -49,6 +51,9 @@ public class ZahtevService {
 
 	@Autowired
 	private PreProcessDataForEmail preProcessDataForEmail;
+
+	@Autowired
+	private SearchOperations searchOperations;
 
 	public ZahtevGradjana getZahtev(String id) throws Exception {
 		ZahtevGradjana zahtev = zahtevRepository.getById(id);
@@ -112,13 +117,14 @@ public class ZahtevService {
 		fusekiWriter.updateZahtevWithStatus(true, zahtevId);
 
 	}
-	
+
 	public String getDocumentMetaDataByIdAsJSON(String zahtevId) throws FileNotFoundException {
 		return fusekiWriter.getZahtevMetaDataByIdAsJSON(zahtevId);
 	}
 
 	public String getDocumentMetaDataByIdAsXML(String zahtevId) throws FileNotFoundException {
 		return fusekiWriter.getZahtevMetaDataByIdAsXML(zahtevId);
+	}
 
 	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
 		return fusekiWriter.readAllRejectedZahteviIdByCitizenEmail(email);
@@ -137,4 +143,43 @@ public class ZahtevService {
 		return fusekiWriter.readAllZahteviForZalbaCutanje(strDate, email);
 	}
 	
+
+	public Set<String> search(SearchDTO searchDTO) throws Exception {
+		String[] metadata = searchDTO.getMetadata().split("and");
+		String[] keyWordsAndPhrase = searchDTO.getKeyWord().split("and");
+
+		ArrayList<String> searchResult = new ArrayList<String>();
+		searchResult.addAll(searchPhraseAndKeyWords(keyWordsAndPhrase));
+		searchResult.addAll(searchOperations.searchMetadata(metadata, searchDTO.getOperator(), "zahtevi"));
+
+		if (metadata.length > 0 && !metadata[0].isEmpty() && keyWordsAndPhrase.length > 0
+				&& !keyWordsAndPhrase[0].isEmpty()) {
+			return searchOperations.andOperator(2, searchResult);
+		} else {
+			return searchOperations.andOperator(1, searchResult);
+		}
+	}
+
+	private Set<String> searchPhraseAndKeyWords(String[] keyWordsAndPhrase) throws Exception {
+		ArrayList<String> ids = new ArrayList<String>();
+		for (String word : keyWordsAndPhrase) {
+			if (word.isEmpty()) {
+				continue;
+			}
+			word = word.trim();
+			if (!word.startsWith("\"")) {
+				word = "\"" + word;
+			}
+			if (!word.endsWith("\"")) {
+				word = word + "\"";
+			}
+			ids.addAll(zahtevRepository.search(word.toLowerCase()));
+		}
+
+		return searchOperations.andOperator(keyWordsAndPhrase.length, ids);
+	}
+
+	public ArrayList<String> getAllZahtevi() {
+		return fusekiWriter.readAllDocuments("/zahtevi");
+	}
 }

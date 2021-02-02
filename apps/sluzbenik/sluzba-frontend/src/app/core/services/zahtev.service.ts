@@ -14,7 +14,7 @@ export class ZahtevService {
     return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
   }
 
-  getAllDocumentsIdByGradjanin(path: string): Observable<any> {
+  getAll(path: string): Observable<any> {
     return this.http.get(`${environment.api_url}${path}`, { responseType: 'text' });
   }
 

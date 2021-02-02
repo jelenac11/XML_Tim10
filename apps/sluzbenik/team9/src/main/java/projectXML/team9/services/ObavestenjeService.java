@@ -81,7 +81,8 @@ public class ObavestenjeService {
 		metadataExtractor.extractMetadata(xmlString);
 		fusekiWriter.saveRDF("/obavestenja");
 		fusekiWriter.updateZahtevWithStatus(true, obavestenje.getBrojZahteva());
-		preProcessDataForEmail.sendMailWhenZahtevIsAccepted(obavestenje.getInformacijeOObavestenju().getTrazilac().getContent(), id);
+		preProcessDataForEmail
+				.sendMailWhenZahtevIsAccepted(obavestenje.getInformacijeOObavestenju().getTrazilac().getContent(), id);
 		return obavestenje;
 	}
 
@@ -110,6 +111,10 @@ public class ObavestenjeService {
 
 	public String getDocumentMetaDataByIdAsXML(String obavestenjeId) throws FileNotFoundException {
 		return fusekiWriter.getObavestenjeMetaDataByIdAsXML(obavestenjeId);
+	}
+
+	public ArrayList<String> getReferencesOn(String id) {
+		return fusekiWriter.getDocumentIdThatHasReferenceOnOtherDocumentWithId(id, "/obavestenja");
 	}
 
 }
