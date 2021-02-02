@@ -112,6 +112,10 @@ public class ObavestenjeService {
 	public String getDocumentMetaDataByIdAsXML(String obavestenjeId) throws FileNotFoundException {
 		return fusekiWriter.getObavestenjeMetaDataByIdAsXML(obavestenjeId);
 	}
+	
+	public String getDocumentMetaDataByIdAsRDF(String zahtevId) throws FileNotFoundException {
+		return fusekiWriter.getDocumentMetaDataByIdAsRDF("obavestenje", zahtevId, "obavestenja");
+	}
 
 	public ArrayList<String> getReferencesOn(String id) {
 		return fusekiWriter.getDocumentIdThatHasReferenceOnOtherDocumentWithId(id, "/obavestenja");

@@ -129,6 +129,10 @@ public class ZahtevService {
 		return fusekiWriter.getZahtevMetaDataByIdAsXML(zahtevId);
 	}
 
+	public String getDocumentMetaDataByIdAsRDF(String zahtevId) throws FileNotFoundException {
+		return fusekiWriter.getDocumentMetaDataByIdAsRDF("zahtev", zahtevId, "zahtevi");
+	}
+
 	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
 		return fusekiWriter.readAllRejectedZahteviIdByCitizenEmail(email);
 	}

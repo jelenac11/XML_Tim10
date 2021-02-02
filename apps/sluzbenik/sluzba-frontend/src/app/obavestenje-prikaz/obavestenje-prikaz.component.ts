@@ -32,34 +32,50 @@ export class ObavestenjePrikazComponent implements OnInit {
     });
   }
 
-  downloadPDF(): void {
-    this.obavestenjeService.download('obavestenja/generate-pdf', this.id).subscribe(response => {
-      let file = new Blob([response], { type: 'application/pdf' });
-      var fileURL = URL.createObjectURL(file);
-      let a = document.createElement('a');
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.href = fileURL;
-      a.download = `${this.id}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(fileURL);
-      a.remove();
+  downloadPDF(documentID: string): void {
+    this.obavestenjeService.download(`obavestenja/generate-pdf`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'pdf', 'application/pdf');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  };
+
+  downloadHTML(documentID: string): void {
+    this.obavestenjeService.download(`obavestenja/generate-html`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'html', 'text/html');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  };
+
+  startDownload(fileName: string, response, extension: string, fileFormat: string) {
+    let file = new Blob([response], { type: fileFormat });
+    var fileURL = URL.createObjectURL(file);
+    let a = document.createElement('a');
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.href = fileURL;
+    a.download = `${fileName}.${extension}`;
+    a.click();
+    window.URL.revokeObjectURL(fileURL);
+    a.remove();
+  };
+
+  extractMetadataAsJSON(documentID: string) {
+    this.obavestenjeService.download(`obavestenja/extract-metadata/json`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'json', 'application/json');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   }
 
-  downloadHTML(): void {
-    this.obavestenjeService.download('obavestenja/generate-html', this.id).subscribe(response => {
-      let file = new Blob([response], { type: 'text/html' });
-      var fileURL = URL.createObjectURL(file);
-      let a = document.createElement('a');
-      document.body.appendChild(a);
-      a.setAttribute('style', 'display: none');
-      a.href = fileURL;
-      a.download = `${this.id}.html`;
-      a.click();
-      window.URL.revokeObjectURL(fileURL);
-      a.remove();
+  extractMetadataAsXML(documentID: string) {
+    this.obavestenjeService.download(`obavestenja/extract-metadata/xml`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'xml', 'application/xml');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  extractMetadataAsRDF(documentID: string) {
+    this.obavestenjeService.download(`obavestenja/extract-metadata/rdf`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'ttl', 'application/x-turtle');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   }
