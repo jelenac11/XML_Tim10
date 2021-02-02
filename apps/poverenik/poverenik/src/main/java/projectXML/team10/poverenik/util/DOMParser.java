@@ -48,7 +48,7 @@ public class DOMParser implements ErrorHandler {
 		factory = DocumentBuilderFactory.newInstance();
 		
 		/* Uključuje validaciju. */ 
-		factory.setValidating(true);
+		factory.setValidating(false);
 		
 		factory.setNamespaceAware(true);
 		factory.setIgnoringComments(true);

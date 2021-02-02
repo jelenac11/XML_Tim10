@@ -2,6 +2,7 @@ package projectXML.team9.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -101,6 +102,14 @@ public class ObavestenjeService {
 		File file = new File(url);
 		FileInputStream fileInputStream = new FileInputStream(file);
 		return IOUtils.toString(fileInputStream, "UTF-8");
+	}
+
+	public String getDocumentMetaDataByIdAsJSON(String obavestenjeId) throws FileNotFoundException {
+		return fusekiWriter.getObavestenjeMetaDataByIdAsJSON(obavestenjeId);
+	}
+
+	public String getDocumentMetaDataByIdAsXML(String obavestenjeId) throws FileNotFoundException {
+		return fusekiWriter.getObavestenjeMetaDataByIdAsXML(obavestenjeId);
 	}
 
 }

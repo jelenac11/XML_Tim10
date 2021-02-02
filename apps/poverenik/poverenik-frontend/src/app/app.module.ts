@@ -23,6 +23,8 @@ import { MojiDokumentiComponent } from './moji-dokumenti/moji-dokumenti.componen
 import { PregledDokumenataComponent } from './pregled-dokumenata/pregled-dokumenata.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
+import { PrikazResenjaComponent } from './prikaz-resenja/prikaz-resenja.component';
+import { ResenjaComponent } from './resenja/resenja.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
     PodnosenjeZalbeNaCutanjeComponent,
     MojiDokumentiComponent,
     PregledDokumenataComponent,
-    ZahtevPrikazComponent
+    ZahtevPrikazComponent,
+    ResenjaComponent,
+    PrikazResenjaComponent
   ],
   imports: [
     BrowserModule,

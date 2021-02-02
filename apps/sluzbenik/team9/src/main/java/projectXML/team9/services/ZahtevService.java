@@ -2,6 +2,7 @@ package projectXML.team9.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -111,6 +112,13 @@ public class ZahtevService {
 		fusekiWriter.updateZahtevWithStatus(true, zahtevId);
 
 	}
+	
+	public String getDocumentMetaDataByIdAsJSON(String zahtevId) throws FileNotFoundException {
+		return fusekiWriter.getZahtevMetaDataByIdAsJSON(zahtevId);
+	}
+
+	public String getDocumentMetaDataByIdAsXML(String zahtevId) throws FileNotFoundException {
+		return fusekiWriter.getZahtevMetaDataByIdAsXML(zahtevId);
 
 	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
 		return fusekiWriter.readAllRejectedZahteviIdByCitizenEmail(email);

@@ -4,6 +4,7 @@ import { NoAuthGuard } from './auth/guards/no-auth.guard';
 import { RoleGuard } from './auth/guards/role.guard';
 import { PrijavaComponent } from './auth/prijava/prijava.component';
 import { RegistracijaComponent } from './auth/registracija/registracija.component';
+import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga.component';
 import { DokumentiComponent } from './dokumenti/dokumenti.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
@@ -56,8 +57,15 @@ const routes: Routes = [
     }
   },
   {
+    path:"pretraga-dokumenata", component: DokumentPretragaComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
     path: '**',
-    component: PageNotFoundComponent
+    component: PageNotFoundComponent 
   }
 ];
 
