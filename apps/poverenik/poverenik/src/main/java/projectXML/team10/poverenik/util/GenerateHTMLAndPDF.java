@@ -7,7 +7,11 @@ import java.io.PrintWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import projectXML.team10.poverenik.models.zalbaCutanje.ZalbaNaCutanje;
+import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team10.poverenik.repositories.ResenjeRepository;
+import projectXML.team10.poverenik.repositories.ZalbaCutanjeRepository;
+import projectXML.team10.poverenik.repositories.ZalbaNaOdlukuRepository;
 
 
 @Component
@@ -25,6 +29,10 @@ public class GenerateHTMLAndPDF {
 
 	@Autowired
 	private ResenjeRepository resenjeRepository;
+	@Autowired
+	private ZalbaNaOdlukuRepository zalbaNaOdlukuRepository;
+	@Autowired
+	private ZalbaCutanjeRepository zalbaCutanjeRepository;
 
 	@Autowired
 	private XMLTransformations xmlTransformations;
@@ -56,5 +64,37 @@ public class GenerateHTMLAndPDF {
 	    PrintWriter printWriter = new PrintWriter(fileWriter);
 	    printWriter.print(content);
 	    printWriter.close();
+	}
+	
+	public String generatePDFZalbaNaOdluku(String id) throws Exception {
+		ZalbaNaOdluku zalba = zalbaNaOdlukuRepository.getById(id);
+		zalbaNaOdlukuRepository.saveToFile(zalba, INPUT_FILE + "zalbaNaOdluku.xml");
+		xmlTransformations.generatePDF(INPUT_FILE + "zalbaNaOdluku.xml", XSLFO_FILE + "zalbaNaOdluku_fo.xsl",
+				OUTPUT_FILE + id + ".pdf");
+		return OUTPUT_FILE + id + ".pdf";
+	}
+
+	public String generateHTMLZalbaNaOdluku(String id) throws Exception {
+		ZalbaNaOdluku zalba = zalbaNaOdlukuRepository.getById(id);
+		zalbaNaOdlukuRepository.saveToFile(zalba, INPUT_FILE + "zalbaNaOdluku.xml");
+		xmlTransformations.generateHTML(INPUT_FILE + "zalbaNaOdluku.xml", XSLT_FILE + "zalbaNaOdluku.xsl",
+				HTML_FILE + id + ".html");
+		return HTML_FILE + id + ".html";
+	}
+
+	public String generateHTMLZalbaCutanje(String id) throws Exception {
+		ZalbaNaCutanje zalba = zalbaCutanjeRepository.getById(id);
+		zalbaCutanjeRepository.saveToFile(zalba, INPUT_FILE + "zalbaNaCutanje.xml");
+		xmlTransformations.generateHTML(INPUT_FILE + "zalbaNaCutanje.xml", XSLT_FILE + "zalbaNaCutanje.xsl",
+				HTML_FILE + id + ".html");
+		return HTML_FILE + id + ".html";
+	}
+	
+	public String generatePDFZalbaCutanje(String id) throws Exception {
+		ZalbaNaCutanje zalba = zalbaCutanjeRepository.getById(id);
+		zalbaCutanjeRepository.saveToFile(zalba, INPUT_FILE + "zalbaNaCutanje.xml");
+		xmlTransformations.generatePDF(INPUT_FILE + "zalbaNaCutanje.xml", XSLFO_FILE + "zalbaNaCutanje_fo.xsl",
+				OUTPUT_FILE + id + ".pdf");
+		return OUTPUT_FILE + id + ".pdf";
 	}
 }

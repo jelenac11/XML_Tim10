@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zno:zalba_na_odluku xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:zno="http://www.projekat.org/zalba_na_odluku" broj_zalbe="dfc14933ee2b-1/2020" broj_zahteva="55f170e1-569e-42f2-a882-36793f9862f3" broj_resenja="2" id="29107c9b-d34c-44fa-ba64-dfc14933ee2b">
+    <zno:adresa_poverenika>
+        <common:mesto>Београд</common:mesto>
+        <common:ulica>Булевар краља Александра</common:ulica>
+        <common:broj>15</common:broj>
+    </zno:adresa_poverenika>
+    <zno:zalilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
+        <common:adresa>
+            <common:mesto>mesto2</common:mesto>
+            <common:ulica>ulica2</common:ulica>
+            <common:broj>broj2</common:broj>
+        </common:adresa>
+        <common:naziv>naziv2</common:naziv>
+    </zno:zalilac>
+    <zno:podaci_o_resenju>
+        <zno:godina>2</zno:godina>
+        <zno:naziv_organa>naziv</zno:naziv_organa>
+    </zno:podaci_o_resenju>
+    <zno:datum_zahteva>2021-01-30</zno:datum_zahteva>
+    <zno:podaci_o_zalbi>
+        <zno:podnosilac_zalbe>
+            <zno:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
+                <common:adresa>
+                    <common:mesto>s</common:mesto>
+                    <common:ulica>s</common:ulica>
+                    <common:broj>s</common:broj>
+                </common:adresa>
+                <common:naziv>s</common:naziv>
+            </zno:lice>
+            <zno:drugi_podaci_za_kontakt>s</zno:drugi_podaci_za_kontakt>
+        </zno:podnosilac_zalbe>
+        <zno:datum_podnosenja>2021-01-31</zno:datum_podnosenja>
+        <zno:mesto>s</zno:mesto>
+        <zno:opis>s</zno:opis>
+    </zno:podaci_o_zalbi>
+</zno:zalba_na_odluku>
