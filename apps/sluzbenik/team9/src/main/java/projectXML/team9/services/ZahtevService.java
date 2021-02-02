@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
@@ -75,7 +77,8 @@ public class ZahtevService {
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getMesto().setProperty();
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getMesto().setDatatype("xs:string");
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setDatatype("xs:dateTime");
-		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setValue(DatatypeFactory.newInstance().newXMLGregorianCalendar(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date())));
+		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setValue(DatatypeFactory.newInstance()
+				.newXMLGregorianCalendar(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date())));
 		zahtevGradjana.getInformacijeVezaneZaZahtev().getDatum().setProperty();
 		zahtevGradjana.getOrgan().setProperty();
 		zahtevGradjana.getOrgan().setContent(zahtevGradjana.getOrgan().getNaziv());
@@ -129,20 +132,19 @@ public class ZahtevService {
 	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
 		return fusekiWriter.readAllRejectedZahteviIdByCitizenEmail(email);
 	}
-	
+
 	public ArrayList<String> readAllZahteviForZalbaCutanje(String email) {
 		Date now = new Date();
 		Calendar c = Calendar.getInstance();
-        c.setTime(now);
-        c.add(Calendar.MINUTE, -10);
-        Date minusDeset = c.getTime();
-		
+		c.setTime(now);
+		c.add(Calendar.MINUTE, -10);
+		Date minusDeset = c.getTime();
+
 		DateFormat datumFormat = new SimpleDateFormat("yyyy-MM-dd");
 		DateFormat vremeFormat = new SimpleDateFormat("HH:mm:ss");
-        String strDate = datumFormat.format(minusDeset) + "T" + vremeFormat.format(minusDeset);
+		String strDate = datumFormat.format(minusDeset) + "T" + vremeFormat.format(minusDeset);
 		return fusekiWriter.readAllZahteviForZalbaCutanje(strDate, email);
 	}
-	
 
 	public Set<String> search(SearchDTO searchDTO) throws Exception {
 		String[] metadata = searchDTO.getMetadata().split("and");
