@@ -1,0 +1,11 @@
+.mat-submit {
+    background-color: #20639B;
+    color: #fff;
+}
+.mat-reset {
+    background-color: #FF2F99;
+    color: #fff;
+}
+::ng-deep.mat-menu-panel {
+  max-width: none !important;
+}

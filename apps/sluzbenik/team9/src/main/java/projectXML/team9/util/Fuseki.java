@@ -24,8 +24,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
 @Component
 public class Fuseki {
 
@@ -120,29 +118,33 @@ public class Fuseki {
 
 		return answeredZahtev;
 	}
-	
+
 	public ArrayList<String> readAllZahteviForZalbaCutanje(String datum, String email) {
 		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
-						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
-				String.format("?s <http://www.projekat.org/predicate/trazilac_informacija> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ",email) + "\n ?s <http://www.projekat.org/predicate/datum_podnosenja> ?date" +
-					 "\n FILTER " + String.format("( ?date < \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> ",datum) +
-						"MINUS \r\n" + "  {\r\n" + "  select ?s WHERE { \r\n"
-					+ "    ?s <http://www.projekat.org/predicate/status> true|false }\r\n" + "  }");
+				String.format(
+						"?s <http://www.projekat.org/predicate/trazilac_informacija> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ",
+						email) + "\n ?s <http://www.projekat.org/predicate/datum_podnosenja> ?date" + "\n FILTER "
+						+ String.format("( ?date < \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> ", datum)
+						+ "MINUS \r\n" + "  {\r\n" + "  select ?s WHERE { \r\n"
+						+ "    ?s <http://www.projekat.org/predicate/status> true|false }\r\n" + "  }");
 		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
 
 		return answeredZahtev;
 	}
-	
+
 	public ArrayList<String> readAllRejectedZahteviIdByCitizenEmail(String email) {
 		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
-						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
 				" ?s <http://www.projekat.org/predicate/status> false ; \n" + String.format(
-				"<http://www.projekat.org/predicate/podnosilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>", 
-				email));
+						"<http://www.projekat.org/predicate/podnosilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
+						email));
 		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
 
 		return answeredZahtev;
@@ -157,6 +159,18 @@ public class Fuseki {
 				String.format(
 						"?s <http://www.projekat.org/predicate/trazilac_informacija> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
 						email));
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithId(String id, String type) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format(
+						"?s ?p \"http://localhost:4200/zahtev/%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
+						id));
 		return getDocumentsId(sparqlQuery);
 	}
 
@@ -245,5 +259,23 @@ public class Fuseki {
 		ResultSetFormatter.outputAsXML(output, result);
 
 		return path;
+	}
+
+	public ArrayList<String> searchMetadata(String data, String graph) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.format("http://localhost:8080/fuseki/SluzbenikDataset/data/metadata/%s", graph),
+				String.format("?s ?p ?o . filter (LCASE(str(?o))=%s)", data));
+
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> readAllDocuments(String type) {
+		String sparqlQuery = SparqlUtil
+				.selectDistinctData(
+						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+								propertiesConfiguration.getFusekiConfiguration().getDataset(),
+								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+						"?s ?p ?o");
+		return getDocumentsId(sparqlQuery);
 	}
 }

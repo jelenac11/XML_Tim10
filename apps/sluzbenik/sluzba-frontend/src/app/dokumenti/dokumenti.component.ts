@@ -37,7 +37,7 @@ export class DokumentiComponent implements OnInit {
   };
 
   getAllGradjanin(): void {
-    this.zahtevService.getAllDocumentsIdByGradjanin('zahtevi').subscribe(res => {
+    this.zahtevService.getAll('zahtevi').subscribe(res => {
       this.extractIds(res, this.zahtevi);
     });
     this.obavestenjeService.getAllDocumentsIdByGradjanin('obavestenja').subscribe(res => {

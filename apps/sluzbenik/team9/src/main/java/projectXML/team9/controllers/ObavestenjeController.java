@@ -73,6 +73,18 @@ public class ObavestenjeController {
 		return ResponseEntity.ok(obavestenje);
 	}
 
+	@GetMapping(value = "references-on/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getreferencesOn(@PathVariable String id) {
+		DocumentsIDDTO documentsIDDTO = new DocumentsIDDTO();
+		try {
+			documentsIDDTO.setZahtev(obavestenjeService.getReferencesOn(id));
+			return ResponseEntity.ok(documentsIDDTO);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+
 	@GetMapping(value = "XSLTDocument/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> getXSLTObavestenje(@PathVariable String id) {
@@ -111,7 +123,7 @@ public class ObavestenjeController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
-	
+
 	@GetMapping(value = "extract-metadata/json/{id}")
 	@CrossOrigin
 	public byte[] extractMetadataAsJSONById(@PathVariable String id) {

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team9.dto.DocumentsIDDTO;
+import projectXML.team9.dto.SearchDTO;
 import projectXML.team9.dto.XSLTDocumentDTO;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
@@ -74,6 +75,18 @@ public class ZahtevController {
 		}
 	}
 
+	@GetMapping(value = "all")
+	@CrossOrigin
+	public ResponseEntity<?> getAllZahtevi() {
+		DocumentsIDDTO iddto = new DocumentsIDDTO();
+		try {
+			iddto.setZahtev(zahtevService.getAllZahtevi());
+			return ResponseEntity.ok(iddto);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+
 	@GetMapping(value = "extract-metadata/json/{id}")
 	@CrossOrigin
 	public byte[] extractMetadataAsJSONById(@PathVariable String id) {
@@ -118,7 +131,7 @@ public class ZahtevController {
 
 	@GetMapping
 	@CrossOrigin
-	public ResponseEntity<?> getZahtevi() {
+	public ResponseEntity<?> getZahteviByCurrentUser() {
 		DocumentsIDDTO zahtevi = new DocumentsIDDTO();
 		try {
 			Korisnik user = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -162,6 +175,20 @@ public class ZahtevController {
 			zahtevService.declineZahtev(zahtevi.getZahtev().get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	@PutMapping(value = "/search")
+	@CrossOrigin
+	public ResponseEntity<?> search(@RequestBody SearchDTO searchDTO) {
+		try {
+			DocumentsIDDTO iddto = new DocumentsIDDTO();
+			iddto.setZahtev(new ArrayList<String>());
+			iddto.getZahtev().addAll(zahtevService.search(searchDTO));
+
+			return ResponseEntity.ok(iddto);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
 }
