@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -117,10 +118,14 @@ public class ZahtevService {
 	
 	public ArrayList<String> readAllZahteviForZalbaCutanje(String email) {
 		Date now = new Date();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-ddThh:mm:ss");
-        String strDate = dateFormat.format(now);
-        System.out.println("DAAAAAAAAAAAAAATUUUUUUUUUUUUUUUUM");
-		System.out.println(strDate);
+		Calendar c = Calendar.getInstance();
+        c.setTime(now);
+        c.add(Calendar.MINUTE, -10);
+        Date minusDeset = c.getTime();
+		
+		DateFormat datumFormat = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat vremeFormat = new SimpleDateFormat("HH:mm:ss");
+        String strDate = datumFormat.format(minusDeset) + "T" + vremeFormat.format(minusDeset);
 		return fusekiWriter.readAllZahteviForZalbaCutanje(strDate, email);
 	}
 	

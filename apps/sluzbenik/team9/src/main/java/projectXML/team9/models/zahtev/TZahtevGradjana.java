@@ -467,7 +467,7 @@ public class TZahtevGradjana {
 		@XmlElement(required = true)
 		protected Mesto mesto;
 		@XmlElement(required = true)
-		@XmlSchemaType(name = "date")
+		@XmlSchemaType(name = "dateTime")
 		protected DatumPodnosenja datum;
 
 		/**
@@ -639,7 +639,7 @@ public class TZahtevGradjana {
 		public static class DatumPodnosenja {
 
 			@XmlValue
-			@XmlSchemaType(name = "date")
+			@XmlSchemaType(name = "dateTime")
 			protected XMLGregorianCalendar value;
 			@XmlAttribute(name = "property", required = false)
 			protected String property;

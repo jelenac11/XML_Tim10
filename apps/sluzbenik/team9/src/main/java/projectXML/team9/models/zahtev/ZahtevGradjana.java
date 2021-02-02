@@ -421,7 +421,7 @@ public class ZahtevGradjana {
 		@XmlElement(required = true)
 		protected Mesto mesto;
 		@XmlElement(required = true)
-		@XmlSchemaType(name = "date")
+		@XmlSchemaType(name = "dateTime")
 		protected DatumPodnosenja datum;
 
 		/**

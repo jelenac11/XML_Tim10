@@ -7,6 +7,7 @@ import { RegistracijaComponent } from './auth/registracija/registracija.componen
 import { DokumentiComponent } from './dokumenti/dokumenti.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZahtevComponent } from './zahtev/zahtev.component';
 
@@ -54,6 +55,10 @@ const routes: Routes = [
       expectedRoles: 'gradjanin|sluzbenik'
     }
   },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({

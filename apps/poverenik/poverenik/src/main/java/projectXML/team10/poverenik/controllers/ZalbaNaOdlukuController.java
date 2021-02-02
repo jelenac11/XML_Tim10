@@ -72,6 +72,7 @@ public class ZalbaNaOdlukuController {
 	        StringArray items = zahteviPort.getOdbijeniZahtevi(current.getEmail());
 			return ResponseEntity.ok(items);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

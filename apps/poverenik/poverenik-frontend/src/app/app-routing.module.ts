@@ -10,6 +10,7 @@ import { PodnosenjeZalbeNaOdlukuComponent } from './podnosenje-zalbe-na-odluku/p
 import { PregledDokumenataComponent } from './pregled-dokumenata/pregled-dokumenata.component';
 import { PrikazZalbaCutanjeComponent } from './prikaz-zalba-cutanje/prikaz-zalba-cutanje.component';
 import { PrikazZalbaNaOdlukuComponent } from './prikaz-zalba-na-odluku/prikaz-zalba-na-odluku.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZalbaCutanjeComponent } from './zalba-cutanje/zalba-cutanje.component';
 import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.component';
@@ -45,7 +46,7 @@ const routes: Routes = [
     }
   },
   {
-    path: "nova-zalba-cutanje/:id", component: ZalbaCutanjeComponent,
+    path: "nova-zalba-na-cutanje/:id", component: ZalbaCutanjeComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'gradjanin'
@@ -92,6 +93,10 @@ const routes: Routes = [
     data: {
         expectedRoles: 'poverenik'
     }
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent
   }
 ];
 
