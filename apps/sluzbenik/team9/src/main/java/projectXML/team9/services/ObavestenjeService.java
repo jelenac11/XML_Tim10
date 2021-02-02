@@ -112,13 +112,21 @@ public class ObavestenjeService {
 	public String getDocumentMetaDataByIdAsXML(String obavestenjeId) throws FileNotFoundException {
 		return fusekiWriter.getObavestenjeMetaDataByIdAsXML(obavestenjeId);
 	}
-	
+
 	public String getDocumentMetaDataByIdAsRDF(String zahtevId) throws FileNotFoundException {
 		return fusekiWriter.getDocumentMetaDataByIdAsRDF("obavestenje", zahtevId, "obavestenja");
 	}
 
-	public ArrayList<String> getReferencesOn(String id) {
-		return fusekiWriter.getDocumentIdThatHasReferenceOnOtherDocumentWithId(id, "/obavestenja");
+	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(String id) {
+		String object = String
+				.format("\"http://localhost:4200/zahtev/%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>", id);
+		return fusekiWriter.getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(object, "/obavestenja");
+	}
+
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String id) {
+		String subject = String.format("http://localhost:4200/obavestenje/%s", id);
+		String predicate = "http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_obavestenje";
+		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(subject, predicate, "/obavestenja");
 	}
 
 }

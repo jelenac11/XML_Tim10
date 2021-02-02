@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="10d4acf68842-1/2020" id_zahteva="http://localhost:4200/zahtev/7260c2cc-84d8-4d53-8c21-998964cf5580" id="http://localhost:4200/obavestenje/cf7ef0d1-064a-4a9f-acaf-10d4acf68842" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/cf7ef0d1-064a-4a9f-acaf-10d4acf68842" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="http://localhost:4200/zahtev/7260c2cc-84d8-4d53-8c21-998964cf5580">
+<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="046f2cb7b589-1/2020" id_zahteva="http://localhost:4200/zahtev/7260c2cc-84d8-4d53-8c21-998964cf5580" id="http://localhost:4200/obavestenje/5a6f1da3-2cb8-4453-b76a-046f2cb7b589" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/5a6f1da3-2cb8-4453-b76a-046f2cb7b589" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="http://localhost:4200/zahtev/7260c2cc-84d8-4d53-8c21-998964cf5580">
     <ob:informacije_o_obavestenju>
         <ob:organ property="pred:kreator_obavestenja" content="PU Backa Palanka">
             <common:adresa>
@@ -20,7 +20,7 @@
                 <common:prezime>Veselinovic</common:prezime>
             </ob:lice>
         </ob:trazilac>
-        <ob:datum_obavestenja property="pred:datum_donosenja" datatype="xs:date">2021-01-26</ob:datum_obavestenja>
+        <ob:datum_obavestenja property="pred:datum_donosenja" datatype="xs:date">2021-01-27</ob:datum_obavestenja>
     </ob:informacije_o_obavestenju>
     <ob:zahtev>
         <ob:datum_trazenja_informacija>2021-01-26</ob:datum_trazenja_informacija>

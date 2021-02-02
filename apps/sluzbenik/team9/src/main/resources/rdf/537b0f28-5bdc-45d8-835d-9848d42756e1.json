@@ -1,0 +1,25 @@
+{
+  "head": {
+    "vars": [ "predicate" , "object" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/datum_donosenja" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2021-01-26" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/trazilac_informacija" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "milanm2998@gmail.com" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/kreator_obavestenja" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "Poreska uprava" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_obavestenje" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45" }
+      }
+    ]
+  }
+}

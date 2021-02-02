@@ -33,11 +33,6 @@ import projectXML.team9.dto.EmailDTO;
 public class AmazonSESSample {
 
 	private static String SENDER = "Sender Name <%s>";
-	private static String SUBJECT = "Customer service contact info";
-	private static String BODY_TEXT = "Hello,\r\n" + "Please see the attached file for a list "
-			+ "of customers to contact.";
-	private static String BODY_HTML = "<html>" + "<head></head>" + "<body>" + "<h1>Hello!</h1>"
-			+ "<p>Please see the attached file for a " + "list of customers to contact.</p>" + "</body>" + "</html>";
 
 	private RestTemplate restTemplate;
 
@@ -57,7 +52,8 @@ public class AmazonSESSample {
 
 		String sender = String.format(SENDER, "milan_marinkovic98@hotmail.com");
 		// Add subject, from and to lines.
-		message.setSubject(SUBJECT, "UTF-8");
+		String subject = "Obaveštenje povodom odgovora na zahtev";
+		message.setSubject(subject, "UTF-8");
 		message.setFrom(new InternetAddress(sender));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
 
@@ -68,16 +64,15 @@ public class AmazonSESSample {
 		MimeBodyPart wrap = new MimeBodyPart();
 
 		// Define the text part.
+		String text = "Poštovani, \n\n"
+				+ "Ovim putem želimo da Vas obavestimo da je Vaš zahtev, koji ste podneli, prihvaćen.\n\n"
+				+ "Takođe, u prilogu Vam dostavljamo i dokument obaveštenje kojim se potvrđuje da je Vaš zahtev prihvaćen.\n\n"
+				+ "S poštovanjem, \n" + "Služba";
 		MimeBodyPart textPart = new MimeBodyPart();
-		textPart.setContent(BODY_TEXT, "text/plain; charset=UTF-8");
-
-		// Define the HTML part.
-		MimeBodyPart htmlPart = new MimeBodyPart();
-		htmlPart.setContent(BODY_HTML, "text/html; charset=UTF-8");
+		textPart.setContent(text, "text/plain; charset=UTF-8");
 
 		// Add the text and HTML parts to the child container.
 		msg_body.addBodyPart(textPart);
-		msg_body.addBodyPart(htmlPart);
 
 		// Add the child container to the wrapper object.
 		wrap.setContent(msg_body);
@@ -115,7 +110,8 @@ public class AmazonSESSample {
 
 		String sender = String.format(SENDER, "milan_marinkovic98@hotmail.com");
 		// Add subject, from and to lines.
-		message.setSubject(SUBJECT, "UTF-8");
+		String subject = "Obaveštenje povodom odgovora na zahtev";
+		message.setSubject(subject, "UTF-8");
 		message.setFrom(new InternetAddress(sender));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
 
@@ -126,16 +122,14 @@ public class AmazonSESSample {
 		MimeBodyPart wrap = new MimeBodyPart();
 
 		// Define the text part.
+		String text = "Poštovani, \n\n"
+				+ "Ovim putem želimo da Vas obavestimo da je Vaš zahtev, koji ste podneli, odbijen.\n\n"
+				+ "S poštovanjem, \n" + "Služba";
 		MimeBodyPart textPart = new MimeBodyPart();
-		textPart.setContent(BODY_TEXT, "text/plain; charset=UTF-8");
-
-		// Define the HTML part.
-		MimeBodyPart htmlPart = new MimeBodyPart();
-		htmlPart.setContent(BODY_HTML, "text/html; charset=UTF-8");
+		textPart.setContent(text, "text/plain; charset=UTF-8");
 
 		// Add the text and HTML parts to the child container.
 		msg_body.addBodyPart(textPart);
-		msg_body.addBodyPart(htmlPart);
 
 		// Add the child container to the wrapper object.
 		wrap.setContent(msg_body);
@@ -144,7 +138,7 @@ public class AmazonSESSample {
 
 		MimeBodyPart attHtml = new MimeBodyPart();
 		attHtml.setText("");
-		
+
 		msg.addBodyPart(attHtml);
 
 		message.setContent(msg);

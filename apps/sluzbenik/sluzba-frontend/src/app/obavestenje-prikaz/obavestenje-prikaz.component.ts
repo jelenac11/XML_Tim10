@@ -14,6 +14,7 @@ export class ObavestenjePrikazComponent implements OnInit {
 
   id: string;
   obavestenje: any;
+  referencesOn: string[] = [];
 
   @ViewChild('obavestenjeHTML', { static: false }) obavestenjeHTML;
 
@@ -30,6 +31,7 @@ export class ObavestenjePrikazComponent implements OnInit {
       something = something.children[0].getText();
       this.obavestenjeHTML.nativeElement.innerHTML = something;
     });
+    this.getReferenced();
   }
 
   downloadPDF(documentID: string): void {
@@ -79,5 +81,18 @@ export class ObavestenjePrikazComponent implements OnInit {
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   }
+
+  getReferenced(): void {
+    this.obavestenjeService.get("obavestenja/references-on", this.id)
+      .subscribe(res => {
+        this.referencesOn = [];
+        let zahtevi = Xonomy.xml2js(res);
+        zahtevi = zahtevi.getDescendantElements('zahtev');
+        for (let i = 0; i < zahtevi.length; i++) {
+          this.referencesOn.push(zahtevi[i].getText().split("^^")[0]);
+        }
+        console.log(this.referencesOn);
+      });
+  };
 
 }

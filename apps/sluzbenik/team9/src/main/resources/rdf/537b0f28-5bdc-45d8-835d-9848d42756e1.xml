@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="predicate"/>
+    <variable name="object"/>
+  </head>
+  <results>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/datum_donosenja</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2021-01-26</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/trazilac_informacija</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/kreator_obavestenja</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Poreska uprava</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_obavestenje</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>

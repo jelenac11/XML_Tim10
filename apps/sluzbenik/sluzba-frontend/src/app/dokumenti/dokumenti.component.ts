@@ -18,7 +18,6 @@ export class DokumentiComponent implements OnInit {
   zahtevi: String[] = [];
   obavestenja: String[] = [];
   izvestaji: String[] = [];
-  zalbe: String[] = [];
 
   constructor(private zahtevService: ZahtevService,
     private obavestenjeService: ObavestenjeService,

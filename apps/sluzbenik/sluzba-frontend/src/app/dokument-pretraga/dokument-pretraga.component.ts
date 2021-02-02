@@ -118,7 +118,7 @@ export class DokumentPretragaComponent implements OnInit {
     this.getAllZahtevi();
   };
   getReferences(index: number): void {
-    this.obavestenjeService.get("obavestenja/references-on", this.documents[index].url.split("/")[4])
+    this.obavestenjeService.get("obavestenja/find-id-with-references-on", this.documents[index].url.split("/")[4])
       .subscribe(res => {
         this.documents[index].referencedBy = [];
         let zahtevi = Xonomy.xml2js(res);

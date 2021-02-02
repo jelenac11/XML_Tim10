@@ -20,4 +20,27 @@
     </button>
   </div>
 </div>
+<div class="row d-flex justify-content-center">
+  <div class="table-wrap m-3 col-10">
+    <table class="table table-hover border">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Dokumenti koje referencira ovaj dokument</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let url of referencesOn; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>
+            <a [href]="url">{{ url }}</a>
+          </td>
+        </tr>
+        <tr *ngIf="referencesOn.length == 0">
+          <td colspan="4">Nema dokumenata koji referenciraju ovaj dokument.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div #obavestenjeHTML></div>

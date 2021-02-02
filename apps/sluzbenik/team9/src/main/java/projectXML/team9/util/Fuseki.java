@@ -161,15 +161,22 @@ public class Fuseki {
 		return getDocumentsId(sparqlQuery);
 	}
 
-	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithId(String id, String type) {
+	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(String object, String type) {
 		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
-						propertiesConfiguration
-								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
-				String.format(
-						"?s ?p \"http://localhost:4200/zahtev/%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
-						id));
+				String.format("?s ?p %s", object));
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String subject, String predicate,
+			String type) {
+		String sparqlQuery = SparqlUtil.selectObjectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format("<%s> <%s> ?o", subject, predicate));
 		return getDocumentsId(sparqlQuery);
 	}
 
