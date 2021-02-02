@@ -71,7 +71,7 @@ export class ObavestenjeComponent implements OnInit {
     return organTrazilac + lice;
   }
   private obradaInformacijaOZahtevu(): string {
-    let informacijeOZahtevu: string = `<ob:datum_trazenja_informacija>${this.zahtev.getDescendantElements("za:datum")[0].getText()}</ob:datum_trazenja_informacija><ob:opis_trazene_informacije>${this.zahtev.getDescendantElements("za:opis_zahteva")[0].getText()}</ob:opis_trazene_informacije>`;
+    let informacijeOZahtevu: string = `<ob:datum_trazenja_informacija>${this.zahtev.getDescendantElements("za:datum")[0].getText().substring(0,10)}</ob:datum_trazenja_informacija><ob:opis_trazene_informacije>${this.zahtev.getDescendantElements("za:opis_zahteva")[0].getText()}</ob:opis_trazene_informacije>`;
     return informacijeOZahtevu;
   }
   private obradaTrazenihZahteva(): string {

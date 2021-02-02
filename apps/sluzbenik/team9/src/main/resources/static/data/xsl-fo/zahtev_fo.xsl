@@ -255,8 +255,17 @@
 						дана
 						<xsl:variable name="currenttime"
 							select="current-dateTime()" as="xs:dateTime" />
-						<xsl:value-of
-							select="format-dateTime($currenttime,'[D]')" />
+						<xsl:if
+							test="number(format-dateTime($currenttime,'[D]')) gt 9">
+							<xsl:value-of
+								select="format-dateTime($currenttime,'[D]')" />
+						</xsl:if>
+						<xsl:if
+							test="number(format-dateTime($currenttime,'[D]')) lt 10">
+							<xsl:text>0</xsl:text>
+							<xsl:value-of
+								select="format-dateTime($currenttime,'[D]')" />
+						</xsl:if>
 						<xsl:text>.</xsl:text>
 						<xsl:if
 							test="number(format-dateTime($currenttime,'[M]')) gt 9">

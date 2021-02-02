@@ -42,7 +42,7 @@ export class ZalbaNaOdlukuComponent implements OnInit {
     this.zalbaNaOdlukuService.getZahtev('zalba-na-odluku/zahtev', this.id).subscribe(res => {
       var convert = require('xml-js');
       var zahtev = convert.xml2js(res, {compact: true, spaces: 4});
-      this.datum_zahteva = zahtev['za:zahtev_gradjana']['za:informacije_vezane_za_zahtev']['za:datum']._text;
+      this.datum_zahteva = zahtev['za:zahtev_gradjana']['za:informacije_vezane_za_zahtev']['za:datum']._text.substring(0,10);
       this.naziv_organa = zahtev['za:zahtev_gradjana']['za:organ']['common:naziv']._text;
       this.mesto_podnosioca = zahtev['za:zahtev_gradjana']['za:trazilac']['za:lice']['common:adresa']['common:mesto']._text;
       this.ulica_podnosioca = zahtev['za:zahtev_gradjana']['za:trazilac']['za:lice']['common:adresa']['common:ulica']._text;

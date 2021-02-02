@@ -20,6 +20,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import projectXML.team10.poverenik.models.common.TAdresa;
 import projectXML.team10.poverenik.models.common.TFizickoLice;
+import projectXML.team10.poverenik.models.common.TLice;
 import projectXML.team10.poverenik.models.common.TPravnoLice;
 
 
@@ -1214,7 +1215,7 @@ public class ZalbaNaCutanje {
         public static class PodnosilacZalbe {
 
             @XmlElement(namespace = "http://www.projekat.org/zalba_cutanja", required = true)
-            protected TFizickoLice lice;
+            protected TLice lice;
             @XmlElement(name = "drugi_podaci_za_kontakt", namespace = "http://www.projekat.org/zalba_cutanja", required = true)
             protected String drugiPodaciZaKontakt;
             @XmlAttribute(name = "property", required = false)
@@ -1230,7 +1231,7 @@ public class ZalbaNaCutanje {
              *     {@link TFizickoLice }
              *     
              */
-            public TFizickoLice getLice() {
+            public TLice getLice() {
                 return lice;
             }
 
@@ -1242,7 +1243,7 @@ public class ZalbaNaCutanje {
              *     {@link TFizickoLice }
              *     
              */
-            public void setLice(TFizickoLice value) {
+            public void setLice(TLice value) {
                 this.lice = value;
             }
 

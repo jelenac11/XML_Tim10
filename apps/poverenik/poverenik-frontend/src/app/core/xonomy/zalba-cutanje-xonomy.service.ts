@@ -53,13 +53,8 @@ export class ZalbaCutanjeXonomyService {
         },
         menu: [],
         attributes: {
-          "vocab": {
-            isInvisible: true,
-          },
-          "about": {
-            isInvisible: true,
-          },
           "broj_zahteva": {
+            isInvisible: true,
             asker: Xonomy.askString,
             menu: [],
           },
@@ -205,6 +200,7 @@ export class ZalbaCutanjeXonomyService {
             isInvisible: true,
           }
         },
+        isReadOnly: true,
         mustBeBefore: ["zc:podaci_o_zahtevu", "zc:podaci_o_zalbi"]
       },
 
@@ -266,6 +262,7 @@ export class ZalbaCutanjeXonomyService {
             );
           }
         },
+        isReadOnly: true,
         hasText: true,
         asker: Xonomy.askString,
         mustBeBefore: ["zc:zahtevi"]
@@ -392,6 +389,13 @@ export class ZalbaCutanjeXonomyService {
 
       "zc:lice": {
         validate: function (jsElement) {
+          if (jsElement.hasAttribute("xsi:type") == "") {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element needs to have attribute xsi:type."
+            }
+            );
+          }
           if (!jsElement.hasElements()) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
@@ -399,8 +403,91 @@ export class ZalbaCutanjeXonomyService {
             }
             );
           }
+          if (jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice" && (!jsElement.hasChildElement("common:ime") || !jsElement.hasChildElement("common:prezime"))) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element needs to have elements <common:ime> and <common:prezime> with attribute xsi:type value common:TFizicko_lice."
+            }
+            );
+          }
+          if (jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice" && !jsElement.hasChildElement("common:naziv")) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element needs to have elements <common:naziv> with attribute xsi:type value common:TPravno_lice."
+            }
+            );
+          }
+          if (!jsElement.hasChildElement("common:adresa")) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: "This element needs to have element <common:adresa>."
+            }
+            );
+          }
         },
-        menu: [],
+        menu: [
+          {
+            caption: "Append an <common:adresa>",
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:adresa ${common}><common:mesto ${common}></common:mesto></common:adresa>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement("common:adresa") || !jsElement.getAttributeValue("xsi:type", null);
+            }
+          },
+          {
+            caption: "Append an <common:naziv>",
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:naziv ${common}></common:naziv>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || jsElement.hasChildElement("common:prezime")
+                || !jsElement.getAttributeValue("xsi:type", null) || jsElement.getAttributeValue("xsi:type", null) == "common:TFizicko_lice";
+            }
+          },
+          {
+            caption: "Append an <common:ime>",
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:ime ${common}></common:ime>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:ime") || !jsElement.getAttributeValue("xsi:type", null)
+                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
+            }
+          },
+          {
+            caption: "Append an <common:prezime>",
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:prezime ${common}></common:prezime>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement("common:naziv") || jsElement.hasChildElement("common:prezime") || !jsElement.getAttributeValue("xsi:type", null)
+                || jsElement.getAttributeValue("xsi:type", null) == "common:TPravno_lice";
+            }
+          },
+          {
+            caption: "Add @xsi:type",
+            action: Xonomy.newAttribute,
+            actionParameter: { name: "xsi:type", value: "" },
+            hideIf: function (jsElement) {
+              return jsElement.hasAttribute("xsi:type");
+            }
+          },
+        ],
+        attributes: {
+          "xsi:type": {
+            asker: Xonomy.askPicklist,
+            askerParameter: [
+              { value: "common:TFizicko_lice" },
+              { value: "common:TPravno_lice" }
+            ],
+            validate: function (jsAttribute) {
+              if (jsAttribute.value == "") {
+                Xonomy.warnings.push({
+                  htmlID: jsAttribute.htmlID,
+                  text: "This attribute must not be empty."
+                }
+                );
+              }
+            }
+          }
+        },
         mustBeBefore: ["zc:drugi_podatak_za_kontakt"],
       },
 

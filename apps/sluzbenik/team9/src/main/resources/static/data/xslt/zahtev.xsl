@@ -440,24 +440,33 @@
 					margin-top:20pt;">
 						дана
 						<xsl:variable name="currenttime"
-							select="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:datum" as="xs:date" />
-						<xsl:value-of
-							select="format-date($currenttime,'[D]')" />
-						<xsl:text>.</xsl:text>
+							select="/za:zahtev_gradjana/za:informacije_vezane_za_zahtev/za:datum" as="xs:dateTime" />
 						<xsl:if
-							test="number(format-date($currenttime,'[M]')) gt 9">
+							test="number(format-dateTime($currenttime,'[D]')) gt 9">
 							<xsl:value-of
-								select="format-date($currenttime,'[M]')" />
+								select="format-dateTime($currenttime,'[D]')" />
 						</xsl:if>
 						<xsl:if
-							test="number(format-date($currenttime,'[M]')) lt 10">
+							test="number(format-dateTime($currenttime,'[D]')) lt 10">
 							<xsl:text>0</xsl:text>
 							<xsl:value-of
-								select="format-date($currenttime,'[M]')" />
+								select="format-dateTime($currenttime,'[D]')" />
+						</xsl:if>
+						<xsl:text>.</xsl:text>
+						<xsl:if
+							test="number(format-dateTime($currenttime,'[M]')) gt 9">
+							<xsl:value-of
+								select="format-dateTime($currenttime,'[M]')" />
+						</xsl:if>
+						<xsl:if
+							test="number(format-dateTime($currenttime,'[M]')) lt 10">
+							<xsl:text>0</xsl:text>
+							<xsl:value-of
+								select="format-dateTime($currenttime,'[M]')" />
 						</xsl:if>
 						<xsl:text>.</xsl:text>
 						<xsl:value-of
-							select="format-date($currenttime,'[Y]')" />
+							select="format-dateTime($currenttime,'[Y]')" />
 						. године
 					</p>
 					<p style="font-family: 'Times New Roman';

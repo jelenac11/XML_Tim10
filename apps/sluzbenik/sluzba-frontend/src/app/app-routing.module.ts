@@ -8,6 +8,7 @@ import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga
 import { DokumentiComponent } from './dokumenti/dokumenti.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZahtevComponent } from './zahtev/zahtev.component';
 
@@ -61,6 +62,10 @@ const routes: Routes = [
     data:{
       expectedRoles: 'sluzbenik'
     }
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent 
   }
 ];
 

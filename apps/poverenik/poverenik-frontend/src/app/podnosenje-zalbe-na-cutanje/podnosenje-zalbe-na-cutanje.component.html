@@ -1,1 +1,37 @@
-<p>podnosenje-zalbe-na-cutanje works!</p>
+<div>
+    <div class="row d-flex justify-content-center">
+        <div class="table-wrap col-10 mt-3">
+        <table class="table table-hover border" bordered="true">
+            <thead>
+            <tr>
+                <th colspan="3">Zahtevi na koje je moguće podneti žalbu na ćutanje</th>
+            </tr>
+            <tr>
+                <th>#</th>
+                <th>Identifikator zahteva</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of zahtevi; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>
+                    <a [href]="item">{{ item.substring(item.length - 36) }}</a>
+                </td>
+                <td>
+                    <button
+                        mat-raised-button
+                        (click)="podnesiZalbu(item)"
+                    >
+                        Podnesi žalbu
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="zahtevi.length == 0">
+                <td colspan="3">Nema podnetih zahteva</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>

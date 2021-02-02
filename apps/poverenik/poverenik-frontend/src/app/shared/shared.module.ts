@@ -11,10 +11,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HeaderComponent } from './layout/header/header.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { HeaderComponent } from './layout/header/header.component';
     MatDialogModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    PageNotFoundComponent
   ],
   providers: [Snackbar]
 })
