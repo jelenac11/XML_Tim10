@@ -114,4 +114,19 @@ public class ZalbaNaOdlukuController {
 		}
 	}
 	
+	@GetMapping(value = "XSLTDocument/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getXSLTZalbaNaOdluku(@PathVariable String id) {
+		String zalbaXSLT;
+		try {
+			zalbaXSLT = zalbaNaOdlukuService.getXSLTZalba(id);
+			XSLTDocumentDTO document = new XSLTDocumentDTO();
+			document.setXslt(zalbaXSLT);
+			return ResponseEntity.ok(document);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
 }

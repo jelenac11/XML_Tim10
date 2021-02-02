@@ -1,5 +1,7 @@
 package projectXML.team10.poverenik.services;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.StringWriter;
 import java.time.ZoneId;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ import projectXML.team10.poverenik.models.korisnik.Korisnik;
 import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team10.poverenik.repositories.ZalbaNaOdlukuRepository;
 import projectXML.team10.poverenik.util.FusekiWriter;
+import projectXML.team10.poverenik.util.GenerateHTMLAndPDF;
 import projectXML.team10.poverenik.util.MarshallerFactory;
 import projectXML.team10.poverenik.util.MetadataExtractor;
 
@@ -29,6 +33,8 @@ public class ZalbaNaOdlukuService {
 	private MetadataExtractor metadataExtractor;
 	@Autowired
 	private MarshallerFactory marshallerFactory;
+	@Autowired
+	private GenerateHTMLAndPDF generateHTMLAndPDF;
 	
 	public ZalbaNaOdluku getZalba(String id) throws Exception {
 		ZalbaNaOdluku zalba = zalbaNaOdlukuRepository.getById(id);
@@ -58,6 +64,13 @@ public class ZalbaNaOdlukuService {
 		metadataExtractor.extractMetadata(xmlString);
 		FusekiWriter.saveRDF("/zalbe-na-odluku");
 		return zalba;
+	}
+	
+	public String getXSLTZalba(String id) throws Exception {
+		String url = generateHTMLAndPDF.generateHTMLZalbaNaOdluku(id);
+		File file = new File(url);
+		FileInputStream fileInputStream = new FileInputStream(file);
+		return IOUtils.toString(fileInputStream, "UTF-8");
 	}
 	
 }

@@ -1,13 +1,17 @@
 package projectXML.team10.poverenik.repositories;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.xml.sax.SAXException;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.modules.XMLResource;
 
@@ -71,6 +75,12 @@ public class ZalbaNaOdlukuRepository {
 		} finally {
 			databaseConnector.closeConnections(res, col);
 		}
+	}
+	
+	public void saveToFile(ZalbaNaOdluku zalba, String path) throws JAXBException, SAXException, FileNotFoundException {
+		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
+		OutputStream os = new FileOutputStream(path);
+		marshaller.marshal(zalba, os);
 	}
 	
 }

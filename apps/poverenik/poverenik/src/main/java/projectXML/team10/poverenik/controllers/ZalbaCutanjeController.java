@@ -114,4 +114,19 @@ public class ZalbaCutanjeController {
 		}
 	}
 	
+	@GetMapping(value = "XSLTDocument/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getXSLTZalbaCutanje(@PathVariable String id) {
+		String zalbaXSLT;
+		try {
+			zalbaXSLT = zalbaCutanjeService.getXSLTZalba(id);
+			XSLTDocumentDTO document = new XSLTDocumentDTO();
+			document.setXslt(zalbaXSLT);
+			return ResponseEntity.ok(document);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
 }

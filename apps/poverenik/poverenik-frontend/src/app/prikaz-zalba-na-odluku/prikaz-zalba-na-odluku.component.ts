@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ZalbaNaOdlukuService } from '../core/services/zalba-na-odluku.service';
-import { ZalbaNaOdlukuXonomyService } from '../core/xonomy/zalba-na-odluku-xonomy.service';
 
 declare const Xonomy: any;
 
@@ -16,7 +15,6 @@ export class PrikazZalbaNaOdlukuComponent implements OnInit {
   zalba: any;
 
   constructor(
-    private xonomyService: ZalbaNaOdlukuXonomyService,
     private zalbaNaOdlukuService: ZalbaNaOdlukuService,
     private route: ActivatedRoute
   ) { }
@@ -25,14 +23,11 @@ export class PrikazZalbaNaOdlukuComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zalbaNaOdlukuService.get('zalba-na-odluku', this.id).subscribe(res => {
-      this.zalba = res;
-      this.zalbaHTML.nativeElement.innerHTML = this.xonomyService.convertZalbaXSLT(this.zalba);
+    this.zalbaNaOdlukuService.get('zalba-na-odluku/XSLTDocument', this.id).subscribe(res => {
+      let something = Xonomy.xml2js(res);
+      something = something.children[0].getText();
+      this.zalbaHTML.nativeElement.innerHTML = something;
     });
-  }
-
-  ngAfterViewInit(): void {
-    this.zalbaHTML.nativeElement.innerHTML = this.xonomyService.convertZalbaXSLT(this.zalba);
   }
 
 }
