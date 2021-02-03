@@ -1,0 +1,11 @@
+<http://localhost:4200/zahtev/307d665c-36a8-41c3-9832-5e9d27c25128>
+        <http://www.projekat.org/predicate/datum_podnosenja>
+                "2021-01-26"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://www.projekat.org/predicate/mesto_podnosenja>
+                "Nesto" ;
+        <http://www.projekat.org/predicate/organ_od_kojeg_se_trazi>
+                "Nesto"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/podnosilac_zahteva>
+                "milanm2998@gmail.com"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/status>
+                false .

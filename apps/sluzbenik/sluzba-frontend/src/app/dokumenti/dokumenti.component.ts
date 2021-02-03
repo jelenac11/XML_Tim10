@@ -18,7 +18,6 @@ export class DokumentiComponent implements OnInit {
   zahtevi: String[] = [];
   obavestenja: String[] = [];
   izvestaji: String[] = [];
-  zalbe: String[] = [];
 
   constructor(private zahtevService: ZahtevService,
     private obavestenjeService: ObavestenjeService,
@@ -108,18 +107,4 @@ export class DokumentiComponent implements OnInit {
     window.URL.revokeObjectURL(fileURL);
     a.remove();
   };
-
-  extractMetadataAsJSON(documentID: string) {
-    this.zahtevService.download(`zahtevi/extract-metadata/json`, documentID).subscribe(response => {
-      this.startDownload(documentID, response, 'json', 'application/json');
-    }), error => console.log('Error downloading the file'),
-      () => console.info('File downloaded successfully');
-  }
-
-  extractMetadataAsXML(documentID: string) {
-    this.zahtevService.download(`zahtevi/extract-metadata/xml`, documentID).subscribe(response => {
-      this.startDownload(documentID, response, 'xml', 'application/xml');
-    }), error => console.log('Error downloading the file'),
-      () => console.info('File downloaded successfully');
-  }
 }

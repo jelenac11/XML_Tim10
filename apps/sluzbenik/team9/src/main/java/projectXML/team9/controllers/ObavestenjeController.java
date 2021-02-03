@@ -73,12 +73,24 @@ public class ObavestenjeController {
 		return ResponseEntity.ok(obavestenje);
 	}
 
-	@GetMapping(value = "references-on/{id}")
+	@GetMapping(value = "find-id-with-references-on/{id}")
 	@CrossOrigin
-	public ResponseEntity<?> getreferencesOn(@PathVariable String id) {
+	public ResponseEntity<?> getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(@PathVariable String id) {
 		DocumentsIDDTO documentsIDDTO = new DocumentsIDDTO();
 		try {
-			documentsIDDTO.setZahtev(obavestenjeService.getReferencesOn(id));
+			documentsIDDTO.setZahtev(obavestenjeService.getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(id));
+			return ResponseEntity.ok(documentsIDDTO);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+
+	@GetMapping(value = "references-on/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getDocumentIdThatIsReferencedByDocumentWithThisId(@PathVariable String id) {
+		DocumentsIDDTO documentsIDDTO = new DocumentsIDDTO();
+		try {
+			documentsIDDTO.setZahtev(obavestenjeService.getDocumentIdThatIsReferencedByDocumentWithThisId(id));
 			return ResponseEntity.ok(documentsIDDTO);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
@@ -143,6 +155,20 @@ public class ObavestenjeController {
 	public byte[] extractMetadataAsXMLById(@PathVariable String id) {
 		try {
 			String path = obavestenjeService.getDocumentMetaDataByIdAsXML(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@GetMapping(value = "extract-metadata/rdf/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsRDFById(@PathVariable String id) {
+		try {
+			String path = obavestenjeService.getDocumentMetaDataByIdAsRDF(id);
 			File file = new File(path);
 			FileInputStream fileInputStream = new FileInputStream(file);
 			return IOUtils.toByteArray(fileInputStream);

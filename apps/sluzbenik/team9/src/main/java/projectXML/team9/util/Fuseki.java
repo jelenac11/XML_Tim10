@@ -122,10 +122,14 @@ public class Fuseki {
 	public ArrayList<String> readAllZahteviForZalbaCutanje(String datum, String email) {
 		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
-				propertiesConfiguration.getFusekiConfiguration().getDataset(),
-				propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
-				String.format("?s <http://www.projekat.org/predicate/podnosilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ",email) + "\n FILTER NOT EXISTS { ?s <http://www.projekat.org/predicate/status> ?o } ." +
-				"\n ?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date . FILTER" + String.format("( ?date < \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )",datum));
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
+				String.format(
+						"?s <http://www.projekat.org/predicate/podnosilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ",
+						email) + "\n FILTER NOT EXISTS { ?s <http://www.projekat.org/predicate/status> ?o } ."
+						+ "\n ?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date . FILTER"
+						+ String.format("( ?date < \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )", datum));
 		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
 
 		return answeredZahtev;
@@ -157,15 +161,22 @@ public class Fuseki {
 		return getDocumentsId(sparqlQuery);
 	}
 
-	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithId(String id, String type) {
+	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(String object, String type) {
 		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
-						propertiesConfiguration
-								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
-				String.format(
-						"?s ?p \"http://localhost:4200/zahtev/%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
-						id));
+				String.format("?s ?p %s", object));
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String subject, String predicate,
+			String type) {
+		String sparqlQuery = SparqlUtil.selectObjectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format("<%s> <%s> ?o", subject, predicate));
 		return getDocumentsId(sparqlQuery);
 	}
 
@@ -222,6 +233,26 @@ public class Fuseki {
 		OutputStream output = new FileOutputStream(path);
 
 		ResultSetFormatter.outputAsXML(output, result);
+
+		return path;
+	}
+
+	public String getDocumentMetaDataByIdAsRDF(String type, String zahtevId, String graph)
+			throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.describeData(String.format("http://localhost:4200/%s/%s", type, zahtevId),
+				String.format("http://localhost:8080/fuseki/SluzbenikDataset/data/metadata/%s", graph),
+				String.format("<http://localhost:4200/%s/%s>  ?p  ?o", type, zahtevId));
+
+		QueryExecution queryExecution = QueryExecutionFactory
+				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.ttl", zahtevId);
+		OutputStream output = new FileOutputStream(path);
+
+		Model describeModel = queryExecution.execDescribe();
+		describeModel.write(output, "TURTLE");
 
 		return path;
 	}

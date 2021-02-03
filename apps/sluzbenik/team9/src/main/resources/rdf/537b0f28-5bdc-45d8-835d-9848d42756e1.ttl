@@ -1,0 +1,9 @@
+<http://localhost:4200/obavestenje/537b0f28-5bdc-45d8-835d-9848d42756e1>
+        <http://www.projekat.org/predicate/datum_donosenja>
+                "2021-01-26"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://www.projekat.org/predicate/kreator_obavestenja>
+                "Poreska uprava"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/trazilac_informacija>
+                "milanm2998@gmail.com"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_obavestenje>
+                "http://localhost:4200/zahtev/c1b8b6c1-47d8-4734-8675-ad43c342fe45"^^<http://www.w3.org/2000/01/rdf-schema#Literal> .

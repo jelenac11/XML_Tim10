@@ -1,0 +1,9 @@
+<http://localhost:4200/obavestenje/42615dc1-6ab0-461e-84d6-fa1ea42179fe>
+        <http://www.projekat.org/predicate/datum_donosenja>
+                "2021-01-28"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://www.projekat.org/predicate/kreator_obavestenja>
+                "JKP Lišće Modriče"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/trazilac_informacija>
+                "milanm2998@gmail.com"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_obavestenje>
+                "http://localhost:4200/zahtev/5385ae9b-d105-40cf-91fc-b944887ad670"^^<http://www.w3.org/2000/01/rdf-schema#Literal> .

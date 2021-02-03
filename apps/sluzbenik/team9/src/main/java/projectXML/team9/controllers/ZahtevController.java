@@ -114,6 +114,20 @@ public class ZahtevController {
 		}
 		return null;
 	}
+	
+	@GetMapping(value = "extract-metadata/rdf/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsRDFById(@PathVariable String id) {
+		try {
+			String path = zahtevService.getDocumentMetaDataByIdAsRDF(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@GetMapping(value = "XSLTDocument/{id}")
 	@CrossOrigin
