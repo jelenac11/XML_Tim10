@@ -28,6 +28,31 @@ public class FusekiWriter {
     
 	@Autowired
 	private PropertiesConfiguration propertiesConfiguration;
+	
+	public static void updateZalbaWithStatus(boolean status, String zalbaId, String type, String db) throws IOException {
+        AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		//Delete first triplet
+        String sparqlUpdate = SparqlUtil.deleteData(
+        		conn.dataEndpoint + GRAPH_URI + type,
+        		String.format("<http://localhost:4200%s/%s>  <http://www.projekat.org/predicate/status> false",db, zalbaId));
+		UpdateRequest request = UpdateFactory.create();
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+        
+        //Inseert
+        sparqlUpdate = SparqlUtil.insertData(
+				conn.dataEndpoint + GRAPH_URI + type,
+				String.format("<http://localhost:4200%s/%s>  <http://www.projekat.org/predicate/status>  %b",db, zalbaId, status));
+		
+		request = UpdateFactory.create();
+        processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+	}
+	
 
     public static void saveRDF(String type) throws IOException {
         AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
@@ -134,14 +159,46 @@ public class FusekiWriter {
 	}
 
 	public ArrayList<String> readAllZalbeCutanje(String string) {
-		return null;
+		String sparqlQuery = SparqlUtil.selectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zalbe-na-cutanje",
+				String.format(
+						"?s <http://www.projekat.org/predicate/status> false"));
+		return getDocumentsId(sparqlQuery);
 	}
 	
 	public ArrayList<String> readAllZalbeNaOdluku(String string) {
-		return null;
+		String sparqlQuery = SparqlUtil.selectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zalbe-na-odluku",
+				String.format(
+						"?s <http://www.projekat.org/predicate/status> false"));
+		return getDocumentsId(sparqlQuery);
 	}
 	
-	public ArrayList<String> readAllResenja(String string) {
-		return null;
+	public ArrayList<String> readAllResenja(String type, String poverenik) {
+		String sparqlQuery = SparqlUtil.selectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format(
+						"?s <http://www.projekat.org/predicate/poverenik> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
+						poverenik));
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> readAllResenja(String type) {
+		String sparqlQuery = SparqlUtil.selectDataJustSubject(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				"?s ?p ?o");
+		return getDocumentsId(sparqlQuery);
 	}
 }

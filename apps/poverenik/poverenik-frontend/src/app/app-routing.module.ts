@@ -104,7 +104,7 @@ const routes: Routes = [
     }
   },
   {
-    path: "novo-resenje", component: ResenjaComponent,
+    path: "novo-resenje/:tip/:idZalbe", component: ResenjaComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'poverenik'

@@ -32,5 +32,5 @@ export class ResenjaService {
   download(path: string, id: string): any {
     return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'arraybuffer' as 'text' });
   }
-  
+
 }
