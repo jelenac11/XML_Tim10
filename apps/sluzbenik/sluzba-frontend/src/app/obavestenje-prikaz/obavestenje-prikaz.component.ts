@@ -77,7 +77,7 @@ export class ObavestenjePrikazComponent implements OnInit {
 
   extractMetadataAsRDF(documentID: string) {
     this.obavestenjeService.download(`obavestenja/extract-metadata/rdf`, documentID).subscribe(response => {
-      this.startDownload(documentID, response, 'ttl', 'application/x-turtle');
+      this.startDownload(documentID, response, 'rdf', 'application/rdf+xml');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   }

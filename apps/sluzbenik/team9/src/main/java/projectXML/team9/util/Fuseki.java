@@ -248,11 +248,11 @@ public class Fuseki {
 						propertiesConfiguration.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
 
-		String path = JSON_FILEPATH + String.format("%s.ttl", zahtevId);
+		String path = JSON_FILEPATH + String.format("%s.rdf", zahtevId);
 		OutputStream output = new FileOutputStream(path);
 
 		Model describeModel = queryExecution.execDescribe();
-		describeModel.write(output, "TURTLE");
+		describeModel.write(output);
 
 		return path;
 	}
