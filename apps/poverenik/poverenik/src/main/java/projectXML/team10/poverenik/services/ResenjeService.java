@@ -3,6 +3,7 @@ package projectXML.team10.poverenik.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
@@ -14,6 +15,7 @@ import org.w3c.dom.NodeList;
 
 import projectXML.team10.poverenik.repositories.ResenjeRepository;
 import projectXML.team10.poverenik.util.DOMParser;
+import projectXML.team10.poverenik.util.FusekiWriter;
 import projectXML.team10.poverenik.util.GenerateHTMLAndPDF;
 
 @Service
@@ -24,6 +26,9 @@ public class ResenjeService {
 
 	@Autowired
 	private ResenjeRepository resenjeRepository;
+	
+	@Autowired
+	private FusekiWriter fusekiWriter;
 	
 	public String getOdlukaPoverioca(String id) throws Exception {
 		return resenjeRepository.getById(id);
@@ -60,6 +65,14 @@ public class ResenjeService {
 		File file = new File(url);
 		FileInputStream fileInputStream = new FileInputStream(file);
 		return IOUtils.toString(fileInputStream, "UTF-8");
+	}
+	
+	public ArrayList<String> getResenjaByCurrentUser(String email) {
+		return fusekiWriter.readAllResenjaIdByEmail("/resenja", email);
+	}
+	
+	public ArrayList<String> getAll() {
+		return fusekiWriter.readAllResenja("/resenja");
 	}
 
 }

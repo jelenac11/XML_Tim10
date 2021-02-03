@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ZalbaCutanjeService } from '../core/services/zalba-cutanje.service';
+import { ZalbaCutanjeXonomyService } from '../core/xonomy/zalba-cutanje-xonomy.service';
 
 declare const Xonomy: any;
 
@@ -15,6 +16,7 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
   zalba: any;
 
   constructor(
+    private xonomyService: ZalbaCutanjeXonomyService,
     private zalbaCutanjeService: ZalbaCutanjeService,
     private route: ActivatedRoute
   ) { }
@@ -23,11 +25,37 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zalbaCutanjeService.get('zalba-cutanje/XSLTDocument', this.id).subscribe(res => {
-      let zalba = Xonomy.xml2js(res);
-      zalba = zalba.children[0].getText();
-      this.zalbaHTML.nativeElement.innerHTML = zalba;
+    this.zalbaCutanjeService.get('zalba-cutanje', this.id).subscribe(res => {
+      this.zalba = res;
+      this.zalbaHTML.nativeElement.innerHTML = this.xonomyService.convertZalbaXSLT(this.zalba);
     });
   }
+
+  downloadPDF(): void {
+    this.zalbaCutanjeService.download(`zalba-cutanje/generate-pdf`, this.id).subscribe(response => {
+      this.startDownload(this.id, response, 'pdf', 'application/pdf');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  };
+
+  downloadHTML(): void {
+    this.zalbaCutanjeService.download(`zalba-cutanje/generate-html`, this.id).subscribe(response => {
+      this.startDownload(this.id, response, 'html', 'text/html');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  };
+
+  startDownload(fileName: string, response, extension: string, fileFormat: string) {
+    let file = new Blob([response], { type: fileFormat });
+    var fileURL = URL.createObjectURL(file);
+    let a = document.createElement('a');
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.href = fileURL;
+    a.download = `${fileName}.${extension}`;
+    a.click();
+    window.URL.revokeObjectURL(fileURL);
+    a.remove();
+  };
 
 }
