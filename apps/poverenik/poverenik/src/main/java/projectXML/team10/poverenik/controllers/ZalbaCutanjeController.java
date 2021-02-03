@@ -1,10 +1,14 @@
 package projectXML.team10.poverenik.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,6 +49,34 @@ public class ZalbaCutanjeController {
 		return ResponseEntity.ok(zalba);
 	}
 	
+	@GetMapping
+	@CrossOrigin
+	public ResponseEntity<?> getZalbeByCurrentUser() {
+		StringArray zalbe = new StringArray();
+		try {
+			Korisnik user = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			ArrayList<String> idsZalbi = zalbaCutanjeService.getZalbeByCurrentUser(user.getEmail());
+			zalbe.setItem(idsZalbi);
+			return ResponseEntity.ok(zalbe);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping(value = "/poverenik")
+	@CrossOrigin
+	public ResponseEntity<?> getAll() {
+		StringArray zalbe = new StringArray();
+		try {
+			ArrayList<String> idsZalbi = zalbaCutanjeService.getAll();
+			zalbe.setItem(idsZalbi);
+			return ResponseEntity.ok(zalbe);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
 	@PostMapping(consumes = MediaType.APPLICATION_XML_VALUE)
 	@CrossOrigin
 	public ResponseEntity<?> createZalbaCutanje(@RequestBody ZalbaNaCutanje zalba){
@@ -73,6 +105,7 @@ public class ZalbaCutanjeController {
 	        StringArray items = zahteviPort.getIstekliZahtevi(current.getEmail());
 			return ResponseEntity.ok(items);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -129,4 +162,34 @@ public class ZalbaCutanjeController {
 		}
 	}
 	
+	@GetMapping(value = "/generate-pdf/{id}")
+	@CrossOrigin
+	public byte[] generatePDFZalbaCutanje(@PathVariable String id) {
+		try {
+			String path = zalbaCutanjeService.generatePDFZalbaCutanje(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@GetMapping(value = "/generate-html/{id}")
+	@CrossOrigin
+	public byte[] generateXHTMLZalbaCutanje(@PathVariable String id) {
+		try {
+			String path = zalbaCutanjeService.generateHTMLZalbaCutanje(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

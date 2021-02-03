@@ -1,1 +1,9 @@
 <div #zalbaHTML class="htmlView"></div>
+<div class="htmlView">
+    <button mat-raised-button (click)="downloadPDF()" style="margin-right: 20px;">
+        <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+    </button>
+    <button mat-raised-button (click)="downloadHTML()">
+        <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+    </button>
+</div>

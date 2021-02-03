@@ -25,6 +25,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { PrikazResenjaComponent } from './prikaz-resenja/prikaz-resenja.component';
 import { ResenjaComponent } from './resenja/resenja.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -43,6 +48,7 @@ import { ResenjaComponent } from './resenja/resenja.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
@@ -52,6 +58,10 @@ import { ResenjaComponent } from './resenja/resenja.component';
     AuthModule,
     MatSnackBarModule,
     MatButtonModule,
+    HttpClientModule,
+    MatIconModule,
+    MatMenuModule,
+    MatInputModule
   ],
   providers: [ZalbaCutanjeService, ZalbaCutanjeXonomyService, ZalbaNaOdlukuService, ZalbaNaOdlukuXonomyService],
   bootstrap: [AppComponent]

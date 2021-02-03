@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.StringWriter;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -32,9 +33,11 @@ public class ZalbaNaOdlukuService {
 	@Autowired
 	private MetadataExtractor metadataExtractor;
 	@Autowired
-	private MarshallerFactory marshallerFactory;
-	@Autowired
 	private GenerateHTMLAndPDF generateHTMLAndPDF;
+	@Autowired
+	private FusekiWriter fusekiWriter;
+	@Autowired
+	private MarshallerFactory marshallerFactory;
 	
 	public ZalbaNaOdluku getZalba(String id) throws Exception {
 		ZalbaNaOdluku zalba = zalbaNaOdlukuRepository.getById(id);
@@ -66,11 +69,27 @@ public class ZalbaNaOdlukuService {
 		return zalba;
 	}
 	
+	public String generatePDFZalbaNaOdluku(String id) throws Exception {
+		return generateHTMLAndPDF.generatePDFZalbaNaOdluku(id);
+	}
+
+	public String generateHTMLZalbaNaOdluku(String id) throws Exception {
+		return generateHTMLAndPDF.generateHTMLZalbaNaOdluku(id);
+	}
+	
 	public String getXSLTZalba(String id) throws Exception {
 		String url = generateHTMLAndPDF.generateHTMLZalbaNaOdluku(id);
 		File file = new File(url);
 		FileInputStream fileInputStream = new FileInputStream(file);
 		return IOUtils.toString(fileInputStream, "UTF-8");
+	}
+	
+	public ArrayList<String> getZalbeByCurrentUser(String email) {
+		return fusekiWriter.readAllZalbeNaOdlukuIdByEmail("/zalbe-na-odluku", email);
+	}
+	
+	public ArrayList<String> getAll() {
+		return fusekiWriter.readAllZalbeNaOdluku("/zalbe-na-odluku");
 	}
 	
 }
