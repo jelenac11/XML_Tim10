@@ -1,0 +1,14 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.projekat.org/predicate/">
+  <rdf:Description rdf:about="http://localhost:4200/obavestenje/951ecb3f-2752-47c1-9da6-a4806aeff4a0">
+    <j.0:zahtev_na_koji_se_odnosi_obavestenje rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal"
+    >http://localhost:4200/zahtev/8513e6f0-25fb-4fb4-8fbb-87b8701042a4</j.0:zahtev_na_koji_se_odnosi_obavestenje>
+    <j.0:trazilac_informacija rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal"
+    >sluzbenik@gmail.com</j.0:trazilac_informacija>
+    <j.0:kreator_obavestenja rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal"
+    >Nesto</j.0:kreator_obavestenja>
+    <j.0:datum_donosenja rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2021-01-26</j.0:datum_donosenja>
+  </rdf:Description>
+</rdf:RDF>

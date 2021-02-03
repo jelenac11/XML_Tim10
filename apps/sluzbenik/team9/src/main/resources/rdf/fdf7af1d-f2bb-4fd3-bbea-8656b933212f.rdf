@@ -1,0 +1,13 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.projekat.org/predicate/">
+  <rdf:Description rdf:about="http://localhost:4200/zahtev/fdf7af1d-f2bb-4fd3-bbea-8656b933212f">
+    <j.0:podnosilac_zahteva rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal"
+    >milanm2998@gmail.com</j.0:podnosilac_zahteva>
+    <j.0:organ_od_kojeg_se_trazi rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal"
+    >Nesto</j.0:organ_od_kojeg_se_trazi>
+    <j.0:mesto_podnosenja>Nesto</j.0:mesto_podnosenja>
+    <j.0:datum_podnosenja rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2021-01-31</j.0:datum_podnosenja>
+  </rdf:Description>
+</rdf:RDF>
