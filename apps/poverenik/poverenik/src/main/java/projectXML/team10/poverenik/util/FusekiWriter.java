@@ -230,6 +230,7 @@ public class FusekiWriter {
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 				"?s ?p ?o");
 		return getDocumentsId(sparqlQuery);
+	}
     public ArrayList<String> readAllDocuments(String type) {
 		String sparqlQuery = SparqlUtil
 				.selectDistinctData(
