@@ -34,7 +34,7 @@ export class ZalbaCutanjeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zalbaCutanjeService.getZahtev('zalba-cutanje/zahtev', this.id).subscribe(res => {
+    this.zalbaCutanjeService.getZahtev('zalbe-cutanje/zahtev', this.id).subscribe(res => {
       var convert = require('xml-js');
       var zahtev = convert.xml2js(res, {compact: true, spaces: 4});
       this.datum_zahteva = zahtev['za:zahtev_gradjana']['za:informacije_vezane_za_zahtev']['za:datum']._text.substring(0,10);
@@ -63,7 +63,7 @@ export class ZalbaCutanjeComponent implements OnInit {
 
   public submit(): void {
     console.log(Xonomy.harvest())
-    this.zalbaCutanjeService.post("zalba-cutanje", Xonomy.harvest())
+    this.zalbaCutanjeService.post("zalbe-cutanje", Xonomy.harvest())
       .subscribe(res => {
         this.snackBar.success("Uspešno ste poslali žalbu na ćutanje.");
         this.kreirajXML();

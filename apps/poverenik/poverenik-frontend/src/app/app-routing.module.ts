@@ -15,6 +15,7 @@ import { ResenjaComponent } from './resenja/resenja.component';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZalbaCutanjeComponent } from './zalba-cutanje/zalba-cutanje.component';
 import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.component';
+import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,13 @@ const routes: Routes = [
   },
   {
     path: "resenja/:id", component: PrikazResenjaComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'poverenik'
+    }
+  },
+  {
+    path: "izvestaji/:id", component: IzvestajPrikazComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'poverenik'

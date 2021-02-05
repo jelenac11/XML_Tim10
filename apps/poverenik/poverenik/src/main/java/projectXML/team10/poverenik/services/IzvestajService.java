@@ -4,6 +4,7 @@ import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.math.BigInteger;
 import java.time.LocalDate;
@@ -58,7 +59,8 @@ public class IzvestajService {
 		
 		pz.setZalbeNaCutanje(zalbaCutanjeService.getPodaciOZalbeCutanja(firstDay + ""));
 		izvestaj.setPodaciOZalbama(pz);
-		
+		izvestaj.setId("http://localhost:4201/izvestaji/" + izvestaj.getId().split("/")[4]);
+		izvestaj.setAbout("http://localhost:4201/izvestaji/" + izvestaj.getId().split("/")[4]);
 		izvestajRepository.save(izvestaj);
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
@@ -66,6 +68,8 @@ public class IzvestajService {
 		String xmlString = sw.toString();
 		metadataExtractor.extractMetadata(xmlString);
 		FusekiWriter.saveRDF("/izvestaji");
+		izvestaj.setId("http://localhost:4200/izvestaji/" + izvestaj.getId().split("/")[4]);
+		izvestaj.setAbout("http://localhost:4200/izvestaji/" + izvestaj.getId().split("/")[4]);
 		return new TIzvestaj(izvestaj);
 	}
 	
@@ -88,5 +92,16 @@ public class IzvestajService {
 		return fusekiWriter.readAllDocuments("/izvestaji");
 	}
 
+	public String getDocumentMetaDataByIdAsJSON(String izvestajId) throws FileNotFoundException {
+		return fusekiWriter.getIzvestajMetaDataByIdAsJSON(izvestajId);
+	}
+
+	public String getDocumentMetaDataByIdAsXML(String izvestajId) throws FileNotFoundException {
+		return fusekiWriter.getIzvestajMetaDataByIdAsXML(izvestajId);
+	}
+
+	public String getDocumentMetaDataByIdAsRDF(String izvestajId) throws FileNotFoundException {
+		return fusekiWriter.getDocumentMetaDataByIdAsRDF("izvestaji", izvestajId, "izvestaji");
+	}
 }
 

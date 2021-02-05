@@ -27,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { IzvestajComponent } from './izvestaj/izvestaj.component';
+import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { IzvestajComponent } from './izvestaj/izvestaj.component';
     ObavestenjePrikazComponent,
     DokumentiComponent,
     DokumentPretragaComponent,
-    IzvestajComponent
+    IzvestajComponent,
+    IzvestajPrikazComponent
   ],
   imports: [
     BrowserModule,

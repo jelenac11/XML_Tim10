@@ -22,7 +22,7 @@ import projectXML.team9.soap.XSLTDocumentDTO;
 import projectXML.team9.soap.ports.used.IzvestajiPort;
 
 @RestController
-@RequestMapping(value = "/api/izvestaj", produces = MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(value = "/api/izvestaji", produces = MediaType.APPLICATION_XML_VALUE)
 public class IzvestajController {
 
 	@Autowired
@@ -32,21 +32,15 @@ public class IzvestajController {
 	@CrossOrigin
 	public ResponseEntity<?> createIzvestaj() {
 		try {
-			System.out.println("0");
 			URL wsdl = new URL("http://localhost:8082/ws/izvestaji?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/izvestaji", "IzvestajiService");
 	    	QName portName = new QName("http://www.projekat.org/ws/izvestaji", "IzvestajPort");
 	    	Service service = Service.create(wsdl, serviceName);
-	    	System.out.println("1");
 	        IzvestajiPort izvestajiPort = service.getPort(portName, IzvestajiPort.class);
 
-	        System.out.println("2");
 	        Izvestaj izvestaj = izvestajService.create();
-	        System.out.println("3");
 	        izvestaj = izvestajiPort.storeIzvestaj(izvestaj);
-	        System.out.println("4");
 	        izvestajService.save(izvestaj);
-	        System.out.println("5");
 			return new ResponseEntity<String>(izvestaj.getId(), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,6 +102,48 @@ public class IzvestajController {
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
+	}
+	
+	@GetMapping(value = "extract-metadata/json/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsJSONById(@PathVariable String id) {
+		try {
+			String path = izvestajService.getDocumentMetaDataByIdAsJSON(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@GetMapping(value = "extract-metadata/xml/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsXMLById(@PathVariable String id) {
+		try {
+			String path = izvestajService.getDocumentMetaDataByIdAsXML(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GetMapping(value = "extract-metadata/rdf/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsRDFById(@PathVariable String id) {
+		try {
+			String path = izvestajService.getDocumentMetaDataByIdAsRDF(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

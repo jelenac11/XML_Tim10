@@ -37,14 +37,14 @@ export class IzvestajComponent implements OnInit {
   };
 
   downloadPDF(documentID: string): void {
-    this.izvestajService.download(`izvestaj/generate-pdf`, documentID).subscribe(response => {
+    this.izvestajService.download(`izvestaji/generate-pdf`, documentID).subscribe(response => {
       this.startDownload(documentID, response, 'pdf', 'application/pdf');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   };
 
   downloadHTML(documentID: string): void {
-    this.izvestajService.download(`izvestaj/generate-html`, documentID).subscribe(response => {
+    this.izvestajService.download(`izvestaji/generate-html`, documentID).subscribe(response => {
       this.startDownload(documentID, response, 'html', 'text/html');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
@@ -63,4 +63,24 @@ export class IzvestajComponent implements OnInit {
     a.remove();
   };
 
+  extractMetadataAsJSON(documentID: string) {
+    this.izvestajService.download(`izvestaji/extract-metadata/json`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'json', 'application/json');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  extractMetadataAsXML(documentID: string) {
+    this.izvestajService.download(`izvestaji/extract-metadata/xml`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'xml', 'application/xml');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  extractMetadataAsRDF(documentID: string) {
+    this.izvestajService.download(`izvestaji/extract-metadata/rdf`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'rdf', 'application/rdf+xml');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
 }

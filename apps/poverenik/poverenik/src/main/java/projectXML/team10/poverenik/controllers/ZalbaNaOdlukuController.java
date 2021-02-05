@@ -31,7 +31,7 @@ import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team10.poverenik.services.ZalbaNaOdlukuService;
 
 @RestController
-@RequestMapping(value = "/api/zalba-na-odluku", produces = MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(value = "/api/zalbe-na-odluku", produces = MediaType.APPLICATION_XML_VALUE)
 public class ZalbaNaOdlukuController {
 
 	@Autowired
@@ -190,4 +190,45 @@ public class ZalbaNaOdlukuController {
 		return null;
 	}
 	
+	@GetMapping(value = "extract-metadata/json/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsJSONById(@PathVariable String id) {
+		try {
+			String path = zalbaNaOdlukuService.getDocumentMetaDataByIdAsJSON(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@GetMapping(value = "extract-metadata/xml/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsXMLById(@PathVariable String id) {
+		try {
+			String path = zalbaNaOdlukuService.getDocumentMetaDataByIdAsXML(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GetMapping(value = "extract-metadata/rdf/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsRDFById(@PathVariable String id) {
+		try {
+			String path = zalbaNaOdlukuService.getDocumentMetaDataByIdAsRDF(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

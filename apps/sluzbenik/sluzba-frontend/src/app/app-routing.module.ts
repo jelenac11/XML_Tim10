@@ -6,6 +6,7 @@ import { PrijavaComponent } from './auth/prijava/prijava.component';
 import { RegistracijaComponent } from './auth/registracija/registracija.component';
 import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga.component';
 import { DokumentiComponent } from './dokumenti/dokumenti.component';
+import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 import { IzvestajComponent } from './izvestaj/izvestaj.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
@@ -65,7 +66,14 @@ const routes: Routes = [
     }
   },
   {
-    path:"izvestaj", component: IzvestajComponent,
+    path:"izvestaj/:id", component: IzvestajPrikazComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
+    path:"podnosenje-izvestaja", component: IzvestajComponent,
     canActivate: [RoleGuard],
     data:{
       expectedRoles: 'sluzbenik'

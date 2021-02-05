@@ -13,6 +13,10 @@ export class IzvestajService {
     private http: HttpClient
   ) { }
 
+  get(path: string, id: string): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
+  }
+
   getAll(path: string): Observable<any> {
     return this.http.get(`${environment.api_url}${path}`, { responseType: 'text' });
   }
