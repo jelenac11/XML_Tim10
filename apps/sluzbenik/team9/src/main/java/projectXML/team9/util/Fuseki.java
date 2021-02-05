@@ -249,11 +249,11 @@ public class Fuseki {
 						propertiesConfiguration.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
 
-		String path = JSON_FILEPATH + String.format("%s.rdf", zahtevId);
+		String path = JSON_FILEPATH + String.format("%s.ttl", zahtevId);
 		OutputStream output = new FileOutputStream(path);
 
 		Model describeModel = queryExecution.execDescribe();
-		describeModel.write(output);
+		describeModel.write(output, "TURTLE");
 
 		return path;
 	}
@@ -314,8 +314,6 @@ public class Fuseki {
 								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
 						" ?s <http://www.projekat.org/predicate/status> false . \n" + "?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date  \n FILTER"
 								+ String.format("( ?date > \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )", date));
-		System.out.println("1");
-		System.out.println(sparqlQuery);
 		ArrayList<String> odbijeniZahtevi = getDocumentsId(sparqlQuery);
 		
 		return BigInteger.valueOf(odbijeniZahtevi.size());
@@ -329,8 +327,6 @@ public class Fuseki {
 								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
 						" ?s <http://www.projekat.org/predicate/status> true . \n" + "?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date \n FILTER"
 								+ String.format("( ?date > \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )", date));
-		System.out.println("2");
-		System.out.println(sparqlQuery);
 		ArrayList<String> odbijeniZahtevi = getDocumentsId(sparqlQuery);
 
 		return BigInteger.valueOf(odbijeniZahtevi.size());
@@ -345,8 +341,6 @@ public class Fuseki {
 				"\n FILTER NOT EXISTS { ?s <http://www.projekat.org/predicate/status> ?o } ."
 						+ "\n ?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date \n FILTER"
 						+ String.format("( ?date > \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )", date));
-		System.out.println("3");
-		System.out.println(sparqlQuery);
 		ArrayList<String> neodgovoreni = getDocumentsId(sparqlQuery);
 
 		return BigInteger.valueOf(neodgovoreni.size());

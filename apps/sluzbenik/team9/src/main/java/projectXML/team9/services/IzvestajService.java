@@ -83,6 +83,7 @@ public class IzvestajService {
         
         PodaciOZahtevima pz = new PodaciOZahtevima();
         pz.setBrojOdbijenihZahteva(fusekiWriter.getNumberOfOdbijeniZahtevi(firstDay + "T00:00:00"));
+        System.out.println("OVDEEEEEEEEE");
         pz.setBrojUsvojenihZahteva(fusekiWriter.getNumberOfUsvojeniZahtevi(firstDay + "T00:00:00"));
         pz.setBrojZahtevaNaKojeNijeOdgovoreno(fusekiWriter.getNumberOfNeodgovoreniZahtevi(firstDay + "T00:00:00"));
         izvestaj.setPodaciOZahtevima(pz);

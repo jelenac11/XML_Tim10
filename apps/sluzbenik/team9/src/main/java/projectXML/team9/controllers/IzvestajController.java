@@ -32,16 +32,22 @@ public class IzvestajController {
 	@CrossOrigin
 	public ResponseEntity<?> createIzvestaj() {
 		try {
+			System.out.println("0");
 			URL wsdl = new URL("http://localhost:8082/ws/izvestaji?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/izvestaji", "IzvestajiService");
 	    	QName portName = new QName("http://www.projekat.org/ws/izvestaji", "IzvestajPort");
 	    	Service service = Service.create(wsdl, serviceName);
+	    	System.out.println("1");
 	        IzvestajiPort izvestajiPort = service.getPort(portName, IzvestajiPort.class);
 
+	        System.out.println("2");
 	        Izvestaj izvestaj = izvestajService.create();
+	        System.out.println("3");
 	        izvestaj = izvestajiPort.storeIzvestaj(izvestaj);
+	        System.out.println("4");
 	        izvestajService.save(izvestaj);
-			return new ResponseEntity(HttpStatus.OK);
+	        System.out.println("5");
+			return new ResponseEntity<String>(izvestaj.getId(), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
