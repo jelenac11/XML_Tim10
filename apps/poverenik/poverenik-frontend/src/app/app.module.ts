@@ -20,7 +20,6 @@ import { SharedModule } from './shared/shared.module';
 import { PodnosenjeZalbeNaOdlukuComponent } from './podnosenje-zalbe-na-odluku/podnosenje-zalbe-na-odluku.component';
 import { PodnosenjeZalbeNaCutanjeComponent } from './podnosenje-zalbe-na-cutanje/podnosenje-zalbe-na-cutanje.component';
 import { MojiDokumentiComponent } from './moji-dokumenti/moji-dokumenti.component';
-import { PregledDokumenataComponent } from './pregled-dokumenata/pregled-dokumenata.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { PrikazResenjaComponent } from './prikaz-resenja/prikaz-resenja.component';
@@ -41,7 +40,6 @@ import { CommonModule } from '@angular/common';
     PodnosenjeZalbeNaOdlukuComponent,
     PodnosenjeZalbeNaCutanjeComponent,
     MojiDokumentiComponent,
-    PregledDokumenataComponent,
     ZahtevPrikazComponent,
     ResenjaComponent,
     PrikazResenjaComponent
