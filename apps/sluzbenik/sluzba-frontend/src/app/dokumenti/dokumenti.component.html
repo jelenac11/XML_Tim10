@@ -135,4 +135,44 @@
       </tbody>
     </table>
   </div>
+  <!--Tabela za izjasnjavanje-->
+  <div class="table-wrap col-10 mt-3">
+    <table class="table table-hover border">
+      <thead>
+        <tr>
+          <th colspan="4">Zalbe na zahtev</th>
+        </tr>
+        <tr>
+          <th>#</th>
+          <th>Naziv dokumenta</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="zalbeZahtevi.length !== 0">
+        <tr *ngFor="let item of zalbeZahtevi; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <a role="button" (click)="zahtev(item)">{{ item.idZahteva }}</a>
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              (click)="prihvatiZahtevZalbe(item)"
+            >
+              <mat-icon>check</mat-icon> Prihvati zahtev
+            </button>
+          </td>
+          <td>
+            <button mat-raised-button (click)="odbijZahtevZalbe(item)">
+              <mat-icon>clear</mat-icon> Odbij zahtev
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="zalbeZahtevi.length == 0">
+          <td colspan="4">Nema podnetih zahteva.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -66,6 +66,31 @@ public class FusekiWriter {
 
     }
     
+    
+    public static void updateData(boolean status, String zalbaId, String type, String db, String predicate) throws IOException {
+        AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		//Delete first triplet
+        String sparqlUpdate = SparqlUtil.deleteData(
+        		conn.dataEndpoint + GRAPH_URI + type,
+        		String.format("<http://localhost:4200%s/%s>  <http://www.projekat.org/predicate/%s> false",db, zalbaId, predicate));
+		UpdateRequest request = UpdateFactory.create();
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+
+        //Inseert
+        sparqlUpdate = SparqlUtil.insertData(
+				conn.dataEndpoint + GRAPH_URI + type,
+				String.format("<http://localhost:4200%s/%s>  <http://www.projekat.org/predicate/%s>  %b",db, zalbaId, predicate, status));
+
+		request = UpdateFactory.create();
+        processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+	}
+    
     public ArrayList<String> getDocumentsId(String sparqlQuery) {
 		ArrayList<String> ids = new ArrayList<String>();
 
@@ -140,6 +165,16 @@ public class FusekiWriter {
 								propertiesConfiguration.getFusekiConfiguration().getDataset(),
 								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 						"?s ?p ?o");
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> getZalbeNotAnswered(String type) {
+		String sparqlQuery = SparqlUtil
+				.selectDistinctData(
+						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+								propertiesConfiguration.getFusekiConfiguration().getDataset(),
+								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+						"?s <http://www.projekat.org/predicate/odgovorena> false");
 		return getDocumentsId(sparqlQuery);
 	}
 

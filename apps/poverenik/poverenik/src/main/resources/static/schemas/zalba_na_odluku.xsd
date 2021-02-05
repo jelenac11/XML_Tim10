@@ -108,7 +108,7 @@
             <xs:attribute name="broj_resenja" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:minLength value="1"/>
+                        <xs:minLength value="0"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>

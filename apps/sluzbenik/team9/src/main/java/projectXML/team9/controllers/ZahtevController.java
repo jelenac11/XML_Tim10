@@ -2,7 +2,11 @@ package projectXML.team9.controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.URL;
 import java.util.ArrayList;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import projectXML.team9.dto.DocumentsIDDTO;
 import projectXML.team9.dto.SearchDTO;
 import projectXML.team9.soap.XSLTDocumentDTO;
+import projectXML.team9.soap.ports.used.OdgovorNaZalbuPort;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.services.ZahtevService;
@@ -201,6 +206,59 @@ public class ZahtevController {
 			iddto.getZahtev().addAll(zahtevService.search(searchDTO));
 
 			return ResponseEntity.ok(iddto);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping(value = "/zalbe-zahtevi")
+	@CrossOrigin
+	public ResponseEntity<?> getZahteviZalbe() {
+		try {
+			URL wsdl = new URL("http://localhost:8082/ws/odgovori?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorNaZalbuService");
+	    	QName portName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        OdgovorNaZalbuPort odgovorPort = service.getPort(portName, OdgovorNaZalbuPort.class);
+			return ResponseEntity.ok(odgovorPort.getZalbeNaKojeTrebaOdgovoriti());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "/odbi-zalbu/{tip}/{idZalbe}")
+	@CrossOrigin
+	public ResponseEntity<?> odbiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
+		try {
+			URL wsdl = new URL("http://localhost:8082/ws/odgovori?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorNaZalbuService");
+	    	QName portName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        OdgovorNaZalbuPort odgovorPort = service.getPort(portName, OdgovorNaZalbuPort.class);
+	        odgovorPort.odbiZalbu(idZalbe, tip);
+	        
+			return ResponseEntity.ok(true);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	
+	@PutMapping(value = "/prihvati-zalbu/{tip}/{idZalbe}")
+	@CrossOrigin
+	public ResponseEntity<?> prihvatiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
+		try {
+			URL wsdl = new URL("http://localhost:8082/ws/odgovori?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorNaZalbuService");
+	    	QName portName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        OdgovorNaZalbuPort odgovorPort = service.getPort(portName, OdgovorNaZalbuPort.class);
+	        odgovorPort.prihvatiZalbu(idZalbe, tip);
+	        
+			return ResponseEntity.ok(true);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}

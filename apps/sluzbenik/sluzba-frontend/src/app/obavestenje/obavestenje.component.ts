@@ -15,7 +15,7 @@ declare const Xonomy: any;
 export class ObavestenjeComponent implements OnInit {
 
   private zahtev: any;
-
+  private tip;
   constructor(private xonomyService: ObavestenjeXonomyService,
     private zahtevService: ZahtevService,
     private obavestenjeService: ObavestenjeService,
@@ -27,6 +27,7 @@ export class ObavestenjeComponent implements OnInit {
   @ViewChild('obavestenjeHTML', { static: false }) obavestenjeHTML;
 
   ngOnInit(): void {
+    this.tip = this.route.snapshot.paramMap.get('tip');
     this.zahtevService.get('zahtevi', this.route.snapshot.paramMap.get('id'))
       .subscribe(res => {
         this.zahtev = Xonomy.xml2js(res);
@@ -45,7 +46,19 @@ export class ObavestenjeComponent implements OnInit {
     this.obavestenjeService.post("obavestenja", Xonomy.harvest())
       .subscribe(res => {
         this.succesMessage('Uspešno ste poslali zahtev.');
-        this.router.navigateByUrl(`/`);
+        if (this.tip){
+          const id = this.route.snapshot.paramMap.get('idZalbe');
+          console.log(id);
+          this.zahtevService.zalba('zahtevi/prihvati-zalbu/' + this.tip + '/' + id).subscribe(() => {
+            this.router.navigateByUrl(`/`);
+          }, () => {
+            this.router.navigateByUrl(`/`);
+          });
+        }
+        else{
+
+          this.router.navigateByUrl(`/`);
+        }
       },
         err => {
           this.errorMessage('Molimo Vas da ispravno popunite zahtev.');

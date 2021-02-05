@@ -8,12 +8,14 @@ import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import projectXML.team10.poverenik.repositories.ResenjeRepository;
+import projectXML.team10.poverenik.util.AmazonSESSample;
 import projectXML.team10.poverenik.util.DOMParser;
 import projectXML.team10.poverenik.util.FusekiWriter;
 import projectXML.team10.poverenik.util.GenerateHTMLAndPDF;
@@ -30,6 +32,9 @@ public class ResenjeService {
 	@Autowired
 	private FusekiWriter fusekiWriter;
 	
+	@Autowired
+	private AmazonSESSample amazonSESSample;
+	
 	public String getOdlukaPoverioca(String id) throws Exception {
 		return resenjeRepository.getById(id);
 	}
@@ -43,6 +48,14 @@ public class ResenjeService {
 //		id = id.split("-")[4]  + "/2020" + "-" + new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue();
 //		doc.getDocumentElement().setAttribute("broj_rešenja", id);
 		return resenjeRepository.save(doc);
+	}
+	
+	@Async
+	public void sendMail(String recipient, String id) throws Exception {
+		String htmlPath = generateHTMLAndPDF.generateHTMLResenje(id);
+		String pdfPath = generateHTMLAndPDF.generatePDFResenje(id);
+
+		amazonSESSample.sendMailWhenResolved(recipient, htmlPath, pdfPath);
 	}
 
 	public String generatePDFResenje(String id) throws Exception {
