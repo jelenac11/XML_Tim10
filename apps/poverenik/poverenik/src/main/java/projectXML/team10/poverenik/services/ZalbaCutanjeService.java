@@ -68,6 +68,7 @@ public class ZalbaCutanjeService {
 		String xmlString = sw.toString();
 		System.out.println(xmlString);
 		metadataExtractor.extractMetadata(xmlString);
+		FusekiWriter.updateZalbaWithStatus(false, zalba.getId(),"/zalbe-na-cutanje", "/zalbe-cutanje");
 		FusekiWriter.saveRDF("/zalbe-na-cutanje");
 		return zalba;
 	}

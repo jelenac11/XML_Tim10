@@ -132,9 +132,9 @@ export class ResenjaXonomyService {
         {
           caption: "Append an <datum_žalbe>",
           action: Xonomy.newElementChild,
-          actionParameter: `<za:datum_žalbe ${res}>${new Date().toISOString().slice(0, 10)}</za:datum_žalbe>`,
+          actionParameter: `<res:datum_žalbe ${res}>${new Date().toISOString().slice(0, 10)}</res:datum_žalbe>`,
           hideIf: function (jsElement) {
-            return jsElement.hasChildElement("za:datum_žalbe");
+            return jsElement.hasChildElement("res:datum_žalbe");
           }
         },
         {
@@ -146,8 +146,8 @@ export class ResenjaXonomyService {
           }
         }
         ],
-        attributes: {
-        }
+        
+        isReadOnly: false
       },
       'res:organ': {
         validate: function (jsElement) {
@@ -158,14 +158,14 @@ export class ResenjaXonomyService {
             }
             );
           }
-          if (!jsElement.hasChildElement('common:adresa')) {
+          if (!jsElement.hasChildElement('res:adresa')) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: 'This element needs to have element adresa.'
             }
             );
           }
-          if (!jsElement.hasChildElement('common:naziv')) {
+          if (!jsElement.hasChildElement('res:naziv')) {
             Xonomy.warnings.push({
               htmlID: jsElement.htmlID,
               text: 'This element needs to have element naziv.'
@@ -173,24 +173,62 @@ export class ResenjaXonomyService {
             );
           }
         },
+        isReadOnly: true,
         menu: [
           {
             caption: 'Append an <adresa>',
             action: Xonomy.newElementChild,
-            actionParameter: `<common:adresa ${common}></common:adresa>`,
+            actionParameter: `<res:adresa ${common}></res:adresa>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement('common:adresa');
+              return jsElement.hasChildElement('res:adresa');
             }
           },
           {
             caption: 'Append an <naziv>',
             action: Xonomy.newElementChild,
-            actionParameter: `<common:naziv ${common}></common:naziv>`,
+            actionParameter: `<res:naziv ${common}></res:naziv>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement('common:naziv');
+              return jsElement.hasChildElement('res:naziv');
             }
           }
         ]
+      },
+      'res:adresa': {
+        validate: function (jsElement) {
+          if (!jsElement.hasElements()) {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: 'This element must not be empty.'
+            }
+            );
+          }
+        },
+        menu: [
+          {
+            caption: 'Append an <mesto>',
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:mesto ${common}></common:mesto>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement('common:mesto');
+            }
+          },
+          {
+            caption: 'Append an <ulica>',
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:ulica ${common}></common:ulica>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement('common:ulica');
+            }
+          },
+          {
+            caption: 'Append an <broj>',
+            action: Xonomy.newElementChild,
+            actionParameter: `<common:broj ${common}></common:broj>`,
+            hideIf: function (jsElement) {
+              return jsElement.hasChildElement('common:broj');
+            }
+          },
+        ],
       },
       'common:adresa': {
         validate: function (jsElement) {
@@ -240,6 +278,7 @@ export class ResenjaXonomyService {
           }
         },
         hasText: true
+
       },
       'common:ulica': {
         validate: function (jsElement) {
@@ -270,7 +309,7 @@ export class ResenjaXonomyService {
         ],
         hasText: true
       },
-      'common:naziv': {
+      'res:naziv': {
         validate: function (jsElement) {
           if (jsElement.getText() === '') {
             Xonomy.warnings.push({
@@ -304,6 +343,7 @@ export class ResenjaXonomyService {
             );
           }
         },
+        isReadOnly: true,
         menu: [
           {
             caption: 'Append an <adresa>',
@@ -318,8 +358,7 @@ export class ResenjaXonomyService {
             action: Xonomy.newElementChild,
             actionParameter: `<common:ime ${common}></common:ime>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement('common:naziv') || jsElement.hasChildElement('common:ime') || !jsElement.getAttributeValue('xsi:type', null)
-                || jsElement.getAttributeValue('xsi:type', null) === 'common:TPravno_lice';
+              return jsElement.hasChildElement('common:ime');
             }
           },
           {
@@ -327,10 +366,10 @@ export class ResenjaXonomyService {
             action: Xonomy.newElementChild,
             actionParameter: `<common:prezime ${common}></common:prezime>`,
             hideIf: function (jsElement) {
-              return jsElement.hasChildElement('common:naziv');
+              return jsElement.hasChildElement('common:prezime');
             }
           },
-        ]
+        ],
       },
       'common:ime': {
         validate: function (jsElement) {
@@ -379,6 +418,7 @@ export class ResenjaXonomyService {
             );
           }
         },
+        isReadOnly: false,
         menu: [
           {
             caption: 'Append an <paragraf>',
@@ -397,7 +437,7 @@ export class ResenjaXonomyService {
             );
           }
         },
-        menu: [
+        inlineMenu: [
           {
             caption: 'Append an <datum>',
             action: Xonomy.newElementChild,
@@ -408,7 +448,27 @@ export class ResenjaXonomyService {
             action: Xonomy.newElementChild,
             actionParameter: `<res:zakon ${res}/>`,
           },
-        ],        
+        ],
+        hasText: true
+      },
+      'res:datum_žalbe': {
+        validate: function (jsElement) {  
+
+          if (jsElement.getText() === '') {
+            Xonomy.warnings.push({
+              htmlID: jsElement.htmlID,
+              text: 'This element must not be empty.'
+            }
+            );
+          }
+        },
+        menu: [
+          {
+            caption: 'Delete this <item>',
+            action: Xonomy.deleteElement
+          },
+        ],
+        isReadOnly: true,
         hasText: true
       },
       'res:datum': {
@@ -557,7 +617,7 @@ export class ResenjaXonomyService {
           }
         ]
       },
-      'res:uputsvo': {
+      'res:uputstvo': {
         validate: function (jsElement) {
           if (jsElement.getText() === '') {
             Xonomy.warnings.push({
@@ -605,6 +665,7 @@ export class ResenjaXonomyService {
             );
           }
         },
+        isReadOnly: true,
         menu: [
           {
             caption: 'Append an <adresa>',

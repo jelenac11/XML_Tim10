@@ -66,6 +66,7 @@ public class ZalbaNaOdlukuService {
 		marshaller.marshal(zalba, sw);
 		String xmlString = sw.toString();
 		metadataExtractor.extractMetadata(xmlString);
+		FusekiWriter.updateZalbaWithStatus(false, zalba.getId(),"/zalbe-na-odluku", "/zalbe-na-odluku");
 		FusekiWriter.saveRDF("/zalbe-na-odluku");
 		return zalba;
 	}
