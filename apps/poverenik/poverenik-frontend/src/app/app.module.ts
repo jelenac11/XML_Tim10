@@ -29,6 +29,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
+import { IzvestajService } from './core/services/izvestaj.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { CommonModule } from '@angular/common';
     PodnosenjeZalbeNaOdlukuComponent,
     PodnosenjeZalbeNaCutanjeComponent,
     MojiDokumentiComponent,
+    IzvestajPrikazComponent,
     ZahtevPrikazComponent,
     ResenjaComponent,
     PrikazResenjaComponent
@@ -61,7 +64,7 @@ import { CommonModule } from '@angular/common';
     MatMenuModule,
     MatInputModule
   ],
-  providers: [ZalbaCutanjeService, ZalbaCutanjeXonomyService, ZalbaNaOdlukuService, ZalbaNaOdlukuXonomyService],
+  providers: [ZalbaCutanjeService, ZalbaCutanjeXonomyService, ZalbaNaOdlukuService, ZalbaNaOdlukuXonomyService, IzvestajService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

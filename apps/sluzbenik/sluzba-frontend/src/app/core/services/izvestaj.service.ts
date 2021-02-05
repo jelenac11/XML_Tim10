@@ -13,13 +13,17 @@ export class IzvestajService {
     private http: HttpClient
   ) { }
 
+  get(path: string, id: string): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
+  }
+
   podnesiIzvestaj(): Observable<any> {
-    return this.http.get(`${environment.api_url}izvestaj`, { responseType: 'text' });
+    return this.http.get(`${environment.api_url}izvestaji`, { responseType: 'text' });
   }
 
   getXSLDocument(id: string): Observable<any> {
-    console.log(`${environment.api_url}izvestaj/XSLTDocument/${id}`);
-    return this.http.get(`${environment.api_url}izvestaj/XSLTDocument/${id}`, { responseType: 'text' });
+    console.log(`${environment.api_url}izvestaji/XSLTDocument/${id}`);
+    return this.http.get(`${environment.api_url}izvestaji/XSLTDocument/${id}`, { responseType: 'text' });
   }
 
   download(path: string, id: string): any {

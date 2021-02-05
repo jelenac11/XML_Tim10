@@ -69,7 +69,7 @@ public class ZalbaCutanjeRepository {
 
 		try {
 			col = databaseConnector.getOrCreateCollection(collectionId, 0);
-			res = databaseConnector.createResource(col, zalba.getId());
+			res = databaseConnector.createResource(col, zalba.getId().split("/")[4]);
 			marshaller.marshal(zalba, os);
 
 			res.setContent(os);

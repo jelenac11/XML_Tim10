@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<za:zahtev_gradjana xmlns:za="http://www.projekat.org/zahtev" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" id="http://localhost:4200/zahtev/55b2147c-a70e-48b8-beaf-bf8ece87173b" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/zahtev/55b2147c-a70e-48b8-beaf-bf8ece87173b">
-    <za:organ property="pred:organ_od_kojeg_se_trazi" content="Organ 1">
+<za:zahtev_gradjana xmlns:za="http://www.projekat.org/zahtev" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" id="http://localhost:4200/zahtev/8789e10a-4559-423f-ae99-9a6e4e5ffcc1" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/zahtev/8789e10a-4559-423f-ae99-9a6e4e5ffcc1">
+    <za:organ property="pred:organ_od_kojeg_se_trazi" content="d">
         <common:adresa>
-            <common:mesto>Novi Sad</common:mesto>
-            <common:ulica>Despota Stefana</common:ulica>
-            <common:broj>7</common:broj>
+            <common:mesto>d</common:mesto>
+            <common:ulica>d</common:ulica>
+            <common:broj>d</common:broj>
         </common:adresa>
-        <common:naziv>Organ 1</common:naziv>
+        <common:naziv>d</common:naziv>
     </za:organ>
     <za:trazilac property="pred:podnosilac_zahteva" content="milanm2998@gmail.com">
         <za:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
             <common:adresa>
-                <common:mesto>Novi Sad</common:mesto>
-                <common:ulica>Narodnog fronta</common:ulica>
-                <common:broj>23</common:broj>
+                <common:mesto>d</common:mesto>
+                <common:ulica>d</common:ulica>
+                <common:broj>d</common:broj>
             </common:adresa>
-            <common:naziv>Organ 2</common:naziv>
+            <common:naziv>d</common:naziv>
         </za:lice>
-        <za:drugi_podatak_za_kontakt>066419361</za:drugi_podatak_za_kontakt>
+        <za:drugi_podatak_za_kontakt>d</za:drugi_podatak_za_kontakt>n
     </za:trazilac>
     <za:informacije_vezane_za_zahtev>
         <za:tip_zahteva>
             <za:obavestenje_posedovanja_informacije/>
         </za:tip_zahteva>
-        <za:opis_zahteva>Opis</za:opis_zahteva>
-        <za:mesto property="pred:mesto_podnosenja" datatype="xs:string">Novi Sad</za:mesto>
-        <za:datum property="pred:datum_podnosenja" datatype="xs:dateTime">2021-02-05T16:55:44</za:datum>
+        <za:opis_zahteva>d</za:opis_zahteva>
+        <za:mesto property="pred:mesto_podnosenja" datatype="xs:string">d</za:mesto>
+        <za:datum property="pred:datum_podnosenja" datatype="xs:dateTime">2021-02-05T20:51:36</za:datum>
     </za:informacije_vezane_za_zahtev>
 </za:zahtev_gradjana>

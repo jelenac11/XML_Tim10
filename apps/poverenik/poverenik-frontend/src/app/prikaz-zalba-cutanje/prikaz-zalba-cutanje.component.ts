@@ -25,21 +25,21 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zalbaCutanjeService.get('zalba-cutanje', this.id).subscribe(res => {
+    this.zalbaCutanjeService.get('zalbe-cutanje', this.id).subscribe(res => {
       this.zalba = res;
       this.zalbaHTML.nativeElement.innerHTML = this.xonomyService.convertZalbaXSLT(this.zalba);
     });
   }
 
   downloadPDF(): void {
-    this.zalbaCutanjeService.download(`zalba-cutanje/generate-pdf`, this.id).subscribe(response => {
+    this.zalbaCutanjeService.download(`zalbe-cutanje/generate-pdf`, this.id).subscribe(response => {
       this.startDownload(this.id, response, 'pdf', 'application/pdf');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   };
 
   downloadHTML(): void {
-    this.zalbaCutanjeService.download(`zalba-cutanje/generate-html`, this.id).subscribe(response => {
+    this.zalbaCutanjeService.download(`zalbe-cutanje/generate-html`, this.id).subscribe(response => {
       this.startDownload(this.id, response, 'html', 'text/html');
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
@@ -58,4 +58,24 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
     a.remove();
   };
 
+  extractMetadataAsJSON(documentID: string) {
+    this.zalbaCutanjeService.download(`zalbe-cutanje/extract-metadata/json`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'json', 'application/json');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  extractMetadataAsXML(documentID: string) {
+    this.zalbaCutanjeService.download(`zalbe-cutanje/extract-metadata/xml`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'xml', 'application/xml');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  extractMetadataAsRDF(documentID: string) {
+    this.zalbaCutanjeService.download(`zalbe-cutanje/extract-metadata/rdf`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'rdf', 'application/rdf+xml');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
 }

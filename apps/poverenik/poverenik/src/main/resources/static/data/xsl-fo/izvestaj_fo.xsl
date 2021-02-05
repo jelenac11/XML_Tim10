@@ -11,8 +11,12 @@
 			<xsl:attribute-set name="rowspan-2">
 			    <xsl:attribute name="number-rows-spanned">2</xsl:attribute>
 			</xsl:attribute-set>
+
 	<xsl:attribute-set name="myBorder">
-  <xsl:attribute name="border">solid 0.4mm black</xsl:attribute>
+  <xsl:attribute name="border">solid 0.3mm black</xsl:attribute>
+  </xsl:attribute-set>
+  <xsl:attribute-set name="myPadding">
+  <xsl:attribute name="padding">5pt</xsl:attribute>
  
 </xsl:attribute-set>
    <xsl:template match="/">
@@ -44,26 +48,26 @@
 						    <fo:table-cell xsl:use-attribute-sets="myBorder">
 						      <fo:block></fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Усвојени захтеви</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Одбијени захтеви</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Захтеви на које није одговорено</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Укупно</fo:block>
 						    </fo:table-cell>
 						  </fo:table-row>
 						</fo:table-header>
 						<fo:table-body>
 						  <fo:table-row>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Број захтева</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 									<xsl:when
@@ -76,7 +80,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 									<xsl:when
@@ -89,7 +93,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 									<xsl:when
@@ -102,7 +106,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 						      		<xsl:when
@@ -117,10 +121,10 @@
 						    </fo:table-cell>
 						  </fo:table-row>
 						  <fo:table-row>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>%</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 					    			<xsl:when
@@ -137,7 +141,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 					    			<xsl:when
@@ -154,7 +158,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 					    			<xsl:when
@@ -182,40 +186,40 @@
 						font-size="11pt" font-weight="bold" margin-top="25pt">
 						<fo:table-header>
 						  <fo:table-row>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block></fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="colspan-3 myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="colspan-3 myBorder myPadding">
 						      <fo:block>Жалбе на ћутање</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="rowspan-2 myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="rowspan-2 myBorder myPadding">
 						      <fo:block>Жалбе на одлуку</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="rowspan-2 myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="rowspan-2 myBorder myPadding">
 						      <fo:block>Укупно</fo:block>
 						    </fo:table-cell>
 						  </fo:table-row>
 						  <fo:table-row>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block></fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Није поступио</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Није поступио у целости</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Није поступио у законском року</fo:block>
 						    </fo:table-cell>
 						  </fo:table-row>
 						</fo:table-header>
 						<fo:table-body>
 						  <fo:table-row>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>Број жалби</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 									<xsl:when
@@ -228,7 +232,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 									<xsl:when
@@ -241,7 +245,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 									<xsl:when
@@ -254,7 +258,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 									<xsl:when
@@ -267,7 +271,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 									<xsl:when
@@ -282,10 +286,10 @@
 						    </fo:table-cell>
 						  </fo:table-row>
 						  <fo:table-row>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>%</fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 					    			<xsl:when
@@ -302,7 +306,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 					    			<xsl:when
@@ -319,7 +323,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 					    			<xsl:when
@@ -336,7 +340,7 @@
 								</xsl:choose>
 						      </fo:block>
 						    </fo:table-cell>
-						    <fo:table-cell xsl:use-attribute-sets="myBorder">
+						    <fo:table-cell xsl:use-attribute-sets="myBorder myPadding">
 						      <fo:block>
 						      	<xsl:choose>
 					    			<xsl:when
