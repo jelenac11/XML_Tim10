@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PregledDokumenataComponent } from './pregled-dokumenata.component';
+import { IzvestajComponent } from './izvestaj.component';
 
-describe('PregledDokumenataComponent', () => {
-  let component: PregledDokumenataComponent;
-  let fixture: ComponentFixture<PregledDokumenataComponent>;
+describe('IzvestajComponent', () => {
+  let component: IzvestajComponent;
+  let fixture: ComponentFixture<IzvestajComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PregledDokumenataComponent ]
+      declarations: [ IzvestajComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PregledDokumenataComponent);
+    fixture = TestBed.createComponent(IzvestajComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,6 +3,7 @@ import { JwtService } from '../core/services/jwt.service';
 import { ZalbaNaOdlukuService } from '../core/services/zalba-na-odluku.service';
 import { ZalbaCutanjeService } from '../core/services/zalba-cutanje.service';
 import { ResenjaService } from '../core/services/resenja.service';
+import { IzvestajService } from '../core/services/izvestaj.service';
 
 declare const Xonomy: any;
 
@@ -22,6 +23,7 @@ export class MojiDokumentiComponent implements OnInit {
   constructor(private zalbaNaOdlukuService: ZalbaNaOdlukuService,
     private zalbaCutanjeService: ZalbaCutanjeService,
     private resenjaService: ResenjaService,
+    private izvestajService: IzvestajService,
     private jwtService: JwtService) { }
 
   ngOnInit(): void {
@@ -56,6 +58,9 @@ export class MojiDokumentiComponent implements OnInit {
     this.resenjaService.getAll('resenje/poverenik').subscribe(res => {
       this.extractIds(res, this.resenja);
     });
+    this.izvestajService.getAll('izvestaj/poverenik').subscribe(res => {
+      this.extractIds(res, this.izvestaji);
+    });
   };
 
   extractIds(documentsId: string, collection: any[]): void {
@@ -82,6 +87,11 @@ export class MojiDokumentiComponent implements OnInit {
         this.startDownload(documentID, response, 'pdf', 'application/pdf');
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully');
+    } else if (url === 'izvestaji') {
+      this.resenjaService.download(`izvestaj/generate-pdf`, documentID).subscribe(response => {
+        this.startDownload(documentID, response, 'pdf', 'application/pdf');
+      }), error => console.log('Error downloading the file'),
+        () => console.info('File downloaded successfully');
     }
   };
 
@@ -98,6 +108,11 @@ export class MojiDokumentiComponent implements OnInit {
         () => console.info('File downloaded successfully'); 
     } else if (url === 'resenja') {
       this.resenjaService.download(`resenje/generate-html`, documentID).subscribe(response => {
+        this.startDownload(documentID, response, 'html', 'text/html');
+      }), error => console.log('Error downloading the file'),
+        () => console.info('File downloaded successfully'); 
+    } else if (url === 'izvestaji') {
+      this.resenjaService.download(`izvestaj/generate-html`, documentID).subscribe(response => {
         this.startDownload(documentID, response, 'html', 'text/html');
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully'); 

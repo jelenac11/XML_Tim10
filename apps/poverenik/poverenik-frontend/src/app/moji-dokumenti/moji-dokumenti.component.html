@@ -131,5 +131,49 @@
             </tbody>
         </table>
         </div>
+
+        <!--CETVRTA TABELA-->
+        <div class="table-wrap col-10 mt-3" *ngIf="role === 'poverenik'">
+            <table class="table table-hover border">
+                <thead>
+                <tr>
+                    <th colspan="4">Izveštaji</th>
+                </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Naziv dokumenta</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of izvestaji; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>
+                    <a [href]="item">{{ item }}</a>
+                    </td>
+                    <td>
+                    <button
+                        mat-raised-button
+                        (click)="downloadPDF(item.split('/')[4], 'izvestaji')"
+                    >
+                        <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+                    </button>
+                    </td>
+                    <td>
+                    <button
+                        mat-raised-button
+                        (click)="downloadHTML(item.split('/')[4], 'izvestaji')"
+                    >
+                        <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+                    </button>
+                    </td>
+                </tr>
+                <tr *ngIf="resenja.length == 0">
+                    <td colspan="4">Nema podnetih izveštaja</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
