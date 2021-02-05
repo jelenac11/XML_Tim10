@@ -17,7 +17,7 @@
             </common:adresa>
             <common:naziv>d</common:naziv>
         </za:lice>
-        <za:drugi_podatak_za_kontakt>d</za:drugi_podatak_za_kontakt>
+        <za:drugi_podatak_za_kontakt>d</za:drugi_podatak_za_kontakt>n
     </za:trazilac>
     <za:informacije_vezane_za_zahtev>
         <za:tip_zahteva>
