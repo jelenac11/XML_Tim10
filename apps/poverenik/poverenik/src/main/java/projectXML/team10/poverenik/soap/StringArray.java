@@ -1,4 +1,4 @@
-package projectXML.team10.poverenik.dto;
+package projectXML.team10.poverenik.soap;
 
 import java.util.List;
 

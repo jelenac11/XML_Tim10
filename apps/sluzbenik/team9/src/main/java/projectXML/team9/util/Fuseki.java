@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 @Component
@@ -303,5 +304,51 @@ public class Fuseki {
 								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 						"?s ?p ?o");
 		return getDocumentsId(sparqlQuery);
+	}
+
+	public BigInteger getNumberOfOdbijeniZahtevi(String date) {
+		String sparqlQuery = SparqlUtil
+				.selectDistinctData(
+						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+								propertiesConfiguration.getFusekiConfiguration().getDataset(),
+								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
+						" ?s <http://www.projekat.org/predicate/status> false . \n" + "?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date  \n FILTER"
+								+ String.format("( ?date > \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )", date));
+		System.out.println("1");
+		System.out.println(sparqlQuery);
+		ArrayList<String> odbijeniZahtevi = getDocumentsId(sparqlQuery);
+		
+		return BigInteger.valueOf(odbijeniZahtevi.size());
+	}
+
+	public BigInteger getNumberOfUsvojeniZahtevi(String date) {
+		String sparqlQuery = SparqlUtil
+				.selectDistinctData(
+						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+								propertiesConfiguration.getFusekiConfiguration().getDataset(),
+								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
+						" ?s <http://www.projekat.org/predicate/status> true . \n" + "?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date \n FILTER"
+								+ String.format("( ?date > \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )", date));
+		System.out.println("2");
+		System.out.println(sparqlQuery);
+		ArrayList<String> odbijeniZahtevi = getDocumentsId(sparqlQuery);
+
+		return BigInteger.valueOf(odbijeniZahtevi.size());
+	}
+
+	public BigInteger getNumberOfNeodgovoreniZahtevi(String date) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
+				"\n FILTER NOT EXISTS { ?s <http://www.projekat.org/predicate/status> ?o } ."
+						+ "\n ?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date \n FILTER"
+						+ String.format("( ?date > \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )", date));
+		System.out.println("3");
+		System.out.println(sparqlQuery);
+		ArrayList<String> neodgovoreni = getDocumentsId(sparqlQuery);
+
+		return BigInteger.valueOf(neodgovoreni.size());
 	}
 }

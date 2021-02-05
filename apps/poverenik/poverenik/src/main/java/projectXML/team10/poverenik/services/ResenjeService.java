@@ -72,7 +72,7 @@ public class ResenjeService {
 	}
 	
 	public ArrayList<String> getAll() {
-		return fusekiWriter.readAllResenja("/resenja");
+		return fusekiWriter.readAllDocuments("/resenja");
 	}
 
 }

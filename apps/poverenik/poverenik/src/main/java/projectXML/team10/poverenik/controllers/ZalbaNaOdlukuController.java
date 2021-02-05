@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import projectXML.team10.poverenik.dto.StringArray;
+import projectXML.team10.poverenik.soap.StringArray;
+import projectXML.team10.poverenik.soap.ports.used.ZahteviPort;
 import projectXML.team10.poverenik.dto.XSLTDocumentDTO;
 import projectXML.team10.poverenik.models.korisnik.Korisnik;
 import projectXML.team10.poverenik.models.zahtev.ZahtevGradjana;
 import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team10.poverenik.services.ZalbaNaOdlukuService;
-import projectXML.team10.poverenik.soap.ports.ZahteviPort;
 
 @RestController
 @RequestMapping(value = "/api/zalba-na-odluku", produces = MediaType.APPLICATION_XML_VALUE)

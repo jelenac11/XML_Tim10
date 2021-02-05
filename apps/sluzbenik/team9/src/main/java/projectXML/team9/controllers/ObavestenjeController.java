@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team9.dto.DocumentsIDDTO;
-import projectXML.team9.dto.XSLTDocumentDTO;
+import projectXML.team9.soap.XSLTDocumentDTO;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.obavestenje.Obavestenje;
 import projectXML.team9.services.ObavestenjeService;

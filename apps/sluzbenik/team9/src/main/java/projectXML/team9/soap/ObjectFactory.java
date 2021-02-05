@@ -1,5 +1,5 @@
 
-package projectXML.team9.dto;
+package projectXML.team9.soap;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

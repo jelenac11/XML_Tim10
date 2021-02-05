@@ -1,4 +1,4 @@
-package projectXML.team10.poverenik.soap.ports;
+package projectXML.team9.soap.ports.defined;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -7,12 +7,12 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import projectXML.team10.poverenik.dto.StringArray;
-import projectXML.team10.poverenik.dto.XSLTDocumentDTO;
-import projectXML.team10.poverenik.models.zahtev.ZahtevGradjana;
+import projectXML.team9.soap.StringArray;
+import projectXML.team9.soap.TXSLTDocumentDTO;
+import projectXML.team9.models.zahtev.TZahtevGradjana;
 
-@WebService(targetNamespace = "http://www.projekat.org/ws/zahtevi", name = "Zahtevi")
-@XmlSeeAlso({projectXML.team10.poverenik.dto.ObjectFactory.class})
+@WebService(targetNamespace = "http://www.projekat.org/ws/zahtevi", name = "ZahteviPort")
+@XmlSeeAlso({projectXML.team9.soap.ObjectFactory.class})
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface ZahteviPort {
 
@@ -32,14 +32,14 @@ public interface ZahteviPort {
 	
 	@WebMethod
     @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zahtevi", partName = "return")
-    public XSLTDocumentDTO getZahtevById(
+    public TXSLTDocumentDTO getZahtevById(
         @WebParam(partName = "id", name = "id")
         String id
     );
 	
 	@WebMethod
     @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zahtevi", partName = "return")
-    public ZahtevGradjana getZahtev(
+    public TZahtevGradjana getZahtev(
         @WebParam(partName = "id", name = "id")
         String id
     );

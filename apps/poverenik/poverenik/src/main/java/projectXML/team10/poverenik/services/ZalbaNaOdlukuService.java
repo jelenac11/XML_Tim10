@@ -49,7 +49,6 @@ public class ZalbaNaOdlukuService {
 		String id = UUID.randomUUID().toString();
 		zalba.setId(id);
 		zalba.setBrojZalbe(id.split("-")[4] + "-" + new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2020");
-		zalbaNaOdlukuRepository.save(zalba);
 		zalba.setAbout("http://localhost:4200/zalbe-na-odluku/" + id);
 		zalba.getPodaciOResenju().getNazivOrgana().setDatatype("xs:string");
 		zalba.getPodaciOResenju().getNazivOrgana().setProperty("pred:organ_koji_je_doneo_odluku");
@@ -60,6 +59,7 @@ public class ZalbaNaOdlukuService {
 		zalba.getPodaciOZalbi().getMesto().setProperty("pred:mesto_podnosenja");
 		zalba.getPodaciOZalbi().getMesto().setDatatype("xs:string");
 		zalba.setVocab("http://www.projekat.org/predicate");
+		zalbaNaOdlukuRepository.save(zalba);
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(zalba, sw);
@@ -89,7 +89,7 @@ public class ZalbaNaOdlukuService {
 	}
 	
 	public ArrayList<String> getAll() {
-		return fusekiWriter.readAllZalbeNaOdluku("/zalbe-na-odluku");
+		return fusekiWriter.readAllDocuments("/zalbe-na-odluku");
 	}
 	
 }
