@@ -7,7 +7,6 @@ import { RegistracijaComponent } from './auth/registracija/registracija.componen
 import { MojiDokumentiComponent } from './moji-dokumenti/moji-dokumenti.component';
 import { PodnosenjeZalbeNaCutanjeComponent } from './podnosenje-zalbe-na-cutanje/podnosenje-zalbe-na-cutanje.component';
 import { PodnosenjeZalbeNaOdlukuComponent } from './podnosenje-zalbe-na-odluku/podnosenje-zalbe-na-odluku.component';
-import { PregledDokumenataComponent } from './pregled-dokumenata/pregled-dokumenata.component';
 import { PrikazResenjaComponent } from './prikaz-resenja/prikaz-resenja.component';
 import { PrikazZalbaCutanjeComponent } from './prikaz-zalba-cutanje/prikaz-zalba-cutanje.component';
 import { PrikazZalbaNaOdlukuComponent } from './prikaz-zalba-na-odluku/prikaz-zalba-na-odluku.component';
@@ -16,6 +15,7 @@ import { ResenjaComponent } from './resenja/resenja.component';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZalbaCutanjeComponent } from './zalba-cutanje/zalba-cutanje.component';
 import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.component';
+import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 
 const routes: Routes = [
   {
@@ -90,7 +90,7 @@ const routes: Routes = [
     }
   },
   {
-    path: "pregled-dokumenata", component: PregledDokumenataComponent,
+    path: "pregled-dokumenata", component: MojiDokumentiComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'poverenik'
@@ -98,6 +98,13 @@ const routes: Routes = [
   },
   {
     path: "resenja/:id", component: PrikazResenjaComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'poverenik'
+    }
+  },
+  {
+    path: "izvestaji/:id", component: IzvestajPrikazComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'poverenik'

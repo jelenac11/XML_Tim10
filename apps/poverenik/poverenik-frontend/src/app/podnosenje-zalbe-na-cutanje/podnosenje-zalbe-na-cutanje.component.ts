@@ -23,7 +23,7 @@ export class PodnosenjeZalbeNaCutanjeComponent implements OnInit {
   }
 
   getOdbijeniZahtevi(): void {
-    this.zalbaCutanjeService.getIstekliZahtevi('zalba-cutanje/istekliZahtevi').subscribe(res => {
+    this.zalbaCutanjeService.getIstekliZahtevi('zalbe-cutanje/istekliZahtevi').subscribe(res => {
       this.extractIds(res, this.zahtevi);
     });
   }

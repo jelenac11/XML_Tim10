@@ -24,7 +24,7 @@ import projectXML.team10.poverenik.security.TokenUtils;
 import projectXML.team10.poverenik.services.KorisnikService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4201", maxAge = 3600, allowedHeaders = "*")
 @RequestMapping(value = "/auth", produces = MediaType.APPLICATION_XML_VALUE)
 public class AuthenticationController {
 	

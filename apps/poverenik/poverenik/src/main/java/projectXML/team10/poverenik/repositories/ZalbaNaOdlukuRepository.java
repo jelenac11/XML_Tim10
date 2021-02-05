@@ -63,8 +63,7 @@ public class ZalbaNaOdlukuRepository {
 
 		try {
 			col = databaseConnector.getOrCreateCollection(collectionId, 0);
-			res = databaseConnector.createResource(col, zalba.getId());
-			System.out.println(zalba.getPodaciOZalbi().getPodnosilacZalbe().getLice().getAdresa().getMesto());
+			res = databaseConnector.createResource(col, zalba.getId().split("/")[4]);
 			marshaller.marshal(zalba, os);
 
 			res.setContent(os);

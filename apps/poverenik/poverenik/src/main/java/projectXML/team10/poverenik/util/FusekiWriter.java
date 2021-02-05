@@ -18,13 +18,18 @@ import org.springframework.stereotype.Component;
 import projectXML.team10.poverenik.configuration.PropertiesConfiguration;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 @Component
 public class FusekiWriter {
     private static final String RDF_FILEPATH = "src/main/resources/rdf/rdfOutput.rdf";
     private static final String GRAPH_URI = "/metadata";
+
+	private static final String JSON_FILEPATH = "src/main/resources/rdf/";
     
 	@Autowired
 	private PropertiesConfiguration propertiesConfiguration;
@@ -123,7 +128,7 @@ public class FusekiWriter {
 	}
     
     public ArrayList<String> readAllZalbeCutanjeIdByEmail(String type, String email) {
-		String sparqlQuery = SparqlUtil.selectData(
+		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration
 								.getFusekiConfiguration().getDataset(),
@@ -135,7 +140,7 @@ public class FusekiWriter {
 	}
     
     public ArrayList<String> readAllZalbeNaOdlukuIdByEmail(String type, String email) {
-		String sparqlQuery = SparqlUtil.selectData(
+		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration
 								.getFusekiConfiguration().getDataset(),
@@ -147,13 +152,13 @@ public class FusekiWriter {
 	}
     
     public ArrayList<String> readAllResenjaIdByEmail(String type, String email) {
-		String sparqlQuery = SparqlUtil.selectData(
+		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration
 								.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 				String.format(
-						"?s <http://www.projekat.org/predicate/trazilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
+						"?s <http://www.projekat.org/predicate/podnosilac_zalbe> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
 						email));
 		return getDocumentsId(sparqlQuery);
 	}
@@ -200,5 +205,133 @@ public class FusekiWriter {
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 				"?s ?p ?o");
 		return getDocumentsId(sparqlQuery);
+    public ArrayList<String> readAllDocuments(String type) {
+		String sparqlQuery = SparqlUtil
+				.selectDistinctData(
+						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+								propertiesConfiguration.getFusekiConfiguration().getDataset(),
+								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+						"?s ?p ?o");
+		return getDocumentsId(sparqlQuery);
 	}
+    
+    public ResultSet getDocumentMetaDataById(String sparqlQuery) {
+		QueryExecution queryExecution = QueryExecutionFactory
+				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
+
+		return queryExecution.execSelect();
+	}
+    
+    public String getZalbaCutanjeMetaDataByIdAsJSON(String zalbaId) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/zalbe-na-cutanje",
+				String.format("<http://localhost:4201/zalbe-cutanje/%s>  ?predicate  ?object", zalbaId));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.json", zalbaId);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsJSON(output, result);
+
+		return path;
+	}
+
+	public String getZalbaCutanjeMetaDataByIdAsXML(String zalbaId) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/zalbe-na-cutanje",
+				String.format("<http://localhost:4201/zalbe-cutanje/%s>  ?predicate  ?object", zalbaId));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.xml", zalbaId);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsXML(output, result);
+
+		return path;
+	}
+	
+	 public String getIzvestajMetaDataByIdAsJSON(String izvestajId) throws FileNotFoundException {
+			String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+					"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/izvestaji",
+					String.format("<http://localhost:4201/izvestaji/%s>  ?predicate  ?object", izvestajId));
+
+			ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+			String path = JSON_FILEPATH + String.format("%s.json", izvestajId);
+			OutputStream output = new FileOutputStream(path);
+
+			ResultSetFormatter.outputAsJSON(output, result);
+
+			return path;
+		}
+
+		public String getIzvestajMetaDataByIdAsXML(String izvestajId) throws FileNotFoundException {
+			String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+					"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/izvestaji",
+					String.format("<http://localhost:4201/izvestaji/%s>  ?predicate  ?object", izvestajId));
+
+			ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+			String path = JSON_FILEPATH + String.format("%s.xml", izvestajId);
+			OutputStream output = new FileOutputStream(path);
+
+			ResultSetFormatter.outputAsXML(output, result);
+
+			return path;
+		}
+
+	public String getZalbaNaOdlukuMetaDataByIdAsJSON(String zalbaId) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/zalbe-na-odluku",
+				String.format("<http://localhost:4201/zalbe-na-odluku/%s>  ?predicate  ?object", zalbaId));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.json", zalbaId);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsJSON(output, result);
+
+		return path;
+	}
+
+	public String getZalbaNaOdlukuMetaDataByIdAsXML(String zalbaId) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/zalbe-na-odluku",
+				String.format("<http://localhost:4201/zalbe-na-odluku/%s>  ?predicate  ?object", zalbaId));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.xml", zalbaId);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsXML(output, result);
+
+		return path;
+	}
+	
+	public String getDocumentMetaDataByIdAsRDF(String type, String zalbaId, String graph)
+			throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.describeData(String.format("http://localhost:4201/%s/%s", type, zalbaId),
+				String.format("http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/%s", graph),
+				String.format("<http://localhost:4201/%s/%s>  ?p  ?o", type, zalbaId));
+
+		QueryExecution queryExecution = QueryExecutionFactory
+				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.ttl", zalbaId);
+		OutputStream output = new FileOutputStream(path);
+
+		Model describeModel = queryExecution.execDescribe();
+		describeModel.write(output, "TURTLE");
+
+		return path;
+	}
+
 }

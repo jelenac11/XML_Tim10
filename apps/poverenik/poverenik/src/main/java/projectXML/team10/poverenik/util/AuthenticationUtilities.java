@@ -23,12 +23,12 @@ public class AuthenticationUtilities {
 
 		public ConnectionProperties(Properties props) {
 			super();
-			dataset = props.getProperty("conn.dataset").trim();
-			endpoint = props.getProperty("conn.endpoint").trim();
+			dataset = props.getProperty("conn.fuseki.dataset").trim();
+			endpoint = props.getProperty("conn.fuseki.endpoint").trim();
 			
-			queryEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.query").trim());
-			updateEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.update").trim());
-			dataEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.data").trim());
+			queryEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.fuseki.query").trim());
+			updateEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.fuseki.update").trim());
+			dataEndpoint = String.join("/", endpoint, dataset, props.getProperty("conn.fuseki.data").trim());
 			
 			System.out.println("[INFO] Parsing connection properties:");
 			System.out.println("[INFO] Query endpoint: " + queryEndpoint);
@@ -43,7 +43,7 @@ public class AuthenticationUtilities {
 	 * @return the configuration object
 	 */
 	public static ConnectionProperties loadProperties() throws IOException {
-		String propsName = "fuseki.properties";
+		String propsName = "application.properties";
 
 		InputStream propsStream = openStream(propsName);
 		if (propsStream == null)

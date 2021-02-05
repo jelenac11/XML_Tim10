@@ -12,7 +12,6 @@ public class PoverenikApplication {
 
 	public static void main(String[] args) {
 		System.setProperty("javax.xml.bind.JAXBContext", "com.sun.xml.internal.bind.v2.ContextFactory");
-		
 		ConfigurableApplicationContext appContext = SpringApplication.run(PoverenikApplication.class, args);
 	    KorisnikService service = appContext.getBean(KorisnikService.class);
 	    Korisnik k = new Korisnik("Milan", "Marinović", "poverenik@gmail.com", "sifra123", "poverenik", "");

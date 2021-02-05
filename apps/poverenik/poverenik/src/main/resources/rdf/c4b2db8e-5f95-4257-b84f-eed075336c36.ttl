@@ -1,0 +1,5 @@
+<http://localhost:4201/izvestaji/c4b2db8e-5f95-4257-b84f-eed075336c36>
+        <http://www.projekat.org/predicate/datum_kada_je_podnet>
+                "2021-02-05"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://www.projekat.org/predicate/je_kreirao_izvestaj>
+                "noreply.kts.l9@gmail.com"^^<http://www.w3.org/2000/01/rdf-schema#Literal> .

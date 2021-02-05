@@ -383,8 +383,8 @@ public class ZalbaNaCutanje {
      *     {@link String }
      *     
      */
-    public void setVocab(String value) {
-        this.vocab = value;
+    public void setVocab() {
+        this.vocab = "http://www.projekat.org/predicate";
     }
 
     /**
@@ -465,8 +465,8 @@ public class ZalbaNaCutanje {
          *     {@link String }
          *     
          */
-        public void setProperty(String value) {
-            this.property = value;
+        public void setProperty() {
+            this.property = "pred:organ_protiv_kojeg_je_zalba";
         }
 
         /**
@@ -1029,8 +1029,8 @@ public class ZalbaNaCutanje {
              *     {@link String }
              *     
              */
-            public void setProperty(String value) {
-                this.property = value;
+            public void setProperty() {
+                this.property = "pred:datum_podnosenja";
             }
 
             /**
@@ -1057,8 +1057,8 @@ public class ZalbaNaCutanje {
              *     {@link String }
              *     
              */
-            public void setDatatype(String value) {
-                this.datatype = value;
+            public void setDatatype() {
+                this.datatype = "xs:date";
             }
 
         }
@@ -1143,8 +1143,8 @@ public class ZalbaNaCutanje {
              *     {@link String }
              *     
              */
-            public void setProperty(String value) {
-                this.property = value;
+            public void setProperty() {
+                this.property = "pred:mesto_podnosenja";
             }
 
             /**
@@ -1171,8 +1171,8 @@ public class ZalbaNaCutanje {
              *     {@link String }
              *     
              */
-            public void setDatatype(String value) {
-                this.datatype = value;
+            public void setDatatype() {
+                this.datatype = "xs:string";
             }
 
         }
@@ -1295,8 +1295,8 @@ public class ZalbaNaCutanje {
              *     {@link String }
              *     
              */
-            public void setProperty(String value) {
-                this.property = value;
+            public void setProperty() {
+                this.property = "pred:podnosilac_zalbe";
             }
 
 

@@ -6,6 +6,8 @@ import { PrijavaComponent } from './auth/prijava/prijava.component';
 import { RegistracijaComponent } from './auth/registracija/registracija.component';
 import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga.component';
 import { DokumentiComponent } from './dokumenti/dokumenti.component';
+import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
+import { IzvestajComponent } from './izvestaj/izvestaj.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
@@ -58,6 +60,20 @@ const routes: Routes = [
   },
   {
     path:"pretraga-dokumenata", component: DokumentPretragaComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
+    path:"izvestaj/:id", component: IzvestajPrikazComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
+    path:"podnosenje-izvestaja", component: IzvestajComponent,
     canActivate: [RoleGuard],
     data:{
       expectedRoles: 'sluzbenik'

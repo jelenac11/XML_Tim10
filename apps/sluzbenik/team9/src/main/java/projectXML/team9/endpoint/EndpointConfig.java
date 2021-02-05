@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import projectXML.team9.soap.ports.ZahteviPortImpl;
+import projectXML.team9.soap.ports.defined.ZahteviPortImpl;
 
 @Configuration
 public class EndpointConfig {

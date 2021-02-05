@@ -14,9 +14,15 @@ public class DatabaseQueries {
 	 * ZALBE NA CUTANJE 
 	 * **/
 	public static final String X_QUERY_FIND_ALL_ZALBE_NA_CUTANJE = "xquery version \"3.1\";\n" +
-            "declare default element namespace \"http://www.projekat.org/zalba_cutanje\";\n" +
+            "declare default element namespace \"http://www.projekat.org/zalba_cutanja\";\n" +
             "for $x in collection(\"/db/sample/zalbeCutanje\")\n" +
             "return $x";
+	
+	public static final String X_QUERY_FIND_ZALBE_CUTANJE_BY_RAZLOG_ZALBE = "xquery version \"3.1\";\n" +
+            "declare default element namespace \"http://www.projekat.org/zalba_cutanja\";\n" +
+            "for $x in collection(\"/db/sample/zalbeCutanje\")/zalba_na_cutanje\n" +
+            "where $x//razlog_zalbe/text()=\"%s\" and (xs:date($x//datum_podnosenja/text()) > xs:date(\"%s\"))\n" +
+            "return $x/@id";
 	
 	/** 
 	 * KORISNICI
@@ -31,6 +37,5 @@ public class DatabaseQueries {
             "for $x in collection(\"/db/sample/korisnici\")/korisnik\n" +
             "where $x/email/text()=\"%s\"\n" +
             "return $x";
-	
 	
 }

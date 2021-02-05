@@ -1,9 +1,23 @@
-<div #zalbaHTML class="htmlView"></div>
-<div class="htmlView">
-    <button mat-raised-button (click)="downloadPDF()" style="margin-right: 20px;">
-        <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
-    </button>
-    <button mat-raised-button (click)="downloadHTML()">
-        <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
-    </button>
+<div class="d-flex">
+    <div class="mt-3 ml-3 mr-auto">
+        <button mat-raised-button (click)="downloadPDF()">
+            <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+        </button>
+        <button class="ml-3" mat-raised-button (click)="downloadHTML()">
+            <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+        </button>
+    </div>
+  
+    <div class="mt-3 mr-3">
+        <button mat-raised-button (click)="extractMetadataAsJSON(id)">
+            <mat-icon>download</mat-icon> Preuzmi metapodatke - JSON
+        </button>
+        <button class="ml-3" mat-raised-button (click)="extractMetadataAsRDF(id)">
+            <mat-icon>download</mat-icon> Preuzmi metapodatke - RDF
+        </button>
+        <button class="ml-3" mat-raised-button (click)="extractMetadataAsXML(id)">
+            <mat-icon>download</mat-icon> Preuzmi metapodatke - XML
+        </button>
+    </div>
 </div>
+<div #zalbaHTML></div>

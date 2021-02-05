@@ -11,6 +11,7 @@ import projectXML.team9.services.KorisnikService;
 public class Team9Application {
 
 	public static void main(String[] args) {
+		
 		ConfigurableApplicationContext appContext = SpringApplication.run(Team9Application.class, args);
 		KorisnikService service = appContext.getBean(KorisnikService.class);
 		Korisnik k = new Korisnik("Marko", "Marković", "noreply.kts.l9@gmail.com", "sifra123", "sluzbenik", "");

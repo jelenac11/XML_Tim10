@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team9.dto.DocumentsIDDTO;
 import projectXML.team9.dto.SearchDTO;
-import projectXML.team9.dto.XSLTDocumentDTO;
+import projectXML.team9.soap.XSLTDocumentDTO;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.services.ZahtevService;

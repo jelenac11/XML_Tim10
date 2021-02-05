@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="predicate"/>
+    <variable name="object"/>
+  </head>
+  <results>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/datum_podnosenja</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-05</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/organ_protiv_kojeg_je_zalba</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">a</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/podnosilac_zalbe</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/mesto_podnosenja</uri>
+      </binding>
+      <binding name="object">
+        <literal>m</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>

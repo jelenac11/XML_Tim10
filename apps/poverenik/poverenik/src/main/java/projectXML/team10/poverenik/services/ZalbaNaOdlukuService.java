@@ -2,6 +2,7 @@ package projectXML.team10.poverenik.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -47,19 +48,19 @@ public class ZalbaNaOdlukuService {
 	public ZalbaNaOdluku create(ZalbaNaOdluku zalba) throws Exception {
 		Korisnik current = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String id = UUID.randomUUID().toString();
-		zalba.setId(id);
+		zalba.setId("http://localhost:4201/zalbe-na-odluku/" + id);
 		zalba.setBrojZalbe(id.split("-")[4] + "-" + new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2020");
-		zalbaNaOdlukuRepository.save(zalba);
-		zalba.setAbout("http://localhost:4200/zalbe-na-odluku/" + id);
-		zalba.getPodaciOResenju().getNazivOrgana().setDatatype("xs:string");
-		zalba.getPodaciOResenju().getNazivOrgana().setProperty("pred:organ_koji_je_doneo_odluku");
-		zalba.getPodaciOZalbi().getPodnosilacZalbe().setProperty("pred:podnosilac_zalbe");
+		zalba.setAbout("http://localhost:4201/zalbe-na-odluku/" + id);
+		zalba.getPodaciOResenju().getNazivOrgana().setDatatype();
+		zalba.getPodaciOResenju().getNazivOrgana().setProperty();
+		zalba.getPodaciOZalbi().getPodnosilacZalbe().setProperty();
 		zalba.getPodaciOZalbi().getPodnosilacZalbe().setContent(current.getEmail());
-		zalba.getPodaciOZalbi().getDatumPodnosenja().setDatatype("xs:date");
-		zalba.getPodaciOZalbi().getDatumPodnosenja().setProperty("pred:datum_podnosenja");
-		zalba.getPodaciOZalbi().getMesto().setProperty("pred:mesto_podnosenja");
-		zalba.getPodaciOZalbi().getMesto().setDatatype("xs:string");
-		zalba.setVocab("http://www.projekat.org/predicate");
+		zalba.getPodaciOZalbi().getDatumPodnosenja().setDatatype();
+		zalba.getPodaciOZalbi().getDatumPodnosenja().setProperty();
+		zalba.getPodaciOZalbi().getMesto().setProperty();
+		zalba.getPodaciOZalbi().getMesto().setDatatype();
+		zalba.setVocab();
+		zalbaNaOdlukuRepository.save(zalba);
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(zalba, sw);
@@ -90,7 +91,18 @@ public class ZalbaNaOdlukuService {
 	}
 	
 	public ArrayList<String> getAll() {
-		return fusekiWriter.readAllZalbeNaOdluku("/zalbe-na-odluku");
+		return fusekiWriter.readAllDocuments("/zalbe-na-odluku");
 	}
 	
+	public String getDocumentMetaDataByIdAsJSON(String zalbaId) throws FileNotFoundException {
+		return fusekiWriter.getZalbaNaOdlukuMetaDataByIdAsJSON(zalbaId);
+	}
+
+	public String getDocumentMetaDataByIdAsXML(String zalbaId) throws FileNotFoundException {
+		return fusekiWriter.getZalbaNaOdlukuMetaDataByIdAsXML(zalbaId);
+	}
+
+	public String getDocumentMetaDataByIdAsRDF(String zahtevId) throws FileNotFoundException {
+		return fusekiWriter.getDocumentMetaDataByIdAsRDF("zalbe-na-odluku", zahtevId, "zalbe-na-odluku");
+	}
 }
