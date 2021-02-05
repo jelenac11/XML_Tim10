@@ -3,6 +3,7 @@ package projectXML.team10.poverenik.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -115,6 +116,8 @@ public class ResenjeService {
 			db = "/zalbe-na-odluku";
 		}
 		FusekiWriter.updateZalbaWithStatus(true, idZalbe, type, db);
+		
+		sendMail("debelidusan@gmail.com",id);
 		return resenjeRepository.save(doc);
 	}
 	
@@ -158,6 +161,18 @@ public class ResenjeService {
 
 	public ArrayList<String> getAll() {
 		return fusekiWriter.readAllDocuments("/resenja");
+	}
+
+	public String getDocumentMetaDataByIdAsJSON(String id) throws FileNotFoundException {
+		return fusekiWriter.getResenjaMetaDataByIdAsJSON(id);
+	}
+
+	public String getDocumentMetaDataByIdAsXML(String id) throws FileNotFoundException {
+		return fusekiWriter.getResenjaMetaDataByIdAsXML(id);
+	}
+
+	public String getDocumentMetaDataByIdAsRDF(String id) throws FileNotFoundException {
+		return fusekiWriter.getResenjaMetaDataByIdAsRDF("resenja", id, "resenja");
 	}
 
 }

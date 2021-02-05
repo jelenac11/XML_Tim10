@@ -56,5 +56,26 @@ export class PrikazResenjaComponent implements OnInit {
     a.remove();
   };
 
+  extractMetadataAsJSON(documentID: string): void {
+    this.resenjeService.download(`resenje/extract-metadata/json`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'json', 'application/json');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  extractMetadataAsXML(documentID: string): void {
+    this.resenjeService.download(`resenje/extract-metadata/xml`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'xml', 'application/xml');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
+  extractMetadataAsRDF(documentID: string): void {
+    this.resenjeService.download(`resenje/extract-metadata/rdf`, documentID).subscribe(response => {
+      this.startDownload(documentID, response, 'rdf', 'application/rdf+xml');
+    }), error => console.log('Error downloading the file'),
+      () => console.info('File downloaded successfully');
+  }
+
 
 }

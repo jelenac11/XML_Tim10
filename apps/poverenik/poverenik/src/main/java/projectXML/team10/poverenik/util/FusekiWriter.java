@@ -39,7 +39,7 @@ public class FusekiWriter {
 		//Delete first triplet
         String sparqlUpdate = SparqlUtil.deleteData(
         		conn.dataEndpoint + GRAPH_URI + type,
-        		String.format("<http://localhost:4200%s/%s>  <http://www.projekat.org/predicate/status> false",db, zalbaId));
+        		String.format("<http://localhost:4201%s/%s>  <http://www.projekat.org/predicate/status> false",db, zalbaId));
 		UpdateRequest request = UpdateFactory.create();
         UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
 		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -49,7 +49,7 @@ public class FusekiWriter {
         //Inseert
         sparqlUpdate = SparqlUtil.insertData(
 				conn.dataEndpoint + GRAPH_URI + type,
-				String.format("<http://localhost:4200%s/%s>  <http://www.projekat.org/predicate/status>  %b",db, zalbaId, status));
+				String.format("<http://localhost:4201%s/%s>  <http://www.projekat.org/predicate/status>  %b",db, zalbaId, status));
 		
 		request = UpdateFactory.create();
         processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
@@ -102,7 +102,7 @@ public class FusekiWriter {
 		//Delete first triplet
         String sparqlUpdate = SparqlUtil.deleteData(
         		conn.dataEndpoint + GRAPH_URI + type,
-        		String.format("<http://localhost:4200%s/%s>  <http://www.projekat.org/predicate/%s> false",db, zalbaId, predicate));
+        		String.format("<http://localhost:4201%s/%s>  <http://www.projekat.org/predicate/%s> false",db, zalbaId, predicate));
 		UpdateRequest request = UpdateFactory.create();
         UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
 		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
@@ -112,7 +112,7 @@ public class FusekiWriter {
         //Inseert
         sparqlUpdate = SparqlUtil.insertData(
 				conn.dataEndpoint + GRAPH_URI + type,
-				String.format("<http://localhost:4200%s/%s>  <http://www.projekat.org/predicate/%s>  %b",db, zalbaId, predicate, status));
+				String.format("<http://localhost:4201%s/%s>  <http://www.projekat.org/predicate/%s>  %b",db, zalbaId, predicate, status));
 
 		request = UpdateFactory.create();
         processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
@@ -368,6 +368,58 @@ public class FusekiWriter {
 								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 						"?s <http://www.projekat.org/predicate/odgovorena> false");
 		return getDocumentsId(sparqlQuery);
+	}
+
+
+	public String getResenjaMetaDataByIdAsJSON(String id) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/resenja",
+				String.format("<http://localhost:4201/resenja/%s>  ?predicate  ?object", id));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.json", id);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsJSON(output, result);
+
+		return path;
+	}
+
+
+	public String getResenjaMetaDataByIdAsXML(String id) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/resenja",
+				String.format("<http://localhost:4201/resenja/%s>  ?predicate  ?object", id));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.xml", id);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsXML(output, result);
+
+		return path;
+	}
+
+
+	public String getResenjaMetaDataByIdAsRDF(String type, String id, String graph) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.describeData(String.format("http://localhost:4201/%s/%s", type, id),
+				String.format("http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/%s", graph),
+				String.format("<http://localhost:4201/%s/%s>  ?p  ?o", type, id));
+
+		QueryExecution queryExecution = QueryExecutionFactory
+				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.ttl", id);
+		OutputStream output = new FileOutputStream(path);
+
+		Model describeModel = queryExecution.execDescribe();
+		describeModel.write(output, "TURTLE");
+
+		return path;
 	}
 
 }
