@@ -1,0 +1,9 @@
+<http://localhost:4201/zalbe-cutanje/594d28b1-051d-47b5-ad4d-e00ed912170c>
+        <http://www.projekat.org/predicate/datum_podnosenja>
+                "2021-02-05"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://www.projekat.org/predicate/mesto_podnosenja>
+                "m" ;
+        <http://www.projekat.org/predicate/organ_protiv_kojeg_je_zalba>
+                "a"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/podnosilac_zalbe>
+                "milanm2998@gmail.com"^^<http://www.w3.org/2000/01/rdf-schema#Literal> .

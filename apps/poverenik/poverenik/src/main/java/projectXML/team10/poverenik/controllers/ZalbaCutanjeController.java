@@ -31,7 +31,7 @@ import projectXML.team10.poverenik.models.zalbaCutanje.ZalbaNaCutanje;
 import projectXML.team10.poverenik.services.ZalbaCutanjeService;
 
 @RestController
-@RequestMapping(value = "/api/zalba-cutanje", produces = MediaType.APPLICATION_XML_VALUE)
+@RequestMapping(value = "/api/zalbe-cutanje", produces = MediaType.APPLICATION_XML_VALUE)
 public class ZalbaCutanjeController {
 
 	@Autowired
@@ -59,7 +59,6 @@ public class ZalbaCutanjeController {
 			zalbe.setItem(idsZalbi);
 			return ResponseEntity.ok(zalbe);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
@@ -82,6 +81,14 @@ public class ZalbaCutanjeController {
 	public ResponseEntity<?> createZalbaCutanje(@RequestBody ZalbaNaCutanje zalba){
 		try {
 			zalbaCutanjeService.create(zalba);
+			URL wsdl = new URL("http://localhost:8081/ws/zahtevi?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/zahtevi", "ZahteviService");
+	    	QName portName = new QName("http://www.projekat.org/ws/zahtevi", "ZahtevPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        ZahteviPort zahteviPort = service.getPort(portName, ZahteviPort.class);
+
+	        zahteviPort.updateZahtev(zalba.getBrojZahteva().split("/")[4]);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
@@ -186,6 +193,48 @@ public class ZalbaCutanjeController {
 			FileInputStream fileInputStream = new FileInputStream(file);
 			return IOUtils.toByteArray(fileInputStream);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GetMapping(value = "extract-metadata/json/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsJSONById(@PathVariable String id) {
+		try {
+			String path = zalbaCutanjeService.getDocumentMetaDataByIdAsJSON(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@GetMapping(value = "extract-metadata/xml/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsXMLById(@PathVariable String id) {
+		try {
+			String path = zalbaCutanjeService.getDocumentMetaDataByIdAsXML(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GetMapping(value = "extract-metadata/rdf/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsRDFById(@PathVariable String id) {
+		try {
+			String path = zalbaCutanjeService.getDocumentMetaDataByIdAsRDF(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

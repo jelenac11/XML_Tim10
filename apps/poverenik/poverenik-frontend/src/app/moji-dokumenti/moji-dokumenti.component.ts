@@ -37,10 +37,10 @@ export class MojiDokumentiComponent implements OnInit {
   };
 
   getAllGradjanin(): void {
-    this.zalbaCutanjeService.getAll('zalba-cutanje').subscribe(res => {
+    this.zalbaCutanjeService.getAll('zalbe-cutanje').subscribe(res => {
       this.extractIds(res, this.zalbeCutanje);
     });
-    this.zalbaNaOdlukuService.getAll('zalba-na-odluku').subscribe(res => {
+    this.zalbaNaOdlukuService.getAll('zalbe-na-odluku').subscribe(res => {
       this.extractIds(res, this.zalbeNaOdluku);
     });
     this.resenjaService.getAll('resenje').subscribe(res => {
@@ -49,16 +49,16 @@ export class MojiDokumentiComponent implements OnInit {
   };
 
   getAllPoverenik(): void {
-    this.zalbaCutanjeService.getAll('zalba-cutanje/poverenik').subscribe(res => {
+    this.zalbaCutanjeService.getAll('zalbe-cutanje/poverenik').subscribe(res => {
       this.extractIds(res, this.zalbeCutanje);
     });
-    this.zalbaNaOdlukuService.getAll('zalba-na-odluku/poverenik').subscribe(res => {
+    this.zalbaNaOdlukuService.getAll('zalbe-na-odluku/poverenik').subscribe(res => {
       this.extractIds(res, this.zalbeNaOdluku);
     });
     this.resenjaService.getAll('resenje/poverenik').subscribe(res => {
       this.extractIds(res, this.resenja);
     });
-    this.izvestajService.getAll('izvestaj/poverenik').subscribe(res => {
+    this.izvestajService.getAll('izvestaji/poverenik').subscribe(res => {
       this.extractIds(res, this.izvestaji);
     });
   };
@@ -73,12 +73,12 @@ export class MojiDokumentiComponent implements OnInit {
 
   downloadPDF(documentID: string, url: string): void {
     if (url === 'zalbeCutanje') {
-      this.zalbaCutanjeService.download(`zalba-cutanje/generate-pdf`, documentID).subscribe(response => {
+      this.zalbaCutanjeService.download(`zalbe-cutanje/generate-pdf`, documentID).subscribe(response => {
         this.startDownload(documentID, response, 'pdf', 'application/pdf');
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully');
     } else if (url === 'zalbeNaOdluku') {
-      this.zalbaNaOdlukuService.download(`zalba-na-odluku/generate-pdf`, documentID).subscribe(response => {
+      this.zalbaNaOdlukuService.download(`zalbe-na-odluku/generate-pdf`, documentID).subscribe(response => {
         this.startDownload(documentID, response, 'pdf', 'application/pdf');
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully');
@@ -88,7 +88,7 @@ export class MojiDokumentiComponent implements OnInit {
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully');
     } else if (url === 'izvestaji') {
-      this.resenjaService.download(`izvestaj/generate-pdf`, documentID).subscribe(response => {
+      this.resenjaService.download(`izvestaji/generate-pdf`, documentID).subscribe(response => {
         this.startDownload(documentID, response, 'pdf', 'application/pdf');
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully');
@@ -97,12 +97,12 @@ export class MojiDokumentiComponent implements OnInit {
 
   downloadHTML(documentID: string, url: string): void {
     if (url === 'zalbeCutanje') {
-      this.zalbaCutanjeService.download(`zalba-cutanje/generate-html`, documentID).subscribe(response => {
+      this.zalbaCutanjeService.download(`zalbe-cutanje/generate-html`, documentID).subscribe(response => {
         this.startDownload(documentID, response, 'html', 'text/html');
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully'); 
     } else if (url === 'zalbeNaOdluku') {
-      this.zalbaNaOdlukuService.download(`zalba-na-odluku/generate-html`, documentID).subscribe(response => {
+      this.zalbaNaOdlukuService.download(`zalbe-na-odluku/generate-html`, documentID).subscribe(response => {
         this.startDownload(documentID, response, 'html', 'text/html');
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully'); 
@@ -112,7 +112,7 @@ export class MojiDokumentiComponent implements OnInit {
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully'); 
     } else if (url === 'izvestaji') {
-      this.resenjaService.download(`izvestaj/generate-html`, documentID).subscribe(response => {
+      this.resenjaService.download(`izvestaji/generate-html`, documentID).subscribe(response => {
         this.startDownload(documentID, response, 'html', 'text/html');
       }), error => console.log('Error downloading the file'),
         () => console.info('File downloaded successfully'); 

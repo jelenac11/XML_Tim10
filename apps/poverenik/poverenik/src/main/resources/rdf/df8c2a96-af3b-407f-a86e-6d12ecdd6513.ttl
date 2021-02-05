@@ -1,0 +1,9 @@
+<http://localhost:4201/zalbe-na-odluku/df8c2a96-af3b-407f-a86e-6d12ecdd6513>
+        <http://www.projekat.org/predicate/datum_podnosenja>
+                "2021-02-05"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://www.projekat.org/predicate/mesto_podnosenja>
+                "s" ;
+        <http://www.projekat.org/predicate/organ_koji_je_doneo_odluku>
+                "x" ;
+        <http://www.projekat.org/predicate/podnosilac_zalbe>
+                "milanm2998@gmail.com"^^<http://www.w3.org/2000/01/rdf-schema#Literal> .

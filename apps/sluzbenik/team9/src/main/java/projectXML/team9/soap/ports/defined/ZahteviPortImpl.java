@@ -60,4 +60,9 @@ public class ZahteviPortImpl implements ZahteviPort {
 		return null;
 	}
 
+	@Override
+	public void updateZahtev(String id) {
+		zahtevService.updateZahtevWithKreiranaZalba(true, "http://localhost:4200/zahtev/" + id);
+	}
+
 }

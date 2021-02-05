@@ -4,6 +4,7 @@ import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.time.LocalDate;
 import java.util.Date;
@@ -120,4 +121,15 @@ public class IzvestajService {
 		fusekiWriter.saveRDF("/izvestaji");
 	}
 	
+	public String getDocumentMetaDataByIdAsJSON(String izvestajId) throws FileNotFoundException {
+		return fusekiWriter.getIzvestajMetaDataByIdAsJSON(izvestajId);
+	}
+
+	public String getDocumentMetaDataByIdAsXML(String izvestajId) throws FileNotFoundException {
+		return fusekiWriter.getIzvestajMetaDataByIdAsXML(izvestajId);
+	}
+
+	public String getDocumentMetaDataByIdAsRDF(String izvestajId) throws FileNotFoundException {
+		return fusekiWriter.getDocumentMetaDataByIdAsRDF("izvestaji", izvestajId, "izvestaji");
+	}
 }

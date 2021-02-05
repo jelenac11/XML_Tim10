@@ -1,6 +1,10 @@
 package projectXML.team10.poverenik.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Paths;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -41,20 +45,31 @@ import static org.apache.xerces.jaxp.JAXPConstants.*;
 public class DOMParser implements ErrorHandler {
 
 	private static DocumentBuilderFactory factory;
+	
+	private static String path;
 	/*
 	 * Factory initialization static-block
 	 */
 	static {
+		
+		try {
+			path = Paths.get((new File(".")).getCanonicalPath(), "src","main", "resources","static","schemas","resenje.xsd").toString();
+			System.out.println(path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		factory = DocumentBuilderFactory.newInstance();
 		
 		/* Uključuje validaciju. */ 
-		factory.setValidating(false);
+		factory.setValidating(true);
 		
 		factory.setNamespaceAware(true);
 		factory.setIgnoringComments(true);
 		factory.setIgnoringElementContentWhitespace(true);
 		/* Validacija u odnosu na XML šemu. */
 		factory.setAttribute(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
+		factory.setAttribute(JAXP_SCHEMA_SOURCE, path);
 	}
 	
 	/**
