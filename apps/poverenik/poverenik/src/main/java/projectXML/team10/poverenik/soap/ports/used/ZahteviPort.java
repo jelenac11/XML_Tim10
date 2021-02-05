@@ -44,4 +44,10 @@ public interface ZahteviPort {
         String id
     );
 	
+	@WebMethod
+    public void updateZahtev(
+        @WebParam(partName = "id", name = "id")
+        String id
+    );
+	
 }

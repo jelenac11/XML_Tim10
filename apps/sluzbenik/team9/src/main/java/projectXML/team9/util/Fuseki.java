@@ -128,7 +128,7 @@ public class Fuseki {
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
 				String.format(
 						"?s <http://www.projekat.org/predicate/podnosilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ",
-						email) + "\n FILTER NOT EXISTS { ?s <http://www.projekat.org/predicate/status> ?o } ."
+						email) + "\n FILTER NOT EXISTS { ?s <http://www.projekat.org/predicate/status> ?o } . \n  FILTER NOT EXISTS {?s  <http://www.projekat.org/predicate/podneta_zalba> ?o} ."
 						+ "\n ?s   <http://www.projekat.org/predicate/datum_podnosenja> ?date . FILTER"
 						+ String.format("( ?date < \"%s\"^^<http://www.w3.org/2001/XMLSchema#dateTime> )", datum));
 		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
@@ -142,9 +142,10 @@ public class Fuseki {
 						propertiesConfiguration
 								.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zahtevi",
-				" ?s <http://www.projekat.org/predicate/status> false ; \n" + String.format(
+				" ?s <http://www.projekat.org/predicate/status> false ; \n " + String.format(
 						"<http://www.projekat.org/predicate/podnosilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
-						email));
+						email) + "\n FILTER NOT EXISTS {?s  <http://www.projekat.org/predicate/podneta_zalba> ?o} ");
+		System.out.println(sparqlQuery);
 		ArrayList<String> answeredZahtev = getDocumentsId(sparqlQuery);
 
 		return answeredZahtev;
@@ -374,5 +375,12 @@ public class Fuseki {
 		ResultSetFormatter.outputAsXML(output, result);
 
 		return path;
+	}
+
+	public void updateZahtevWithKreiranaZalba(boolean b, String id) {
+		String sparqlUpdate = SparqlUtil.insertData(
+				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/zahtevi",
+				String.format("<%s>  <http://www.projekat.org/predicate/podneta_zalba>  %b", id, b));
+		update(sparqlUpdate);
 	}
 }

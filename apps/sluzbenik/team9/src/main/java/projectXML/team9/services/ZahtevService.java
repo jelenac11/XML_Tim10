@@ -188,4 +188,8 @@ public class ZahtevService {
 	public ArrayList<String> getAllZahtevi() {
 		return fusekiWriter.readAllDocuments("/zahtevi");
 	}
+
+	public void updateZahtevWithKreiranaZalba(boolean b, String id) {
+		fusekiWriter.updateZahtevWithKreiranaZalba(true, id);
+	}
 }

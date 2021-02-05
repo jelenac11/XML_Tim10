@@ -59,7 +59,6 @@ public class ZalbaCutanjeController {
 			zalbe.setItem(idsZalbi);
 			return ResponseEntity.ok(zalbe);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
@@ -82,6 +81,14 @@ public class ZalbaCutanjeController {
 	public ResponseEntity<?> createZalbaCutanje(@RequestBody ZalbaNaCutanje zalba){
 		try {
 			zalbaCutanjeService.create(zalba);
+			URL wsdl = new URL("http://localhost:8081/ws/zahtevi?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/zahtevi", "ZahteviService");
+	    	QName portName = new QName("http://www.projekat.org/ws/zahtevi", "ZahtevPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        ZahteviPort zahteviPort = service.getPort(portName, ZahteviPort.class);
+
+	        zahteviPort.updateZahtev(zalba.getBrojZahteva().split("/")[4]);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());

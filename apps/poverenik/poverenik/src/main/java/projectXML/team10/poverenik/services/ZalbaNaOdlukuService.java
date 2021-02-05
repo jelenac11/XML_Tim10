@@ -50,6 +50,7 @@ public class ZalbaNaOdlukuService {
 		String id = UUID.randomUUID().toString();
 		zalba.setId("http://localhost:4201/zalbe-na-odluku/" + id);
 		zalba.setBrojZalbe(id.split("-")[4] + "-" + new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2020");
+		zalba.setBrojZahteva("http://localhost:4200/zahtev/" + zalba.getBrojZahteva());
 		zalba.setAbout("http://localhost:4201/zalbe-na-odluku/" + id);
 		zalba.getPodaciOResenju().getNazivOrgana().setDatatype();
 		zalba.getPodaciOResenju().getNazivOrgana().setProperty();

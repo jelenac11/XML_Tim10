@@ -51,6 +51,7 @@ public class ZalbaCutanjeService {
 		String id = UUID.randomUUID().toString();
 		zalba.setId("http://localhost:4201/zalbe-cutanje/" + id);
 		zalba.setBrojZalbe(id.split("-")[4] + "-" + new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2021");
+		zalba.setBrojZahteva("http://localhost:4200/zahtev/" + zalba.getBrojZahteva());
 		zalba.getOrganProtivKojegJeZalba().setProperty();
 		zalba.getPodaciOZalbi().getPodnosilacZalbe().setProperty();
 		zalba.getPodaciOZalbi().getDatumPodnosenja().setDatatype();
@@ -66,7 +67,6 @@ public class ZalbaCutanjeService {
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(zalba, sw);
 		String xmlString = sw.toString();
-		System.out.println(xmlString);
 		metadataExtractor.extractMetadata(xmlString);
 		FusekiWriter.saveRDF("/zalbe-na-cutanje");
 		return zalba;
