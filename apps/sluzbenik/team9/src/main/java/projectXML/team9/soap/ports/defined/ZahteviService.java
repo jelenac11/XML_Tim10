@@ -1,4 +1,4 @@
-package projectXML.team9.soap.ports;
+package projectXML.team9.soap.ports.defined;
 
 import java.net.URL;
 

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import projectXML.team10.poverenik.models.izvestaj.Izvestaj.PodaciOZalbama.ZalbeNaCutanje;
 import projectXML.team10.poverenik.models.korisnik.Korisnik;
 import projectXML.team10.poverenik.models.zalbaCutanje.ZalbaNaCutanje;
 import projectXML.team10.poverenik.repositories.ZalbaCutanjeRepository;
@@ -49,7 +50,6 @@ public class ZalbaCutanjeService {
 		String id = UUID.randomUUID().toString();
 		zalba.setId(id);
 		zalba.setBrojZalbe(id.split("-")[4] + "-" + new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2021");
-		zalbaCutanjeRepository.save(zalba);
 		zalba.getOrganProtivKojegJeZalba().setProperty("pred:organ_protiv_kojeg_je_zalba");
 		zalba.getPodaciOZalbi().getPodnosilacZalbe().setProperty("pred:podnosilac_zalbe");
 		zalba.getPodaciOZalbi().getDatumPodnosenja().setDatatype("xs:date");
@@ -60,6 +60,7 @@ public class ZalbaCutanjeService {
 		zalba.setAbout("http://localhost:4200/zalbe-cutanje/" + id);
 		zalba.getOrganProtivKojegJeZalba().setContent(zalba.getOrganProtivKojegJeZalba().getNaziv());
 		zalba.getPodaciOZalbi().getPodnosilacZalbe().setContent(current.getEmail());
+		zalbaCutanjeRepository.save(zalba);
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
 		marshaller.marshal(zalba, sw);
@@ -90,7 +91,11 @@ public class ZalbaCutanjeService {
 	}
 	
 	public ArrayList<String> getAll() {
-		return fusekiWriter.readAllZalbeCutanje("/zalbe-na-cutanje");
+		return fusekiWriter.readAllDocuments("/zalbe-na-cutanje");
+	}
+
+	public ZalbeNaCutanje getPodaciOZalbeCutanja(String datum) {
+		return zalbaCutanjeRepository.getPodaciOZalbeCutanja(datum);
 	}
 
 }

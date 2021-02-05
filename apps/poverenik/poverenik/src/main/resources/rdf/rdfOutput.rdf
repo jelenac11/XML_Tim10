@@ -1,14 +1,8 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<rdf:Description rdf:about="http://localhost:4200/zalbe-cutanje/83324f77-8087-4435-a079-4d2d6cd3d4d9">
-<pred:organ_protiv_kojeg_je_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Organ</pred:organ_protiv_kojeg_je_zalba>
+<rdf:Description rdf:about="http://localhost:4200/izvestaji/621f65a7-565a-43dd-910f-11b020313b36">
+<pred:datum_kada_je_podnet xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-05</pred:datum_kada_je_podnet>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zalbe-cutanje/83324f77-8087-4435-a079-4d2d6cd3d4d9">
-<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:podnosilac_zalbe>
-</rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zalbe-cutanje/83324f77-8087-4435-a079-4d2d6cd3d4d9">
-<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-02</pred:datum_podnosenja>
-</rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zalbe-cutanje/83324f77-8087-4435-a079-4d2d6cd3d4d9">
-<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">s</pred:mesto_podnosenja>
+<rdf:Description rdf:about="http://localhost:4200/izvestaji/621f65a7-565a-43dd-910f-11b020313b36">
+<pred:je_kreirao_izvestaj xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">noreply.kts.l9@gmail.com</pred:je_kreirao_izvestaj>
 </rdf:Description>
 </rdf:RDF>

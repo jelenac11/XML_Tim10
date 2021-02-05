@@ -1,5 +1,5 @@
 
-package projectXML.team10.poverenik.dto;
+package projectXML.team10.poverenik.soap;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
@@ -27,10 +27,6 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
-    }
-    
-    public TStringArray createStringArray() {
-        return new TStringArray();
     }
 
 }

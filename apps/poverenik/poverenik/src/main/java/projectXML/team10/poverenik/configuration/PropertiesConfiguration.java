@@ -20,4 +20,5 @@ public class PropertiesConfiguration {
 		this.existDBConfiguration = existDBConfiguration;
 		this.fusekiConfiguration = fusekiConfiguration;
 	}
+
 }

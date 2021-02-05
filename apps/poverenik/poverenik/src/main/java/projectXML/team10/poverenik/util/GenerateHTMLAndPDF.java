@@ -4,11 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import projectXML.team10.poverenik.models.izvestaj.Izvestaj;
 import projectXML.team10.poverenik.models.zalbaCutanje.ZalbaNaCutanje;
 import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
+import projectXML.team10.poverenik.repositories.IzvestajRepository;
 import projectXML.team10.poverenik.repositories.ResenjeRepository;
 import projectXML.team10.poverenik.repositories.ZalbaCutanjeRepository;
 import projectXML.team10.poverenik.repositories.ZalbaNaOdlukuRepository;
@@ -33,6 +36,8 @@ public class GenerateHTMLAndPDF {
 	private ZalbaNaOdlukuRepository zalbaNaOdlukuRepository;
 	@Autowired
 	private ZalbaCutanjeRepository zalbaCutanjeRepository;
+	@Autowired
+	private IzvestajRepository izvestajRepository;
 
 	@Autowired
 	private XMLTransformations xmlTransformations;
@@ -96,5 +101,21 @@ public class GenerateHTMLAndPDF {
 		xmlTransformations.generatePDF(INPUT_FILE + "zalbaNaCutanje.xml", XSLFO_FILE + "zalbaNaCutanje_fo.xsl",
 				OUTPUT_FILE + id + ".pdf");
 		return OUTPUT_FILE + id + ".pdf";
+	}
+
+	public String generatePDFIzvestaj(String id) throws Exception {
+		Izvestaj izvestaj = izvestajRepository.getById(id);
+		izvestajRepository.saveToFile(izvestaj, INPUT_FILE + "izvestaj.xml");
+		xmlTransformations.generatePDF(INPUT_FILE + "izvestaj.xml", XSLFO_FILE + "izvestaj_fo.xsl",
+				OUTPUT_FILE + id + ".pdf");
+		return OUTPUT_FILE + id + ".pdf";
+	}
+
+	public String generateHTMLIzvestaj(String id) throws Exception {
+		Izvestaj izvestaj = izvestajRepository.getById(id);
+		izvestajRepository.saveToFile(izvestaj, INPUT_FILE + "izvestaj.xml");
+		xmlTransformations.generateHTML(INPUT_FILE + "izvestaj.xml", XSLT_FILE + "izvestaj.xsl",
+				HTML_FILE + id + ".html");
+		return HTML_FILE + id + ".html";
 	}
 }

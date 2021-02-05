@@ -1,12 +1,12 @@
-package projectXML.team9.soap.ports;
+package projectXML.team9.soap.ports.defined;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import projectXML.team9.dto.StringArray;
-import projectXML.team9.dto.TXSLTDocumentDTO;
+import projectXML.team9.soap.StringArray;
+import projectXML.team9.soap.TXSLTDocumentDTO;
 import projectXML.team9.models.zahtev.TZahtevGradjana;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.services.ZahtevService;
@@ -16,7 +16,7 @@ import projectXML.team9.services.ZahtevService;
         portName = "ZahtevPort",
         targetNamespace = "http://www.projekat.org/ws/zahtevi",
        // wsdlLocation = "classpath:wsdl/Zahtev.wsdl",
-        endpointInterface = "projectXML.team9.soap.ports.ZahteviPort")
+        endpointInterface = "projectXML.team9.soap.ports.defined.ZahteviPort")
 @Service
 public class ZahteviPortImpl implements ZahteviPort {
 

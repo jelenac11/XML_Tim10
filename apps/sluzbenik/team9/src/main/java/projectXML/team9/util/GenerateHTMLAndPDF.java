@@ -3,8 +3,10 @@ package projectXML.team9.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import projectXML.team9.models.izvestaj.Izvestaj;
 import projectXML.team9.models.obavestenje.Obavestenje;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
+import projectXML.team9.repositories.IzvestajRepository;
 import projectXML.team9.repositories.ObavestenjeRepository;
 import projectXML.team9.repositories.ZahtevRepository;
 
@@ -26,6 +28,9 @@ public class GenerateHTMLAndPDF {
 
 	@Autowired
 	private ZahtevRepository zahtevRepository;
+	
+	@Autowired
+	private IzvestajRepository izvestajRepository;
 
 	@Autowired
 	private XMLTransformations xmlTransformations;
@@ -58,6 +63,21 @@ public class GenerateHTMLAndPDF {
 		ZahtevGradjana zahtev = zahtevRepository.getById(id);
 		zahtevRepository.saveToFile(zahtev, INPUT_FILE + "zahtev.xml");
 		xmlTransformations.generateHTML(INPUT_FILE + "zahtev.xml", XSLT_FILE + "zahtev.xsl", HTML_FILE + id + ".html");
+		return HTML_FILE + id + ".html";
+	}
+	
+	public String generatePDFIzvestaj(String id) throws Exception {
+		Izvestaj izvestaj = izvestajRepository.getById(id);
+		izvestajRepository.saveToFile(izvestaj, INPUT_FILE + "izvestaj.xml");
+		xmlTransformations.generatePDF(INPUT_FILE + "izvestaj.xml", XSLFO_FILE + "izvestaj_fo.xsl",
+				OUTPUT_FILE + id + ".pdf");
+		return OUTPUT_FILE + id + ".pdf";
+	}
+
+	public String generateHTMLIzvestaj(String id) throws Exception {
+		Izvestaj izvestaj = izvestajRepository.getById(id);
+		izvestajRepository.saveToFile(izvestaj, INPUT_FILE + "izvestaj.xml");
+		xmlTransformations.generateHTML(INPUT_FILE + "izvestaj.xml", XSLT_FILE + "izvestaj.xsl", HTML_FILE + id + ".html");
 		return HTML_FILE + id + ".html";
 	}
 }

@@ -1,4 +1,4 @@
-package projectXML.team9.endpoint;
+package projectXML.team10.poverenik.endpoint;
 
 import javax.xml.ws.Endpoint;
 
@@ -8,22 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import projectXML.team9.soap.ports.defined.ZahteviPortImpl;
+import projectXML.team10.poverenik.soap.ports.defined.IzvestajiPortImpl;
 
 @Configuration
 public class EndpointConfig {
-
+	
 	@Autowired
 	private Bus bus;
 	
 	@Autowired
-	private ZahteviPortImpl zahteviPortImpl;
+	private IzvestajiPortImpl izvestajiPortImpl;
 	
 	@Bean
-	public Endpoint ZahtevEndpoint() {
-		EndpointImpl endpoint = new EndpointImpl(bus, zahteviPortImpl);
-		endpoint.publish("/zahtevi");
+	public Endpoint IzvestajEndpoint() {
+		EndpointImpl endpoint = new EndpointImpl(bus, izvestajiPortImpl);
+		endpoint.publish("/izvestaji");
 		return endpoint;
 	}
-	
+
 }

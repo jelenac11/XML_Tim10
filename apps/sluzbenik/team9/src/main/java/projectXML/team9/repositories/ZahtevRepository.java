@@ -115,4 +115,5 @@ public class ZahtevRepository {
 			databaseConnector.closeConnections(xmlResource, collection);
 		}
 	}
+
 }

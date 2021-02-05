@@ -98,7 +98,7 @@ public class FusekiWriter {
 	}
     
     public ArrayList<String> readAllZalbeCutanjeIdByEmail(String type, String email) {
-		String sparqlQuery = SparqlUtil.selectData(
+		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration
 								.getFusekiConfiguration().getDataset(),
@@ -110,7 +110,7 @@ public class FusekiWriter {
 	}
     
     public ArrayList<String> readAllZalbeNaOdlukuIdByEmail(String type, String email) {
-		String sparqlQuery = SparqlUtil.selectData(
+		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration
 								.getFusekiConfiguration().getDataset(),
@@ -122,26 +122,25 @@ public class FusekiWriter {
 	}
     
     public ArrayList<String> readAllResenjaIdByEmail(String type, String email) {
-		String sparqlQuery = SparqlUtil.selectData(
+		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
 						propertiesConfiguration
 								.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 				String.format(
-						"?s <http://www.projekat.org/predicate/trazilac_zahteva> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
+						"?s <http://www.projekat.org/predicate/podnosilac_zalbe> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
 						email));
 		return getDocumentsId(sparqlQuery);
 	}
 
-	public ArrayList<String> readAllZalbeCutanje(String string) {
-		return null;
+    public ArrayList<String> readAllDocuments(String type) {
+		String sparqlQuery = SparqlUtil
+				.selectDistinctData(
+						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+								propertiesConfiguration.getFusekiConfiguration().getDataset(),
+								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+						"?s ?p ?o");
+		return getDocumentsId(sparqlQuery);
 	}
-	
-	public ArrayList<String> readAllZalbeNaOdluku(String string) {
-		return null;
-	}
-	
-	public ArrayList<String> readAllResenja(String string) {
-		return null;
-	}
+
 }

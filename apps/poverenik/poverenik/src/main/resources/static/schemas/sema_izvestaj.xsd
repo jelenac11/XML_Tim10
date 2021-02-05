@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.projekat.org/izvestaj" xmlns:iz="http://www.projekat.org/izvestaj">
+    <xs:element name="izvestaj">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="podaci_o_zahtevima">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="broj_usvojenih_zahteva" type="xs:nonNegativeInteger"/>
+                            <xs:element name="broj_odbijenih_zahteva" type="xs:nonNegativeInteger"/>
+                            <xs:element name="broj_zahteva_na_koje_nije_odgovoreno"
+                                type="xs:nonNegativeInteger"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="podaci_o_zalbama">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="zalbe_na_cutanje">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="nije_postupio"
+                                            type="xs:nonNegativeInteger"/>
+                                        <xs:element name="nije_postupio_u_celosti"
+                                            type="xs:nonNegativeInteger"/>
+                                        <xs:element name="nije_postupio_u_zakonskom_roku"
+                                            type="xs:nonNegativeInteger"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="broj_zalbi_na_odluku" type="xs:nonNegativeInteger"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="datum_podnosenja">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:date">
+                                <xs:attribute fixed="pred:datum_kada_je_podnet" name="property"
+                                    type="xs:string"/>
+                                <xs:attribute fixed="xs:date" name="datatype" type="xs:string"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="kreator">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute fixed="pred:je_kreirao_izvestaj" name="property"
+                                    type="xs:string"/>
+                                <xs:attribute name="content" type="xs:string"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:string"/>
+            <xs:attribute fixed="http://www.projekat.org/predicate" name="vocab" type="xs:string"/>
+            <xs:attribute name="about" type="xs:anyURI"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
