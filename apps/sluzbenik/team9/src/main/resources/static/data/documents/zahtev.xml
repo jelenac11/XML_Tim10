@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
-<za:zahtev_gradjana xmlns:za="http://www.projekat.org/zahtev" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" id="http://localhost:4200/zahtev/8789e10a-4559-423f-ae99-9a6e4e5ffcc1" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/zahtev/8789e10a-4559-423f-ae99-9a6e4e5ffcc1">
-    <za:organ property="pred:organ_od_kojeg_se_trazi" content="d">
+<za:zahtev_gradjana xmlns:za="http://www.projekat.org/zahtev" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" id="http://localhost:4200/zahtev/465373e8-2e12-418d-9537-6d5e2e74aa7b" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/zahtev/465373e8-2e12-418d-9537-6d5e2e74aa7b">
+    <za:organ property="pred:organ_od_kojeg_se_trazi" content="Policijska uprava">
         <common:adresa>
-            <common:mesto>d</common:mesto>
-            <common:ulica>d</common:ulica>
-            <common:broj>d</common:broj>
+            <common:mesto>Backa Topola</common:mesto>
+            <common:ulica>Svetog Save</common:ulica>
+            <common:broj>9</common:broj>
         </common:adresa>
-        <common:naziv>d</common:naziv>
+        <common:naziv>Policijska uprava</common:naziv>
     </za:organ>
     <za:trazilac property="pred:podnosilac_zahteva" content="milanm2998@gmail.com">
         <za:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
             <common:adresa>
-                <common:mesto>d</common:mesto>
-                <common:ulica>d</common:ulica>
-                <common:broj>d</common:broj>
+                <common:mesto>Novi Sad</common:mesto>
+                <common:ulica>Branka Copic</common:ulica>
+                <common:broj>15</common:broj>
             </common:adresa>
-            <common:naziv>d</common:naziv>
+            <common:ime>Milan</common:ime>
+            <common:prezime>Marinkovic</common:prezime>
         </za:lice>
-        <za:drugi_podatak_za_kontakt>d</za:drugi_podatak_za_kontakt>
+        <za:drugi_podatak_za_kontakt>milan@goymial.com</za:drugi_podatak_za_kontakt>
     </za:trazilac>
     <za:informacije_vezane_za_zahtev>
         <za:tip_zahteva>
             <za:obavestenje_posedovanja_informacije/>
         </za:tip_zahteva>
-
-        <za:opis_zahteva>d</za:opis_zahteva>
-        <za:mesto property="pred:mesto_podnosenja" datatype="xs:string">d</za:mesto>
-        <za:datum property="pred:datum_podnosenja" datatype="xs:dateTime">2021-02-05T20:51:36</za:datum>
-
+        <za:opis_zahteva>ovdje ide neki opis, koji god zelite, svejedno je</za:opis_zahteva>
+        <za:mesto property="pred:mesto_podnosenja" datatype="xs:string">Novi Sad</za:mesto>
+        <za:datum property="pred:datum_podnosenja" datatype="xs:dateTime">2021-02-06T11:28:24</za:datum>
     </za:informacije_vezane_za_zahtev>
 </za:zahtev_gradjana>
