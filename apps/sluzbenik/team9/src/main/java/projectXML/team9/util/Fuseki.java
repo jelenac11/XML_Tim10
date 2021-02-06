@@ -383,8 +383,6 @@ public class Fuseki {
 				String.format("<%s>  <http://www.projekat.org/predicate/podneta_zalba>  %b", id, b));
 		update(sparqlUpdate);
 	}
-<<<<<<< Updated upstream
-=======
 
 	public void updateZahtevWithStatusWithZalba(boolean status, String brojZahteva) {
 		String sparqlUpdate = SparqlUtil.deleteData(
@@ -404,7 +402,7 @@ public class Fuseki {
 				String.format("<%s>  <http://www.projekat.org/predicate/status>  %b", brojZahteva, status));
 		update(sparqlUpdate2);
 	}
->>>>>>> Stashed changes
+
 	
 	public String getResenjaMetaDataByIdAsJSON(String id) throws FileNotFoundException {
 		String sparqlQuery = SparqlUtil.selectPredicateObjectData(

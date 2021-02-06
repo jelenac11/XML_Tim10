@@ -43,26 +43,50 @@ export class ObavestenjeComponent implements OnInit {
   }
 
   public submit(): void {
-    this.obavestenjeService.post("obavestenja", Xonomy.harvest())
-      .subscribe(res => {
-        this.succesMessage('Uspešno ste poslali zahtev.');
-        if (this.tip){
-          const id = this.route.snapshot.paramMap.get('idZalbe');
-          console.log(id);
-          this.zahtevService.zalba('zahtevi/prihvati-zalbu/' + this.tip + '/' + id).subscribe(() => {
-            this.router.navigateByUrl(`/`);
-          }, () => {
-            this.router.navigateByUrl(`/`);
-          });
-        }
-        else{
+    if (this.tip) {
+      this.obavestenjeService.post("obavestenja/zalba", Xonomy.harvest())
+        .subscribe(res => {
+          this.succesMessage('Uspešno ste poslali zahtev.');
+          if (this.tip) {
+            const id = this.route.snapshot.paramMap.get('idZalbe');
+            console.log(id);
+            this.zahtevService.zalba('zahtevi/prihvati-zalbu/' + this.tip + '/' + id).subscribe(() => {
+              this.router.navigateByUrl(`/`);
+            }, () => {
+              this.router.navigateByUrl(`/`);
+            });
+          }
+          else {
 
-          this.router.navigateByUrl(`/`);
-        }
-      },
-        err => {
-          this.errorMessage('Molimo Vas da ispravno popunite zahtev.');
-        });
+            this.router.navigateByUrl(`/`);
+          }
+        },
+          err => {
+            this.errorMessage('Molimo Vas da ispravno popunite zahtev.');
+          });
+    }
+    else {
+      this.obavestenjeService.post("obavestenja", Xonomy.harvest())
+        .subscribe(res => {
+          this.succesMessage('Uspešno ste poslali zahtev.');
+          if (this.tip) {
+            const id = this.route.snapshot.paramMap.get('idZalbe');
+            console.log(id);
+            this.zahtevService.zalba('zahtevi/prihvati-zalbu/' + this.tip + '/' + id).subscribe(() => {
+              this.router.navigateByUrl(`/`);
+            }, () => {
+              this.router.navigateByUrl(`/`);
+            });
+          }
+          else {
+
+            this.router.navigateByUrl(`/`);
+          }
+        },
+          err => {
+            this.errorMessage('Molimo Vas da ispravno popunite zahtev.');
+          });
+    }
   };
 
   private succesMessage(message: string): void {
@@ -84,7 +108,7 @@ export class ObavestenjeComponent implements OnInit {
     return organTrazilac + lice;
   }
   private obradaInformacijaOZahtevu(): string {
-    let informacijeOZahtevu: string = `<ob:datum_trazenja_informacija>${this.zahtev.getDescendantElements("za:datum")[0].getText().substring(0,10)}</ob:datum_trazenja_informacija><ob:opis_trazene_informacije>${this.zahtev.getDescendantElements("za:opis_zahteva")[0].getText()}</ob:opis_trazene_informacije>`;
+    let informacijeOZahtevu: string = `<ob:datum_trazenja_informacija>${this.zahtev.getDescendantElements("za:datum")[0].getText().substring(0, 10)}</ob:datum_trazenja_informacija><ob:opis_trazene_informacije>${this.zahtev.getDescendantElements("za:opis_zahteva")[0].getText()}</ob:opis_trazene_informacije>`;
     return informacijeOZahtevu;
   }
   private obradaTrazenihZahteva(): string {

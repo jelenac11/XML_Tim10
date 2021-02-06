@@ -234,4 +234,27 @@ public class ResenjeController {
 		}
 	}
 	
+	@GetMapping(value = "find-id-with-references-on-zalbe-cutanja/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getDocumentIdThatHasReferenceOnOtherDocumentWithThisIdZalbaCutanje(@PathVariable String id) {
+		DocumentsIDDTO documentsIDDTO = new DocumentsIDDTO();
+		try {
+			documentsIDDTO.setItem(resenjeService.getDocumentIdThatHasReferenceOnOtherDocumentWithThisIdZalbaCutanje(id));
+			return ResponseEntity.ok(documentsIDDTO);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping(value = "find-id-with-references-on-zalbe-na-odluku/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getDocumentIdThatHasReferenceOnOtherDocumentWithThisIdZalbaNaOdgovor(@PathVariable String id) {
+		DocumentsIDDTO documentsIDDTO = new DocumentsIDDTO();
+		try {
+			documentsIDDTO.setItem(resenjeService.getDocumentIdThatHasReferenceOnOtherDocumentWithThisIdZalbaCNaOdluku(id));
+			return ResponseEntity.ok(documentsIDDTO);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
 }

@@ -169,7 +169,7 @@ export class DokumentPretragaComponent implements OnInit {
   };
 
   getReferencesZalbeCutanja(index: number): void {
-    this.resenjaService.getReferences("resenja/find-id-with-references-on-zalbe-cutanja", this.documents[index].url.split("/")[4])
+    this.resenjaService.getReferences("resenje/find-id-with-references-on-zalbe-cutanja", this.documents[index].url.split("/")[4])
       .subscribe(res => {
         this.documents[index].referencedBy = [];
         let zalbeCutanje = Xonomy.xml2js(res);
@@ -181,7 +181,7 @@ export class DokumentPretragaComponent implements OnInit {
   };
 
   getReferencesZalbeNaOdluku(index: number): void {
-    this.resenjaService.getReferences("resenja/find-id-with-references-on-zalbe-na-odluku", this.documents[index].url.split("/")[4])
+    this.resenjaService.getReferences("resenje/find-id-with-references-on-zalbe-na-odluku", this.documents[index].url.split("/")[4])
       .subscribe(res => {
         this.documents[index].referencedBy = [];
         let zalbeNaOdluku = Xonomy.xml2js(res);
