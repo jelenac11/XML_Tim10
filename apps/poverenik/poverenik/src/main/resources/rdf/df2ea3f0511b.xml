@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="predicate"/>
+    <variable name="object"/>
+  </head>
+  <results>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/podnosilac_zalbe</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Nesto Nesto</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/reference</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">/zalbe-na-odluku/fe64a9f0-f0a1-4563-86ba-563ad8082f49</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/poverenik</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Milan Marinović</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/datum_resenja</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/datum_zalbe</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/organ_protiv_kojeg_je_zalba</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Nesto</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>

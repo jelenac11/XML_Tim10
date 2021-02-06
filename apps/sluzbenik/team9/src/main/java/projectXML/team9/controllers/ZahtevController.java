@@ -231,7 +231,7 @@ public class ZahtevController {
 	
 	@PutMapping(value = "/odbi-zalbu/{tip}/{idZalbe}")
 	@CrossOrigin
-	public ResponseEntity<?> odbiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
+	public void odbiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
 		try {
 			URL wsdl = new URL("http://localhost:8082/ws/odgovori?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorNaZalbuService");
@@ -241,16 +241,14 @@ public class ZahtevController {
 	        OdgovorNaZalbuPort odgovorPort = service.getPort(portName, OdgovorNaZalbuPort.class);
 	        odgovorPort.odbiZalbu(idZalbe, tip);
 	        
-			return ResponseEntity.ok(true);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
 	
 	
 	@PutMapping(value = "/prihvati-zalbu/{tip}/{idZalbe}")
 	@CrossOrigin
-	public ResponseEntity<?> prihvatiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
+	public void prihvatiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
 		try {
 			URL wsdl = new URL("http://localhost:8082/ws/odgovori?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorNaZalbuService");
@@ -260,9 +258,7 @@ public class ZahtevController {
 	        OdgovorNaZalbuPort odgovorPort = service.getPort(portName, OdgovorNaZalbuPort.class);
 	        odgovorPort.prihvatiZalbu(idZalbe, tip);
 	        
-			return ResponseEntity.ok(true);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
 	

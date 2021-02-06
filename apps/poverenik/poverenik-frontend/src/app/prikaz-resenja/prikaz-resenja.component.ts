@@ -25,9 +25,10 @@ export class PrikazResenjaComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.resenjeService.get(this.id).subscribe(res => {
-      this.resenje = res;
-      this.resenjeHTML.nativeElement.innerHTML = this.xonomyService.convertResenjeXSLT(this.resenje);
+    this.resenjeService.get('XSLTDocument/'+this.id).subscribe(res => {
+      let something = Xonomy.xml2js(res);
+      something = something.children[0].getText();
+      this.resenjeHTML.nativeElement.innerHTML = something;
       this.resenjeService.getTemplate(`resenje/references-on/${this.id}`,"").subscribe(res => {
         let zahtevi = Xonomy.xml2js(res);
         console.log(res);
