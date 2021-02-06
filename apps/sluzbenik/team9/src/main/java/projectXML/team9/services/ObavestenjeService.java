@@ -129,4 +129,34 @@ public class ObavestenjeService {
 		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(subject, predicate, "/obavestenja");
 	}
 
+	public Obavestenje createThroughZalba(Obavestenje obavestenje) throws Exception {
+		String id = UUID.randomUUID().toString();
+		obavestenje.setId(id);
+		obavestenje.setBrojObavestenja(id.split("-")[4] + "-"
+				+ new Date().toInstant().atZone(ZoneId.systemDefault()).getMonthValue() + "/2020");
+		obavestenje.setVocab();
+		obavestenje.setAbout(id);
+		obavestenje.setProperty();
+		obavestenje.setContent(obavestenje.getBrojZahteva());
+		obavestenje.getInformacijeOObavestenju().getOrgan().setProperty();
+		obavestenje.getInformacijeOObavestenju().getOrgan()
+				.setContent(obavestenje.getInformacijeOObavestenju().getOrgan().getNaziv());
+		obavestenje.getInformacijeOObavestenju().getTrazilac().setProperty();
+		obavestenje.getInformacijeOObavestenju().getTrazilac().setContent(
+				zahtevService.getZahtev(obavestenje.getBrojZahteva().split("/")[4]).getTrazilac().getContent());
+		obavestenje.getInformacijeOObavestenju().getDatumObavestenja().setProperty();
+		obavestenje.getInformacijeOObavestenju().getDatumObavestenja().setDatatype("xs:date");
+		obavestenjeRepository.save(obavestenje, id);
+		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
+		StringWriter sw = new StringWriter();
+		marshaller.marshal(obavestenje, sw);
+		String xmlString = sw.toString();
+		metadataExtractor.extractMetadata(xmlString);
+		fusekiWriter.saveRDF("/obavestenja");
+		fusekiWriter.updateZahtevWithStatusWithZalba(true, obavestenje.getBrojZahteva());
+		preProcessDataForEmail
+				.sendMailWhenZahtevIsAccepted(obavestenje.getInformacijeOObavestenju().getTrazilac().getContent(), id);
+		return obavestenje;
+	}
+
 }

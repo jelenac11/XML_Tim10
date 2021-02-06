@@ -121,6 +121,17 @@ public class ObavestenjeController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
+	
+	@PostMapping(value = "zalba" ,consumes = MediaType.APPLICATION_XML_VALUE)
+	@CrossOrigin
+	public ResponseEntity<?> createObavestenjeZalba(@RequestBody Obavestenje obavestenje) {
+		try {
+			obavestenje = obavestenjeService.createThroughZalba(obavestenje);
+			return ResponseEntity.ok(obavestenje);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
 
 	@GetMapping
 	@CrossOrigin

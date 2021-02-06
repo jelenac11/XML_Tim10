@@ -91,7 +91,7 @@ public class ZalbaNaOdlukuService {
 		    @Override
 		    public void run() {
 		    	try {
-					FusekiWriter.updateData(true, zalba.getId(),"/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
+					FusekiWriter.updateData(true, zalba.getId().split("/")[4],"/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
 					System.out.println("Uspeo");
 		    	} catch (IOException e) {
 					e.printStackTrace();

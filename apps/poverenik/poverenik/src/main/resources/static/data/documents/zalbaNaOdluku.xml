@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<zno:zalba_na_odluku xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:zno="http://www.projekat.org/zalba_na_odluku" broj_zalbe="1d6715146b63-2/2020" broj_zahteva="http://localhost:4200/zahtev/cf7a2fec-cc59-423c-8c15-5dec21d4fe20" broj_resenja="zalba" id="http://localhost:4201/zalbe-na-odluku/004e497d-92f3-44f9-bfee-1d6715146b63" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/zalbe-na-odluku/004e497d-92f3-44f9-bfee-1d6715146b63" property="pred:zahtev_na_koji_se_odnosi_zalba" content="http://localhost:4200/zahtev/cf7a2fec-cc59-423c-8c15-5dec21d4fe20">
+    <zno:adresa_poverenika>
+        <common:mesto>Београд</common:mesto>
+        <common:ulica>Булевар краља Александра</common:ulica>
+        <common:broj>15</common:broj>
+    </zno:adresa_poverenika>
+    <zno:zalilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
+        <common:adresa>
+            <common:mesto>zalba</common:mesto>
+            <common:ulica>zalba</common:ulica>
+            <common:broj>zalba</common:broj>
+        </common:adresa>
+        <common:ime>zalba</common:ime>
+        <common:prezime>zalba</common:prezime>
+    </zno:zalilac>
+    <zno:podaci_o_resenju>
+        <zno:godina>2021</zno:godina>
+        <zno:naziv_organa property="pred:organ_koji_je_doneo_odluku" datatype="xs:string">zalba</zno:naziv_organa>
+    </zno:podaci_o_resenju>
+    <zno:datum_zahteva>2021-02-06</zno:datum_zahteva>
+    <zno:podaci_o_zalbi>
+        <zno:opis>zalba</zno:opis>
+        <zno:podnosilac_zalbe property="pred:podnosilac_zalbe" content="milanm2998@gmail.com">
+            <zno:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
+                <common:adresa>
+                    <common:mesto>zalba</common:mesto>
+                    <common:ulica>zalba</common:ulica>
+                    <common:broj>zalba</common:broj>
+                </common:adresa>
+                <common:ime>zalba</common:ime>
+                <common:prezime>zalba</common:prezime>
+            </zno:lice>
+            <zno:drugi_podaci_za_kontakt>zalba</zno:drugi_podaci_za_kontakt>
+        </zno:podnosilac_zalbe>
+        <zno:datum_podnosenja property="pred:datum_podnosenja" datatype="xs:date">2021-02-06</zno:datum_podnosenja>
+        <zno:mesto property="pred:mesto_podnosenja" datatype="xs:string">zalba</zno:mesto>
+    </zno:podaci_o_zalbi>
+</zno:zalba_na_odluku>
