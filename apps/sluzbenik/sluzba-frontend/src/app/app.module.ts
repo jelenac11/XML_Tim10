@@ -30,6 +30,7 @@ import { IzvestajComponent } from './izvestaj/izvestaj.component';
 import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 import { PrikazZalbaCutanjeComponent } from './prikaz-zalba-cutanje/prikaz-zalba-cutanje.component';
 import { PrikazZalbaNaOdlukuComponent } from './prikaz-zalba-na-odluku/prikaz-zalba-na-odluku.component';
+import { PrikazResenjaComponent } from './prikaz-resenja/prikaz-resenja.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PrikazZalbaNaOdlukuComponent } from './prikaz-zalba-na-odluku/prikaz-za
     IzvestajComponent,
     IzvestajPrikazComponent,
     PrikazZalbaCutanjeComponent,
-    PrikazZalbaNaOdlukuComponent
+    PrikazZalbaNaOdlukuComponent,
+    PrikazResenjaComponent
   ],
   imports: [
     BrowserModule,

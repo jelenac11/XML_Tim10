@@ -383,11 +383,33 @@ public class Fuseki {
 				String.format("<%s>  <http://www.projekat.org/predicate/podneta_zalba>  %b", id, b));
 		update(sparqlUpdate);
 	}
+<<<<<<< Updated upstream
+=======
+
+	public void updateZahtevWithStatusWithZalba(boolean status, String brojZahteva) {
+		String sparqlUpdate = SparqlUtil.deleteData(
+				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/zahtevi",
+        		String.format("<%s>  <http://www.projekat.org/predicate/status> false", brojZahteva));
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+		// UpdateProcessor sends update request to a remote SPARQL update service.
+		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update,
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getUpdate()));
+		processor.execute();
+		
+		String sparqlUpdate2 = SparqlUtil.insertData(
+				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/zahtevi",
+				String.format("<%s>  <http://www.projekat.org/predicate/status>  %b", brojZahteva, status));
+		update(sparqlUpdate2);
+	}
+>>>>>>> Stashed changes
 	
 	public String getResenjaMetaDataByIdAsJSON(String id) throws FileNotFoundException {
 		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
-				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/resenja",
-				String.format("<http://localhost:4201/resenja/%s>  ?predicate  ?object", id));
+				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/resenja",
+				String.format("<http://localhost:4200/resenja/%s>  ?predicate  ?object", id));
 
 		ResultSet result = getDocumentMetaDataById(sparqlQuery);
 
@@ -402,8 +424,8 @@ public class Fuseki {
 
 	public String getResenjaMetaDataByIdAsXML(String id) throws FileNotFoundException {
 		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
-				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/resenja",
-				String.format("<http://localhost:4201/resenja/%s>  ?predicate  ?object", id));
+				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/resenja",
+				String.format("<http://localhost:4200/resenja/%s>  ?predicate  ?object", id));
 
 		ResultSet result = getDocumentMetaDataById(sparqlQuery);
 
@@ -417,9 +439,9 @@ public class Fuseki {
 
 
 	public String getResenjaMetaDataByIdAsRDF(String type, String id, String graph) throws FileNotFoundException {
-		String sparqlQuery = SparqlUtil.describeData(String.format("http://localhost:4201/%s/%s", type, id),
-				String.format("http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/%s", graph),
-				String.format("<http://localhost:4201/%s/%s>  ?p  ?o", type, id));
+		String sparqlQuery = SparqlUtil.describeData(String.format("http://localhost:4200/%s/%s", type, id),
+				String.format("http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/%s", graph),
+				String.format("<http://localhost:4200/%s/%s>  ?p  ?o", type, id));
 
 		QueryExecution queryExecution = QueryExecutionFactory
 				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
@@ -434,4 +456,13 @@ public class Fuseki {
 
 		return path;
 	}
+	
+	public void insertReference(String id, String idZalbe) throws IOException {
+		//Delete first triplet
+		 String sparqlUpdate = SparqlUtil.insertData(
+				 "http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/resenja",
+		 String.format("<http://localhost:4200/resenja/%s>  <http://www.projekat.org/predicate/reference> \"http://localhost:4201%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",id, idZalbe));
+		 update(sparqlUpdate);
+	}
+	
 }

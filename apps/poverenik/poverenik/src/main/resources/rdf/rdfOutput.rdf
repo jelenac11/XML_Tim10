@@ -1,4 +1,5 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+<<<<<<< Updated upstream
 <rdf:Description rdf:about="http://localhost:4201/resenja/9cdbcb3bf113">
 <pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">s sdasd </pred:podnosilac_zalbe>
 </rdf:Description>
@@ -12,6 +13,21 @@
 <pred:datum_resenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_resenja>
 </rdf:Description>
 <rdf:Description rdf:about="http://localhost:4201/resenja/9cdbcb3bf113">
+=======
+<rdf:Description rdf:about="http://localhost:4201/resenja/1b09cfd75ade">
+<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">c ddd </pred:podnosilac_zalbe>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/resenja/1b09cfd75ade">
+<pred:organ_protiv_kojeg_je_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">undefined</pred:organ_protiv_kojeg_je_zalba>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/resenja/1b09cfd75ade">
+<pred:datum_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">undefined</pred:datum_zalbe>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/resenja/1b09cfd75ade">
+<pred:datum_resenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_resenja>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/resenja/1b09cfd75ade">
+>>>>>>> Stashed changes
 <pred:poverenik xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Milan Marinović</pred:poverenik>
 </rdf:Description>
 </rdf:RDF>
