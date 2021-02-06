@@ -2,6 +2,7 @@ package projectXML.team10.poverenik.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.time.ZoneId;
@@ -9,11 +10,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +49,8 @@ public class ZalbaCutanjeService {
 	private GenerateHTMLAndPDF generateHTMLAndPDF;
 	@Autowired
 	private MarshallerFactory marshallerFactory;
+  
+	private TaskScheduler scheduler;
 	@Autowired
 	private SearchOperations searchOperations;
 
@@ -75,8 +83,34 @@ public class ZalbaCutanjeService {
 		marshaller.marshal(zalba, sw);
 		String xmlString = sw.toString();
 		metadataExtractor.extractMetadata(xmlString);
+		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-cutanje", "/zalbe-cutanje", "odgovorena");
+		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-cutanje", "/zalbe-cutanje", "status");
+
 		FusekiWriter.saveRDF("/zalbe-na-cutanje");
+		
+		Runnable exampleRunnable = new Runnable(){
+		    @Override
+		    public void run() {
+		    	try {
+		    		FusekiWriter.updateData(true, zalba.getId(),"/zalbe-na-cutanje", "/zalbe-cutanje", "odgovorena");
+		    	} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    }
+		};
+		executeTask(exampleRunnable);
+		
 		return zalba;
+	}
+	
+	@Async
+	public void executeTask(Runnable exampleRunnable) {
+	    ScheduledExecutorService localExecutor = Executors.newSingleThreadScheduledExecutor();
+	    scheduler = new ConcurrentTaskScheduler(localExecutor);
+	    long millis = System.currentTimeMillis();
+	    millis += 1000L * 60 * 10; //10 minuta
+	    scheduler.schedule(exampleRunnable,
+	            new Date(millis));
 	}
 	
 	public String generatePDFZalbaCutanje(String id) throws Exception {
@@ -106,6 +140,25 @@ public class ZalbaCutanjeService {
 		return zalbaCutanjeRepository.getPodaciOZalbeCutanja(datum);
 	}
 
+	public ArrayList<String> getZalbeNotAnswered() throws Exception {
+		ArrayList<String> items = new ArrayList<String>();
+		for(String zalba : fusekiWriter.getZalbeNotAnswered("/zalbe-na-cutanje")) {
+			String id = zalba.split("/")[4];
+			items.add(id + "|" + zalbaCutanjeRepository.getById(id).getBrojZahteva());
+		}
+		return items;
+	}
+
+	public void odustaniOdZalbe(String zalbaId) throws IOException {
+		FusekiWriter.updateData(true, zalbaId, "/zalbe-na-cutanje", "/zalbe-cutanje", "status");
+		FusekiWriter.updateData(true, zalbaId, "/zalbe-na-cutanje", "/zalbe-cutanje", "odgovorena");
+	}
+	
+	public void odbiZalbu(String zalbaId) throws IOException {
+		FusekiWriter.updateData(false, zalbaId, "/zalbe-na-cutanje", "/zalbe-cutanje", "status");
+		FusekiWriter.updateData(true, zalbaId, "/zalbe-na-cutanje", "/zalbe-cutanje", "odgovorena");
+	}
+
 	public String getDocumentMetaDataByIdAsJSON(String zalbaId) throws FileNotFoundException {
 		return fusekiWriter.getZalbaCutanjeMetaDataByIdAsJSON(zalbaId);
 	}
@@ -116,6 +169,10 @@ public class ZalbaCutanjeService {
 
 	public String getDocumentMetaDataByIdAsRDF(String zalbaId) throws FileNotFoundException {
 		return fusekiWriter.getDocumentMetaDataByIdAsRDF("zalbe-cutanje", zalbaId, "zalbe-na-cutanje");
+	}
+
+	public ArrayList<String> getAllowed() {
+		return fusekiWriter.readAllAllowed("/zalbe-na-cutanje");
 	}
 
 	public Set<String> search(SearchDTO searchDTO) throws Exception {
@@ -161,5 +218,6 @@ public class ZalbaCutanjeService {
 		String subject = String.format("http://localhost:4201/zalbe-cutanje/%s", id);
 		String predicate = "http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_zalba";
 		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(subject, predicate, "/zalbe-na-cutanje");
+
 	}
 }

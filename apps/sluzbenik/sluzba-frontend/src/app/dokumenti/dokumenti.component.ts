@@ -18,6 +18,7 @@ export class DokumentiComponent implements OnInit {
   zahtevi: String[] = [];
   obavestenja: String[] = [];
   izvestaji: String[] = [];
+  zalbeZahtevi = [];
 
   constructor(private zahtevService: ZahtevService,
     private obavestenjeService: ObavestenjeService,
@@ -47,7 +48,19 @@ export class DokumentiComponent implements OnInit {
   getAllSluzbenik(): void {
     this.obavestenjeService.getAllDocumentsIdByGradjanin('zahtevi/unanswered-zahtevi').subscribe(res => {
       this.extractIds(res, this.zahtevi);
-    })
+    });
+    this.zahtevService.getAll('zahtevi/zalbe-zahtevi').subscribe(res => {
+      let zahtevi = Xonomy.xml2js(res);
+      zahtevi = zahtevi.getDescendantElements('item');
+      for (let i = 0; i < zahtevi.length; i++) {
+        
+        const txt = zahtevi[i].getText().split('|');
+        const idZalbe = txt[0];
+        const idZahteva = txt[1];
+        const tip = txt[2];
+        this.zalbeZahtevi.push({idZalbe, idZahteva, tip});
+      }
+    });
   };
 
   extractIds(documentsId: string, collection: any[]): void {
@@ -72,6 +85,20 @@ export class DokumentiComponent implements OnInit {
   prihvatiZahtev(zahtevId: string): void {
     this.router.navigateByUrl(`/novo-obavestenje/${zahtevId}`);
   };
+
+  odbijZahtevZalbe(zahtev: any): void {
+    this.zahtevService.zalba('zahtevi/odbi-zalbu/' + zahtev.tip + '/' + zahtev.idZalbe).subscribe(() => {
+      this.getAllSluzbenik();
+    });
+  };
+
+  prihvatiZahtevZalbe(zahtev: any): void {
+    this.router.navigateByUrl(`/zalba-odgovor/${zahtev.tip}/${zahtev.idZahteva}/${zahtev.idZalbe}`);
+  };
+
+  zahtev(zahtev: any): void {
+    this.router.navigateByUrl(`/zahtev/${zahtev.idZahteva}`);
+  }
 
   private succesMessage(message: string): void {
     this.snackBar.success(message);

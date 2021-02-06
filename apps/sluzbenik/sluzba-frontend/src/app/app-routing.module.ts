@@ -80,6 +80,13 @@ const routes: Routes = [
     }
   },
   {
+    path:"zalba-odgovor/:tip/:id/:idZalbe", component: ObavestenjeComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
     path: '**',
     component: PageNotFoundComponent 
   }

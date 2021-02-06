@@ -2,18 +2,25 @@ package projectXML.team10.poverenik.services;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javax.xml.bind.Marshaller;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +49,7 @@ public class ZalbaNaOdlukuService {
 	private FusekiWriter fusekiWriter;
 	@Autowired
 	private MarshallerFactory marshallerFactory;
+	private TaskScheduler scheduler;
 	@Autowired
 	private SearchOperations searchOperations;
 	
@@ -74,8 +82,33 @@ public class ZalbaNaOdlukuService {
 		marshaller.marshal(zalba, sw);
 		String xmlString = sw.toString();
 		metadataExtractor.extractMetadata(xmlString);
+		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
+		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-odluku", "/zalbe-na-odluku", "status");
+
 		FusekiWriter.saveRDF("/zalbe-na-odluku");
+		Runnable exampleRunnable = new Runnable(){
+		    @Override
+		    public void run() {
+		    	try {
+					FusekiWriter.updateData(true, zalba.getId(),"/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
+					System.out.println("Uspeo");
+		    	} catch (IOException e) {
+					e.printStackTrace();
+				}
+		    }
+		};
+		executeTask(exampleRunnable);
 		return zalba;
+	}
+	
+	@Async
+	public void executeTask(Runnable exampleRunnable) {
+	    ScheduledExecutorService localExecutor = Executors.newSingleThreadScheduledExecutor();
+	    scheduler = new ConcurrentTaskScheduler(localExecutor);
+	    long millis = System.currentTimeMillis();
+	    millis += 1000L * 60 * 10; //10 minuta
+	    scheduler.schedule(exampleRunnable,
+	            new Date(millis));
 	}
 	
 	public String generatePDFZalbaNaOdluku(String id) throws Exception {
@@ -100,6 +133,26 @@ public class ZalbaNaOdlukuService {
 	public ArrayList<String> getAll() {
 		return fusekiWriter.readAllDocuments("/zalbe-na-odluku");
 	}
+
+	public Collection<? extends String> getZalbeNotAnswered() throws Exception {
+		ArrayList<String> items = new ArrayList<String>();
+		for(String zalba : fusekiWriter.getZalbeNotAnswered("/zalbe-na-odluku")) {
+			String id = zalba.split("/")[4];
+			items.add(id+ "|" +zalbaNaOdlukuRepository.getById(id).getBrojZahteva());
+		}
+		return items;
+	}
+
+	public void odustaniOdZalbe(String zalbaId) throws IOException {
+		FusekiWriter.updateData(true, zalbaId,"/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
+		FusekiWriter.updateData(true, zalbaId,"/zalbe-na-odluku", "/zalbe-na-odluku", "status");
+	}
+	
+	public void odbiZalbu(String zalbaId) throws IOException {
+		
+		FusekiWriter.updateData(false, zalbaId, "/zalbe-na-odluku", "/zalbe-na-odluku", "status");
+		FusekiWriter.updateData(true, zalbaId, "/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
+	}
 	
 	public String getDocumentMetaDataByIdAsJSON(String zalbaId) throws FileNotFoundException {
 		return fusekiWriter.getZalbaNaOdlukuMetaDataByIdAsJSON(zalbaId);
@@ -111,6 +164,10 @@ public class ZalbaNaOdlukuService {
 
 	public String getDocumentMetaDataByIdAsRDF(String zahtevId) throws FileNotFoundException {
 		return fusekiWriter.getDocumentMetaDataByIdAsRDF("zalbe-na-odluku", zahtevId, "zalbe-na-odluku");
+	}
+
+	public ArrayList<String> getAllowed() {
+		return fusekiWriter.readAllAllowed("/zalbe-na-odluku");
 	}
 	
 	public Set<String> search(SearchDTO searchDTO) throws Exception {

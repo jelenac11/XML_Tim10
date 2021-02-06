@@ -1,0 +1,110 @@
+<div>
+    <div class="row d-flex justify-content-center">
+        <!--PRVA TABELA-->
+        <div class="table-wrap col-10 mt-3">
+        <table class="table table-hover border" bordered="true">
+            <thead>
+            <tr>
+                <th colspan="4">Žalbe na ćutanje uprave</th>
+            </tr>
+            <tr>
+                <th>#</th>
+                <th>Naziv dokumenta</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of zalbeCutanje; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>
+                <a [href]="item">{{ item }}</a>
+                </td>
+                <td>
+                <button
+                    mat-raised-button
+                    (click)="downloadPDF(item.split('/')[4], 'zalbeCutanje')"
+                >
+                    <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+                </button>
+                </td>
+                <td>
+                <button
+                    mat-raised-button
+                    (click)="downloadHTML(item.split('/')[4], 'zalbeCutanje')"
+                >
+                    <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+                </button>
+                </td>
+                <td>
+                    <button
+                        mat-raised-button
+                        routerLink="/novo-resenje/cutanje/{{getId(item)}}"
+                    >
+                        <mat-icon>done</mat-icon> Reši
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="zalbeCutanje.length == 0">
+                <td colspan="4">Nema podnetih žalbi na ćutanje uprave</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <!--DRUGA TABELA-->
+        <div class="table-wrap col-10 mt-3">
+        <table class="table table-hover border">
+            <thead>
+            <tr>
+                <th colspan="4">Žalbe na odluku</th>
+            </tr>
+            <tr>
+                <th>#</th>
+                <th>Naziv dokumenta</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of zalbeNaOdluku; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>
+                <a [href]="item">{{ item }}</a>
+                </td>
+                <td>
+                <button
+                    mat-raised-button
+                    (click)="downloadPDF(item.split('/')[4], 'zalbeNaOdluku')"
+                >
+                    <mat-icon>picture_as_pdf</mat-icon> Preuzmi dokument kao PDF
+                </button>
+                </td>
+                <td>
+                <button
+                    mat-raised-button
+                    (click)="downloadHTML(item.split('/')[4], 'zalbeNaOdluku')"
+                >
+                    <mat-icon>code</mat-icon> Preuzmi dokument kao HTML
+                </button>
+                </td>
+                <td>
+                    <button
+                        mat-raised-button
+                        routerLink="/novo-resenje/odluka/{{getId(item)}}"
+                    >
+                        <mat-icon>done</mat-icon> Reši
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="zalbeNaOdluku.length == 0">
+                <td colspan="4">Nema podnetih žalbi na odluku</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+    </div>
+</div>

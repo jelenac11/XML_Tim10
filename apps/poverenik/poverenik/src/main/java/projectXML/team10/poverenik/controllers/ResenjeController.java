@@ -137,4 +137,59 @@ public class ResenjeController {
 		}
 	}
 	
+	
+	@GetMapping(value = "references-on/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getDocumentIdThatIsReferencedByDocumentWithThisId(@PathVariable String id) {
+		try {
+			ArrayList<String> item = resenjeService.getDocumentIdThatIsReferencedByDocumentWithThisId(id);
+			return ResponseEntity.ok(new StringArray(item));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	
+	@GetMapping(value = "extract-metadata/json/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsJSONById(@PathVariable String id) {
+		try {
+			String path = resenjeService.getDocumentMetaDataByIdAsJSON(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@GetMapping(value = "extract-metadata/xml/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsXMLById(@PathVariable String id) {
+		try {
+			String path = resenjeService.getDocumentMetaDataByIdAsXML(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GetMapping(value = "extract-metadata/rdf/{id}")
+	@CrossOrigin
+	public byte[] extractMetadataAsRDFById(@PathVariable String id) {
+		try {
+			String path = resenjeService.getDocumentMetaDataByIdAsRDF(id);
+			File file = new File(path);
+			FileInputStream fileInputStream = new FileInputStream(file);
+			return IOUtils.toByteArray(fileInputStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

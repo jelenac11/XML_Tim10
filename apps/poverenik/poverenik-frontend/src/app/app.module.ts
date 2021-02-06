@@ -31,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 import { IzvestajService } from './core/services/izvestaj.service';
+import { OdlukaZalbiComponent } from './odluka-zalbi/odluka-zalbi.component';
 import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -49,11 +50,12 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ZahtevPrikazComponent,
     ResenjaComponent,
     PrikazResenjaComponent,
+    OdlukaZalbiComponent,
     DokumentPretragaComponent
   ],
   imports: [
-    BrowserModule,
     CommonModule,
+    BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,

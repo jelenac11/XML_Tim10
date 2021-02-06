@@ -33,6 +33,31 @@ public class FusekiWriter {
     
 	@Autowired
 	private PropertiesConfiguration propertiesConfiguration;
+	
+	public static void updateZalbaWithStatus(boolean status, String zalbaId, String type, String db) throws IOException {
+        AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		//Delete first triplet
+        String sparqlUpdate = SparqlUtil.deleteData(
+        		conn.dataEndpoint + GRAPH_URI + type,
+        		String.format("<http://localhost:4201%s/%s>  <http://www.projekat.org/predicate/status> false",db, zalbaId));
+		UpdateRequest request = UpdateFactory.create();
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+        
+        //Inseert
+        sparqlUpdate = SparqlUtil.insertData(
+				conn.dataEndpoint + GRAPH_URI + type,
+				String.format("<http://localhost:4201%s/%s>  <http://www.projekat.org/predicate/status>  %b",db, zalbaId, status));
+		
+		request = UpdateFactory.create();
+        processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+	}
+
 
     public static void saveRDF(String type) throws IOException {
         AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
@@ -70,6 +95,31 @@ public class FusekiWriter {
 		System.out.println("[INFO] End.");
 
     }
+    
+    
+    public static void updateData(boolean status, String zalbaId, String type, String db, String predicate) throws IOException {
+        AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		//Delete first triplet
+        String sparqlUpdate = SparqlUtil.deleteData(
+        		conn.dataEndpoint + GRAPH_URI + type,
+        		String.format("<http://localhost:4201%s/%s>  <http://www.projekat.org/predicate/%s> false",db, zalbaId, predicate));
+		UpdateRequest request = UpdateFactory.create();
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+
+        //Inseert
+        sparqlUpdate = SparqlUtil.insertData(
+				conn.dataEndpoint + GRAPH_URI + type,
+				String.format("<http://localhost:4201%s/%s>  <http://www.projekat.org/predicate/%s>  %b",db, zalbaId, predicate, status));
+
+		request = UpdateFactory.create();
+        processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+	}
     
     public ArrayList<String> getDocumentsId(String sparqlQuery) {
 		ArrayList<String> ids = new ArrayList<String>();
@@ -135,6 +185,50 @@ public class FusekiWriter {
 				String.format(
 						"?s <http://www.projekat.org/predicate/podnosilac_zalbe> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
 						email));
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> readAllZalbeCutanje(String string) {
+		String sparqlQuery = SparqlUtil.selectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zalbe-na-cutanje",
+				String.format(
+						"?s <http://www.projekat.org/predicate/status> false"));
+		return getDocumentsId(sparqlQuery);
+	}
+	
+	public ArrayList<String> readAllZalbeNaOdluku(String string) {
+		String sparqlQuery = SparqlUtil.selectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/zalbe-na-odluku",
+				String.format(
+						"?s <http://www.projekat.org/predicate/status> false"));
+		return getDocumentsId(sparqlQuery);
+	}
+	
+	public ArrayList<String> readAllResenja(String type, String poverenik) {
+		String sparqlQuery = SparqlUtil.selectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format(
+						"?s <http://www.projekat.org/predicate/poverenik> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",
+						poverenik));
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> readAllResenja(String type) {
+		String sparqlQuery = SparqlUtil.selectDataJustSubject(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				"?s ?p ?o");
 		return getDocumentsId(sparqlQuery);
 	}
 
@@ -272,6 +366,109 @@ public class FusekiWriter {
 				String.format("http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/%s", graph),
 				String.format("?s ?p ?o . filter (LCASE(str(?o))=%s)", data));
 
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> getZalbeNotAnswered(String type) {
+		String sparqlQuery = SparqlUtil
+				.selectDistinctData(
+						String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+								propertiesConfiguration.getFusekiConfiguration().getDataset(),
+								propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+						"?s <http://www.projekat.org/predicate/odgovorena> false");
+		return getDocumentsId(sparqlQuery);
+	}
+
+
+	public String getResenjaMetaDataByIdAsJSON(String id) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/resenja",
+				String.format("<http://localhost:4201/resenja/%s>  ?predicate  ?object", id));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.json", id);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsJSON(output, result);
+
+		return path;
+	}
+
+
+	public String getResenjaMetaDataByIdAsXML(String id) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/resenja",
+				String.format("<http://localhost:4201/resenja/%s>  ?predicate  ?object", id));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.xml", id);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsXML(output, result);
+
+		return path;
+	}
+
+
+	public String getResenjaMetaDataByIdAsRDF(String type, String id, String graph) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.describeData(String.format("http://localhost:4201/%s/%s", type, id),
+				String.format("http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/%s", graph),
+				String.format("<http://localhost:4201/%s/%s>  ?p  ?o", type, id));
+
+		QueryExecution queryExecution = QueryExecutionFactory
+				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.ttl", id);
+		OutputStream output = new FileOutputStream(path);
+
+		Model describeModel = queryExecution.execDescribe();
+		describeModel.write(output, "TURTLE");
+
+		return path;
+	}
+
+
+	public static void insertReference(String id, String idZalbe) throws IOException {
+		 AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		//Delete first triplet
+        String sparqlUpdate = SparqlUtil.insertData(
+        		conn.dataEndpoint + GRAPH_URI + "/resenja",
+        		String.format("<http://localhost:4201/resenja/%s>  <http://www.projekat.org/predicate/reference> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",id, idZalbe));
+		UpdateRequest request = UpdateFactory.create();
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+		
+	}
+
+
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String id) {
+		String sparqlQuery = SparqlUtil.selectObjectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/resenja",
+				String.format(
+						"<http://localhost:4201/resenja/%s>  <http://www.projekat.org/predicate/reference> ?o",
+						id));
+		return getDocumentsId(sparqlQuery);
+	}
+
+
+	public ArrayList<String> readAllAllowed(String type) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format(
+						"?s <http://www.projekat.org/predicate/status> false .\n"
+						+ "?s <http://www.projekat.org/predicate/odgovorena> true"));
 		return getDocumentsId(sparqlQuery);
 	}
 

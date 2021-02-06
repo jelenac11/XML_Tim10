@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KorisnikService } from '../core/services/korisnik.service';
 import { ResenjaService } from '../core/services/resenja.service';
 import { ResenjaXonomyService } from '../core/xonomy/resenja-xonomy.service';
@@ -16,7 +17,12 @@ export class ResenjaComponent implements OnInit, AfterViewInit {
   constructor(
     private xonomyService: ResenjaXonomyService,
     private resenjeService: ResenjaService,
-    private korisnikService: KorisnikService
+    private korisnikService: KorisnikService,
+    private route: ActivatedRoute,
+    private zalbaNaOdlukuService: ZalbaNaOdlukuService,
+    private zalbaCutanjeService: ZalbaCutanjeService,
+    private snackBar: Snackbar,
+    private router: Router,
   ) { }
 
   @ViewChild('resenjeXonomy', { static: false }) resenjeXonomy;
@@ -25,11 +31,53 @@ export class ResenjaComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.korisnikService.getTrenutnoUlogovan().subscribe(res => {
       const convert = require('xml-js');
-      this.user = convert.xml2js(res, {ignoreComment: true, compact: true});
+      this.user = convert.xml2js(res, {ignoreComment: true, compact: true}).korisnik;
     });
   }
 
-  ngAfterViewInit(): void {
+  zalbaCutanja(): void{
+    // tslint:disable
+    this.zalbaCutanjeService.get('zalbe-cutanje', this.idZalbe).subscribe(res => {
+      const convert = require('xml-js');
+      const zahtev = convert.xml2js(res, {compact: true, spaces: 4});
+      console.log(zahtev);
+      this.naziv_organa = zahtev['zc:zalba_na_cutanje']['zc:organ_protiv_kojeg_je_zalba']['zc:naziv']?._text;
+      this.mesto_podnosioca = zahtev['zc:zalba_na_cutanje']['zc:podaci_o_zalbi']['zc:podnosilac_zalbe']['zc:lice']['common:adresa']['common:mesto']?._text;
+      this.ulica_podnosioca = zahtev['zc:zalba_na_cutanje']['zc:podaci_o_zalbi']['zc:podnosilac_zalbe']['zc:lice']['common:adresa']['common:ulica']?._text;
+      this.broj_podnosioca = zahtev['zc:zalba_na_cutanje']['zc:podaci_o_zalbi']['zc:podnosilac_zalbe']['zc:lice']['common:adresa']['common:broj']?._text;
+      this.ime_podnosioca = zahtev['zc:zalba_na_cutanje']['zc:podaci_o_zalbi']['zc:podnosilac_zalbe']['zc:lice']['common:ime']?._text;
+      this.prezime_podnosioca = zahtev['zc:zalba_na_cutanje']['zc:podaci_o_zalbi']['zc:podnosilac_zalbe']['zc:lice']['common:prezime']?._text;
+      this.naziv_podnosioca = zahtev['zc:zalba_na_cutanje']['zc:podaci_o_zalbi']['zc:podnosilac_zalbe']['zc:lice']['common:naziv']?._text;
+      this.datum_zalbe = zahtev['zc:zalba_na_cutanje']['zc:datum_podnosenja']?._text;
+      if (this.naziv_podnosioca !== undefined) {
+        this.ime_podnosioca = this.naziv_podnosioca;
+        this.prezime_podnosioca = ' ';
+      }
+      this.kreirajXML();
+    });
+  }
+
+  zalbaNaOdluku(): void{
+    this.zalbaNaOdlukuService.get('zalbe-na-odluku', this.idZalbe).subscribe(res => {
+      const convert = require('xml-js');
+      const zahtev = convert.xml2js(res, {compact: true, spaces: 4});
+      this.naziv_organa = zahtev['zno:zalba_na_odluku']['zno:podaci_o_resenju']['zno:naziv_organa']._text;
+      this.mesto_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:adresa']['common:mesto']._text;
+      this.ulica_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:adresa']['common:ulica']._text;
+      this.broj_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:adresa']['common:broj']._text;
+      this.ime_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:ime']?._text;
+      this.prezime_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:prezime']?._text;
+      this.naziv_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:naziv']?._text;
+      this.datum_zalbe = zahtev['zno:zalba_na_odluku']['zno:podaci_o_zalbi']['zno:datum_podnosenja']?._text;
+      if (this.naziv_podnosioca !== undefined) {
+        this.ime_podnosioca = this.naziv_podnosioca;
+        this.prezime_podnosioca = ' ';
+      }
+      this.kreirajXML();
+    });
+  }
+
+  kreirajXML(): void{
     const element = document.getElementById('resenje');
     const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
     <res:odluka_poverioca
@@ -106,7 +154,11 @@ export class ResenjaComponent implements OnInit, AfterViewInit {
 
   public submit(): void {
     this.resenjeService.post(Xonomy.harvest())
-      .subscribe(res => console.log(res));
+      .subscribe(res => {
+        this.snackBar.success("Uspešno ste kreirali rešenje!")
+        this.router.navigate(['/']);
+      });
+
   }
 
   onChange(): void {
