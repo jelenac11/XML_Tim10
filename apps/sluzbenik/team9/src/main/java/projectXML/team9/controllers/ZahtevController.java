@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team9.dto.DocumentsIDDTO;
 import projectXML.team9.dto.SearchDTO;
+import projectXML.team9.soap.TStringArray;
 import projectXML.team9.soap.XSLTDocumentDTO;
 import projectXML.team9.soap.ports.used.OdgovorNaZalbuPort;
+import projectXML.team9.soap.ports.used.ZalbePort;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.services.ZahtevService;
@@ -229,7 +231,7 @@ public class ZahtevController {
 	
 	@PutMapping(value = "/odbi-zalbu/{tip}/{idZalbe}")
 	@CrossOrigin
-	public ResponseEntity<?> odbiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
+	public void odbiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
 		try {
 			URL wsdl = new URL("http://localhost:8082/ws/odgovori?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorNaZalbuService");
@@ -239,16 +241,14 @@ public class ZahtevController {
 	        OdgovorNaZalbuPort odgovorPort = service.getPort(portName, OdgovorNaZalbuPort.class);
 	        odgovorPort.odbiZalbu(idZalbe, tip);
 	        
-			return ResponseEntity.ok(true);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
 	
 	
 	@PutMapping(value = "/prihvati-zalbu/{tip}/{idZalbe}")
 	@CrossOrigin
-	public ResponseEntity<?> prihvatiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
+	public void prihvatiZalbu(@PathVariable String tip ,@PathVariable String idZalbe) {
 		try {
 			URL wsdl = new URL("http://localhost:8082/ws/odgovori?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/odgovor", "OdgovorNaZalbuService");
@@ -258,11 +258,8 @@ public class ZahtevController {
 	        OdgovorNaZalbuPort odgovorPort = service.getPort(portName, OdgovorNaZalbuPort.class);
 	        odgovorPort.prihvatiZalbu(idZalbe, tip);
 	        
-			return ResponseEntity.ok(true);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-<<<<<<< Updated upstream
-=======
 		}
 	}
 	
@@ -338,7 +335,6 @@ public class ZahtevController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
->>>>>>> Stashed changes
 		}
 	}
 }

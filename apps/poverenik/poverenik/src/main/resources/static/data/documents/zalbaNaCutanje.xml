@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<zc:zalba_na_cutanje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:zc="http://www.projekat.org/zalba_cutanja" broj_zalbe="e00ed912170c-2/2021" broj_zahteva="4bc9ab65-0aef-4850-afb7-e8a77b8dbd7e" id="http://localhost:4201/zalbe-cutanje/594d28b1-051d-47b5-ad4d-e00ed912170c" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/zalbe-cutanje/594d28b1-051d-47b5-ad4d-e00ed912170c">
+<zc:zalba_na_cutanje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:zc="http://www.projekat.org/zalba_cutanja" broj_zalbe="00d8ac396daa-2/2021" broj_zahteva="http://localhost:4200/zahtev/d6904c1b-5023-4693-aaee-9a604e8b6129" id="http://localhost:4201/zalbe-cutanje/135bd90c-8833-48ac-ab16-00d8ac396daa" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/zalbe-cutanje/135bd90c-8833-48ac-ab16-00d8ac396daa" property="pred:zahtev_na_koji_se_odnosi_zalba" content="http://localhost:4200/zahtev/d6904c1b-5023-4693-aaee-9a604e8b6129">
     <zc:adresa_poverenika>
         <common:mesto>Београд</common:mesto>
         <common:ulica>Булевар краља Александра</common:ulica>
         <common:broj>15</common:broj>
     </zc:adresa_poverenika>
-    <zc:organ_protiv_kojeg_je_zalba property="pred:organ_protiv_kojeg_je_zalba" content="a">
+    <zc:organ_protiv_kojeg_je_zalba property="pred:organ_protiv_kojeg_je_zalba" content="s">
         <common:adresa>
-            <common:mesto>a</common:mesto>
-            <common:ulica>a</common:ulica>
-            <common:broj>a</common:broj>
+            <common:mesto>s</common:mesto>
+            <common:ulica>s</common:ulica>
+            <common:broj>s</common:broj>
         </common:adresa>
-        <common:naziv>a</common:naziv>
+        <common:naziv>s</common:naziv>
     </zc:organ_protiv_kojeg_je_zalba>
     <zc:podaci_o_zahtevu>
-        <zc:informacije>m</zc:informacije>
-        <zc:datum>2021-02-05</zc:datum>
+        <zc:informacije>d</zc:informacije>
+        <zc:datum>2021-02-06</zc:datum>
         <zc:zahtevi>
             <zc:uvid></zc:uvid>
         </zc:zahtevi>
@@ -24,16 +24,16 @@
         <zc:podnosilac_zalbe property="pred:podnosilac_zalbe" content="milanm2998@gmail.com">
             <zc:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
                 <common:adresa>
-                    <common:mesto>m</common:mesto>
-                    <common:ulica>m</common:ulica>
-                    <common:broj>m</common:broj>
+                    <common:mesto>d</common:mesto>
+                    <common:ulica>d</common:ulica>
+                    <common:broj>d</common:broj>
                 </common:adresa>
-                <common:naziv>m</common:naziv>
+                <common:naziv>d</common:naziv>
             </zc:lice>
-            <zc:drugi_podaci_za_kontakt>m</zc:drugi_podaci_za_kontakt>
+            <zc:drugi_podaci_za_kontakt>d</zc:drugi_podaci_za_kontakt>
         </zc:podnosilac_zalbe>
-        <zc:datum_podnosenja property="pred:datum_podnosenja" datatype="xs:date">2021-02-05</zc:datum_podnosenja>
-        <zc:mesto property="pred:mesto_podnosenja" datatype="xs:string">m</zc:mesto>
-        <zc:razlog_zalbe>није поступио у целости</zc:razlog_zalbe>
+        <zc:datum_podnosenja property="pred:datum_podnosenja" datatype="xs:date">2021-02-06</zc:datum_podnosenja>
+        <zc:mesto property="pred:mesto_podnosenja" datatype="xs:string">d</zc:mesto>
+        <zc:razlog_zalbe>није поступио</zc:razlog_zalbe>
     </zc:podaci_o_zalbi>
 </zc:zalba_na_cutanje>

@@ -124,7 +124,7 @@ public class ResenjeService {
 		FusekiWriter.updateZalbaWithStatus(true, idZalbe, type, db);
 		FusekiWriter.insertReference(id,db + "/" + idZalbe);
 		String xml = resenjeRepository.save(doc);
-		sendMail("debelidusan@gmail.com",id);
+		sendMail("milanm2998@gmail.com",id);
 		return xml;
 	}
 	

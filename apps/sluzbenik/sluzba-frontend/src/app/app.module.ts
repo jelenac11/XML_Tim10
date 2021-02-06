@@ -28,6 +28,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { IzvestajComponent } from './izvestaj/izvestaj.component';
 import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
+import { PrikazZalbaCutanjeComponent } from './prikaz-zalba-cutanje/prikaz-zalba-cutanje.component';
+import { PrikazZalbaNaOdlukuComponent } from './prikaz-zalba-na-odluku/prikaz-zalba-na-odluku.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.compo
     DokumentiComponent,
     DokumentPretragaComponent,
     IzvestajComponent,
-    IzvestajPrikazComponent
+    IzvestajPrikazComponent,
+    PrikazZalbaCutanjeComponent,
+    PrikazZalbaNaOdlukuComponent
   ],
   imports: [
     BrowserModule,

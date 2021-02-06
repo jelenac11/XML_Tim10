@@ -25,7 +25,18 @@
 				</style>
 			</head>
 			<body>
-				<div class="font_style" style="text-align:justify;position:absolute;left:50%;margin-left:-306px;top:0px;width:612px;border-style:outset;overflow:hidden;padding: 35px;">
+				<div class="font_style" style="padding-left: 50pt;
+					margin: 0 auto;
+					margin-top: 20pt;
+					margin-bottom: 20pt;
+					background-color: white;
+					padding-right: 50pt;
+					padding-top: 60pt;
+					padding-bottom: 60pt;
+					box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+					width: 50%;
+					position: sticky;
+					top: 25pt;">
 					<p style="white-space: pre-line;">Решење када је жалба основана - налаже се:
 						Бр. <xsl:value-of select="/res:odluka_poverioca/@broj_rešenja"/> <span style="float: right">Датум: <xsl:variable name="currenttime"
 							select="/res:odluka_poverioca/res:datum_rešenja" as="xs:date" /><xsl:if

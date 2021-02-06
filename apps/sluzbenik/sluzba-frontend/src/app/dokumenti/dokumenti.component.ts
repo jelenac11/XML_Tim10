@@ -47,18 +47,20 @@ export class DokumentiComponent implements OnInit {
 
   getAllSluzbenik(): void {
     this.obavestenjeService.getAllDocumentsIdByGradjanin('zahtevi/unanswered-zahtevi').subscribe(res => {
+      this.zahtevi = [];
       this.extractIds(res, this.zahtevi);
     });
     this.zahtevService.getAll('zahtevi/zalbe-zahtevi').subscribe(res => {
       let zahtevi = Xonomy.xml2js(res);
       zahtevi = zahtevi.getDescendantElements('item');
+      this.zalbeZahtevi = [];
       for (let i = 0; i < zahtevi.length; i++) {
-        
+
         const txt = zahtevi[i].getText().split('|');
         const idZalbe = txt[0];
         const idZahteva = txt[1];
         const tip = txt[2];
-        this.zalbeZahtevi.push({idZalbe, idZahteva, tip});
+        this.zalbeZahtevi.push({ idZalbe, idZahteva, tip });
       }
     });
   };
@@ -93,11 +95,17 @@ export class DokumentiComponent implements OnInit {
   };
 
   prihvatiZahtevZalbe(zahtev: any): void {
-    this.router.navigateByUrl(`/zalba-odgovor/${zahtev.tip}/${zahtev.idZahteva}/${zahtev.idZalbe}`);
+    this.router.navigateByUrl(`/zalba-odgovor/${zahtev.tip}/${zahtev.idZahteva.split("/")[4]}/${zahtev.idZalbe}`);
   };
 
   zahtev(zahtev: any): void {
-    this.router.navigateByUrl(`/zahtev/${zahtev.idZahteva}`);
+    console.log(zahtev);
+    if (zahtev.tip == 'odluka') {
+      this.router.navigateByUrl(`/zalba-na-odluku/${zahtev.idZalbe}`);
+    }
+    else {
+      this.router.navigateByUrl(`/zalba-cutanje/${zahtev.idZalbe}`);
+    }
   }
 
   private succesMessage(message: string): void {

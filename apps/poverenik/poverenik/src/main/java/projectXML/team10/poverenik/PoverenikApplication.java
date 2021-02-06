@@ -13,7 +13,7 @@ import projectXML.team10.poverenik.util.DatabaseConnector;
 public class PoverenikApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("javax.xml.bind.JAXBContext", "com.sun.xml.internal.bind.v2.ContextFactory");
+		//System.setProperty("javax.xml.bind.JAXBContext", "com.sun.xml.internal.bind.v2.ContextFactory");
 		ConfigurableApplicationContext appContext = SpringApplication.run(PoverenikApplication.class, args);
 	    
 		DatabaseConnector connector = appContext.getBean(DatabaseConnector.class);
@@ -24,7 +24,6 @@ public class PoverenikApplication {
 			connector.getOrCreateCollection("/db/sample/zalbeCutanje", 0);
 			connector.getOrCreateCollection("/db/sample/zalbeNaOdluku", 0);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

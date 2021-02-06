@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import projectXML.team10.poverenik.soap.ports.defined.IzvestajiPortImpl;
 import projectXML.team10.poverenik.soap.ports.defined.OdgovorNaZalbuPortImpl;
+import projectXML.team10.poverenik.soap.ports.defined.ZalbePortImpl;
 
 @Configuration
 public class EndpointConfig {
@@ -23,6 +24,9 @@ public class EndpointConfig {
 	@Autowired
 	private OdgovorNaZalbuPortImpl odgovorPortImpl;
 	
+	@Autowired
+	private ZalbePortImpl zalbePortImpl;
+	
 	@Bean
 	public Endpoint IzvestajEndpoint() {
 		EndpointImpl endpoint = new EndpointImpl(bus, izvestajiPortImpl);
@@ -34,6 +38,13 @@ public class EndpointConfig {
 	public Endpoint OdgovorEndpoint() {
 		EndpointImpl endpoint = new EndpointImpl(bus, odgovorPortImpl);
 		endpoint.publish("/odgovori");
+		return endpoint;
+	}
+	
+	@Bean
+	public Endpoint ZalbeEndpoint() {
+		EndpointImpl endpoint = new EndpointImpl(bus, zalbePortImpl);
+		endpoint.publish("/zalbe");
 		return endpoint;
 	}
 
