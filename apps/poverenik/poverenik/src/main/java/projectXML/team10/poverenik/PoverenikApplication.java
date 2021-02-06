@@ -13,7 +13,7 @@ import projectXML.team10.poverenik.util.DatabaseConnector;
 public class PoverenikApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("javax.xml.bind.JAXBContext", "com.sun.xml.internal.bind.v2.ContextFactory");
+		//System.setProperty("javax.xml.bind.JAXBContext", "com.sun.xml.internal.bind.v2.ContextFactory");
 		ConfigurableApplicationContext appContext = SpringApplication.run(PoverenikApplication.class, args);
 	    
 		DatabaseConnector connector = appContext.getBean(DatabaseConnector.class);

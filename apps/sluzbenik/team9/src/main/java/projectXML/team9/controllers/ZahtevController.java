@@ -263,4 +263,32 @@ public class ZahtevController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 	}
+	
+	@GetMapping(value = "/XSLTZalbaCutanje/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getZalbaCutanjeById(@PathVariable String id) {
+		return null;
+		
+	}
+	
+	@GetMapping(value = "/XSLTZalbaNaOdluku/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getZalbaNaOdlukuById(@PathVariable String id) {
+		return null;
+		
+	}
+	
+	@GetMapping(value = "/find-id-with-references-on-zalba-na-odluku/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> findIdWithReferencesOnZalbaCutanje(@PathVariable String id) {
+		return null;
+		
+	}
+	
+	@GetMapping(value = "/find-id-with-references-on-zalba-na-odluku/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> findIdWithReferencesOnZalbaNaOdluku(@PathVariable String id) {
+		return null;
+		
+	}
 }

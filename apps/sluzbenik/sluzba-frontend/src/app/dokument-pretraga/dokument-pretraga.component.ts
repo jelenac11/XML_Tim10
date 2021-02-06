@@ -127,6 +127,24 @@ export class DokumentPretragaComponent implements OnInit {
           this.documents[index].referencedBy.push(zahtevi[i].getText());
         }
       });
+    this.zahtevService.get("zahtevi/find-id-with-references-on-zalba-cutanje", this.documents[index].url.split("/")[4])
+      .subscribe(res => {
+        this.documents[index].referencedBy = [];
+        let zahtevi = Xonomy.xml2js(res);
+        zahtevi = zahtevi.getDescendantElements('');
+        for (let i = 0; i < zahtevi.length; i++) {
+          this.documents[index].referencedBy.push(zahtevi[i].getText());
+        }
+      });
+    this.zahtevService.get("zahtevi/find-id-with-references-on-zalba-na-odluku", this.documents[index].url.split("/")[4])
+      .subscribe(res => {
+        this.documents[index].referencedBy = [];
+        let zahtevi = Xonomy.xml2js(res);
+        zahtevi = zahtevi.getDescendantElements('');
+        for (let i = 0; i < zahtevi.length; i++) {
+          this.documents[index].referencedBy.push(zahtevi[i].getText());
+        }
+      });
   };
 
   open(index: number) {
