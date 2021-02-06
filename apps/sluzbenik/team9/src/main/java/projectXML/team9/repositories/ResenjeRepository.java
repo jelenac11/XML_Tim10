@@ -1,4 +1,4 @@
-package projectXML.team10.poverenik.repositories;
+package projectXML.team9.repositories;
 
 
 import java.io.StringWriter;
@@ -21,10 +21,10 @@ import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XQueryService;
 
-import projectXML.team10.poverenik.util.DatabaseConnector;
-import projectXML.team10.poverenik.util.DatabaseQueries;
-import projectXML.team10.poverenik.util.FusekiWriter;
-import projectXML.team10.poverenik.util.MetadataExtractor;
+import projectXML.team9.util.DatabaseConnector;
+import projectXML.team9.util.DatabaseQueries;
+import projectXML.team9.util.Fuseki;
+import projectXML.team9.util.MetadataExtractor;
 
 @Repository
 public class ResenjeRepository {
@@ -32,6 +32,8 @@ public class ResenjeRepository {
 	private static String collectionId = "/db/sample/odlukePoverioca";
 	private DatabaseConnector databaseConnector;
 	private MetadataExtractor metadataExtractor;
+	@Autowired
+	private Fuseki fusekiWriter;
 	
 	@Autowired
 	public ResenjeRepository(DatabaseConnector databaseConnector, MetadataExtractor metadataExtractor) {
@@ -71,7 +73,7 @@ public class ResenjeRepository {
 			col.storeResource(res);
 			
 			metadataExtractor.extractMetadata(xmlString);
-			FusekiWriter.saveRDF("/resenja");
+			fusekiWriter.saveRDF("/resenja");
 			return xmlString;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,7 +83,6 @@ public class ResenjeRepository {
 			databaseConnector.closeConnections(res, col);
 		}
 	}
-	
 	
 	private String xmlString(Document doc) throws Exception {
 		TransformerFactory transfac = TransformerFactory.newInstance();
