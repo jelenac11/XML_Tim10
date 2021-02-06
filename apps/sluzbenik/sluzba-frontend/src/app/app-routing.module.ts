@@ -89,14 +89,14 @@ const routes: Routes = [
     }
   },
   {
-    path:"zalba-cutanje/:idZalbe", component: PrikazZalbaCutanjeComponent,
+    path:"zalbe-cutanje/:id", component: PrikazZalbaCutanjeComponent,
     canActivate: [RoleGuard],
     data:{
       expectedRoles: 'sluzbenik'
     }
   },
   {
-    path:"zalba-na-odluku/:idZalbe", component: PrikazZalbaNaOdlukuComponent,
+    path:"zalbe-na-odluku/:id", component: PrikazZalbaNaOdlukuComponent,
     canActivate: [RoleGuard],
     data:{
       expectedRoles: 'sluzbenik'

@@ -7,8 +7,8 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+import projectXML.team9.soap.TStringArray;
 import projectXML.team9.soap.XSLTDocumentDTO;
-import projectXML.team9.soap.StringArray;
 
 @WebService(targetNamespace = "http://www.projekat.org/ws/zalbe", name = "ZalbePort")
 @XmlSeeAlso({projectXML.team9.soap.ObjectFactory.class})
@@ -17,7 +17,7 @@ public interface ZalbePort {
 
 	@WebMethod
     @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zalbe", partName = "return")
-    public StringArray getReferenciraneZalbeCutanje(
+    public TStringArray getReferenciraneZalbeCutanje(
         @WebParam(partName = "id", name = "id")
         String id
     );
@@ -31,7 +31,7 @@ public interface ZalbePort {
 	
 	@WebMethod
     @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zalbe", partName = "return")
-    public StringArray getReferenciraneZalbeNaOdluku(
+    public TStringArray getReferenciraneZalbeNaOdluku(
         @WebParam(partName = "id", name = "id")
         String id
     );

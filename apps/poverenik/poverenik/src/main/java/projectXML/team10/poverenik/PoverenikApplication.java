@@ -24,7 +24,6 @@ public class PoverenikApplication {
 			connector.getOrCreateCollection("/db/sample/zalbeCutanje", 0);
 			connector.getOrCreateCollection("/db/sample/zalbeNaOdluku", 0);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

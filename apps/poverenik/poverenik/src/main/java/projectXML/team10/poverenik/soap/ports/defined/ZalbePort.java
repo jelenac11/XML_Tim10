@@ -7,7 +7,7 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import projectXML.team10.poverenik.soap.StringArray;
+import projectXML.team10.poverenik.soap.TStringArray;
 import projectXML.team10.poverenik.soap.TXSLTDocument;
 
 @WebService(targetNamespace = "http://www.projekat.org/ws/zalbe", name = "ZalbePort")
@@ -17,7 +17,7 @@ public interface ZalbePort {
 
 	@WebMethod
     @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zalbe", partName = "return")
-    public StringArray getReferenciraneZalbeCutanje(
+    public TStringArray getReferenciraneZalbeCutanje(
         @WebParam(partName = "id", name = "id")
         String id
     );
@@ -31,7 +31,7 @@ public interface ZalbePort {
 	
 	@WebMethod
     @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zalbe", partName = "return")
-    public StringArray getReferenciraneZalbeNaOdluku(
+    public TStringArray getReferenciraneZalbeNaOdluku(
         @WebParam(partName = "id", name = "id")
         String id
     );

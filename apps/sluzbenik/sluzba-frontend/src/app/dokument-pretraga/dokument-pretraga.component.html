@@ -110,7 +110,7 @@
               <tr *ngFor="let url of item.referencedBy; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>
-                  <a [href]="url">{{ url }}</a>
+                  <a [href]="url.replace('4201', '4200')">{{ url }}</a>
                 </td>
               </tr>
               <tr *ngIf="item.referencedBy.length == 0">

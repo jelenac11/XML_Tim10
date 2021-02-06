@@ -131,7 +131,7 @@ export class DokumentPretragaComponent implements OnInit {
       .subscribe(res => {
         this.documents[index].referencedBy = [];
         let zahtevi = Xonomy.xml2js(res);
-        zahtevi = zahtevi.getDescendantElements('');
+        zahtevi = zahtevi.getDescendantElements('item');
         for (let i = 0; i < zahtevi.length; i++) {
           this.documents[index].referencedBy.push(zahtevi[i].getText());
         }
@@ -140,7 +140,7 @@ export class DokumentPretragaComponent implements OnInit {
       .subscribe(res => {
         this.documents[index].referencedBy = [];
         let zahtevi = Xonomy.xml2js(res);
-        zahtevi = zahtevi.getDescendantElements('');
+        zahtevi = zahtevi.getDescendantElements('item');
         for (let i = 0; i < zahtevi.length; i++) {
           this.documents[index].referencedBy.push(zahtevi[i].getText());
         }
