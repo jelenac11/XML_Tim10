@@ -1,0 +1,33 @@
+{
+  "head": {
+    "vars": [ "predicate" , "object" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/datum_resenja" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2021-02-06" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/reference" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "http://localhost:4201/zalbe-cutanje/360b7cf0-195d-47ed-8d85-70a4685606e3" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/organ_protiv_kojeg_je_zalba" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "undefined" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/podnosilac_zalbe" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "c ddd " }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/poverenik" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "Milan Marinović" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/datum_zalbe" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "undefined" }
+      }
+    ]
+  }
+}

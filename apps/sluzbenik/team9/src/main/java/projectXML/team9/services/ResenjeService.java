@@ -112,6 +112,7 @@ public class ResenjeService {
 			type = "/zalbe-na-odluku";
 			db = "/zalbe-na-odluku";
 		}
+		fusekiWriter.insertReference(id,db + "/" + idZalbe);
 		String xml = resenjeRepository.save(doc);
 		return xml;
 	}
