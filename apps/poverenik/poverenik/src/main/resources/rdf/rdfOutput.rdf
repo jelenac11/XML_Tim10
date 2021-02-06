@@ -1,0 +1,10 @@
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+<rdf:Description rdf:about="http://localhost:4201/izvestaji/af8b4b96-0b9b-4a28-8634-2de2d0fd4a9f">
+<pred:datum_kada_je_podnet xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_kada_je_podnet>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/izvestaji/af8b4b96-0b9b-4a28-8634-2de2d0fd4a9f">
+<pred:je_kreirao_izvestaj xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">noreply.kts.l9@gmail.com</pred:je_kreirao_izvestaj>
+</rdf:Description>
+</rdf:RDF>
+

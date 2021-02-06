@@ -7,8 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.StringWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.xml.bind.Marshaller;
@@ -22,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import projectXML.team9.dto.SearchDTO;
 import projectXML.team9.models.izvestaj.Izvestaj;
 import projectXML.team9.models.izvestaj.Izvestaj.DatumPodnosenja;
 import projectXML.team9.models.izvestaj.Izvestaj.Kreator;
@@ -49,6 +53,8 @@ public class IzvestajService {
 	private Fuseki fusekiWriter;
 	@Autowired
 	private GenerateHTMLAndPDF generateHTMLAndPDF;
+	@Autowired
+	private projectXML.team9.util.SearchOperations searchOperations;
 	
 	public Izvestaj create() throws Exception {
 		Korisnik current = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -131,5 +137,40 @@ public class IzvestajService {
 
 	public String getDocumentMetaDataByIdAsRDF(String izvestajId) throws FileNotFoundException {
 		return fusekiWriter.getDocumentMetaDataByIdAsRDF("izvestaji", izvestajId, "izvestaji");
+	}
+
+	public Set<String> search(SearchDTO searchDTO) throws Exception {
+		String[] metadata = searchDTO.getMetadata().split("and");
+		String[] keyWordsAndPhrase = searchDTO.getKeyWord().split("and");
+
+		ArrayList<String> searchResult = new ArrayList<String>();
+		searchResult.addAll(searchPhraseAndKeyWords(keyWordsAndPhrase));
+		searchResult.addAll(searchOperations.searchMetadata(metadata, searchDTO.getOperator(), "izvestaji"));
+
+		if (metadata.length > 0 && !metadata[0].isEmpty() && keyWordsAndPhrase.length > 0
+				&& !keyWordsAndPhrase[0].isEmpty()) {
+			return searchOperations.andOperator(2, searchResult);
+		} else {
+			return searchOperations.andOperator(1, searchResult);
+		}
+	}
+	
+	private Set<String> searchPhraseAndKeyWords(String[] keyWordsAndPhrase) throws Exception {
+		ArrayList<String> ids = new ArrayList<String>();
+		for (String word : keyWordsAndPhrase) {
+			if (word.isEmpty()) {
+				continue;
+			}
+			word = word.trim();
+			if (!word.startsWith("\"")) {
+				word = "\"" + word;
+			}
+			if (!word.endsWith("\"")) {
+				word = word + "\"";
+			}
+			ids.addAll(izvestajRepository.search(word.toLowerCase()));
+		}
+
+		return searchOperations.andOperator(keyWordsAndPhrase.length, ids);
 	}
 }

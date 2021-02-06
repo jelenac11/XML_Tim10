@@ -69,7 +69,7 @@ const routes: Routes = [
     }
   },
   {
-    path:"izvestaj/:id", component: IzvestajPrikazComponent,
+    path:"izvestaji/:id", component: IzvestajPrikazComponent,
     canActivate: [RoleGuard],
     data:{
       expectedRoles: 'sluzbenik'

@@ -402,8 +402,7 @@ public class Fuseki {
 				String.format("<%s>  <http://www.projekat.org/predicate/status>  %b", brojZahteva, status));
 		update(sparqlUpdate2);
 	}
-
-	
+  
 	public String getResenjaMetaDataByIdAsJSON(String id) throws FileNotFoundException {
 		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
 				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/resenja",

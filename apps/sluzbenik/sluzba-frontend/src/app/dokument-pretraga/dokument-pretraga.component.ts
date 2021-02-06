@@ -97,15 +97,15 @@ export class DokumentPretragaComponent implements OnInit {
 
   searchIzvestaj(form: string): void {
     this.documents = [];
-    this.izvestajService.put('izvestaji/search', form).subscribe(res => {
-      let izvestaji = Xonomy.xml2js(res);
-      izvestaji = izvestaji.getDescendantElements('item');
-      for (let i = 0; i < izvestaji.length; i++) {
+    this.zahtevService.put('izvestaji/search', form).subscribe(res => {
+      let zahtevi = Xonomy.xml2js(res);
+      zahtevi = zahtevi.getDescendantElements('zahtev');
+      for (let i = 0; i < zahtevi.length; i++) {
         this.documents.push(
           {
-            url: izvestaji[i].getText(),
+            url: zahtevi[i].getText(),
             open: false,
-            type: 'izvestaji',
+            type: 'zahtev',
             referencedBy: []
           });
       }
