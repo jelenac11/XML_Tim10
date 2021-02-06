@@ -7,6 +7,7 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
+
 @WebService(targetNamespace = "http://www.projekat.org/ws/odgovor", name = "OdgovorNaZalbuPort")
 @XmlSeeAlso({projectXML.team10.poverenik.soap.ObjectFactory.class})
 @SOAPBinding(style = SOAPBinding.Style.RPC)
