@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ResenjaService } from '../core/services/resenja.service';
+import { ResenjaXonomyService } from '../core/xonomy/resenja-xonomy.service';
 
 declare const Xonomy: any;
 

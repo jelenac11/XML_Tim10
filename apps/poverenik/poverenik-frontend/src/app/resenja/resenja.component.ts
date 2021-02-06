@@ -2,7 +2,10 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KorisnikService } from '../core/services/korisnik.service';
 import { ResenjaService } from '../core/services/resenja.service';
+import { ZalbaCutanjeService } from '../core/services/zalba-cutanje.service';
+import { ZalbaNaOdlukuService } from '../core/services/zalba-na-odluku.service';
 import { ResenjaXonomyService } from '../core/xonomy/resenja-xonomy.service';
+import { Snackbar } from '../shared/snackbars/snackbar/snackbar';
 
 declare const Xonomy: any;
 declare var require: any;
@@ -12,8 +15,23 @@ declare var require: any;
   templateUrl: './resenja.component.html',
   styleUrls: ['./resenja.component.scss']
 })
-export class ResenjaComponent implements OnInit, AfterViewInit {
+export class ResenjaComponent implements OnInit {
+
   public user = null;
+  public idZalbe;
+  public tip;
+  ime_podnosioca: string;
+  prezime_podnosioca: string;
+  naziv_podnosioca: string;
+  mesto_podnosioca: string;
+  ulica_podnosioca: string;
+  broj_podnosioca: string;
+  naziv_organa: string;
+  datum_zalbe: string;
+  zalilac: string;
+  tip_podnosioca: string;
+  tipResenja: string;
+
   constructor(
     private xonomyService: ResenjaXonomyService,
     private resenjeService: ResenjaService,
@@ -31,15 +49,15 @@ export class ResenjaComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.korisnikService.getTrenutnoUlogovan().subscribe(res => {
       const convert = require('xml-js');
-      this.user = convert.xml2js(res, {ignoreComment: true, compact: true}).korisnik;
+      this.user = convert.xml2js(res, { ignoreComment: true, compact: true }).korisnik;
     });
   }
 
-  zalbaCutanja(): void{
+  zalbaCutanja(): void {
     // tslint:disable
     this.zalbaCutanjeService.get('zalbe-cutanje', this.idZalbe).subscribe(res => {
       const convert = require('xml-js');
-      const zahtev = convert.xml2js(res, {compact: true, spaces: 4});
+      const zahtev = convert.xml2js(res, { compact: true, spaces: 4 });
       console.log(zahtev);
       this.naziv_organa = zahtev['zc:zalba_na_cutanje']['zc:organ_protiv_kojeg_je_zalba']['zc:naziv']?._text;
       this.mesto_podnosioca = zahtev['zc:zalba_na_cutanje']['zc:podaci_o_zalbi']['zc:podnosilac_zalbe']['zc:lice']['common:adresa']['common:mesto']?._text;
@@ -57,10 +75,10 @@ export class ResenjaComponent implements OnInit, AfterViewInit {
     });
   }
 
-  zalbaNaOdluku(): void{
+  zalbaNaOdluku(): void {
     this.zalbaNaOdlukuService.get('zalbe-na-odluku', this.idZalbe).subscribe(res => {
       const convert = require('xml-js');
-      const zahtev = convert.xml2js(res, {compact: true, spaces: 4});
+      const zahtev = convert.xml2js(res, { compact: true, spaces: 4 });
       this.naziv_organa = zahtev['zno:zalba_na_odluku']['zno:podaci_o_resenju']['zno:naziv_organa']._text;
       this.mesto_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:adresa']['common:mesto']._text;
       this.ulica_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:adresa']['common:ulica']._text;
@@ -77,7 +95,7 @@ export class ResenjaComponent implements OnInit, AfterViewInit {
     });
   }
 
-  kreirajXML(): void{
+  kreirajXML(): void {
     const element = document.getElementById('resenje');
     const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
     <res:odluka_poverioca
