@@ -1,22 +1,8 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<<<<<<< Updated upstream
 <rdf:Description rdf:about="http://localhost:4200/izvestaji/fd45a7b3-862a-4ba4-8538-224b16e0e495">
 <pred:datum_kada_je_podnet xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_kada_je_podnet>
 </rdf:Description>
 <rdf:Description rdf:about="http://localhost:4200/izvestaji/fd45a7b3-862a-4ba4-8538-224b16e0e495">
 <pred:je_kreirao_izvestaj xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">noreply.kts.l9@gmail.com</pred:je_kreirao_izvestaj>
-=======
-<rdf:Description rdf:about="http://localhost:4200/zahtev/13d19e4f-ceb5-4b55-80c0-c3309ce21af0">
-<pred:organ_od_kojeg_se_trazi xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">a</pred:organ_od_kojeg_se_trazi>
-</rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zahtev/13d19e4f-ceb5-4b55-80c0-c3309ce21af0">
-<pred:podnosilac_zahteva xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:podnosilac_zahteva>
-</rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zahtev/13d19e4f-ceb5-4b55-80c0-c3309ce21af0">
-<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">a</pred:mesto_podnosenja>
-</rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/zahtev/13d19e4f-ceb5-4b55-80c0-c3309ce21af0">
-<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-02-06T17:03:23</pred:datum_podnosenja>
->>>>>>> Stashed changes
 </rdf:Description>
 </rdf:RDF>
