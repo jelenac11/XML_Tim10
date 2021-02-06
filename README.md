@@ -16,3 +16,4 @@ Pokretanje projekta
 - Bekend za sluzbenika se pokrece na portu 8081, a za poverenika na portu 8082.
 - Baze su na portu 8080. 
 - Za fuseki baze, potrebno je napraviti dataset-ove, i to u bazi sluzbenika SLuzbenikDataset, a u bazi poverenika PoverenikDataset.
+ LINK DO VIDEA: https://www.youtube.com/watch?v=LmYyvMhHqR0
