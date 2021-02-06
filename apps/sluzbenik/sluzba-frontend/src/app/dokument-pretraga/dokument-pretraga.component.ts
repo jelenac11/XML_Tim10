@@ -82,7 +82,7 @@ export class DokumentPretragaComponent implements OnInit {
     this.documents = [];
     this.resenjaService.put('resenje/search', form).subscribe(res => {
       let resenja = Xonomy.xml2js(res);
-      resenja = resenja.getDescendantElements('item');
+      resenja = resenja.getDescendantElements('zahtev');
       for (let i = 0; i < resenja.length; i++) {
         this.documents.push(
           {
