@@ -430,6 +430,14 @@ public class FusekiWriter {
 
 		return path;
 	}
+	
+	public ArrayList<String> searchMetadata(String data, String graph) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.format("http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/%s", graph),
+				String.format("?s ?p ?o . filter (LCASE(str(?o))=%s)", data));
+
+		return getDocumentsId(sparqlQuery);
+	}
 
 
 	public static void insertReference(String id, String idZalbe) throws IOException {

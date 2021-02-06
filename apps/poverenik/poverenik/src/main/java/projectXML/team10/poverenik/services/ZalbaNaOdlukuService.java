@@ -50,6 +50,7 @@ public class ZalbaNaOdlukuService {
 	@Autowired
 	private MarshallerFactory marshallerFactory;
 	private TaskScheduler scheduler;
+
 	@Autowired
 	private SearchOperations searchOperations;
 	
