@@ -173,6 +173,7 @@ public class ZalbaCutanjeService {
 
 	public ArrayList<String> getAllowed() {
 		return fusekiWriter.readAllAllowed("/zalbe-na-cutanje");
+	}
 
 	public Set<String> search(SearchDTO searchDTO) throws Exception {
 		String[] metadata = searchDTO.getMetadata().split("and");

@@ -168,6 +168,7 @@ public class ZalbaNaOdlukuService {
 
 	public ArrayList<String> getAllowed() {
 		return fusekiWriter.readAllAllowed("/zalbe-na-odluku");
+	}
 	
 	public Set<String> search(SearchDTO searchDTO) throws Exception {
 		String[] metadata = searchDTO.getMetadata().split("and");
