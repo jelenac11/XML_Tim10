@@ -1,0 +1,17 @@
+{
+  "head": {
+    "vars": [ "predicate" , "object" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/je_kreirao_izvestaj" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "noreply.kts.l9@gmail.com" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/datum_kada_je_podnet" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2021-02-06" }
+      }
+    ]
+  }
+}

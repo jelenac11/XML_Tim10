@@ -3,6 +3,8 @@ package projectXML.team9.controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
+import java.util.ArrayList;
+
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
@@ -14,8 +16,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import projectXML.team9.dto.DocumentsIDDTO;
+import projectXML.team9.dto.SearchDTO;
 import projectXML.team9.models.izvestaj.Izvestaj;
 import projectXML.team9.services.IzvestajService;
 import projectXML.team9.soap.XSLTDocumentDTO;
@@ -144,6 +151,20 @@ public class IzvestajController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@PutMapping(value = "/search")
+	@CrossOrigin
+	public ResponseEntity<?> search(@RequestBody SearchDTO searchDTO) {
+		try {
+			DocumentsIDDTO iddto = new DocumentsIDDTO();
+			iddto.setZahtev(new ArrayList<String>());
+			iddto.getZahtev().addAll(izvestajService.search(searchDTO));
+
+			return ResponseEntity.ok(iddto);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
 	}
 
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<iz:izvestaj xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:pred="http://www.projekat.org/predicate/" xmlns:iz="http://www.projekat.org/izvestaj" id="http://localhost:4201/izvestaji/858c6be8-255c-49fa-a31b-b5c1ba51751c" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/izvestaji/858c6be8-255c-49fa-a31b-b5c1ba51751c">
+<iz:izvestaj xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:pred="http://www.projekat.org/predicate/" xmlns:iz="http://www.projekat.org/izvestaj" id="http://localhost:4201/izvestaji/af8b4b96-0b9b-4a28-8634-2de2d0fd4a9f" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/izvestaji/af8b4b96-0b9b-4a28-8634-2de2d0fd4a9f">
     <iz:podaci_o_zahtevima>
-        <iz:broj_usvojenih_zahteva>0</iz:broj_usvojenih_zahteva>
+        <iz:broj_usvojenih_zahteva>1</iz:broj_usvojenih_zahteva>
         <iz:broj_odbijenih_zahteva>1</iz:broj_odbijenih_zahteva>
-        <iz:broj_zahteva_na_koje_nije_odgovoreno>2</iz:broj_zahteva_na_koje_nije_odgovoreno>
+        <iz:broj_zahteva_na_koje_nije_odgovoreno>1</iz:broj_zahteva_na_koje_nije_odgovoreno>
     </iz:podaci_o_zahtevima>
     <iz:podaci_o_zalbama>
         <iz:zalbe_na_cutanje>
-            <iz:nije_postupio>0</iz:nije_postupio>
+            <iz:nije_postupio>2</iz:nije_postupio>
             <iz:nije_postupio_u_celosti>0</iz:nije_postupio_u_celosti>
             <iz:nije_postupio_u_zakonskom_roku>0</iz:nije_postupio_u_zakonskom_roku>
         </iz:zalbe_na_cutanje>

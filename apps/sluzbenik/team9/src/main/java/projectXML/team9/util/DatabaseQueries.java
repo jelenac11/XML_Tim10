@@ -15,12 +15,16 @@ public class DatabaseQueries {
 			+ "return $x";
 	public static final String SEARCH_ZAHTEV = "xquery version \"3.1\";\n"
 			+ "declare default element namespace \"http://www.projekat.org/zahtev\";\n"
-			+ "for $x in collection(\"/db/sample/zahtevi\")\n"
-			+ "where $x//*/text()[contains(lower-case(.) ,%s)]\n" + "return data($x/*/@id)";
-	
+			+ "for $x in collection(\"/db/sample/zahtevi\")\n" + "where $x//*/text()[contains(lower-case(.) ,%s)]\n"
+			+ "return data($x/*/@id)";
+
 	public static final String SEARCH_RESENJA = "xquery version \"3.1\";\n"
 			+ "declare default element namespace \"http://www.projekat.org/resenje\";\n"
 			+ "for $x in collection(\"/db/sample/odlukePoverioca\")\n"
 			+ "where $x//*/text()[contains(lower-case(.) ,%s)]\n" + "return data($x/*/@id)";
 
+	public static final String SEARCH_IZVESTAJI = "xquery version \"3.1\";\n"
+			+ "declare default element namespace \"http://www.projekat.org/izvestaj\";\n"
+			+ "for $x in collection(\"/db/sample/izvestaji\")\n" + "where $x//*/text()[contains(lower-case(.) ,%s)]\n"
+			+ "return data($x/*/@id)";
 }

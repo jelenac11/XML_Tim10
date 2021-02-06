@@ -115,7 +115,7 @@ public class ResenjeRepository {
 			ResourceIterator resourceIterator = resourceSet.getIterator();
 			while (resourceIterator.hasMoreResources()) {
 				xmlResource = (XMLResource) resourceIterator.nextResource();
-				ids.add((String) xmlResource.getContent());
+				ids.add("http://localhost:4201/resenja/"+(String) xmlResource.getContent());
 			}
 			return ids;
 		} catch (Exception e) {

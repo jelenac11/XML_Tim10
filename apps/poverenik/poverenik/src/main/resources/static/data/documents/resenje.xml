@@ -1,39 +1,39 @@
-<res:odluka_poverioca xmlns:res="http://www.projekat.org/resenje" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" about="http://localhost:4201/resenja/0f75e44c9777" broj_rešenja="0f75e44c9777" broj_žalbe="004e497d-92f3-44f9-bfee-1d6715146b63" tip_rešenja="žalba_na_odluku" vocab="http://www.projekat.org/predicate" xsi:schemaLocation="http://www.projekat.org/resenje">
+<res:odluka_poverioca xmlns:res="http://www.projekat.org/resenje" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" about="http://localhost:4201/resenja/99e9cf3829b7" broj_rešenja="99e9cf3829b7" broj_žalbe="20f31bc9-48e1-4b34-b99d-7b3a48ad6d5f" tip_rešenja="žalba_ćutanja" vocab="http://www.projekat.org/predicate" xsi:schemaLocation="http://www.projekat.org/resenje">
    <res:opis_žalbe>
-      <res:žalioc content="zalba zalba" property="pred:podnosilac_zalbe">
+      <res:žalioc content="nesto nesto" property="pred:podnosilac_zalbe">
          <common:adresa>
-            <common:mesto xml:space="preserve">zalba</common:mesto>
-            <common:ulica xml:space="preserve">zalba</common:ulica>
-            <common:broj xml:space="preserve">zalba</common:broj>
+            <common:mesto xml:space="preserve">nesto</common:mesto>
+            <common:ulica xml:space="preserve">nesto</common:ulica>
+            <common:broj xml:space="preserve">nesto</common:broj>
          </common:adresa>
-         <common:ime xml:space="preserve">zalba</common:ime>
-         <common:prezime xml:space="preserve">zalba</common:prezime>
+         <common:ime xml:space="preserve">nesto</common:ime>
+         <common:prezime xml:space="preserve">nesto</common:prezime>
       </res:žalioc>
-      <res:organ content="zalba" property="pred:organ_protiv_kojeg_je_zalba">
-         <res:naziv xml:space="preserve">zalba</res:naziv>
+      <res:organ content="undefined" property="pred:organ_protiv_kojeg_je_zalba">
+         <res:naziv xml:space="preserve">undefined</res:naziv>
          <res:adresa>
             <common:mesto xml:space="preserve">Beograd</common:mesto>
             <common:ulica xml:space="preserve">Beogradska ulica</common:ulica>
             <common:broj xml:space="preserve">12</common:broj>
          </res:adresa>
       </res:organ>
-      <res:datum_žalbe datatype="xs:date" property="pred:datum_zalbe" xml:space="preserve">2021-02-06</res:datum_žalbe>
+      <res:datum_žalbe datatype="xs:date" property="pred:datum_zalbe" xml:space="preserve">undefined</res:datum_žalbe>
       <res:ceo_opis>
-         <res:paragraf xml:space="preserve">zalba</res:paragraf>
+         <res:paragraf xml:space="preserve">nesto</res:paragraf>
       </res:ceo_opis>
    </res:opis_žalbe>
    <res:rešenja>
-      <res:paragraf xml:space="preserve">zalba</res:paragraf>
+      <res:paragraf xml:space="preserve">nesto</res:paragraf>
    </res:rešenja>
    <res:obrazloženje>
       <res:opis>
-         <res:paragraf xml:space="preserve">zalba</res:paragraf>
+         <res:paragraf xml:space="preserve">nesto</res:paragraf>
       </res:opis>
       <res:razlog>
-         <res:paragraf xml:space="preserve">zalba</res:paragraf>
+         <res:paragraf xml:space="preserve">nesto</res:paragraf>
       </res:razlog>
       <res:konačno_rešenje>
-         <res:paragraf xml:space="preserve">zalba</res:paragraf>
+         <res:paragraf xml:space="preserve">nesto</res:paragraf>
       </res:konačno_rešenje>
    </res:obrazloženje>
    <res:uputstvo/>

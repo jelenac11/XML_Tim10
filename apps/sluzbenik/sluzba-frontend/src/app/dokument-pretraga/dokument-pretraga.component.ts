@@ -79,7 +79,20 @@ export class DokumentPretragaComponent implements OnInit {
   };
 
   searchIzvestaj(form: string): void {
-    console.log('izvestaj');
+    this.documents = [];
+    this.zahtevService.put('izvestaji/search', form).subscribe(res => {
+      let zahtevi = Xonomy.xml2js(res);
+      zahtevi = zahtevi.getDescendantElements('zahtev');
+      for (let i = 0; i < zahtevi.length; i++) {
+        this.documents.push(
+          {
+            url: zahtevi[i].getText(),
+            open: false,
+            type: 'zahtev',
+            referencedBy: []
+          });
+      }
+    });
   };
 
   onSubmit(): void {
