@@ -87,6 +87,23 @@ const routes: Routes = [
     }
   },
   {
+<<<<<<< Updated upstream
+=======
+    path:"zalbe-cutanje/:id", component: PrikazZalbaCutanjeComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
+    path:"zalbe-na-odluku/:id", component: PrikazZalbaNaOdlukuComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
+>>>>>>> Stashed changes
     path: '**',
     component: PageNotFoundComponent 
   }

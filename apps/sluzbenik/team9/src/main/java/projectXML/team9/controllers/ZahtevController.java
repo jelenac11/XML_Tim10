@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team9.dto.DocumentsIDDTO;
 import projectXML.team9.dto.SearchDTO;
-import projectXML.team9.soap.StringArray;
+import projectXML.team9.soap.TStringArray;
 import projectXML.team9.soap.XSLTDocumentDTO;
 import projectXML.team9.soap.ports.used.OdgovorNaZalbuPort;
 import projectXML.team9.soap.ports.used.ZalbePort;
@@ -270,7 +270,7 @@ public class ZahtevController {
 	@CrossOrigin
 	public ResponseEntity<?> getZalbaCutanjeById(@PathVariable String id) {
 		try {
-			URL wsdl = new URL("http://localhost:8081/ws/zalbe?wsdl");
+			URL wsdl = new URL("http://localhost:8082/ws/zalbe?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/zalbe", "ZalbeService");
 	    	QName portName = new QName("http://www.projekat.org/ws/zalbe", "ZalbaPort");
 	    	
@@ -288,7 +288,7 @@ public class ZahtevController {
 	@CrossOrigin
 	public ResponseEntity<?> getZalbaNaOdlukuById(@PathVariable String id) {
 		try {
-			URL wsdl = new URL("http://localhost:8081/ws/zalbe?wsdl");
+			URL wsdl = new URL("http://localhost:8082/ws/zalbe?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/zalbe", "ZalbeService");
 	    	QName portName = new QName("http://www.projekat.org/ws/zalbe", "ZalbaPort");
 	    	
@@ -306,14 +306,14 @@ public class ZahtevController {
 	@CrossOrigin
 	public ResponseEntity<?> findIdWithReferencesOnZalbaCutanje(@PathVariable String id) {
 		try {
-			URL wsdl = new URL("http://localhost:8081/ws/zalbe?wsdl");
+			URL wsdl = new URL("http://localhost:8082/ws/zalbe?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/zalbe", "ZalbeService");
 	    	QName portName = new QName("http://www.projekat.org/ws/zalbe", "ZalbaPort");
 	    	
 	    	Service service = Service.create(wsdl, serviceName);
 	        ZalbePort zalbePort = service.getPort(portName, ZalbePort.class);
 
-	        StringArray items = zalbePort.getReferenciraneZalbeCutanje(id);
+	        TStringArray items = zalbePort.getReferenciraneZalbeCutanje(id);
 			return ResponseEntity.ok(items);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -325,14 +325,15 @@ public class ZahtevController {
 	@CrossOrigin
 	public ResponseEntity<?> findIdWithReferencesOnZalbaNaOdluku(@PathVariable String id) {
 		try {
-			URL wsdl = new URL("http://localhost:8081/ws/zalbe?wsdl");
+			URL wsdl = new URL("http://localhost:8082/ws/zalbe?wsdl");
 	    	QName serviceName = new QName("http://www.projekat.org/ws/zalbe", "ZalbeService");
 	    	QName portName = new QName("http://www.projekat.org/ws/zalbe", "ZalbaPort");
 	    	
 	    	Service service = Service.create(wsdl, serviceName);
 	        ZalbePort zalbePort = service.getPort(portName, ZalbePort.class);
 
-	        StringArray items = zalbePort.getReferenciraneZalbeNaOdluku(id);
+	        TStringArray items = zalbePort.getReferenciraneZalbeNaOdluku(id);
+	        System.out.println(items.getItem().size());
 			return ResponseEntity.ok(items);
 		} catch (Exception e) {
 			e.printStackTrace();

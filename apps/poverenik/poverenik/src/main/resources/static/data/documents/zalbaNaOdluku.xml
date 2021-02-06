@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<zno:zalba_na_odluku xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:zno="http://www.projekat.org/zalba_na_odluku" broj_zalbe="6d12ecdd6513-2/2020" broj_zahteva="ca6655da-4338-40f5-a93c-e045de1ffa98" broj_resenja="22" id="http://localhost:4201/zalbe-na-odluku/df8c2a96-af3b-407f-a86e-6d12ecdd6513" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/zalbe-na-odluku/df8c2a96-af3b-407f-a86e-6d12ecdd6513">
+<zno:zalba_na_odluku xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:zno="http://www.projekat.org/zalba_na_odluku" broj_zalbe="f21a20f9c929-2/2020" broj_zahteva="http://localhost:4200/zahtev/13d19e4f-ceb5-4b55-80c0-c3309ce21af0" broj_resenja="22" id="http://localhost:4201/zalbe-na-odluku/274f904d-a0d5-4c70-82f0-f21a20f9c929" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/zalbe-na-odluku/274f904d-a0d5-4c70-82f0-f21a20f9c929" property="pred:zahtev_na_koji_se_odnosi_zalba" content="http://localhost:4200/zahtev/13d19e4f-ceb5-4b55-80c0-c3309ce21af0">
     <zno:adresa_poverenika>
         <common:mesto>Београд</common:mesto>
         <common:ulica>Булевар краља Александра</common:ulica>
@@ -7,31 +7,31 @@
     </zno:adresa_poverenika>
     <zno:zalilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
         <common:adresa>
-            <common:mesto>x</common:mesto>
-            <common:ulica>x</common:ulica>
-            <common:broj>x</common:broj>
+            <common:mesto>a</common:mesto>
+            <common:ulica>a</common:ulica>
+            <common:broj>a</common:broj>
         </common:adresa>
-        <common:naziv>x</common:naziv>
+        <common:naziv>a</common:naziv>
     </zno:zalilac>
     <zno:podaci_o_resenju>
-        <zno:godina>222</zno:godina>
-        <zno:naziv_organa property="pred:organ_koji_je_doneo_odluku" datatype="xs:string">x</zno:naziv_organa>
+        <zno:godina>2000</zno:godina>
+        <zno:naziv_organa property="pred:organ_koji_je_doneo_odluku" datatype="xs:string">a</zno:naziv_organa>
     </zno:podaci_o_resenju>
-    <zno:datum_zahteva>2021-02-05</zno:datum_zahteva>
+    <zno:datum_zahteva>2021-02-06</zno:datum_zahteva>
     <zno:podaci_o_zalbi>
         <zno:podnosilac_zalbe property="pred:podnosilac_zalbe" content="milanm2998@gmail.com">
             <zno:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
                 <common:adresa>
-                    <common:mesto>s</common:mesto>
-                    <common:ulica>s</common:ulica>
-                    <common:broj>s</common:broj>
+                    <common:mesto>f</common:mesto>
+                    <common:ulica>f</common:ulica>
+                    <common:broj>f</common:broj>
                 </common:adresa>
-                <common:naziv>s</common:naziv>
+                <common:naziv>f</common:naziv>
             </zno:lice>
-            <zno:drugi_podaci_za_kontakt>s</zno:drugi_podaci_za_kontakt>
+            <zno:drugi_podaci_za_kontakt>f</zno:drugi_podaci_za_kontakt>
         </zno:podnosilac_zalbe>
-        <zno:datum_podnosenja property="pred:datum_podnosenja" datatype="xs:date">2021-02-05</zno:datum_podnosenja>
-        <zno:mesto property="pred:mesto_podnosenja" datatype="xs:string">s</zno:mesto>
-        <zno:opis>s</zno:opis>
+        <zno:datum_podnosenja property="pred:datum_podnosenja" datatype="xs:date">2021-02-06</zno:datum_podnosenja>
+        <zno:mesto property="pred:mesto_podnosenja" datatype="xs:string">f</zno:mesto>
+        <zno:opis>f</zno:opis>
     </zno:podaci_o_zalbi>
 </zno:zalba_na_odluku>

@@ -451,6 +451,7 @@ public class FusekiWriter {
 						propertiesConfiguration.getFusekiConfiguration().getDataset(),
 						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
 				String.format("?s ?p %s", object));
+		System.out.println(sparqlQuery);
 		return getDocumentsId(sparqlQuery);
 	}
 

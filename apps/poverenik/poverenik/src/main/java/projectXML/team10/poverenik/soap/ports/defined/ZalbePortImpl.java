@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import projectXML.team10.poverenik.services.ZalbaCutanjeService;
 import projectXML.team10.poverenik.services.ZalbaNaOdlukuService;
-import projectXML.team10.poverenik.soap.StringArray;
+import projectXML.team10.poverenik.soap.TStringArray;
 import projectXML.team10.poverenik.soap.TXSLTDocument;
 
 @javax.jws.WebService(
@@ -26,9 +26,9 @@ public class ZalbePortImpl implements ZalbePort {
 	private ZalbaNaOdlukuService zalbaNaOdlukuService;
 
 	@Override
-	public StringArray getReferenciraneZalbeCutanje(String id) {
-		ArrayList<String> referencirane = zalbaCutanjeService.readAllZalbaCutanjeReferencedByZahtev("http://localhost:4200/zahtev/" + id);
-		return new StringArray(referencirane);
+	public TStringArray getReferenciraneZalbeCutanje(String id) {
+		ArrayList<String> referencirane = zalbaCutanjeService.readAllZalbaCutanjeReferencedByZahtev(id);
+		return new TStringArray(referencirane);
 	}
 
 	@Override
@@ -45,9 +45,10 @@ public class ZalbePortImpl implements ZalbePort {
 	}
 
 	@Override
-	public StringArray getReferenciraneZalbeNaOdluku(String id) {
-		ArrayList<String> referencirane = zalbaNaOdlukuService.readAllZalbaNaOdlukuReferencedByZahtev("http://localhost:4200/zahtev/" + id);
-		return new StringArray(referencirane);
+	public TStringArray getReferenciraneZalbeNaOdluku(String id) {
+		ArrayList<String> referencirane = zalbaNaOdlukuService.readAllZalbaNaOdlukuReferencedByZahtev(id);
+		System.out.println(referencirane.size());
+		return new TStringArray(referencirane);
 	}
 
 	@Override

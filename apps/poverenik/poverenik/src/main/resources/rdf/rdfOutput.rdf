@@ -1,8 +1,25 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
+<<<<<<< Updated upstream
 <rdf:Description rdf:about="http://localhost:4201/izvestaji/fd45a7b3-862a-4ba4-8538-224b16e0e495">
 <pred:datum_kada_je_podnet xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_kada_je_podnet>
 </rdf:Description>
 <rdf:Description rdf:about="http://localhost:4201/izvestaji/fd45a7b3-862a-4ba4-8538-224b16e0e495">
 <pred:je_kreirao_izvestaj xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">noreply.kts.l9@gmail.com</pred:je_kreirao_izvestaj>
+=======
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/135bd90c-8833-48ac-ab16-00d8ac396daa">
+<pred:zahtev_na_koji_se_odnosi_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://localhost:4200/zahtev/d6904c1b-5023-4693-aaee-9a604e8b6129</pred:zahtev_na_koji_se_odnosi_zalba>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/135bd90c-8833-48ac-ab16-00d8ac396daa">
+<pred:organ_protiv_kojeg_je_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">s</pred:organ_protiv_kojeg_je_zalba>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/135bd90c-8833-48ac-ab16-00d8ac396daa">
+<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:podnosilac_zalbe>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/135bd90c-8833-48ac-ab16-00d8ac396daa">
+<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_podnosenja>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/135bd90c-8833-48ac-ab16-00d8ac396daa">
+<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d</pred:mesto_podnosenja>
+>>>>>>> Stashed changes
 </rdf:Description>
 </rdf:RDF>

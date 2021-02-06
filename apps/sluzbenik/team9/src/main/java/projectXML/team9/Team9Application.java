@@ -24,7 +24,6 @@ public class Team9Application {
 			connector.getOrCreateCollection("/db/sample/obavestenja", 0);
 			connector.getOrCreateCollection("/db/sample/izvestaji", 0);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | XMLDBException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
