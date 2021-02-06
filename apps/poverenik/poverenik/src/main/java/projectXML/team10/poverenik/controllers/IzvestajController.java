@@ -12,9 +12,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import projectXML.team10.poverenik.dto.DocumentsIDDTO;
+import projectXML.team10.poverenik.dto.SearchDTO;
 import projectXML.team10.poverenik.dto.XSLTDocumentDTO;
 import projectXML.team10.poverenik.models.izvestaj.Izvestaj;
 import projectXML.team10.poverenik.services.IzvestajService;
@@ -133,6 +137,32 @@ public class IzvestajController {
 			ArrayList<String> idsIzvestaji = izvestajService.getAll();
 			izvestaji.setItem(idsIzvestaji);
 			return ResponseEntity.ok(izvestaji);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping(value = "all")
+	@CrossOrigin
+	public ResponseEntity<?> getAllIzvestaji() {
+		DocumentsIDDTO iddto = new DocumentsIDDTO();
+		try {
+			iddto.setItem(izvestajService.getAllIzvestaji());
+			return ResponseEntity.ok(iddto);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "/search")
+	@CrossOrigin
+	public ResponseEntity<?> search(@RequestBody SearchDTO searchDTO) {
+		try {
+			DocumentsIDDTO iddto = new DocumentsIDDTO();
+			iddto.setItem(new ArrayList<String>());
+			iddto.getItem().addAll(izvestajService.search(searchDTO));
+
+			return ResponseEntity.ok(iddto);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}

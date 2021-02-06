@@ -1,0 +1,126 @@
+<div class="m-3">
+  <button mat-raised-button [matMenuTriggerFor]="menu" color="submit">
+    <mat-icon>search</mat-icon>Pretraga
+  </button>
+  <div>
+    <mat-menu #menu="matMenu">
+      <form (click)="$event.stopPropagation()" [formGroup]="searchForm">
+        <p>
+          <mat-form-field appearance="outline" class="m-2">
+            <mat-label>Tip</mat-label>
+            <mat-select
+              [(ngModel)]="selected"
+              id="select_type"
+              formControlName="type"
+            >
+              <mat-option value="zalbeCutanje">Žalbe na ćutanje</mat-option>
+              <mat-option value="zalbeNaOdluku">Žalbe na odluku</mat-option>
+              <mat-option value="resenja">Rešenje</mat-option>
+              <mat-option value="godisnjiIzvestaj">Godišnji izveštaj</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="m-2">
+            <mat-label>Ključne reči i fraze</mat-label>
+            <input
+              id="document_key_word_input"
+              type="text"
+              formControlName="keyWord"
+              [errorStateMatcher]="matcher"
+              matInput
+            />
+          </mat-form-field>
+        </p>
+        <div class="d-flex flex-row">
+          <p>
+            <mat-form-field appearance="outline" class="m-2">
+              <mat-label>Metapodaci</mat-label>
+              <input
+                id="document_metadata_input"
+                type="text"
+                formControlName="metadata"
+                [errorStateMatcher]="matcher"
+                matInput
+              />
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field
+              class="operation_select_field"
+              appearance="outline"
+              class="m-2"
+            >
+              <mat-label>Operator</mat-label>
+              <mat-select
+                [(ngModel)]="selectedOperator"
+                id="select_operator"
+                formControlName="operator"
+              >
+                <mat-option value="and">AND</mat-option>
+                <mat-option value="or">OR</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="d-flex">
+          <button
+            class="ml-1 mr-auto"
+            mat-raised-button
+            color="reset"
+            (click)="reset()"
+          >
+            Poništi
+          </button>
+          <button
+            mat-raised-button
+            color="submit"
+            class="mr-1"
+            (click)="onSubmit()"
+          >
+            Pretraži
+          </button>
+        </div>
+      </form>
+    </mat-menu>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <mat-accordion class="col-10">
+      <mat-expansion-panel
+        *ngFor="let item of documents; let i = index"
+        (opened)="open(i)"
+        (closed)="close(i)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <a [href]="item.url">{{ item.url }}</a>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="table-wrap m-3">
+          <table class="table table-hover border">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Dokumenti koji referenciraju ovaj dokument</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let url of item.referencedBy; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>
+                  <a [href]="url">{{ url }}</a>
+                </td>
+              </tr>
+              <tr *ngIf="item.referencedBy.length == 0">
+                <td colspan="4">
+                  Nema dokumenata koji referenciraju ovaj dokument.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

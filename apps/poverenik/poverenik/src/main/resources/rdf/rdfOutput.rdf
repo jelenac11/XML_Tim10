@@ -1,14 +1,17 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/6fcf2923-f7b9-4cde-a020-7bdff952861f">
-<pred:organ_koji_je_doneo_odluku xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">x</pred:organ_koji_je_doneo_odluku>
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/4fdf4ed1-e207-4598-940d-b650375a70b6">
+<pred:zahtev_na_koji_se_odnosi_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://localhost:4200/zahtev/8789e10a-4559-423f-ae99-9a6e4e5ffcc1</pred:zahtev_na_koji_se_odnosi_zalba>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/6fcf2923-f7b9-4cde-a020-7bdff952861f">
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/4fdf4ed1-e207-4598-940d-b650375a70b6">
+<pred:organ_protiv_kojeg_je_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">d</pred:organ_protiv_kojeg_je_zalba>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/4fdf4ed1-e207-4598-940d-b650375a70b6">
 <pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:podnosilac_zalbe>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/6fcf2923-f7b9-4cde-a020-7bdff952861f">
-<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-05</pred:datum_podnosenja>
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/4fdf4ed1-e207-4598-940d-b650375a70b6">
+<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_podnosenja>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/6fcf2923-f7b9-4cde-a020-7bdff952861f">
-<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">s</pred:mesto_podnosenja>
+<rdf:Description rdf:about="http://localhost:4201/zalbe-cutanje/4fdf4ed1-e207-4598-940d-b650375a70b6">
+<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f</pred:mesto_podnosenja>
 </rdf:Description>
 </rdf:RDF>

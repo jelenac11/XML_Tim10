@@ -56,7 +56,7 @@
                                             <xs:attribute fixed="pred:datum_zalbe" name="property"
                                                 type="xs:string"/>
                                             <xs:attribute fixed="xs:date" name="datatype"
-                                                type="xs:string"/>
+                                                type="xs:string" use="required"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
@@ -82,7 +82,8 @@
                             <xs:extension base="xs:date">
                                 <xs:attribute fixed="pred:datum_resenja" name="property"
                                     type="xs:string"/>
-                                <xs:attribute fixed="xs:date" name="datatype" type="xs:string"/>
+                                <xs:attribute fixed="xs:date" name="datatype" type="xs:string"
+                                    use="required"/>
                             </xs:extension>
                         </xs:simpleContent>
                     </xs:complexType>
@@ -105,8 +106,9 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute name="broj_rešenja" type="xs:string"> </xs:attribute>
-            <xs:attribute name="broj_žalbe" type="xs:string"/>
+            <xs:attribute name="broj_rešenja" type="xs:positiveInteger"> </xs:attribute>
+            <xs:attribute name="broj_žalbe" type="xs:positiveInteger"/>
+            <xs:attribute name="broj_zahteva" type="xs:positiveInteger"/>
             <xs:attribute name="tip_rešenja" type="xs:string"/>
             <xs:attribute fixed="http://www.projekat.org/predicate" name="vocab">
                 <xs:simpleType>

@@ -14,6 +14,7 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
 
   id: string;
   zalba: any;
+  referencesOn: string[] = [];
 
   constructor(
     private xonomyService: ZalbaCutanjeXonomyService,
@@ -29,6 +30,7 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
       this.zalba = res;
       this.zalbaHTML.nativeElement.innerHTML = this.xonomyService.convertZalbaXSLT(this.zalba);
     });
+    this.getReferenced();
   }
 
   downloadPDF(): void {
@@ -78,4 +80,18 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   }
+
+  getReferenced(): void {
+    this.zalbaCutanjeService.get("zalbe-cutanje/references-on", this.id)
+      .subscribe(res => {
+        this.referencesOn = [];
+        let zahtevi = Xonomy.xml2js(res);
+        zahtevi = zahtevi.getDescendantElements('item');
+        for (let i = 0; i < zahtevi.length; i++) {
+          this.referencesOn.push(zahtevi[i].getText().split("^^")[0]);
+        }
+        console.log(this.referencesOn);
+      });
+  };
+
 }

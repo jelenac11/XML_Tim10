@@ -122,6 +122,9 @@
             <xs:attribute name="vocab" type="xs:string"
                 fixed="http://www.projekat.org/predicate"/>
             <xs:attribute name="about" type="xs:string"/>
+             <xs:attribute fixed="pred:zahtev_na_koji_se_odnosi_zalba" form="unqualified"
+                name="property" type="xs:string" use="optional"/>
+            <xs:attribute name="content" type="xs:anyURI" use="optional"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

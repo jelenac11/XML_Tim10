@@ -1,51 +1,83 @@
-<res:odluka_poverioca xmlns:res="http://www.projekat.org/resenje" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" about="http://localhost:4200/resenja/e2e6f02ead78" broj_rešenja="e2e6f02ead78" broj_žalbe="1" tip_rešenja="žalba_ćutanja" vocab="http://www.projekat.org/predicate" xsi:schemaLocation="http://www.projekat.org/resenje">
+<res:odluka_poverioca xmlns:res="http://www.projekat.org/resenje" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" about="http://www.projekat.org/resenje/1114234" broj_rešenja="1114234" broj_zahteva="123123" broj_žalbe="1235" tip_rešenja="žalba_cutanja" vocab="http://www.projekat.org/predicate" xsi:schemaLocation="http://www.projekat.org/resenje src/main/resources/static/schemas/resenje.xsd">
    <res:opis_žalbe>
-      <res:žalioc content="undefined undefined" property="pred:podnosilac_zalbe">
+      <res:žalioc content="AA" property="pred:podnosilac_zalbe">
          <common:adresa>
-            <common:mesto>undefined</common:mesto>
-            <common:ulica>undefined</common:ulica>
-            <common:broj>undefined</common:broj>
+            <common:mesto>RNGlovac</common:mesto>
+            <common:ulica>RNG ulica</common:ulica>
+            <common:broj>2</common:broj>
          </common:adresa>
-         <common:ime>undefined</common:ime>
-         <common:prezime>undefined</common:prezime>
+         <common:ime>A</common:ime>
+         <common:prezime>A</common:prezime>
       </res:žalioc>
-      <res:organ content="undefined" property="pred:organ_protiv_kojeg_je_zalba">
-         <res:naziv>undefined</res:naziv>
+      <res:organ content="Ucitaljski fakultet u Prizrenu" property="pred:organ_protiv_kojeg_je_zalba">
+         <res:naziv>Учитељског факултета у Призрену</res:naziv>
          <res:adresa>
-            <common:mesto>Beograd</common:mesto>
-            <common:ulica>Beogradska ulica</common:ulica>
-            <common:broj>12</common:broj>
+            <common:mesto>Лепосавићу,</common:mesto>
+            <common:ulica>Немањина</common:ulica>
+            <common:broj>064123123</common:broj>
          </res:adresa>
       </res:organ>
-      <res:datum_žalbe datatype="xs:date" property="pred:datum_zalbe">2020-03-12</res:datum_žalbe>
+      <res:datum_žalbe datatype="xs:date" property="pred:datum_zalbe">2020-04-16</res:datum_žalbe>
       <res:ceo_opis>
-         <res:paragraf>RNG
-</res:paragraf>
+         <res:paragraf>
+                Повереник за информације од јавног значаја и заштиту података о личности, у поступку по алби коју је изјавио AA, због непоступања Учитељског факултета у Призрену са привременим седиштем у Лепосавићу, ул. Немањина бб, по његовом захтеву од <res:datum>2020-04-16</res:datum> године за приступ информацијама од јавног значаја, на основу <res:zakon>члана 35. став 1. тачка 5. Закона о слободном приступу информацијама од јавног значаја („Сл. гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10)</res:zakon>, а у вези са <res:zakon>чланом 4. тачка 22. Закона о заштити података о личности („Сл. гласник РС“, број 87/18)</res:zakon>, <res:zakon>као и члана 23. и члана 24. став 4. Закона о слободном приступу информацијама од јавног значаја</res:zakon> и <res:zakon>члана 173. став 2. Закона о општем управном поступку („Сл. гласник РС“, бр. 18/2016 и 95/2018-аутентично тумачење)</res:zakon>, доноси
+		    </res:paragraf>
       </res:ceo_opis>
    </res:opis_žalbe>
    <res:rešenja>
-      <res:paragraf>RNG</res:paragraf>
+      <res:paragraf>
+            Налаже се Учитељском факултету у Призрену са привременим седиштем у Лепосавићу, да без одлагања, а најкасније у року од пет дана од дана пријема овог решења, обавести АА, да ли поседује тражене информације односно документ у коме су исте садржане, и то: Уговор о раду који је као последњи потписан између тог Факултета и ББ, те да му, уколико такав документ поседује достави копију истог електронском поштом на адресу … или поштом, с тим што ће пре достављања заштитити и учинити недоступним податке о личности којима би се повредило право на приватност лица на које се информације односе, као што су: адреса становања, лични матични број грађана, име оца, радни стаж, просечна оцена студирања и сл. уколико су такви подаци садржани у траженом документу.
+        </res:paragraf>
+      <res:paragraf>
+            О извршењу решења Учитељски факултет у Призрену са привременим седиштем у Лепосавићу, ће обавестити Повереника у року од седам дана од пријема овог решења.
+        </res:paragraf>
    </res:rešenja>
    <res:obrazloženje>
       <res:opis>
-         <res:paragraf>RNG</res:paragraf>
+         <res:paragraf>
+                АА, као тражилац информација, изјавио је дана <res:datum>2020-04-14</res:datum> године жалбу Поверенику против обавештења Министарства за рад, запошљавање, борачка и социјална питања Републике Србије у Београду број: 07-00-00019/2020-01 од <res:datum>2020-04-01</res:datum> године, због недобијања тражених информација по његовом захтеву за приступ информацијама од јавног значаја поднетом <res:datum>2020-03-12</res:datum> године. У жалби је навео да му предметним обавештењем орган власти није доставио тражене информације, па предлаже да Повереник уважи његову жалбу и наложи да му се доставе тражене информације. У прилогу је доставио копије захтева и ожалбеног обавештења.
+			</res:paragraf>
+         <res:paragraf>
+                Поступајући по жалби Повереник је дана <res:datum>2020-04-22</res:datum> године исту упутио на изјашњење Министарству за рад, запошљавање, борачка и социјална питања Републике Србије у Београду, као органу власти у смислу <res:zakon>члана 3. Закона о слободном приступу информацијама од јавног значаја</res:zakon>.
+			</res:paragraf>
+         <res:paragraf>
+                У одговору на жалбу од <res:datum>2020-05-18</res:datum> године, орган власти је остао при наводима из ожалбеног обавештења, истичући да је жалиоцу доставио информације којима је располагао у тренутку подношења захтева за приступ информацијама од јавног значаја.
+			</res:paragraf>
       </res:opis>
       <res:razlog>
-         <res:paragraf>RNG</res:paragraf>
+         <res:paragraf>
+                Увидом у списе предмета утврђено је да је АА, поднео Министарству за рад, запошљавање, борачка и социјална питања Републике Србије у Београду, захтев од <res:datum>2020-03-12</res:datum> године за приступ информацијама од јавног значаја, којим је у вези са страдањем радника, који је марта 2020. године погинуо приликом извођења радова на простору Београдског зоо врта, тражио достављање одређених информација, и то: име и презиме односно иницијале погинулог радника, назив правног субјекта за кога је наведени радник радио, да ли је радник био пријављен, да ли је извршен инспекцијски надзор, као и копије докумената о извршеном инспекцијском надзору.
+			</res:paragraf>
+         <res:paragraf>
+                Даље је, увидом у списе предмета утврђено да је одговором број: 07-00-00019/2020-01 од <res:datum>2020-04-01</res:datum> године, орган власти обавестио жалиоца да је до смртне повреде на раду запосленог ББ која се догодила, дана <res:datum>2020-03-05</res:datum> године око 20,30 часова, у кругу Зоолошког врта у Београду, Мали Калемегдан бр. 8, дошло након обрушавања оплате потпорног зида, дужине око 5 метара и висине 3 метра, као и да је МУП, Полицијска управа Стари Град, дана <res:datum>2020-05-03</res:datum> године око 21,30 часова пријавило инспекцији рада наведену смртну повреду на раду, а да је инспектор рада Одељења инспекције рада у Граду Београду изашао на лице места, дана <res:datum>2020-03-06</res:datum> године у 7,30 часова, да је надзор поводом наведене смртне повреде на раду у току и да ће након утврђивања свих релевантних чињеница везаних за дешавање смртне повреде на раду, инспектор рада предузети мере из домена своје надлежности, те да, како је поступак инспекцијског надзора у току, то се достављају наведене информације са којима орган располаже у том тренутку.
+			</res:paragraf>
+         <res:paragraf>
+            <res:zakon>Чланом 16. став 1. Закона о слободном приступу информацијама од јавног значаја</res:zakon> прописано је да је орган власти дужан да без одлагања, а најкасније у року од 15 дана од дана пријема захтева, тражиоца обавести о поседовању информације, стави му на увид документ који садржи тражену информацију, односно изда му или упути копију тог документа.
+			</res:paragraf>
+         <res:paragraf>
+                Имајући у виду да је орган власти, пре изјављене жалбе, поступио по захтеву жалиоца, тако што га је одговором број: 07-00-00019/2020-01 од <res:datum>2020-04-01</res:datum> године, обавестио о иницијалима погинулог радника, као и да је инспектор рада Одељења инспекције рада у Граду Београду, дана <res:datum>2020-03-06</res:datum> године у 7,30 часова, изашао на лице места, након пријаве Полицијске управе Стари Град, те да је инспекцијски надзор поводом наведене смртне повреде на раду у току односно да му доставља информације којима у времену поступања по предметном захтеву, располаже, што је поновио и у одговору на жалбу, Повереник налази да је орган власти поступио по поднетом захтеву жалиоца у складу са цитираном одредбом <res:zakon>члана 16. став 1. Закона о слободном приступу информацијама од јавног значаја</res:zakon>, те да је жалба неоснована.
+			</res:paragraf>
+         <res:paragraf>
+				Овим се не дира у право жалиоца да информације које орган власти није поседовао у времену поступања по захтеву који је предмет ове управне ствари, жалилац од органа власти затражи новим захтевом за приступ информацијама од јавног значаја, имајући у виду одређени протек времена.
+			</res:paragraf>
       </res:razlog>
       <res:konačno_rešenje>
-         <res:paragraf>RNG</res:paragraf>
+         <res:paragraf>
+			    Учитељски факултет у Призрену са привременим седиштем у Лепосавићу, је дужан да о извршењу решења из става I диспозитива, обавести Повереника у складу са <res:zakon>чланом 24. став 3. Закона о слободном приступу информацијама од јавног значаја</res:zakon>.
+			</res:paragraf>
       </res:konačno_rešenje>
    </res:obrazloženje>
-   <res:uputstvo>RNG</res:uputstvo>
-   <res:datum_rešenja datatype="xs:date" property="pred:datum_resenja">2021-02-03</res:datum_rešenja>
-   <res:poverenik content="Milan Marinović" property="pred:poverenik">
+   <res:uputstvo>
+        Против овог решења није допуштена жалба већ се, у складу са Законом о управним споровима, може покренути управни спор тужбом Управном суду у Београду, у року од 30 дана од дана пријема решења. Такса на тужбу износи 390,00 динара.
+    </res:uputstvo>
+   <res:datum_rešenja datatype="xs:date" property="pred:datum_resenja">2020-06-09</res:datum_rešenja>
+   <res:poverenik content="Milan Marinovic" property="pred:poverenik">
       <common:adresa>
-         <common:mesto>Beograd</common:mesto>
-         <common:ulica>Beogradska 12</common:ulica>
-         <common:broj>12</common:broj>
+         <common:mesto>RNGlovac</common:mesto>
+         <common:ulica>RNG ulica</common:ulica>
+         <common:broj>2</common:broj>
       </common:adresa>
       <common:ime>Milan</common:ime>
-      <common:prezime>Marinović</common:prezime>
+      <common:prezime>Marinovic</common:prezime>
    </res:poverenik>
 </res:odluka_poverioca>

@@ -190,6 +190,10 @@ public class ZalbaNaCutanje {
     protected String vocab;
     @XmlAttribute(name = "about", required = false)
     protected String about;
+    @XmlAttribute(name = "property", required = false)
+	protected String property;
+	@XmlAttribute(name = "content", required = false)
+	protected String content;
 
     /**
      * Gets the value of the adresaPoverenika property.
@@ -410,7 +414,44 @@ public class ZalbaNaCutanje {
     public void setAbout(String value) {
         this.about = value;
     }
+    
+    public String getProperty() {
+		if (property == null) {
+			return "pred:zahtev_na_koji_se_odnosi_zalba";
+		} else {
+			return property;
+		}
+	}
 
+	/**
+	 * Sets the value of the property property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setProperty() {
+		this.property = "pred:zahtev_na_koji_se_odnosi_zalba";
+	}
+
+	/**
+	 * Gets the value of the datatype property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * Sets the value of the datatype property.
+	 * 
+	 * @param value allowed object is {@link String }
+	 * 
+	 */
+	public void setContent(String value) {
+		this.content = value;
+	}
 
     /**
      * &lt;p&gt;Java class for anonymous complex type.

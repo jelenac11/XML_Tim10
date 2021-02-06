@@ -9,6 +9,7 @@ import java.io.StringWriter;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.xml.bind.Marshaller;
 
@@ -16,6 +17,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import projectXML.team10.poverenik.dto.SearchDTO;
 import projectXML.team10.poverenik.models.izvestaj.Izvestaj;
 import projectXML.team10.poverenik.models.izvestaj.Izvestaj.PodaciOZalbama;
 import projectXML.team10.poverenik.models.izvestaj.TIzvestaj;
@@ -24,6 +26,7 @@ import projectXML.team10.poverenik.util.FusekiWriter;
 import projectXML.team10.poverenik.util.GenerateHTMLAndPDF;
 import projectXML.team10.poverenik.util.MarshallerFactory;
 import projectXML.team10.poverenik.util.MetadataExtractor;
+import projectXML.team10.poverenik.util.SearchOperations;
 
 @Service
 public class IzvestajService {
@@ -42,6 +45,8 @@ public class IzvestajService {
 	private GenerateHTMLAndPDF generateHTMLAndPDF;
 	@Autowired
 	private MarshallerFactory marshallerFactory;
+	@Autowired
+	private SearchOperations searchOperations;
 
 	public Izvestaj getIzvestaj(String id) throws Exception {
 		Izvestaj izvestaj = izvestajRepository.getById(id);
@@ -102,6 +107,45 @@ public class IzvestajService {
 
 	public String getDocumentMetaDataByIdAsRDF(String izvestajId) throws FileNotFoundException {
 		return fusekiWriter.getDocumentMetaDataByIdAsRDF("izvestaji", izvestajId, "izvestaji");
+	}
+	
+	public Set<String> search(SearchDTO searchDTO) throws Exception {
+		String[] metadata = searchDTO.getMetadata().split("and");
+		String[] keyWordsAndPhrase = searchDTO.getKeyWord().split("and");
+
+		ArrayList<String> searchResult = new ArrayList<String>();
+		searchResult.addAll(searchPhraseAndKeyWords(keyWordsAndPhrase));
+		searchResult.addAll(searchOperations.searchMetadata(metadata, searchDTO.getOperator(), "izvestaji"));
+
+		if (metadata.length > 0 && !metadata[0].isEmpty() && keyWordsAndPhrase.length > 0
+				&& !keyWordsAndPhrase[0].isEmpty()) {
+			return searchOperations.andOperator(2, searchResult);
+		} else {
+			return searchOperations.andOperator(1, searchResult);
+		}
+	}
+	
+	private Set<String> searchPhraseAndKeyWords(String[] keyWordsAndPhrase) throws Exception {
+		ArrayList<String> ids = new ArrayList<String>();
+		for (String word : keyWordsAndPhrase) {
+			if (word.isEmpty()) {
+				continue;
+			}
+			word = word.trim();
+			if (!word.startsWith("\"")) {
+				word = "\"" + word;
+			}
+			if (!word.endsWith("\"")) {
+				word = word + "\"";
+			}
+			ids.addAll(izvestajRepository.search(word.toLowerCase()));
+		}
+
+		return searchOperations.andOperator(keyWordsAndPhrase.length, ids);
+	}
+	
+	public ArrayList<String> getAllIzvestaji() {
+		return fusekiWriter.readAllDocuments("/izvestaji");
 	}
 }
 
