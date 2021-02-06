@@ -21,6 +21,11 @@ export class IzvestajService {
     return this.http.get(`${environment.api_url}izvestaji`, { responseType: 'text' });
   }
 
+  put(path: string, body: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
+    return this.http.put(`${environment.api_url}${path}`, body, { headers: headers, responseType: 'text' });
+  }
+
   getXSLDocument(id: string): Observable<any> {
     console.log(`${environment.api_url}izvestaji/XSLTDocument/${id}`);
     return this.http.get(`${environment.api_url}izvestaji/XSLTDocument/${id}`, { responseType: 'text' });
