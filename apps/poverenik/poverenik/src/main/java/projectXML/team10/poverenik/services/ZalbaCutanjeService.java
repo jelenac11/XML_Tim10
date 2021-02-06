@@ -93,7 +93,7 @@ public class ZalbaCutanjeService {
 		    @Override
 		    public void run() {
 		    	try {
-		    		FusekiWriter.updateData(true, zalba.getId(),"/zalbe-na-cutanje", "/zalbe-cutanje", "odgovorena");
+		    		FusekiWriter.updateData(true, zalba.getId().split("/")[4],"/zalbe-na-cutanje", "/zalbe-cutanje", "odgovorena");
 		    	} catch (IOException e) {
 					e.printStackTrace();
 				}

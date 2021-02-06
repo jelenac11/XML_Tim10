@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="7ee6780f2138-2/2020" id_zahteva="http://localhost:4200/zahtev/795344d0-a31e-403d-9ada-00776ff60063" id="http://localhost:4200/obavestenje/9fe1b8be-5305-479a-8885-7ee6780f2138" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/9fe1b8be-5305-479a-8885-7ee6780f2138" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="http://localhost:4200/zahtev/795344d0-a31e-403d-9ada-00776ff60063">
+<ob:obavestenje xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:ob="http://www.projekat.org/obavestenje" broj_obavestenja="9c68a9cd8166-2/2020" id_zahteva="http://localhost:4200/zahtev/7f437dd8-9671-4ae8-9ef7-432192ccaa29" id="http://localhost:4200/obavestenje/0baffc8d-8b18-449a-8326-9c68a9cd8166" vocab="http://www.projekat.org/predicate" about="http://localhost:4200/obavestenje/0baffc8d-8b18-449a-8326-9c68a9cd8166" property="pred:zahtev_na_koji_se_odnosi_obavestenje" content="http://localhost:4200/zahtev/7f437dd8-9671-4ae8-9ef7-432192ccaa29">
     <ob:informacije_o_obavestenju>
-        <ob:organ property="pred:kreator_obavestenja" content="Nesto">
+        <ob:organ property="pred:kreator_obavestenja" content="nesto">
             <common:adresa>
-                <common:mesto>Nesto</common:mesto>
-                <common:ulica>Nesto</common:ulica>
-                <common:broj>Nesto</common:broj>
+                <common:mesto>nesto</common:mesto>
+                <common:ulica>nesto</common:ulica>
+                <common:broj>nesto</common:broj>
             </common:adresa>
-            <common:naziv>Nesto</common:naziv>
+            <common:naziv>nesto</common:naziv>
         </ob:organ>
         <ob:trazilac property="pred:trazilac_informacija" content="milanm2998@gmail.com">
             <ob:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
                 <common:adresa>
-                    <common:mesto>Nesto</common:mesto>
-                    <common:ulica>Nesto</common:ulica>
-                    <common:broj>Nesto</common:broj>
+                    <common:mesto>nesto</common:mesto>
+                    <common:ulica>nesto</common:ulica>
+                    <common:broj>nesto</common:broj>
                 </common:adresa>
-                <common:ime>Nesto</common:ime>
-                <common:prezime>Nesto</common:prezime>
+                <common:ime>nesto</common:ime>
+                <common:prezime>nesto</common:prezime>
             </ob:lice>
         </ob:trazilac>
         <ob:datum_obavestenja property="pred:datum_donosenja" datatype="xs:date">2021-02-06</ob:datum_obavestenja>
     </ob:informacije_o_obavestenju>
     <ob:zahtev>
         <ob:datum_trazenja_informacija>2021-02-06</ob:datum_trazenja_informacija>
-        <ob:opis_trazene_informacije>Nesto</ob:opis_trazene_informacije>
+        <ob:opis_trazene_informacije>nesto</ob:opis_trazene_informacije>
     </ob:zahtev>
     <ob:odgovor_na_zahtev>
         <ob:zahtevi>

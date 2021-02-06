@@ -156,14 +156,14 @@
             <a
               *ngIf="item.tip === 'odluka'; else elseBlock"
               role="button"
-              [href]="'http://localhost:4200/zalba-na-odluku/' + item.idZalbe"
-              >http://localhost:4200/zalba-na-odluku/{{ item.idZalbe }}</a
+              [href]="'http://localhost:4200/zalbe-na-odluku/' + item.idZalbe"
+              >http://localhost:4200/zalbe-na-odluku/{{ item.idZalbe }}</a
             >
             <ng-template #elseBlock
               ><a
                 role="button"
-                [href]="'http://localhost:4200/zalba-cutanje/' + item.idZalbe"
-                >http://localhost:4200/zalba-cutanje/{{ item.idZalbe }}</a
+                [href]="'http://localhost:4200/zalbe-cutanje/' + item.idZalbe"
+                >http://localhost:4200/zalbe-cutanje/{{ item.idZalbe }}</a
               ></ng-template
             >
           </td>

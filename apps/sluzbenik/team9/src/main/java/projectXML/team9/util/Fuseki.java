@@ -383,6 +383,24 @@ public class Fuseki {
 				String.format("<%s>  <http://www.projekat.org/predicate/podneta_zalba>  %b", id, b));
 		update(sparqlUpdate);
 	}
+
+	public void updateZahtevWithStatusWithZalba(boolean status, String brojZahteva) {
+		String sparqlUpdate = SparqlUtil.deleteData(
+				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/zahtevi",
+        		String.format("<%s>  <http://www.projekat.org/predicate/status> false", brojZahteva));
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+
+		// UpdateProcessor sends update request to a remote SPARQL update service.
+		UpdateProcessor processor = UpdateExecutionFactory.createRemote(update,
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getUpdate()));
+		processor.execute();
+		
+		String sparqlUpdate2 = SparqlUtil.insertData(
+				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/zahtevi",
+				String.format("<%s>  <http://www.projekat.org/predicate/status>  %b", brojZahteva, status));
+		update(sparqlUpdate2);
 	
 	public String getResenjaMetaDataByIdAsJSON(String id) throws FileNotFoundException {
 		String sparqlQuery = SparqlUtil.selectPredicateObjectData(

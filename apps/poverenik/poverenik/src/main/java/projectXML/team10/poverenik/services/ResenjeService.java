@@ -220,5 +220,17 @@ public class ResenjeService {
 	public ArrayList<String> getAllResenja() {
 		return fusekiWriter.readAllDocuments("/resenja");
 	}
+	
+	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithThisIdZalbaCutanje(String id) {
+		String object = String
+				.format("\"http://localhost:4201/zalbe-cutanje/%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>", id);
+		return fusekiWriter.getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(object, "/resenja");
+	}
+	
+	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithThisIdZalbaCNaOdluku(String id) {
+		String object = String
+				.format("\"http://localhost:4201/zalbe-na-odluku/%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>", id);
+		return fusekiWriter.getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(object, "/resenja");
+	}
 
 }

@@ -35,6 +35,7 @@ public class SparqlUtil {
 
 	private static final String SELECT_OBJECT_GRAPH_TEMPLATE = "SELECT ?o FROM <%1$s> WHERE { %2$s }";
 
+	private static final String DELETE_TEMPLATE = "DELETE DATA { GRAPH <%1$s> { %2$s } }";
 	/* Plain text RDF serialization format */
 	public static final String NTRIPLES = "N-TRIPLES";
 
@@ -76,6 +77,10 @@ public class SparqlUtil {
 
 	public static String selectPredicateObjectData(String graphURI, String sparqlCondition) {
 		return String.format(SELECT_OBJECT_PREDICATE_NAMED_GRAPH_TEMPLATE, graphURI, sparqlCondition);
+	}
+
+	public static String deleteData(String string, String format) {
+		return String.format(DELETE_TEMPLATE, string, format);
 	}
 
 }
