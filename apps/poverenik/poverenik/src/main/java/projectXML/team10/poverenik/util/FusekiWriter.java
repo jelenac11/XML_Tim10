@@ -262,7 +262,7 @@ public class FusekiWriter {
 		OutputStream output = new FileOutputStream(path);
 
 		Model describeModel = queryExecution.execDescribe();
-		describeModel.write(output, "TURTLE");
+		describeModel.write(output);
 
 		return path;
 	}
