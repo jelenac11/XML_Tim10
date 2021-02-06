@@ -26,9 +26,10 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zalbaCutanjeService.get('zalbe-cutanje', this.id).subscribe(res => {
-      this.zalba = res;
-      this.zalbaHTML.nativeElement.innerHTML = this.xonomyService.convertZalbaXSLT(this.zalba);
+    this.zalbaCutanjeService.get('zalbe-cutanje/XSLTDocument', this.id).subscribe(res => {
+      let something = Xonomy.xml2js(res);
+      something = something.children[0].getText();
+      this.zalbaHTML.nativeElement.innerHTML = something;
     });
     this.getReferenced();
   }

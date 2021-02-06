@@ -81,7 +81,7 @@ const routes: Routes = [
     path: "zahtev/:id", component: ZahtevPrikazComponent,
     canActivate: [RoleGuard],
     data: {
-        expectedRoles: 'gradjanin'
+        expectedRoles: 'gradjanin|poverenik'
     }
   },
   {

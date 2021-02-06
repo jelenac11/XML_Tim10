@@ -1,0 +1,18 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.projekat.org/predicate/">
+  <rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/d73974d9-7323-4c20-a6b7-ac8dd6663264">
+    <j.0:zahtev_na_koji_se_odnosi_zalba rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal"
+    >http://localhost:4200/zahtev/d96170c6-f286-45e1-94ad-bc64ca1dd026</j.0:zahtev_na_koji_se_odnosi_zalba>
+    <j.0:status rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:status>
+    <j.0:podnosilac_zalbe rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal"
+    >milanm2998@gmail.com</j.0:podnosilac_zalbe>
+    <j.0:organ_koji_je_doneo_odluku>s</j.0:organ_koji_je_doneo_odluku>
+    <j.0:odgovorena rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+    >false</j.0:odgovorena>
+    <j.0:mesto_podnosenja>m</j.0:mesto_podnosenja>
+    <j.0:datum_podnosenja rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2021-02-06</j.0:datum_podnosenja>
+  </rdf:Description>
+</rdf:RDF>

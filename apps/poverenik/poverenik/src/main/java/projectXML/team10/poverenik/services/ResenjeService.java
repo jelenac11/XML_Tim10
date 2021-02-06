@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
@@ -15,11 +16,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import projectXML.team10.poverenik.dto.SearchDTO;
 import projectXML.team10.poverenik.repositories.ResenjeRepository;
 import projectXML.team10.poverenik.util.AmazonSESSample;
 import projectXML.team10.poverenik.util.DOMParser;
 import projectXML.team10.poverenik.util.FusekiWriter;
 import projectXML.team10.poverenik.util.GenerateHTMLAndPDF;
+import projectXML.team10.poverenik.util.SearchOperations;
 
 @Service
 public class ResenjeService {
@@ -35,6 +38,9 @@ public class ResenjeService {
 	
 	@Autowired
 	private AmazonSESSample amazonSESSample;
+	
+	@Autowired
+	private SearchOperations searchOperations;
 	
 	public String getOdlukaPoverioca(String id) throws Exception {
 		return resenjeRepository.getById(id);
@@ -174,6 +180,45 @@ public class ResenjeService {
 
 	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String id) {
 		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(id);
+	}
+	
+	public Set<String> search(SearchDTO searchDTO) throws Exception {
+		String[] metadata = searchDTO.getMetadata().split("and");
+		String[] keyWordsAndPhrase = searchDTO.getKeyWord().split("and");
+
+		ArrayList<String> searchResult = new ArrayList<String>();
+		searchResult.addAll(searchPhraseAndKeyWords(keyWordsAndPhrase));
+		searchResult.addAll(searchOperations.searchMetadata(metadata, searchDTO.getOperator(), "resenja"));
+
+		if (metadata.length > 0 && !metadata[0].isEmpty() && keyWordsAndPhrase.length > 0
+				&& !keyWordsAndPhrase[0].isEmpty()) {
+			return searchOperations.andOperator(2, searchResult);
+		} else {
+			return searchOperations.andOperator(1, searchResult);
+		}
+	}
+	
+	private Set<String> searchPhraseAndKeyWords(String[] keyWordsAndPhrase) throws Exception {
+		ArrayList<String> ids = new ArrayList<String>();
+		for (String word : keyWordsAndPhrase) {
+			if (word.isEmpty()) {
+				continue;
+			}
+			word = word.trim();
+			if (!word.startsWith("\"")) {
+				word = "\"" + word;
+			}
+			if (!word.endsWith("\"")) {
+				word = word + "\"";
+			}
+			ids.addAll(resenjeRepository.search(word.toLowerCase()));
+		}
+
+		return searchOperations.andOperator(keyWordsAndPhrase.length, ids);
+	}
+	
+	public ArrayList<String> getAllResenja() {
+		return fusekiWriter.readAllDocuments("/resenja");
 	}
 
 }

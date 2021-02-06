@@ -30,20 +30,6 @@
                                 </xs:simpleType>
                             </xs:element>
                             <xs:element name="datum" type="xs:date"/>
-                            <xs:element name="zahtevi">
-                                <xs:complexType>
-                                    <xs:sequence>
-                                        <xs:element minOccurs="0" name="uvid" fixed="uvid"
-                                            type="xs:string"/>
-                                        <xs:element minOccurs="0" name="kopija" fixed="kopija"
-                                            type="xs:string"/>
-                                        <xs:element minOccurs="0" name="dostava" fixed="dostava"
-                                            type="xs:string"/>
-                                        <xs:element minOccurs="0" name="posedovanje"
-                                            fixed="posedovanje" type="xs:string"/>
-                                    </xs:sequence>
-                                </xs:complexType>
-                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

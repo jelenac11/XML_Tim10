@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ZalbaNaOdlukuService } from '../core/services/zalba-na-odluku.service';
 import { ZalbaNaOdlukuXonomyService } from '../core/xonomy/zalba-na-odluku-xonomy.service';
 import { Snackbar } from '../shared/snackbars/snackbar/snackbar';
@@ -31,6 +31,7 @@ export class ZalbaNaOdlukuComponent implements OnInit {
     private xonomyService: ZalbaNaOdlukuXonomyService,
     private zalbaNaOdlukuService: ZalbaNaOdlukuService,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: Snackbar
   ) { }
 
@@ -68,7 +69,7 @@ export class ZalbaNaOdlukuComponent implements OnInit {
   kreirajXML(): void {
     let element = document.getElementById("zalbaNaOdluku");
     let xmlString = `<?xml version='1.0' encoding='UTF-8'?>
-      <zno:zalba_na_odluku xmlns:common="http://www.projekat.org/common" xmlns:zno="http://www.projekat.org/zalba_na_odluku" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" broj_resenja="" broj_zahteva="${this.id}"><zno:adresa_poverenika><common:mesto>Београд</common:mesto><common:ulica>Булевар краља Александра</common:ulica><common:broj>15</common:broj></zno:adresa_poverenika><zno:zalilac xsi:type="common:${this.tip_podnosioca}"><common:adresa><common:mesto>${this.mesto_podnosioca}</common:mesto><common:ulica>${this.ulica_podnosioca}</common:ulica><common:broj>${this.broj_podnosioca}</common:broj></common:adresa>${this.zalilac}</zno:zalilac><zno:podaci_o_resenju><zno:godina></zno:godina><zno:naziv_organa>${this.naziv_organa}</zno:naziv_organa></zno:podaci_o_resenju><zno:datum_zahteva>${this.datum_zahteva}</zno:datum_zahteva><zno:podaci_o_zalbi><zno:podnosilac_zalbe><zno:lice><common:adresa><common:mesto></common:mesto><common:ulica></common:ulica><common:broj></common:broj></common:adresa></zno:lice><zno:drugi_podaci_za_kontakt></zno:drugi_podaci_za_kontakt></zno:podnosilac_zalbe><zno:datum_podnosenja>${new Date().toISOString().slice(0, 10)}</zno:datum_podnosenja><zno:mesto></zno:mesto><zno:opis></zno:opis></zno:podaci_o_zalbi></zno:zalba_na_odluku>`;
+      <zno:zalba_na_odluku xmlns:common="http://www.projekat.org/common" xmlns:zno="http://www.projekat.org/zalba_na_odluku" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" broj_resenja="" broj_zahteva="${this.id}"><zno:adresa_poverenika><common:mesto>Београд</common:mesto><common:ulica>Булевар краља Александра</common:ulica><common:broj>15</common:broj></zno:adresa_poverenika><zno:zalilac xsi:type="common:${this.tip_podnosioca}"><common:adresa><common:mesto>${this.mesto_podnosioca}</common:mesto><common:ulica>${this.ulica_podnosioca}</common:ulica><common:broj>${this.broj_podnosioca}</common:broj></common:adresa>${this.zalilac}</zno:zalilac><zno:podaci_o_resenju><zno:godina></zno:godina><zno:naziv_organa>${this.naziv_organa}</zno:naziv_organa></zno:podaci_o_resenju><zno:datum_zahteva>${this.datum_zahteva}</zno:datum_zahteva><zno:podaci_o_zalbi><zno:opis></zno:opis><zno:podnosilac_zalbe><zno:lice><common:adresa><common:mesto></common:mesto><common:ulica></common:ulica><common:broj></common:broj></common:adresa></zno:lice><zno:drugi_podaci_za_kontakt></zno:drugi_podaci_za_kontakt></zno:podnosilac_zalbe><zno:datum_podnosenja>${new Date().toISOString().slice(0, 10)}</zno:datum_podnosenja><zno:mesto></zno:mesto></zno:podaci_o_zalbi></zno:zalba_na_odluku>`;
     Xonomy.render(xmlString, element, {
       validate: this.xonomyService.zalbaNaOdlukuSpecification.validate,
       elements: this.xonomyService.zalbaNaOdlukuSpecification.elements,
@@ -85,7 +86,7 @@ export class ZalbaNaOdlukuComponent implements OnInit {
     this.zalbaNaOdlukuService.post("zalbe-na-odluku", Xonomy.harvest())
       .subscribe(res => {
         this.snackBar.success("Uspešno ste poslali žalbu na odluku.");
-        this.kreirajXML();
+        this.router.navigateByUrl(`/`);
       },
       error => {
         this.snackBar.error("Dokument nije validan.");

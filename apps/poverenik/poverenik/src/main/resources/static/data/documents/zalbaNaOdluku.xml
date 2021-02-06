@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<<<<<<< Updated upstream
 <zno:zalba_na_odluku xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:zno="http://www.projekat.org/zalba_na_odluku" broj_zalbe="6d12ecdd6513-2/2020" broj_zahteva="ca6655da-4338-40f5-a93c-e045de1ffa98" broj_resenja="22" id="http://localhost:4201/zalbe-na-odluku/df8c2a96-af3b-407f-a86e-6d12ecdd6513" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/zalbe-na-odluku/df8c2a96-af3b-407f-a86e-6d12ecdd6513">
+=======
+<zno:zalba_na_odluku xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:zno="http://www.projekat.org/zalba_na_odluku" broj_zalbe="ac8dd6663264-2/2020" broj_zahteva="http://localhost:4200/zahtev/d96170c6-f286-45e1-94ad-bc64ca1dd026" broj_resenja="2" id="http://localhost:4201/zalbe-na-odluku/d73974d9-7323-4c20-a6b7-ac8dd6663264" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/zalbe-na-odluku/d73974d9-7323-4c20-a6b7-ac8dd6663264" property="pred:zahtev_na_koji_se_odnosi_zalba" content="http://localhost:4200/zahtev/d96170c6-f286-45e1-94ad-bc64ca1dd026">
+>>>>>>> Stashed changes
     <zno:adresa_poverenika>
         <common:mesto>Београд</common:mesto>
         <common:ulica>Булевар краља Александра</common:ulica>
@@ -7,6 +11,7 @@
     </zno:adresa_poverenika>
     <zno:zalilac xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
         <common:adresa>
+<<<<<<< Updated upstream
             <common:mesto>x</common:mesto>
             <common:ulica>x</common:ulica>
             <common:broj>x</common:broj>
@@ -16,12 +21,25 @@
     <zno:podaci_o_resenju>
         <zno:godina>222</zno:godina>
         <zno:naziv_organa property="pred:organ_koji_je_doneo_odluku" datatype="xs:string">x</zno:naziv_organa>
+=======
+            <common:mesto>s</common:mesto>
+            <common:ulica>s</common:ulica>
+            <common:broj>s</common:broj>
+        </common:adresa>
+        <common:naziv>s</common:naziv>
+    </zno:zalilac>
+    <zno:podaci_o_resenju>
+        <zno:godina>2000</zno:godina>
+        <zno:naziv_organa property="pred:organ_koji_je_doneo_odluku" datatype="xs:string">s</zno:naziv_organa>
+>>>>>>> Stashed changes
     </zno:podaci_o_resenju>
     <zno:datum_zahteva>2021-02-05</zno:datum_zahteva>
     <zno:podaci_o_zalbi>
+        <zno:opis>mm</zno:opis>
         <zno:podnosilac_zalbe property="pred:podnosilac_zalbe" content="milanm2998@gmail.com">
             <zno:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
                 <common:adresa>
+<<<<<<< Updated upstream
                     <common:mesto>s</common:mesto>
                     <common:ulica>s</common:ulica>
                     <common:broj>s</common:broj>
@@ -33,5 +51,17 @@
         <zno:datum_podnosenja property="pred:datum_podnosenja" datatype="xs:date">2021-02-05</zno:datum_podnosenja>
         <zno:mesto property="pred:mesto_podnosenja" datatype="xs:string">s</zno:mesto>
         <zno:opis>s</zno:opis>
+=======
+                    <common:mesto>m</common:mesto>
+                    <common:ulica>m</common:ulica>
+                    <common:broj>m</common:broj>
+                </common:adresa>
+                <common:naziv>m</common:naziv>
+            </zno:lice>
+            <zno:drugi_podaci_za_kontakt>m</zno:drugi_podaci_za_kontakt>
+        </zno:podnosilac_zalbe>
+        <zno:datum_podnosenja property="pred:datum_podnosenja" datatype="xs:date">2021-02-06</zno:datum_podnosenja>
+        <zno:mesto property="pred:mesto_podnosenja" datatype="xs:string">m</zno:mesto>
+>>>>>>> Stashed changes
     </zno:podaci_o_zalbi>
 </zno:zalba_na_odluku>

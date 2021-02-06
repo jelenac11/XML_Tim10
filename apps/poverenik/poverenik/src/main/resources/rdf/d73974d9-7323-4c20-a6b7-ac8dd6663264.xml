@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="predicate"/>
+    <variable name="object"/>
+  </head>
+  <results>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/status</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">false</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/datum_podnosenja</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_zalba</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://localhost:4200/zahtev/d96170c6-f286-45e1-94ad-bc64ca1dd026</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/organ_koji_je_doneo_odluku</uri>
+      </binding>
+      <binding name="object">
+        <literal>s</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/odgovorena</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">false</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/podnosilac_zalbe</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/mesto_podnosenja</uri>
+      </binding>
+      <binding name="object">
+        <literal>m</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>

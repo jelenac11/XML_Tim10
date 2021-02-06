@@ -96,7 +96,20 @@ export class DokumentPretragaComponent implements OnInit {
   };
 
   searchResenje(form: string): void {
-    console.log('res');
+    this.documents = [];
+    this.resenjaService.put('resenje/search', form).subscribe(res => {
+      let resenja = Xonomy.xml2js(res);
+      resenja = resenja.getDescendantElements('item');
+      for (let i = 0; i < resenja.length; i++) {
+        this.documents.push(
+          {
+            url: resenja[i].getText(),
+            open: false,
+            type: 'resenja',
+            referencedBy: []
+          });
+      }
+    });
   };
 
   searchIzvestaj(form: string): void {

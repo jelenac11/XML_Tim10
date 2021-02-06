@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 <res:odluka_poverioca xmlns:res="http://www.projekat.org/resenje" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" about="http://www.projekat.org/resenje/1114234" broj_rešenja="1114234" broj_zahteva="123123" broj_žalbe="1235" tip_rešenja="žalba_cutanja" vocab="http://www.projekat.org/predicate" xsi:schemaLocation="http://www.projekat.org/resenje src/main/resources/static/schemas/resenje.xsd">
+=======
+<res:odluka_poverioca xmlns:res="http://www.projekat.org/resenje" xmlns:common="http://www.projekat.org/common" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" about="http://localhost:4201/resenja/cfd0a2d861ae" broj_rešenja="cfd0a2d861ae" broj_žalbe="e5924dca-4e94-4f72-ba59-f9e1668b1301" tip_rešenja="žalba_na_odluku" vocab="http://www.projekat.org/predicate" xsi:schemaLocation="http://www.projekat.org/resenje">
+>>>>>>> Stashed changes
    <res:opis_žalbe>
       <res:žalioc content="AA" property="pred:podnosilac_zalbe">
          <common:adresa>
@@ -19,6 +23,7 @@
       </res:organ>
       <res:datum_žalbe datatype="xs:date" property="pred:datum_zalbe">2020-04-16</res:datum_žalbe>
       <res:ceo_opis>
+<<<<<<< Updated upstream
          <res:paragraf>
                 Повереник за информације од јавног значаја и заштиту података о личности, у поступку по алби коју је изјавио AA, због непоступања Учитељског факултета у Призрену са привременим седиштем у Лепосавићу, ул. Немањина бб, по његовом захтеву од <res:datum>2020-04-16</res:datum> године за приступ информацијама од јавног значаја, на основу <res:zakon>члана 35. став 1. тачка 5. Закона о слободном приступу информацијама од јавног значаја („Сл. гласник РС“, бр. 120/04, 54/07, 104/09 и 36/10)</res:zakon>, а у вези са <res:zakon>чланом 4. тачка 22. Закона о заштити података о личности („Сл. гласник РС“, број 87/18)</res:zakon>, <res:zakon>као и члана 23. и члана 24. став 4. Закона о слободном приступу информацијама од јавног значаја</res:zakon> и <res:zakon>члана 173. став 2. Закона о општем управном поступку („Сл. гласник РС“, бр. 18/2016 и 95/2018-аутентично тумачење)</res:zakon>, доноси
 		    </res:paragraf>
@@ -65,6 +70,23 @@
          <res:paragraf>
 			    Учитељски факултет у Призрену са привременим седиштем у Лепосавићу, је дужан да о извршењу решења из става I диспозитива, обавести Повереника у складу са <res:zakon>чланом 24. став 3. Закона о слободном приступу информацијама од јавног значаја</res:zakon>.
 			</res:paragraf>
+=======
+         <res:paragraf xml:space="preserve">2021-02-06</res:paragraf>
+      </res:ceo_opis>
+   </res:opis_žalbe>
+   <res:rešenja>
+      <res:paragraf xml:space="preserve">2021-02-06</res:paragraf>
+   </res:rešenja>
+   <res:obrazloženje>
+      <res:opis>
+         <res:paragraf xml:space="preserve">2021-02-06</res:paragraf>
+      </res:opis>
+      <res:razlog>
+         <res:paragraf xml:space="preserve">2021-02-06</res:paragraf>
+      </res:razlog>
+      <res:konačno_rešenje>
+         <res:paragraf xml:space="preserve">2021-02-06</res:paragraf>
+>>>>>>> Stashed changes
       </res:konačno_rešenje>
    </res:obrazloženje>
    <res:uputstvo>

@@ -778,10 +778,10 @@ public class ZalbaNaOdluku {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
+        "opis",
         "podnosilacZalbe",
         "datumPodnosenja",
-        "mesto",
-        "opis"
+        "mesto"
     })
     public static class PodaciOZalbi {
 
