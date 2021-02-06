@@ -85,4 +85,5 @@ public class SparqlUtil {
 	public static String selectPredicateObjectData(String graphURI, String sparqlCondition) {
 		return String.format(SELECT_OBJECT_PREDICATE_NAMED_GRAPH_TEMPLATE, graphURI, sparqlCondition);
 	}
+	
 }

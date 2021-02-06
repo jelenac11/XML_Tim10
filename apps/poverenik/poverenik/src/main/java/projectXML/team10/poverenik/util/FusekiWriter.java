@@ -96,7 +96,6 @@ public class FusekiWriter {
 
     }
     
-    
     public static void updateData(boolean status, String zalbaId, String type, String db, String predicate) throws IOException {
         AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
 		//Delete first triplet
@@ -446,6 +445,14 @@ public class FusekiWriter {
 		
 	}
 
+	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(String object, String type) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format("?s ?p %s", object));
+		return getDocumentsId(sparqlQuery);
+	}
 
 	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String id) {
 		String sparqlQuery = SparqlUtil.selectObjectData(

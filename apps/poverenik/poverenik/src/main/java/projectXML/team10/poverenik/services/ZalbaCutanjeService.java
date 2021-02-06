@@ -51,6 +51,7 @@ public class ZalbaCutanjeService {
 	private MarshallerFactory marshallerFactory;
   
 	private TaskScheduler scheduler;
+
 	@Autowired
 	private SearchOperations searchOperations;
 
@@ -174,7 +175,6 @@ public class ZalbaCutanjeService {
 	public ArrayList<String> getAllowed() {
 		return fusekiWriter.readAllAllowed("/zalbe-na-cutanje");
 	}
-
 	public Set<String> search(SearchDTO searchDTO) throws Exception {
 		String[] metadata = searchDTO.getMetadata().split("and");
 		String[] keyWordsAndPhrase = searchDTO.getKeyWord().split("and");
@@ -218,6 +218,11 @@ public class ZalbaCutanjeService {
 		String subject = String.format("http://localhost:4201/zalbe-cutanje/%s", id);
 		String predicate = "http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_zalba";
 		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(subject, predicate, "/zalbe-na-cutanje");
+	}
 
+	public ArrayList<String> readAllZalbaCutanjeReferencedByZahtev(String id) {
+		String object = String
+				.format("\"http://localhost:4200/zahtev/%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>", id);
+		return fusekiWriter.getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(object, "/zalbe-na-cutanje");
 	}
 }

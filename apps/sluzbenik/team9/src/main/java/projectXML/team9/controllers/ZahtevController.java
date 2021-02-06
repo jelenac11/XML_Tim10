@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team9.dto.DocumentsIDDTO;
 import projectXML.team9.dto.SearchDTO;
+import projectXML.team9.soap.StringArray;
 import projectXML.team9.soap.XSLTDocumentDTO;
 import projectXML.team9.soap.ports.used.OdgovorNaZalbuPort;
+import projectXML.team9.soap.ports.used.ZalbePort;
 import projectXML.team9.models.korisnik.Korisnik;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.services.ZahtevService;
@@ -267,28 +269,74 @@ public class ZahtevController {
 	@GetMapping(value = "/XSLTZalbaCutanje/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> getZalbaCutanjeById(@PathVariable String id) {
-		return null;
-		
+		try {
+			URL wsdl = new URL("http://localhost:8081/ws/zalbe?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/zalbe", "ZalbeService");
+	    	QName portName = new QName("http://www.projekat.org/ws/zalbe", "ZalbaPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        ZalbePort zalbePort = service.getPort(portName, ZalbePort.class);
+
+	        XSLTDocumentDTO zalbaXSLT = zalbePort.getXSLTZalbeCutanje(id);
+			return ResponseEntity.ok(zalbaXSLT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@GetMapping(value = "/XSLTZalbaNaOdluku/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> getZalbaNaOdlukuById(@PathVariable String id) {
-		return null;
-		
+		try {
+			URL wsdl = new URL("http://localhost:8081/ws/zalbe?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/zalbe", "ZalbeService");
+	    	QName portName = new QName("http://www.projekat.org/ws/zalbe", "ZalbaPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        ZalbePort zalbePort = service.getPort(portName, ZalbePort.class);
+
+	        XSLTDocumentDTO zalbaXSLT = zalbePort.getXSLTZalbeNaOdluku(id);
+			return ResponseEntity.ok(zalbaXSLT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@GetMapping(value = "/find-id-with-references-on-zalba-cutanje/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> findIdWithReferencesOnZalbaCutanje(@PathVariable String id) {
-		return null;
-		
+		try {
+			URL wsdl = new URL("http://localhost:8081/ws/zalbe?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/zalbe", "ZalbeService");
+	    	QName portName = new QName("http://www.projekat.org/ws/zalbe", "ZalbaPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        ZalbePort zalbePort = service.getPort(portName, ZalbePort.class);
+
+	        StringArray items = zalbePort.getReferenciraneZalbeCutanje(id);
+			return ResponseEntity.ok(items);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@GetMapping(value = "/find-id-with-references-on-zalba-na-odluku/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> findIdWithReferencesOnZalbaNaOdluku(@PathVariable String id) {
-		return null;
-		
+		try {
+			URL wsdl = new URL("http://localhost:8081/ws/zalbe?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/zalbe", "ZalbeService");
+	    	QName portName = new QName("http://www.projekat.org/ws/zalbe", "ZalbaPort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        ZalbePort zalbePort = service.getPort(portName, ZalbePort.class);
+
+	        StringArray items = zalbePort.getReferenciraneZalbeNaOdluku(id);
+			return ResponseEntity.ok(items);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }
