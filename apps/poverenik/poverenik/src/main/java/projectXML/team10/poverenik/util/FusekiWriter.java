@@ -436,7 +436,7 @@ public class FusekiWriter {
 		//Delete first triplet
         String sparqlUpdate = SparqlUtil.insertData(
         		conn.dataEndpoint + GRAPH_URI + "/resenja",
-        		String.format("<http://localhost:4201/resenja/%s>  <http://www.projekat.org/predicate/reference> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",id, idZalbe));
+        		String.format("<http://localhost:4201/resenja/%s>  <http://www.projekat.org/predicate/reference> \"http://localhost:4201%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",id, idZalbe));
 		UpdateRequest request = UpdateFactory.create();
         UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
 		UpdateRequest update = UpdateFactory.create(sparqlUpdate);

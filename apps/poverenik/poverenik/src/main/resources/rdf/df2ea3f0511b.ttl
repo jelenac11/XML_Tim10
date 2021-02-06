@@ -1,0 +1,13 @@
+<http://localhost:4201/resenja/df2ea3f0511b>
+        <http://www.projekat.org/predicate/datum_resenja>
+                "2021-02-06"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://www.projekat.org/predicate/datum_zalbe>
+                "2021-02-06"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://www.projekat.org/predicate/organ_protiv_kojeg_je_zalba>
+                "Nesto"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/podnosilac_zalbe>
+                "Nesto Nesto"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/poverenik>
+                "Milan Marinović"^^<http://www.w3.org/2000/01/rdf-schema#Literal> ;
+        <http://www.projekat.org/predicate/reference>
+                "/zalbe-na-odluku/fe64a9f0-f0a1-4563-86ba-563ad8082f49"^^<http://www.w3.org/2000/01/rdf-schema#Literal> .

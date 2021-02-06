@@ -47,11 +47,13 @@ export class DokumentiComponent implements OnInit {
 
   getAllSluzbenik(): void {
     this.obavestenjeService.getAllDocumentsIdByGradjanin('zahtevi/unanswered-zahtevi').subscribe(res => {
+      this.zahtevi = [];
       this.extractIds(res, this.zahtevi);
     });
     this.zahtevService.getAll('zahtevi/zalbe-zahtevi').subscribe(res => {
       let zahtevi = Xonomy.xml2js(res);
       zahtevi = zahtevi.getDescendantElements('item');
+      this.zalbeZahtevi = [];
       for (let i = 0; i < zahtevi.length; i++) {
 
         const txt = zahtevi[i].getText().split('|');
@@ -93,7 +95,7 @@ export class DokumentiComponent implements OnInit {
   };
 
   prihvatiZahtevZalbe(zahtev: any): void {
-    this.router.navigateByUrl(`/zalba-odgovor/${zahtev.tip}/${zahtev.idZahteva}/${zahtev.idZalbe}`);
+    this.router.navigateByUrl(`/zalba-odgovor/${zahtev.tip}/${zahtev.idZahteva.split("/")[4]}/${zahtev.idZalbe}`);
   };
 
   zahtev(zahtev: any): void {
