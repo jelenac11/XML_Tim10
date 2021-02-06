@@ -1,5 +1,9 @@
 package projectXML.team9.util;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +12,7 @@ import projectXML.team9.models.obavestenje.Obavestenje;
 import projectXML.team9.models.zahtev.ZahtevGradjana;
 import projectXML.team9.repositories.IzvestajRepository;
 import projectXML.team9.repositories.ObavestenjeRepository;
+import projectXML.team9.repositories.ResenjeRepository;
 import projectXML.team9.repositories.ZahtevRepository;
 
 @Component
@@ -28,6 +33,9 @@ public class GenerateHTMLAndPDF {
 
 	@Autowired
 	private ZahtevRepository zahtevRepository;
+	
+	@Autowired
+	private ResenjeRepository resenjeRepository;
 	
 	@Autowired
 	private IzvestajRepository izvestajRepository;
@@ -79,5 +87,33 @@ public class GenerateHTMLAndPDF {
 		izvestajRepository.saveToFile(izvestaj, INPUT_FILE + "izvestaj.xml");
 		xmlTransformations.generateHTML(INPUT_FILE + "izvestaj.xml", XSLT_FILE + "izvestaj.xsl", HTML_FILE + id + ".html");
 		return HTML_FILE + id + ".html";
+	}
+	
+	public String generatePDFResenje(String id) throws Exception {
+		String resenje = resenjeRepository.getById(id);
+		saveToFile(resenje, INPUT_FILE + "resenje.xml");
+		xmlTransformations.generatePDF(INPUT_FILE + "resenje.xml", XSLFO_FILE + "resenje_fo.xsl",
+				OUTPUT_FILE + id + ".pdf");
+		return OUTPUT_FILE + id + ".pdf";
+	}
+
+	public String generateHTMLResenje(String id) throws Exception {
+		String resenje = resenjeRepository.getById(id);
+		saveToFile(resenje, INPUT_FILE + "resenje.xml");
+		xmlTransformations.generateHTML(INPUT_FILE + "resenje.xml", XSLT_FILE + "resenje.xsl", HTML_FILE + id + ".html");
+		return HTML_FILE + id + ".html";
+	}
+	
+	public String generateHTMLResenjeXML(String xml) throws Exception {
+		saveToFile(xml, INPUT_FILE + "resenje.xml");
+		xmlTransformations.generateHTML(INPUT_FILE + "resenje.xml", XSLT_FILE + "resenje.xsl", HTML_FILE + "RNG" + ".html");
+		return HTML_FILE + "RNG" + ".html";
+	}
+	
+	private void saveToFile(String content, String fileName) throws IOException {
+		FileWriter fileWriter = new FileWriter(fileName);
+	    PrintWriter printWriter = new PrintWriter(fileWriter);
+	    printWriter.print(content);
+	    printWriter.close();
 	}
 }

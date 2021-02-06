@@ -162,7 +162,7 @@ public class Fuseki {
 						email));
 		return getDocumentsId(sparqlQuery);
 	}
-
+							
 	public ArrayList<String> getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(String object, String type) {
 		String sparqlQuery = SparqlUtil.selectDistinctData(
 				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
@@ -171,7 +171,7 @@ public class Fuseki {
 				String.format("?s ?p %s", object));
 		return getDocumentsId(sparqlQuery);
 	}
-
+							
 	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String subject, String predicate,
 			String type) {
 		String sparqlQuery = SparqlUtil.selectObjectData(
@@ -382,5 +382,56 @@ public class Fuseki {
 				"http://localhost:8080/fusekiSluzbenik/SluzbenikDataset/data/metadata/zahtevi",
 				String.format("<%s>  <http://www.projekat.org/predicate/podneta_zalba>  %b", id, b));
 		update(sparqlUpdate);
+	}
+	
+	public String getResenjaMetaDataByIdAsJSON(String id) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/resenja",
+				String.format("<http://localhost:4201/resenja/%s>  ?predicate  ?object", id));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.json", id);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsJSON(output, result);
+
+		return path;
+	}
+
+
+	public String getResenjaMetaDataByIdAsXML(String id) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.selectPredicateObjectData(
+				"http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/resenja",
+				String.format("<http://localhost:4201/resenja/%s>  ?predicate  ?object", id));
+
+		ResultSet result = getDocumentMetaDataById(sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.xml", id);
+		OutputStream output = new FileOutputStream(path);
+
+		ResultSetFormatter.outputAsXML(output, result);
+
+		return path;
+	}
+
+
+	public String getResenjaMetaDataByIdAsRDF(String type, String id, String graph) throws FileNotFoundException {
+		String sparqlQuery = SparqlUtil.describeData(String.format("http://localhost:4201/%s/%s", type, id),
+				String.format("http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/%s", graph),
+				String.format("<http://localhost:4201/%s/%s>  ?p  ?o", type, id));
+
+		QueryExecution queryExecution = QueryExecutionFactory
+				.sparqlService(String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getQuery()), sparqlQuery);
+
+		String path = JSON_FILEPATH + String.format("%s.ttl", id);
+		OutputStream output = new FileOutputStream(path);
+
+		Model describeModel = queryExecution.execDescribe();
+		describeModel.write(output, "TURTLE");
+
+		return path;
 	}
 }
