@@ -16,6 +16,10 @@ export class ResenjaService {
     return this.http.get(`${environment.api_url}resenje/${id}`, { responseType: 'text' });
   }
 
+  getReferences(path: string, id: string): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
+  }
+
   getAll(path: string): Observable<any> {
     return this.http.get(`${environment.api_url}${path}`, { responseType: 'text' });
   }
@@ -23,6 +27,11 @@ export class ResenjaService {
   post(body: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
     return this.http.post(`${environment.api_url}resenje`, body, { headers, responseType: 'text' });
+  }
+
+  put(path: string, body: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
+    return this.http.put(`${environment.api_url}${path}`, body, { headers: headers, responseType: 'text' });
   }
 
   transform(xml: string): Observable<any> {

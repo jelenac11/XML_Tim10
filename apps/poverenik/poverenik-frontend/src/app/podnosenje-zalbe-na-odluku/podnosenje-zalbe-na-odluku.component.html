@@ -16,7 +16,7 @@
             <tr *ngFor="let item of zahtevi; let i = index">
                 <th scope="row">{{ i + 1 }}</th>
                 <td>
-                    <a [href]="item">{{ item.substring(item.length - 36) }}</a>
+                    <a [href]="item.replace('4200', '4201')">{{ item.substring(item.length - 36) }}</a>
                 </td>
                 <td>
                     <button

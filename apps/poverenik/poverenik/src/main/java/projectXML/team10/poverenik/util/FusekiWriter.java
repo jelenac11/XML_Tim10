@@ -266,5 +266,22 @@ public class FusekiWriter {
 
 		return path;
 	}
+	
+	public ArrayList<String> searchMetadata(String data, String graph) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.format("http://localhost:8080/fusekiPoverenik/PoverenikDataset/data/metadata/%s", graph),
+				String.format("?s ?p ?o . filter (LCASE(str(?o))=%s)", data));
 
+		return getDocumentsId(sparqlQuery);
+	}
+
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String subject, String predicate,
+			String type) {
+		String sparqlQuery = SparqlUtil.selectObjectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format("<%s> <%s> ?o", subject, predicate));
+		return getDocumentsId(sparqlQuery);
+	}
 }

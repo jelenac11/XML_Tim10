@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.xml.sax.SAXException;
 import org.xmldb.api.base.Collection;
 import org.xmldb.api.base.CompiledExpression;
+import org.xmldb.api.base.ResourceIterator;
 import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.modules.XMLResource;
 import org.xmldb.api.modules.XQueryService;
@@ -111,6 +113,33 @@ public class ZalbaCutanjeRepository {
 			e.printStackTrace();
 		}  
 		return zc;
+	}
+	
+	public ArrayList<String> search(String search) throws Exception {
+		ArrayList<String> ids = new ArrayList<String>();
+
+		Collection collection = null;
+		XMLResource xmlResource = null;
+		try {
+			collection = databaseConnector.getCollection(collectionId);
+			XQueryService xQueryService = (XQueryService) collection.getService("XQueryService", "1.0");
+			String query = String.format(DatabaseQueries.SEARCH_ZALBA_CUTANJE, search);
+			CompiledExpression compiledExpression = xQueryService.compile(query);
+			ResourceSet resourceSet = xQueryService.execute(compiledExpression);
+			if (resourceSet.getSize() == 0) {
+				return ids;
+			}
+			ResourceIterator resourceIterator = resourceSet.getIterator();
+			while (resourceIterator.hasMoreResources()) {
+				xmlResource = (XMLResource) resourceIterator.nextResource();
+				ids.add((String) xmlResource.getContent());
+			}
+			return ids;
+		} catch (Exception e) {
+			return null;
+		} finally {
+			databaseConnector.closeConnections(xmlResource, collection);
+		}
 	}
 
 }

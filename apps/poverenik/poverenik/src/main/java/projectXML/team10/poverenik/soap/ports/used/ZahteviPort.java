@@ -8,7 +8,7 @@ import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 import projectXML.team10.poverenik.soap.StringArray;
-import projectXML.team10.poverenik.dto.XSLTDocumentDTO;
+import projectXML.team10.poverenik.soap.XSLTDocument;
 import projectXML.team10.poverenik.models.zahtev.ZahtevGradjana;
 
 @WebService(targetNamespace = "http://www.projekat.org/ws/zahtevi", name = "Zahtevi")
@@ -32,7 +32,7 @@ public interface ZahteviPort {
 	
 	@WebMethod
     @WebResult(name = "return", targetNamespace = "http://www.projekat.org/ws/zahtevi", partName = "return")
-    public XSLTDocumentDTO getZahtevById(
+    public XSLTDocument getZahtevById(
         @WebParam(partName = "id", name = "id")
         String id
     );

@@ -31,6 +31,9 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 import { IzvestajService } from './core/services/izvestaj.service';
+import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { IzvestajService } from './core/services/izvestaj.service';
     IzvestajPrikazComponent,
     ZahtevPrikazComponent,
     ResenjaComponent,
-    PrikazResenjaComponent
+    PrikazResenjaComponent,
+    DokumentPretragaComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,9 @@ import { IzvestajService } from './core/services/izvestaj.service';
     HttpClientModule,
     MatIconModule,
     MatMenuModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatExpansionModule
   ],
   providers: [ZalbaCutanjeService, ZalbaCutanjeXonomyService, ZalbaNaOdlukuService, ZalbaNaOdlukuXonomyService, IzvestajService],
   bootstrap: [AppComponent]

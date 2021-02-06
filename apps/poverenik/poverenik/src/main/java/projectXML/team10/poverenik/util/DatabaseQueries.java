@@ -38,4 +38,24 @@ public class DatabaseQueries {
             "where $x/email/text()=\"%s\"\n" +
             "return $x";
 	
+	public static final String SEARCH_ZALBA_CUTANJE = "xquery version \"3.1\";\n"
+			+ "declare default element namespace \"http://www.projekat.org/zalba_cutanja\";\n"
+			+ "for $x in collection(\"/db/sample/zalbeCutanje\")\n"
+			+ "where $x//*/text()[contains(lower-case(.) ,%s)]\n" + "return data($x/*/@id)";
+	
+	public static final String SEARCH_ZALBA_NA_ODLUKU = "xquery version \"3.1\";\n"
+			+ "declare default element namespace \"http://www.projekat.org/zalba_na_odluku\";\n"
+			+ "for $x in collection(\"/db/sample/zalbeNaOdluku\")\n"
+			+ "where $x//*/text()[contains(lower-case(.) ,%s)]\n" + "return data($x/*/@id)";
+	
+	public static final String SEARCH_RESENJA = "xquery version \"3.1\";\n"
+			+ "declare default element namespace \"http://www.projekat.org/resenje\";\n"
+			+ "for $x in collection(\"/db/sample/resenja\")\n"
+			+ "where $x//*/text()[contains(lower-case(.) ,%s)]\n" + "return data($x/*/@id)";
+	
+	public static final String SEARCH_IZVESTAJI = "xquery version \"3.1\";\n"
+			+ "declare default element namespace \"http://www.projekat.org/izvestaj\";\n"
+			+ "for $x in collection(\"/db/sample/izvestaji\")\n"
+			+ "where $x//*/text()[contains(lower-case(.) ,%s)]\n" + "return data($x/*/@id)";
+	
 }
