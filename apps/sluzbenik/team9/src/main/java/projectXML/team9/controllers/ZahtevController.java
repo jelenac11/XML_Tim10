@@ -278,7 +278,7 @@ public class ZahtevController {
 		
 	}
 	
-	@GetMapping(value = "/find-id-with-references-on-zalba-na-odluku/{id}")
+	@GetMapping(value = "/find-id-with-references-on-zalba-cutanje/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> findIdWithReferencesOnZalbaCutanje(@PathVariable String id) {
 		return null;

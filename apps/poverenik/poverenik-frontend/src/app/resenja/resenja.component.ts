@@ -47,6 +47,16 @@ export class ResenjaComponent implements OnInit {
   @ViewChild('resenjeHTML', { static: false }) resenjeHTML;
 
   ngOnInit(): void {
+    this.tip = this.route.snapshot.params['tip'];
+    this.idZalbe = this.route.snapshot.params['idZalbe'];
+    if (this.tip === 'odluka'){
+      this.tipResenja = "tip_rešenja='žalba_na_odluku'";
+      this.zalbaNaOdluku();
+    }
+    else{
+      this.tipResenja = "tip_rešenja='žalba_ćutanja'";
+      this.zalbaCutanja();
+    }
     this.korisnikService.getTrenutnoUlogovan().subscribe(res => {
       const convert = require('xml-js');
       this.user = convert.xml2js(res, { ignoreComment: true, compact: true }).korisnik;

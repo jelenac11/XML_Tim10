@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ZalbaCutanjeService } from '../core/services/zalba-cutanje.service';
-import { ZalbaCutanjeXonomyService } from '../core/xonomy/zalba-cutanje-xonomy.service';
+import { ZahtevService } from '../core/services/zahtev.service';
 
 declare const Xonomy: any;
+declare var require: any;
 
 @Component({
   selector: 'app-prikaz-zalba-cutanje',
@@ -16,8 +16,7 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
   zalba: any;
 
   constructor(
-    private xonomyService: ZalbaCutanjeXonomyService,
-    private zalbaCutanjeService: ZalbaCutanjeService,
+    private zahtevService: ZahtevService,
     private route: ActivatedRoute
   ) { }
 
@@ -25,9 +24,10 @@ export class PrikazZalbaCutanjeComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zalbaCutanjeService.get('zahtevi/XSLTZalbaCutanje', this.id).subscribe(res => {
-      this.zalba = res;
-      this.zalbaHTML.nativeElement.innerHTML = this.xonomyService.convertZalbaXSLT(this.zalba);
+    this.zahtevService.get('zahtevi/XSLTZalbaCutanje', this.id).subscribe(res => {
+      var convert = require('xml-js');
+      var htmlZahtev = convert.xml2js(res, { compact: true, spaces: 4 });
+      this.zalbaHTML.nativeElement.innerHTML = htmlZahtev.xsltRoot.xslt._text;
     });
   }
 }
