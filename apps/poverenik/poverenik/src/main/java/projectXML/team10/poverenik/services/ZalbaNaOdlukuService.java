@@ -215,4 +215,10 @@ public class ZalbaNaOdlukuService {
 		String predicate = "http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_zalba";
 		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(subject, predicate, "/zalbe-na-odluku");
 	}
+	
+	public ArrayList<String> readAllZalbaNaOdlukuReferencedByZahtev(String id) {
+		String object = String
+				.format("\"http://localhost:4200/zahtev/%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>", id);
+		return fusekiWriter.getDocumentIdThatHasReferenceOnOtherDocumentWithThisId(object, "/zalbe-na-odluku");
+	}
 }
