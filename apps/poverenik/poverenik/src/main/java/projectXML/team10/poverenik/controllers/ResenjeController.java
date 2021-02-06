@@ -2,7 +2,11 @@ package projectXML.team10.poverenik.controllers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.URL;
 import java.util.ArrayList;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team10.poverenik.soap.StringArray;
+import projectXML.team10.poverenik.soap.ports.used.ResenjaPort;
 import projectXML.team10.poverenik.dto.DocumentsIDDTO;
 import projectXML.team10.poverenik.dto.SearchDTO;
 import projectXML.team10.poverenik.dto.XSLTDocumentDTO;
@@ -134,6 +139,14 @@ public class ResenjeController {
 	@CrossOrigin
 	public ResponseEntity<?> createOdlukaPoverioca(@RequestBody String odluka){
 		try {
+			URL wsdl = new URL("http://localhost:8081/ws/resenja?wsdl");
+	    	QName serviceName = new QName("http://www.projekat.org/ws/resenja", "ResenjaService");
+	    	QName portName = new QName("http://www.projekat.org/ws/resenja", "ResenjePort");
+	    	
+	    	Service service = Service.create(wsdl, serviceName);
+	        ResenjaPort resenjaPort = service.getPort(portName, ResenjaPort.class);
+
+	        resenjaPort.storeOdlukaPoverioca(odluka);
 			return ResponseEntity.ok(resenjeService.create(odluka));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
