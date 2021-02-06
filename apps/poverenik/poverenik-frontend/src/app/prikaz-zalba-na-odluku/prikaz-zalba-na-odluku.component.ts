@@ -26,9 +26,10 @@ export class PrikazZalbaNaOdlukuComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zalbaNaOdlukuService.get('zalbe-na-odluku', this.id).subscribe(res => {
-      this.zalba = res;
-      this.zalbaHTML.nativeElement.innerHTML = this.xonomyService.convertZalbaXSLT(this.zalba);
+    this.zalbaNaOdlukuService.get('zalbe-na-odluku/XSLTDocument', this.id).subscribe(res => {
+      let something = Xonomy.xml2js(res);
+      something = something.children[0].getText();
+      this.zalbaHTML.nativeElement.innerHTML = something;
     });
     this.getReferenced();
   }

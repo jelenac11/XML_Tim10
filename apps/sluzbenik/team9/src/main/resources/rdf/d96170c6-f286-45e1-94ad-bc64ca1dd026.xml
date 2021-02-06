@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="predicate"/>
+    <variable name="object"/>
+  </head>
+  <results>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/status</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">false</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/podnosilac_zahteva</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/datum_podnosenja</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-02-06T19:30:28</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/organ_od_kojeg_se_trazi</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2000/01/rdf-schema#Literal">s</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/mesto_podnosenja</uri>
+      </binding>
+      <binding name="object">
+        <literal>s</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="predicate">
+        <uri>http://www.projekat.org/predicate/podneta_zalba</uri>
+      </binding>
+      <binding name="object">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">true</literal>
+      </binding>
+    </result>
+  </results>
+</sparql>

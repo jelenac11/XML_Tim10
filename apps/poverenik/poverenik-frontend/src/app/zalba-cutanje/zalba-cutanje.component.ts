@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ZalbaCutanjeService } from '../core/services/zalba-cutanje.service';
 import { ZalbaCutanjeXonomyService } from '../core/xonomy/zalba-cutanje-xonomy.service';
 import { Snackbar } from '../shared/snackbars/snackbar/snackbar';
@@ -26,6 +26,7 @@ export class ZalbaCutanjeComponent implements OnInit {
     private xonomyService: ZalbaCutanjeXonomyService,
     private zalbaCutanjeService: ZalbaCutanjeService,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: Snackbar
   ) { }
 
@@ -52,7 +53,7 @@ export class ZalbaCutanjeComponent implements OnInit {
 
   kreirajXML(): void {
     let element = document.getElementById("zalbaCutanje");
-    let xmlString = `<?xml version='1.0' encoding='UTF-8'?><zc:zalba_na_cutanje xmlns:common="http://www.projekat.org/common" xmlns:zc="http://www.projekat.org/zalba_cutanja" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" broj_zahteva="${this.id}"><zc:adresa_poverenika><common:mesto>Београд</common:mesto><common:ulica>Булевар краља Александра</common:ulica><common:broj>15</common:broj></zc:adresa_poverenika><zc:organ_protiv_kojeg_je_zalba><common:adresa><common:mesto>${this.mesto_organa}</common:mesto><common:ulica>${this.ulica_organa}</common:ulica><common:broj>${this.broj_organa}</common:broj></common:adresa><common:naziv>${this.naziv_organa}</common:naziv></zc:organ_protiv_kojeg_je_zalba><zc:podaci_o_zahtevu><zc:informacije></zc:informacije><zc:datum>${this.datum_zahteva}</zc:datum><zc:zahtevi></zc:zahtevi></zc:podaci_o_zahtevu><zc:podaci_o_zalbi><zc:podnosilac_zalbe><zc:lice><common:adresa><common:mesto></common:mesto><common:ulica></common:ulica><common:broj></common:broj></common:adresa></zc:lice><zc:drugi_podaci_za_kontakt></zc:drugi_podaci_za_kontakt></zc:podnosilac_zalbe><zc:datum_podnosenja>${new Date().toISOString().slice(0, 10)}</zc:datum_podnosenja><zc:mesto></zc:mesto><zc:razlog_zalbe></zc:razlog_zalbe></zc:podaci_o_zalbi></zc:zalba_na_cutanje>`;
+    let xmlString = `<?xml version='1.0' encoding='UTF-8'?><zc:zalba_na_cutanje xmlns:common="http://www.projekat.org/common" xmlns:zc="http://www.projekat.org/zalba_cutanja" xmlns:pred="http://www.projekat.org/predicate/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" broj_zahteva="${this.id}"><zc:adresa_poverenika><common:mesto>Београд</common:mesto><common:ulica>Булевар краља Александра</common:ulica><common:broj>15</common:broj></zc:adresa_poverenika><zc:organ_protiv_kojeg_je_zalba><common:adresa><common:mesto>${this.mesto_organa}</common:mesto><common:ulica>${this.ulica_organa}</common:ulica><common:broj>${this.broj_organa}</common:broj></common:adresa><common:naziv>${this.naziv_organa}</common:naziv></zc:organ_protiv_kojeg_je_zalba><zc:podaci_o_zahtevu><zc:informacije></zc:informacije><zc:datum>${this.datum_zahteva}</zc:datum></zc:podaci_o_zahtevu><zc:podaci_o_zalbi><zc:podnosilac_zalbe><zc:lice><common:adresa><common:mesto></common:mesto><common:ulica></common:ulica><common:broj></common:broj></common:adresa></zc:lice><zc:drugi_podaci_za_kontakt></zc:drugi_podaci_za_kontakt></zc:podnosilac_zalbe><zc:datum_podnosenja>${new Date().toISOString().slice(0, 10)}</zc:datum_podnosenja><zc:mesto></zc:mesto><zc:razlog_zalbe></zc:razlog_zalbe></zc:podaci_o_zalbi></zc:zalba_na_cutanje>`;
     Xonomy.render(xmlString, element, {
       validate: this.xonomyService.zalbaCutanjeSpecification.validate,
       elements: this.xonomyService.zalbaCutanjeSpecification.elements,
@@ -66,7 +67,7 @@ export class ZalbaCutanjeComponent implements OnInit {
     this.zalbaCutanjeService.post("zalbe-cutanje", Xonomy.harvest())
       .subscribe(res => {
         this.snackBar.success("Uspešno ste poslali žalbu na ćutanje.");
-        this.kreirajXML();
+        this.router.navigateByUrl(`/`);
       },
       error => {
         this.snackBar.error("Dokument nije validan.");

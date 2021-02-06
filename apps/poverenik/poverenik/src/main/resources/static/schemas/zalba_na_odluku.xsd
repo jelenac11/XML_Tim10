@@ -39,6 +39,13 @@
                 <xs:element name="podaci_o_zalbi">
                     <xs:complexType>
                         <xs:sequence>
+                        	<xs:element name="opis">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:minLength value="1"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
                             <xs:element name="podnosilac_zalbe">
                                 <xs:complexType>
                                     <xs:sequence>
@@ -80,13 +87,6 @@
                                     </xs:simpleContent>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="opis">
-                                <xs:simpleType>
-                                    <xs:restriction base="xs:string">
-                                        <xs:minLength value="1"/>
-                                    </xs:restriction>
-                                </xs:simpleType>
-                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -108,7 +108,7 @@
             <xs:attribute name="broj_resenja" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:minLength value="0"/>
+                        <xs:minLength value="1"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>

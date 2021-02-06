@@ -590,8 +590,6 @@ public class ZalbaNaCutanje {
         @XmlElement(namespace = "http://www.projekat.org/zalba_cutanja", required = true)
         @XmlSchemaType(name = "date")
         protected XMLGregorianCalendar datum;
-        @XmlElement(namespace = "http://www.projekat.org/zalba_cutanja", required = true)
-        protected ZalbaNaCutanje.PodaciOZahtevu.Zahtevi zahtevi;
 
         /**
          * Gets the value of the informacije property.
@@ -649,22 +647,6 @@ public class ZalbaNaCutanje {
          *     {@link ZalbaNaCutanje.PodaciOZahtevu.Zahtevi }
          *     
          */
-        public ZalbaNaCutanje.PodaciOZahtevu.Zahtevi getZahtevi() {
-            return zahtevi;
-        }
-
-        /**
-         * Sets the value of the zahtevi property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link ZalbaNaCutanje.PodaciOZahtevu.Zahtevi }
-         *     
-         */
-        public void setZahtevi(ZalbaNaCutanje.PodaciOZahtevu.Zahtevi value) {
-            this.zahtevi = value;
-        }
-
 
         /**
          * &lt;p&gt;Java class for anonymous complex type.

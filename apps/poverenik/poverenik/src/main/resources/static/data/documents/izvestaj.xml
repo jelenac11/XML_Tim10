@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<iz:izvestaj xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:pred="http://www.projekat.org/predicate/" xmlns:iz="http://www.projekat.org/izvestaj" id="http://localhost:4201/izvestaji/c4b2db8e-5f95-4257-b84f-eed075336c36" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/izvestaji/c4b2db8e-5f95-4257-b84f-eed075336c36">
+<iz:izvestaj xmlns:xs="http://www.w3.org/2001/XMLSchema#" xmlns:pred="http://www.projekat.org/predicate/" xmlns:iz="http://www.projekat.org/izvestaj" id="http://localhost:4201/izvestaji/858c6be8-255c-49fa-a31b-b5c1ba51751c" vocab="http://www.projekat.org/predicate" about="http://localhost:4201/izvestaji/858c6be8-255c-49fa-a31b-b5c1ba51751c">
     <iz:podaci_o_zahtevima>
         <iz:broj_usvojenih_zahteva>0</iz:broj_usvojenih_zahteva>
         <iz:broj_odbijenih_zahteva>1</iz:broj_odbijenih_zahteva>
@@ -8,11 +8,11 @@
     <iz:podaci_o_zalbama>
         <iz:zalbe_na_cutanje>
             <iz:nije_postupio>0</iz:nije_postupio>
-            <iz:nije_postupio_u_celosti>1</iz:nije_postupio_u_celosti>
+            <iz:nije_postupio_u_celosti>0</iz:nije_postupio_u_celosti>
             <iz:nije_postupio_u_zakonskom_roku>0</iz:nije_postupio_u_zakonskom_roku>
         </iz:zalbe_na_cutanje>
         <iz:broj_zalbi_na_odluku>0</iz:broj_zalbi_na_odluku>
     </iz:podaci_o_zalbama>
-    <iz:datum_podnosenja property="pred:datum_kada_je_podnet" datatype="xs:date">2021-02-05</iz:datum_podnosenja>
+    <iz:datum_podnosenja property="pred:datum_kada_je_podnet" datatype="xs:date">2021-02-06</iz:datum_podnosenja>
     <iz:kreator property="pred:je_kreirao_izvestaj" content="noreply.kts.l9@gmail.com">noreply.kts.l9@gmail.com</iz:kreator>
 </iz:izvestaj>

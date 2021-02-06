@@ -50,7 +50,7 @@ public class DatabaseQueries {
 	
 	public static final String SEARCH_RESENJA = "xquery version \"3.1\";\n"
 			+ "declare default element namespace \"http://www.projekat.org/resenje\";\n"
-			+ "for $x in collection(\"/db/sample/resenja\")\n"
+			+ "for $x in collection(\"/db/sample/odlukePoverioca\")\n"
 			+ "where $x//*/text()[contains(lower-case(.) ,%s)]\n" + "return data($x/*/@id)";
 	
 	public static final String SEARCH_IZVESTAJI = "xquery version \"3.1\";\n"

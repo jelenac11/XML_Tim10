@@ -105,7 +105,6 @@ export class ZalbaNaOdlukuXonomyService {
             );
           }
         },
-        mustBeBefore: ["zno:opis"],
         attributes: {
           "property": {
             isInvisible: true,
@@ -440,7 +439,7 @@ export class ZalbaNaOdlukuXonomyService {
             isInvisible: true,
           }
         },
-        mustBeBefore: ["zno:datum_podnosenja", "zno:mesto", "zno:opis"]
+        mustBeBefore: ["zno:datum_podnosenja", "zno:mesto"]
       },
 
       "zno:lice": {
@@ -641,7 +640,7 @@ export class ZalbaNaOdlukuXonomyService {
             isInvisible: true,
           }
         },
-        mustBeBefore: ["zno:mesto", "zno:opis"],
+        mustBeBefore: ["zno:mesto"],
         asker: Xonomy.askString,
       },
 

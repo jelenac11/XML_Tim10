@@ -1,0 +1,37 @@
+{
+  "head": {
+    "vars": [ "predicate" , "object" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/status" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "false" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/datum_podnosenja" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#date" , "value": "2021-02-06" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_zalba" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "http://localhost:4200/zahtev/d96170c6-f286-45e1-94ad-bc64ca1dd026" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/organ_koji_je_doneo_odluku" } ,
+        "object": { "type": "literal" , "value": "s" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/odgovorena" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2001/XMLSchema#boolean" , "value": "false" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/podnosilac_zalbe" } ,
+        "object": { "type": "literal" , "datatype": "http://www.w3.org/2000/01/rdf-schema#Literal" , "value": "milanm2998@gmail.com" }
+      } ,
+      {
+        "predicate": { "type": "uri" , "value": "http://www.projekat.org/predicate/mesto_podnosenja" } ,
+        "object": { "type": "literal" , "value": "m" }
+      }
+    ]
+  }
+}

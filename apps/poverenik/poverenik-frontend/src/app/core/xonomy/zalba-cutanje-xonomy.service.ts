@@ -227,13 +227,6 @@ export class ZalbaCutanjeXonomyService {
             }
             );
           }
-          if (!jsElement.hasChildElement("zc:zahtevi")) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element needs to have element <zc:zahtevi>."
-            }
-            );
-          }
         },
         menu: [],
         mustBeBefore: ["zc:podaci_o_zalbi"],
@@ -265,90 +258,8 @@ export class ZalbaCutanjeXonomyService {
         isReadOnly: true,
         hasText: true,
         asker: Xonomy.askString,
-        mustBeBefore: ["zc:zahtevi"]
       },
-
-      "zc:zahtevi": {
-        validate: function (jsElement) {
-          if (!jsElement.hasElements()) {
-            Xonomy.warnings.push({
-              htmlID: jsElement.htmlID,
-              text: "This element must not be empty."
-            }
-            );
-          }
-        },
-        menu: [
-          {
-            caption: "Append an <zc:uvid>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<zc:uvid ${zc}/>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("zc:uvid");
-            }
-          },
-          {
-            caption: "Append an <zc:kopija>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<zc:kopija ${zc}/>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("zc:kopija");
-            }
-          },
-          {
-            caption: "Append an <zc:dostava>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<zc:dostava ${zc}/>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("zc:dostava");
-            }
-          },
-          {
-            caption: "Append an <zc:posedovanje>",
-            action: Xonomy.newElementChild,
-            actionParameter: `<zc:posedovanje ${zc}/>`,
-            hideIf: function (jsElement) {
-              return jsElement.hasChildElement("zc:posedovanje");
-            }
-          },
-        ]
-      },
-
-      "zc:uvid": {
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
-        ],
-        mustBeBefore: ["zc:kopija", "zc:dostava", "zc:posedovanje"]
-      },
-
-      "zc:kopija": {
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
-        ],
-        mustBeBefore: ["zc:dostava", "zc:posedovanje"]
-      },
-
-      "zc:dostava": {
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
-        ],
-        mustBeBefore: ["zc:posedovanje"]
-      },
-
-      "zc:posedovanje": {
-        menu: [{
-          caption: "Delete this <item>",
-          action: Xonomy.deleteElement
-        }
-        ],
-      },
-
+      
       "zc:podaci_o_zalbi": {
         validate: function (jsElement) {
           if (!jsElement.hasElements()) {
