@@ -67,6 +67,20 @@ public class ZalbaCutanjeController {
 		}
 	}
 	
+	
+	@GetMapping(value = "/dozvoljene")
+	@CrossOrigin
+	public ResponseEntity<?> getAllAllowed() {
+		StringArray zalbe = new StringArray();
+		try {
+			ArrayList<String> idsZalbi = zalbaCutanjeService.getAllowed();
+			zalbe.setItem(idsZalbi);
+			return ResponseEntity.ok(zalbe);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
 	@GetMapping(value = "/poverenik")
 	@CrossOrigin
 	public ResponseEntity<?> getAll() {

@@ -31,4 +31,9 @@ export class ZahtevService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
     return this.http.put(`${environment.api_url}${path}`, body, { headers: headers, responseType: 'text' });
   }
+
+  zalba(path: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/xml' });
+    return this.http.put(`${environment.api_url}${path}`, { headers, responseType: 'text' });
+  }
 }

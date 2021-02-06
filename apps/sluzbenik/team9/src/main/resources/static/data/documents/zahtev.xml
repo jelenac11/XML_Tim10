@@ -9,7 +9,7 @@
         <common:naziv>d</common:naziv>
     </za:organ>
     <za:trazilac property="pred:podnosilac_zahteva" content="milanm2998@gmail.com">
-        <za:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TPravno_lice">
+        <za:lice xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="common:TFizicko_lice">
             <common:adresa>
                 <common:mesto>d</common:mesto>
                 <common:ulica>d</common:ulica>

@@ -16,6 +16,10 @@ export class ResenjaService {
     return this.http.get(`${environment.api_url}resenje/${id}`, { responseType: 'text' });
   }
 
+  getTemplate(path: string, id: string): Observable<any> {
+    return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
+  }
+
   getReferences(path: string, id: string): Observable<any> {
     return this.http.get(`${environment.api_url}${path}/${id}`, { responseType: 'text' });
   }
