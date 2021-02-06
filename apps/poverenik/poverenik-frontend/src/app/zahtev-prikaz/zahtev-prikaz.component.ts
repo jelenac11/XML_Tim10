@@ -24,7 +24,7 @@ export class ZahtevPrikazComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.zalbaNaOdlukuService.getXSLTZahtev('zalba-na-odluku/XSLTZahtev', this.id).subscribe(res => {
+    this.zalbaNaOdlukuService.getXSLTZahtev('zalbe-na-odluku/XSLTZahtev', this.id).subscribe(res => {
       var convert = require('xml-js');
       var htmlZahtev = convert.xml2js(res, {compact: true, spaces: 4});
       this.zahtevHTML.nativeElement.innerHTML = htmlZahtev.xsltRoot.xslt._text;
