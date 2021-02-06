@@ -30,5 +30,4 @@ export class ZahtevPrikazComponent implements OnInit {
       this.zahtevHTML.nativeElement.innerHTML = htmlZahtev.xsltRoot.xslt._text;
     });
   }
-
 }

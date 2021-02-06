@@ -10,6 +10,8 @@ import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.compo
 import { IzvestajComponent } from './izvestaj/izvestaj.component';
 import { ObavestenjePrikazComponent } from './obavestenje-prikaz/obavestenje-prikaz.component';
 import { ObavestenjeComponent } from './obavestenje/obavestenje.component';
+import { PrikazZalbaCutanjeComponent } from './prikaz-zalba-cutanje/prikaz-zalba-cutanje.component';
+import { PrikazZalbaNaOdlukuComponent } from './prikaz-zalba-na-odluku/prikaz-zalba-na-odluku.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZahtevComponent } from './zahtev/zahtev.component';
@@ -81,6 +83,20 @@ const routes: Routes = [
   },
   {
     path:"zalba-odgovor/:tip/:id/:idZalbe", component: ObavestenjeComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
+    path:"zalba-cutanje/:idZalbe", component: PrikazZalbaCutanjeComponent,
+    canActivate: [RoleGuard],
+    data:{
+      expectedRoles: 'sluzbenik'
+    }
+  },
+  {
+    path:"zalba-na-odluku/:idZalbe", component: PrikazZalbaNaOdlukuComponent,
     canActivate: [RoleGuard],
     data:{
       expectedRoles: 'sluzbenik'

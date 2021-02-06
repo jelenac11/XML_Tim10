@@ -53,12 +53,12 @@ export class DokumentiComponent implements OnInit {
       let zahtevi = Xonomy.xml2js(res);
       zahtevi = zahtevi.getDescendantElements('item');
       for (let i = 0; i < zahtevi.length; i++) {
-        
+
         const txt = zahtevi[i].getText().split('|');
         const idZalbe = txt[0];
         const idZahteva = txt[1];
         const tip = txt[2];
-        this.zalbeZahtevi.push({idZalbe, idZahteva, tip});
+        this.zalbeZahtevi.push({ idZalbe, idZahteva, tip });
       }
     });
   };
@@ -97,7 +97,13 @@ export class DokumentiComponent implements OnInit {
   };
 
   zahtev(zahtev: any): void {
-    this.router.navigateByUrl(`/zahtev/${zahtev.idZahteva}`);
+    console.log(zahtev);
+    if (zahtev.tip == 'odluka') {
+      this.router.navigateByUrl(`/zalba-na-odluku/${zahtev.idZalbe}`);
+    }
+    else {
+      this.router.navigateByUrl(`/zalba-cutanje/${zahtev.idZalbe}`);
+    }
   }
 
   private succesMessage(message: string): void {

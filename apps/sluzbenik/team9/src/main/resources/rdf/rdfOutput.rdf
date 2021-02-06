@@ -1,8 +1,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<rdf:Description rdf:about="http://localhost:4200/izvestaji/fd45a7b3-862a-4ba4-8538-224b16e0e495">
-<pred:datum_kada_je_podnet xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_kada_je_podnet>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/a2ba3576-36a0-4cb6-8628-6db7b9e9ddb1">
+<pred:organ_od_kojeg_se_trazi xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Nesto</pred:organ_od_kojeg_se_trazi>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4200/izvestaji/fd45a7b3-862a-4ba4-8538-224b16e0e495">
-<pred:je_kreirao_izvestaj xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">noreply.kts.l9@gmail.com</pred:je_kreirao_izvestaj>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/a2ba3576-36a0-4cb6-8628-6db7b9e9ddb1">
+<pred:podnosilac_zahteva xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:podnosilac_zahteva>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/a2ba3576-36a0-4cb6-8628-6db7b9e9ddb1">
+<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nesto</pred:mesto_podnosenja>
+</rdf:Description>
+<rdf:Description rdf:about="http://localhost:4200/zahtev/a2ba3576-36a0-4cb6-8628-6db7b9e9ddb1">
+<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-02-06T15:03:41</pred:datum_podnosenja>
 </rdf:Description>
 </rdf:RDF>
