@@ -580,8 +580,7 @@ public class ZalbaNaCutanje {
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
         "informacije",
-        "datum",
-        "zahtevi"
+        "datum"
     })
     public static class PodaciOZahtevu {
 
