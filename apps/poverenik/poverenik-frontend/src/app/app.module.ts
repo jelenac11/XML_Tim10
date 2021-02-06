@@ -31,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 import { IzvestajService } from './core/services/izvestaj.service';
+import { OdlukaZalbiComponent } from './odluka-zalbi/odluka-zalbi.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { IzvestajService } from './core/services/izvestaj.service';
     IzvestajPrikazComponent,
     ZahtevPrikazComponent,
     ResenjaComponent,
-    PrikazResenjaComponent
+    PrikazResenjaComponent,
+    OdlukaZalbiComponent
   ],
   imports: [
     CommonModule,

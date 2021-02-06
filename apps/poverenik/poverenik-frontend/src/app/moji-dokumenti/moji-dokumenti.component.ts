@@ -55,7 +55,7 @@ export class MojiDokumentiComponent implements OnInit {
     this.zalbaNaOdlukuService.getAll('zalbe-na-odluku/poverenik').subscribe(res => {
       this.extractIds(res, this.zalbeNaOdluku);
     });
-    this.resenjaService.getAll('resenje/poverenik').subscribe(res => {
+    this.resenjaService.getAll('resenje/all').subscribe(res => {
       this.extractIds(res, this.resenja);
     });
     this.izvestajService.getAll('izvestaji/poverenik').subscribe(res => {

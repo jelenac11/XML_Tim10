@@ -152,6 +152,18 @@ public class ResenjeController {
 	}
 	
 	
+	@GetMapping(value = "references-on/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getDocumentIdThatIsReferencedByDocumentWithThisId(@PathVariable String id) {
+		try {
+			ArrayList<String> item = resenjeService.getDocumentIdThatIsReferencedByDocumentWithThisId(id);
+			return ResponseEntity.ok(new StringArray(item));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	
 	@GetMapping(value = "extract-metadata/json/{id}")
 	@CrossOrigin
 	public byte[] extractMetadataAsJSONById(@PathVariable String id) {

@@ -422,4 +422,45 @@ public class FusekiWriter {
 		return path;
 	}
 
+
+	public static void insertReference(String id, String idZalbe) throws IOException {
+		 AuthenticationUtilities.ConnectionProperties conn = AuthenticationUtilities.loadProperties();
+		//Delete first triplet
+        String sparqlUpdate = SparqlUtil.insertData(
+        		conn.dataEndpoint + GRAPH_URI + "/resenja",
+        		String.format("<http://localhost:4201/resenja/%s>  <http://www.projekat.org/predicate/reference> \"%s\"^^<http://www.w3.org/2000/01/rdf-schema#Literal>",id, idZalbe));
+		UpdateRequest request = UpdateFactory.create();
+        UpdateProcessor processor = UpdateExecutionFactory.createRemote(request,conn.updateEndpoint);
+		UpdateRequest update = UpdateFactory.create(sparqlUpdate);
+	    processor = UpdateExecutionFactory.createRemote(update,conn.updateEndpoint);
+	    processor.execute();
+		
+	}
+
+
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String id) {
+		String sparqlQuery = SparqlUtil.selectObjectData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + "/resenja",
+				String.format(
+						"<http://localhost:4201/resenja/%s>  <http://www.projekat.org/predicate/reference> ?o",
+						id));
+		return getDocumentsId(sparqlQuery);
+	}
+
+
+	public ArrayList<String> readAllAllowed(String type) {
+		String sparqlQuery = SparqlUtil.selectDistinctData(
+				String.join("/", propertiesConfiguration.getFusekiConfiguration().getEndpoint(),
+						propertiesConfiguration
+								.getFusekiConfiguration().getDataset(),
+						propertiesConfiguration.getFusekiConfiguration().getData()) + GRAPH_URI + type,
+				String.format(
+						"?s <http://www.projekat.org/predicate/status> false .\n"
+						+ "?s <http://www.projekat.org/predicate/odgovorena> true"));
+		return getDocumentsId(sparqlQuery);
+	}
+
 }

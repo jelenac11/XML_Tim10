@@ -46,7 +46,7 @@ public class ResenjeService {
 		Element elem = (Element) nodes.item(0);
 		String id = UUID.randomUUID().toString().split("-")[4];
 		elem.setAttribute("broj_rešenja", id);
-		elem.setAttribute("about", "http://localhost:4200/resenja/" + id);
+		elem.setAttribute("about", "http://localhost:4201/resenja/" + id);
 		String tip = elem.getAttribute("tip_rešenja");
 		String idZalbe = elem.getAttribute("broj_žalbe");
 		
@@ -116,9 +116,10 @@ public class ResenjeService {
 			db = "/zalbe-na-odluku";
 		}
 		FusekiWriter.updateZalbaWithStatus(true, idZalbe, type, db);
-		
+		FusekiWriter.insertReference(id,db + "/" + idZalbe);
+		String xml = resenjeRepository.save(doc);
 		sendMail("debelidusan@gmail.com",id);
-		return resenjeRepository.save(doc);
+		return xml;
 	}
 	
 	@Async
@@ -173,6 +174,10 @@ public class ResenjeService {
 
 	public String getDocumentMetaDataByIdAsRDF(String id) throws FileNotFoundException {
 		return fusekiWriter.getResenjaMetaDataByIdAsRDF("resenja", id, "resenja");
+	}
+
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String id) {
+		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(id);
 	}
 
 }

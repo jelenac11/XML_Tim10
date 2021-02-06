@@ -76,8 +76,8 @@ public class ZalbaNaOdlukuService {
 		marshaller.marshal(zalba, sw);
 		String xmlString = sw.toString();
 		metadataExtractor.extractMetadata(xmlString);
-		FusekiWriter.updateData(false, zalba.getId(),"/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
-		FusekiWriter.updateData(false, zalba.getId(),"/zalbe-na-odluku", "/zalbe-na-odluku", "status");
+		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
+		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-odluku", "/zalbe-na-odluku", "status");
 		FusekiWriter.saveRDF("/zalbe-na-odluku");
 		Runnable exampleRunnable = new Runnable(){
 		    @Override
@@ -157,5 +157,9 @@ public class ZalbaNaOdlukuService {
 
 	public String getDocumentMetaDataByIdAsRDF(String zahtevId) throws FileNotFoundException {
 		return fusekiWriter.getDocumentMetaDataByIdAsRDF("zalbe-na-odluku", zahtevId, "zalbe-na-odluku");
+	}
+
+	public ArrayList<String> getAllowed() {
+		return fusekiWriter.readAllAllowed("/zalbe-na-odluku");
 	}
 }

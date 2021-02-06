@@ -76,8 +76,8 @@ public class ZalbaCutanjeService {
 		marshaller.marshal(zalba, sw);
 		String xmlString = sw.toString();
 		metadataExtractor.extractMetadata(xmlString);
-		FusekiWriter.updateData(false, zalba.getId(),"/zalbe-na-cutanje", "/zalbe-cutanje", "odgovorena");
-		FusekiWriter.updateData(false, zalba.getId(),"/zalbe-na-cutanje", "/zalbe-cutanje", "status");
+		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-cutanje", "/zalbe-cutanje", "odgovorena");
+		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-cutanje", "/zalbe-cutanje", "status");
 
 		FusekiWriter.saveRDF("/zalbe-na-cutanje");
 		
@@ -162,5 +162,9 @@ public class ZalbaCutanjeService {
 
 	public String getDocumentMetaDataByIdAsRDF(String zalbaId) throws FileNotFoundException {
 		return fusekiWriter.getDocumentMetaDataByIdAsRDF("zalbe-cutanje", zalbaId, "zalbe-na-cutanje");
+	}
+
+	public ArrayList<String> getAllowed() {
+		return fusekiWriter.readAllAllowed("/zalbe-na-cutanje");
 	}
 }

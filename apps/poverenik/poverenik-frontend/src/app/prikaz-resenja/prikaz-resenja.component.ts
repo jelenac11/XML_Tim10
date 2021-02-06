@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ResenjaService } from '../core/services/resenja.service';
 import { ResenjaXonomyService } from '../core/xonomy/resenja-xonomy.service';
 
+declare const Xonomy: any;
+
 @Component({
   selector: 'app-prikaz-resenja',
   templateUrl: './prikaz-resenja.component.html',
@@ -12,6 +14,7 @@ export class PrikazResenjaComponent implements OnInit {
 
   id: string;
   resenje: any;
+  referencesOn = [];
 
   constructor(
     private xonomyService: ResenjaXonomyService,
@@ -26,6 +29,14 @@ export class PrikazResenjaComponent implements OnInit {
     this.resenjeService.get(this.id).subscribe(res => {
       this.resenje = res;
       this.resenjeHTML.nativeElement.innerHTML = this.xonomyService.convertResenjeXSLT(this.resenje);
+      this.resenjeService.getTemplate(`resenje/references-on/${this.id}`,"").subscribe(res => {
+        let zahtevi = Xonomy.xml2js(res);
+        console.log(res);
+        zahtevi = zahtevi.getDescendantElements('item');
+        for (let i = 0; i < zahtevi.length; i++) {
+          this.referencesOn.push(zahtevi[i].getText().split("^^")[0]);
+        }
+      });
     });
   }
 
@@ -76,6 +87,19 @@ export class PrikazResenjaComponent implements OnInit {
     }), error => console.log('Error downloading the file'),
       () => console.info('File downloaded successfully');
   }
+
+  getReferenced(): void {
+    this.resenjeService.getTemplate("resenja/references-on", this.id)
+      .subscribe(res => {
+        this.referencesOn = [];
+        let dokumenti = Xonomy.xml2js(res);
+        dokumenti = dokumenti.getDescendantElements('item');
+        for (let i = 0; i < dokumenti.length; i++) {
+          this.referencesOn.push(dokumenti[i].getText().split("^^")[0]);
+        }
+        console.log(this.referencesOn);
+      });
+  };
 
 
 }

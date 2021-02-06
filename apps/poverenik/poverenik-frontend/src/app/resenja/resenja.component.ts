@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KorisnikService } from '../core/services/korisnik.service';
 import { ResenjaService } from '../core/services/resenja.service';
 import { ZalbaCutanjeService } from '../core/services/zalba-cutanje.service';
@@ -37,7 +37,8 @@ export class ResenjaComponent implements OnInit {
     private route: ActivatedRoute,
     private zalbaNaOdlukuService: ZalbaNaOdlukuService,
     private zalbaCutanjeService: ZalbaCutanjeService,
-    private snackBar: Snackbar
+    private snackBar: Snackbar,
+    private router: Router,
   ) { }
 
   @ViewChild('resenjeXonomy', { static: false }) resenjeXonomy;
@@ -57,14 +58,12 @@ export class ResenjaComponent implements OnInit {
     this.korisnikService.getTrenutnoUlogovan().subscribe(res => {
       const convert = require('xml-js');
       this.user = convert.xml2js(res, {ignoreComment: true, compact: true}).korisnik;
-      this.datum_zalbe = "2020-03-12";
-      this.kreirajXML();
     });
   }
 
   zalbaCutanja(): void{
     // tslint:disable
-    this.zalbaCutanjeService.get('zalba-cutanje', this.idZalbe).subscribe(res => {
+    this.zalbaCutanjeService.get('zalbe-cutanje', this.idZalbe).subscribe(res => {
       const convert = require('xml-js');
       const zahtev = convert.xml2js(res, {compact: true, spaces: 4});
       console.log(zahtev);
@@ -80,11 +79,12 @@ export class ResenjaComponent implements OnInit {
         this.ime_podnosioca = this.naziv_podnosioca;
         this.prezime_podnosioca = ' ';
       }
+      this.kreirajXML();
     });
   }
 
   zalbaNaOdluku(): void{
-    this.zalbaNaOdlukuService.get('zalba-na-odluku', this.idZalbe).subscribe(res => {
+    this.zalbaNaOdlukuService.get('zalbe-na-odluku', this.idZalbe).subscribe(res => {
       const convert = require('xml-js');
       const zahtev = convert.xml2js(res, {compact: true, spaces: 4});
       this.naziv_organa = zahtev['zno:zalba_na_odluku']['zno:podaci_o_resenju']['zno:naziv_organa']._text;
@@ -94,11 +94,12 @@ export class ResenjaComponent implements OnInit {
       this.ime_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:ime']?._text;
       this.prezime_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:prezime']?._text;
       this.naziv_podnosioca = zahtev['zno:zalba_na_odluku']['zno:zalilac']['common:naziv']?._text;
-      this.datum_zalbe = zahtev['zno:zalba_na_odluku']['zno:podaci_o_resenju']['zno:datum_podnosenja']?._text;
+      this.datum_zalbe = zahtev['zno:zalba_na_odluku']['zno:podaci_o_zalbi']['zno:datum_podnosenja']?._text;
       if (this.naziv_podnosioca !== undefined) {
         this.ime_podnosioca = this.naziv_podnosioca;
         this.prezime_podnosioca = ' ';
       }
+      this.kreirajXML();
     });
   }
 
@@ -124,7 +125,8 @@ export class ResenjaComponent implements OnInit {
   public submit(): void {
     this.resenjeService.post(Xonomy.harvest())
       .subscribe(res => {
-        this.snackBar.success("Uspešno ste kreirali rešenje!");
+        this.snackBar.success("Uspešno ste kreirali rešenje!")
+        this.router.navigate(['/']);
       });
   }
 

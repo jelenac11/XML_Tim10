@@ -16,6 +16,7 @@ import { ZahtevPrikazComponent } from './zahtev-prikaz/zahtev-prikaz.component';
 import { ZalbaCutanjeComponent } from './zalba-cutanje/zalba-cutanje.component';
 import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.component';
 import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
+import { OdlukaZalbiComponent } from './odluka-zalbi/odluka-zalbi.component';
 
 const routes: Routes = [
   {
@@ -112,6 +113,13 @@ const routes: Routes = [
   },
   {
     path: "novo-resenje/:tip/:idZalbe", component: ResenjaComponent,
+    canActivate: [RoleGuard],
+    data: {
+        expectedRoles: 'poverenik'
+    }
+  },
+  {
+    path: "odluci-zalbe", component: OdlukaZalbiComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'poverenik'
