@@ -17,10 +17,11 @@ import { ZalbaCutanjeComponent } from './zalba-cutanje/zalba-cutanje.component';
 import { ZalbaNaOdlukuComponent } from './zalba-na-odluku/zalba-na-odluku.component';
 import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 import { OdlukaZalbiComponent } from './odluka-zalbi/odluka-zalbi.component';
+import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga.component';
 
 const routes: Routes = [
   {
-    path: "", component: MojiDokumentiComponent,
+    path: "", component: DokumentPretragaComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'role'
@@ -91,7 +92,7 @@ const routes: Routes = [
     }
   },
   {
-    path: "pregled-dokumenata", component: MojiDokumentiComponent,
+    path: "pregled-dokumenata", component: DokumentPretragaComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'poverenik'
@@ -112,7 +113,7 @@ const routes: Routes = [
     }
   },
   {
-    path: "novo-resenje/:tip/:idZalbe", component: ResenjaComponent,
+    path: "novo-resenje", component: ResenjaComponent,
     canActivate: [RoleGuard],
     data: {
         expectedRoles: 'poverenik'

@@ -64,20 +64,6 @@ public class ResenjeController {
 	public ResponseEntity<?> getAll() {
 		StringArray resenja = new StringArray();
 		try {
-			Korisnik user = (Korisnik) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			ArrayList<String> idsResenja = resenjeService.getAll(user.getIme() + " " + user.getPrezime());
-			resenja.setItem(idsResenja);
-			return ResponseEntity.ok(resenja);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
-	
-	@GetMapping(value = "all")
-	@CrossOrigin
-	public ResponseEntity<?> getAllResenja() {
-		StringArray resenja = new StringArray();
-		try {
 			ArrayList<String> idsResenja = resenjeService.getAll();
 			resenja.setItem(idsResenja);
 			return ResponseEntity.ok(resenja);
@@ -129,7 +115,7 @@ public class ResenjeController {
 		}
 	}
 
-	@GetMapping(value = "/{id}", produces = "text/plain;charset=UTF-8")
+	@GetMapping(value = "/{id}")
 	@CrossOrigin
 	public ResponseEntity<?> ResponseEntitygetOdluka(@PathVariable String id) {
 		String odluka;
@@ -141,7 +127,7 @@ public class ResenjeController {
 		return ResponseEntity.ok(odluka);
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_XML_VALUE, produces = "text/plain;charset=UTF-8")
+	@PostMapping(consumes = MediaType.APPLICATION_XML_VALUE)
 	@CrossOrigin
 	public ResponseEntity<?> createOdlukaPoverioca(@RequestBody String odluka){
 		try {

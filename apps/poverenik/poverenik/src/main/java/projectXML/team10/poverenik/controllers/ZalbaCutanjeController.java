@@ -18,12 +18,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import projectXML.team10.poverenik.soap.StringArray;
+import projectXML.team10.poverenik.soap.XSLTDocument;
 import projectXML.team10.poverenik.soap.ports.used.ZahteviPort;
+import projectXML.team10.poverenik.dto.DocumentsIDDTO;
+import projectXML.team10.poverenik.dto.SearchDTO;
 import projectXML.team10.poverenik.dto.XSLTDocumentDTO;
 import projectXML.team10.poverenik.models.korisnik.Korisnik;
 import projectXML.team10.poverenik.models.zahtev.ZahtevGradjana;
@@ -142,7 +146,7 @@ public class ZalbaCutanjeController {
 	    	Service service = Service.create(wsdl, serviceName);
 	        ZahteviPort zahteviPort = service.getPort(portName, ZahteviPort.class);
 
-	        XSLTDocumentDTO zahtevXSLT = zahteviPort.getZahtevById(id);
+	        XSLTDocument zahtevXSLT = zahteviPort.getZahtevById(id);
 			return ResponseEntity.ok(zahtevXSLT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -253,6 +257,44 @@ public class ZalbaCutanjeController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@GetMapping(value = "all")
+	@CrossOrigin
+	public ResponseEntity<?> getAllZalbeCutanje() {
+		DocumentsIDDTO iddto = new DocumentsIDDTO();
+		try {
+			iddto.setItem(zalbaCutanjeService.getAllZalbeCutanje());
+			return ResponseEntity.ok(iddto);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@PutMapping(value = "/search")
+	@CrossOrigin
+	public ResponseEntity<?> search(@RequestBody SearchDTO searchDTO) {
+		try {
+			DocumentsIDDTO iddto = new DocumentsIDDTO();
+			iddto.setItem(new ArrayList<String>());
+			iddto.getItem().addAll(zalbaCutanjeService.search(searchDTO));
+
+			return ResponseEntity.ok(iddto);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping(value = "references-on/{id}")
+	@CrossOrigin
+	public ResponseEntity<?> getDocumentIdThatIsReferencedByDocumentWithThisId(@PathVariable String id) {
+		DocumentsIDDTO documentsIDDTO = new DocumentsIDDTO();
+		try {
+			documentsIDDTO.setItem(zalbaCutanjeService.getDocumentIdThatIsReferencedByDocumentWithThisId(id));
+			return ResponseEntity.ok(documentsIDDTO);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
 	}
 
 }

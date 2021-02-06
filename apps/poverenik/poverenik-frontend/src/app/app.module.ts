@@ -32,6 +32,9 @@ import { CommonModule } from '@angular/common';
 import { IzvestajPrikazComponent } from './izvestaj-prikaz/izvestaj-prikaz.component';
 import { IzvestajService } from './core/services/izvestaj.service';
 import { OdlukaZalbiComponent } from './odluka-zalbi/odluka-zalbi.component';
+import { DokumentPretragaComponent } from './dokument-pretraga/dokument-pretraga.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,8 @@ import { OdlukaZalbiComponent } from './odluka-zalbi/odluka-zalbi.component';
     ZahtevPrikazComponent,
     ResenjaComponent,
     PrikazResenjaComponent,
-    OdlukaZalbiComponent
+    OdlukaZalbiComponent,
+    DokumentPretragaComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +68,9 @@ import { OdlukaZalbiComponent } from './odluka-zalbi/odluka-zalbi.component';
     HttpClientModule,
     MatIconModule,
     MatMenuModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatExpansionModule
   ],
   providers: [ZalbaCutanjeService, ZalbaCutanjeXonomyService, ZalbaNaOdlukuService, ZalbaNaOdlukuXonomyService, IzvestajService],
   bootstrap: [AppComponent]

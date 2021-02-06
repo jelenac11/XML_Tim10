@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -13,10 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.xml.sax.SAXException;
 import org.xmldb.api.base.Collection;
+import org.xmldb.api.base.CompiledExpression;
+import org.xmldb.api.base.ResourceIterator;
+import org.xmldb.api.base.ResourceSet;
 import org.xmldb.api.modules.XMLResource;
+import org.xmldb.api.modules.XQueryService;
 
 import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team10.poverenik.util.DatabaseConnector;
+import projectXML.team10.poverenik.util.DatabaseQueries;
 import projectXML.team10.poverenik.util.MarshallerFactory;
 
 @Repository
@@ -80,6 +86,33 @@ public class ZalbaNaOdlukuRepository {
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		OutputStream os = new FileOutputStream(path);
 		marshaller.marshal(zalba, os);
+	}
+	
+	public ArrayList<String> search(String search) throws Exception {
+		ArrayList<String> ids = new ArrayList<String>();
+
+		Collection collection = null;
+		XMLResource xmlResource = null;
+		try {
+			collection = databaseConnector.getCollection(collectionId);
+			XQueryService xQueryService = (XQueryService) collection.getService("XQueryService", "1.0");
+			String query = String.format(DatabaseQueries.SEARCH_ZALBA_NA_ODLUKU, search);
+			CompiledExpression compiledExpression = xQueryService.compile(query);
+			ResourceSet resourceSet = xQueryService.execute(compiledExpression);
+			if (resourceSet.getSize() == 0) {
+				return ids;
+			}
+			ResourceIterator resourceIterator = resourceSet.getIterator();
+			while (resourceIterator.hasMoreResources()) {
+				xmlResource = (XMLResource) resourceIterator.nextResource();
+				ids.add((String) xmlResource.getContent());
+			}
+			return ids;
+		} catch (Exception e) {
+			return null;
+		} finally {
+			databaseConnector.closeConnections(xmlResource, collection);
+		}
 	}
 	
 }

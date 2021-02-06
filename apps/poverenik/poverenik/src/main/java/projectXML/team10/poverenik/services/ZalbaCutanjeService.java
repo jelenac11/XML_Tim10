@@ -8,6 +8,7 @@ import java.io.StringWriter;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,6 +23,7 @@ import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import projectXML.team10.poverenik.dto.SearchDTO;
 import projectXML.team10.poverenik.models.izvestaj.Izvestaj.PodaciOZalbama.ZalbeNaCutanje;
 import projectXML.team10.poverenik.models.korisnik.Korisnik;
 import projectXML.team10.poverenik.models.zalbaCutanje.ZalbaNaCutanje;
@@ -30,6 +32,7 @@ import projectXML.team10.poverenik.util.FusekiWriter;
 import projectXML.team10.poverenik.util.GenerateHTMLAndPDF;
 import projectXML.team10.poverenik.util.MarshallerFactory;
 import projectXML.team10.poverenik.util.MetadataExtractor;
+import projectXML.team10.poverenik.util.SearchOperations;
 
 @Service
 public class ZalbaCutanjeService {
@@ -46,8 +49,10 @@ public class ZalbaCutanjeService {
 	private GenerateHTMLAndPDF generateHTMLAndPDF;
 	@Autowired
 	private MarshallerFactory marshallerFactory;
-	
+  
 	private TaskScheduler scheduler;
+	@Autowired
+	private SearchOperations searchOperations;
 
 	public ZalbaNaCutanje getZalba(String id) throws Exception {
 		ZalbaNaCutanje zalba = zalbaCutanjeRepository.getById(id);
@@ -67,6 +72,8 @@ public class ZalbaCutanjeService {
 		zalba.getPodaciOZalbi().getMesto().setDatatype();
 		zalba.getPodaciOZalbi().getMesto().setProperty();
 		zalba.setVocab();
+		zalba.setProperty();
+		zalba.setContent(zalba.getBrojZahteva());
 		zalba.setAbout("http://localhost:4201/zalbe-cutanje/" + id);
 		zalba.getOrganProtivKojegJeZalba().setContent(zalba.getOrganProtivKojegJeZalba().getNaziv());
 		zalba.getPodaciOZalbi().getPodnosilacZalbe().setContent(current.getEmail());
@@ -166,5 +173,50 @@ public class ZalbaCutanjeService {
 
 	public ArrayList<String> getAllowed() {
 		return fusekiWriter.readAllAllowed("/zalbe-na-cutanje");
+
+	public Set<String> search(SearchDTO searchDTO) throws Exception {
+		String[] metadata = searchDTO.getMetadata().split("and");
+		String[] keyWordsAndPhrase = searchDTO.getKeyWord().split("and");
+
+		ArrayList<String> searchResult = new ArrayList<String>();
+		searchResult.addAll(searchPhraseAndKeyWords(keyWordsAndPhrase));
+		searchResult.addAll(searchOperations.searchMetadata(metadata, searchDTO.getOperator(), "zalbe-na-cutanje"));
+
+		if (metadata.length > 0 && !metadata[0].isEmpty() && keyWordsAndPhrase.length > 0
+				&& !keyWordsAndPhrase[0].isEmpty()) {
+			return searchOperations.andOperator(2, searchResult);
+		} else {
+			return searchOperations.andOperator(1, searchResult);
+		}
+	}
+	
+	private Set<String> searchPhraseAndKeyWords(String[] keyWordsAndPhrase) throws Exception {
+		ArrayList<String> ids = new ArrayList<String>();
+		for (String word : keyWordsAndPhrase) {
+			if (word.isEmpty()) {
+				continue;
+			}
+			word = word.trim();
+			if (!word.startsWith("\"")) {
+				word = "\"" + word;
+			}
+			if (!word.endsWith("\"")) {
+				word = word + "\"";
+			}
+			ids.addAll(zalbaCutanjeRepository.search(word.toLowerCase()));
+		}
+
+		return searchOperations.andOperator(keyWordsAndPhrase.length, ids);
+	}
+	
+	public ArrayList<String> getAllZalbeCutanje() {
+		return fusekiWriter.readAllDocuments("/zalbe-na-cutanje");
+	}
+	
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String id) {
+		String subject = String.format("http://localhost:4201/zalbe-cutanje/%s", id);
+		String predicate = "http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_zalba";
+		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(subject, predicate, "/zalbe-na-cutanje");
+
 	}
 }

@@ -9,6 +9,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -23,6 +24,7 @@ import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import projectXML.team10.poverenik.dto.SearchDTO;
 import projectXML.team10.poverenik.models.korisnik.Korisnik;
 import projectXML.team10.poverenik.models.zalbaNaOdluku.ZalbaNaOdluku;
 import projectXML.team10.poverenik.repositories.ZalbaNaOdlukuRepository;
@@ -30,6 +32,7 @@ import projectXML.team10.poverenik.util.FusekiWriter;
 import projectXML.team10.poverenik.util.GenerateHTMLAndPDF;
 import projectXML.team10.poverenik.util.MarshallerFactory;
 import projectXML.team10.poverenik.util.MetadataExtractor;
+import projectXML.team10.poverenik.util.SearchOperations;
 
 @Service
 public class ZalbaNaOdlukuService {
@@ -46,8 +49,9 @@ public class ZalbaNaOdlukuService {
 	private FusekiWriter fusekiWriter;
 	@Autowired
 	private MarshallerFactory marshallerFactory;
-
 	private TaskScheduler scheduler;
+	@Autowired
+	private SearchOperations searchOperations;
 	
 	public ZalbaNaOdluku getZalba(String id) throws Exception {
 		ZalbaNaOdluku zalba = zalbaNaOdlukuRepository.getById(id);
@@ -70,6 +74,8 @@ public class ZalbaNaOdlukuService {
 		zalba.getPodaciOZalbi().getMesto().setProperty();
 		zalba.getPodaciOZalbi().getMesto().setDatatype();
 		zalba.setVocab();
+		zalba.setProperty();
+		zalba.setContent(zalba.getBrojZahteva());
 		zalbaNaOdlukuRepository.save(zalba);
 		Marshaller marshaller = marshallerFactory.createMarshaller(contextPath, schemaPath);
 		StringWriter sw = new StringWriter();
@@ -78,6 +84,7 @@ public class ZalbaNaOdlukuService {
 		metadataExtractor.extractMetadata(xmlString);
 		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-odluku", "/zalbe-na-odluku", "odgovorena");
 		FusekiWriter.updateData(false, zalba.getId().split("/")[4],"/zalbe-na-odluku", "/zalbe-na-odluku", "status");
+
 		FusekiWriter.saveRDF("/zalbe-na-odluku");
 		Runnable exampleRunnable = new Runnable(){
 		    @Override
@@ -161,5 +168,49 @@ public class ZalbaNaOdlukuService {
 
 	public ArrayList<String> getAllowed() {
 		return fusekiWriter.readAllAllowed("/zalbe-na-odluku");
+	
+	public Set<String> search(SearchDTO searchDTO) throws Exception {
+		String[] metadata = searchDTO.getMetadata().split("and");
+		String[] keyWordsAndPhrase = searchDTO.getKeyWord().split("and");
+
+		ArrayList<String> searchResult = new ArrayList<String>();
+		searchResult.addAll(searchPhraseAndKeyWords(keyWordsAndPhrase));
+		searchResult.addAll(searchOperations.searchMetadata(metadata, searchDTO.getOperator(), "zalbe-na-odluku"));
+
+		if (metadata.length > 0 && !metadata[0].isEmpty() && keyWordsAndPhrase.length > 0
+				&& !keyWordsAndPhrase[0].isEmpty()) {
+			return searchOperations.andOperator(2, searchResult);
+		} else {
+			return searchOperations.andOperator(1, searchResult);
+		}
+	}
+	
+	private Set<String> searchPhraseAndKeyWords(String[] keyWordsAndPhrase) throws Exception {
+		ArrayList<String> ids = new ArrayList<String>();
+		for (String word : keyWordsAndPhrase) {
+			if (word.isEmpty()) {
+				continue;
+			}
+			word = word.trim();
+			if (!word.startsWith("\"")) {
+				word = "\"" + word;
+			}
+			if (!word.endsWith("\"")) {
+				word = word + "\"";
+			}
+			ids.addAll(zalbaNaOdlukuRepository.search(word.toLowerCase()));
+		}
+
+		return searchOperations.andOperator(keyWordsAndPhrase.length, ids);
+	}
+	
+	public ArrayList<String> getAllZalbeNaOdluku() {
+		return fusekiWriter.readAllDocuments("/zalbe-na-odluku");
+	}
+	
+	public ArrayList<String> getDocumentIdThatIsReferencedByDocumentWithThisId(String id) {
+		String subject = String.format("http://localhost:4201/zalbe-na-odluku/%s", id);
+		String predicate = "http://www.projekat.org/predicate/zahtev_na_koji_se_odnosi_zalba";
+		return fusekiWriter.getDocumentIdThatIsReferencedByDocumentWithThisId(subject, predicate, "/zalbe-na-odluku");
 	}
 }

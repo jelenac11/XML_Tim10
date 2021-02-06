@@ -156,10 +156,6 @@ public class ResenjeService {
 		return fusekiWriter.readAllResenjaIdByEmail("/resenja", email);
 	}
 	
-	public ArrayList<String> getAll(String poverenik) {
-		return fusekiWriter.readAllResenja("/resenja", poverenik);
-	}
-
 	public ArrayList<String> getAll() {
 		return fusekiWriter.readAllDocuments("/resenja");
 	}

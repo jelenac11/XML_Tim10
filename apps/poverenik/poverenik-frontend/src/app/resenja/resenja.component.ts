@@ -2,10 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { KorisnikService } from '../core/services/korisnik.service';
 import { ResenjaService } from '../core/services/resenja.service';
-import { ZalbaCutanjeService } from '../core/services/zalba-cutanje.service';
-import { ZalbaNaOdlukuService } from '../core/services/zalba-na-odluku.service';
 import { ResenjaXonomyService } from '../core/xonomy/resenja-xonomy.service';
-import { Snackbar } from '../shared/snackbars/snackbar/snackbar';
 
 declare const Xonomy: any;
 declare var require: any;
@@ -15,21 +12,8 @@ declare var require: any;
   templateUrl: './resenja.component.html',
   styleUrls: ['./resenja.component.scss']
 })
-export class ResenjaComponent implements OnInit {
+export class ResenjaComponent implements OnInit, AfterViewInit {
   public user = null;
-  public idZalbe;
-  public tip;
-  ime_podnosioca: string;
-  prezime_podnosioca: string;
-  naziv_podnosioca: string;
-  mesto_podnosioca: string;
-  ulica_podnosioca: string;
-  broj_podnosioca: string;
-  naziv_organa: string;
-  datum_zalbe: string;
-  zalilac: string;
-  tip_podnosioca: string;
-  tipResenja: string;
   constructor(
     private xonomyService: ResenjaXonomyService,
     private resenjeService: ResenjaService,
@@ -45,16 +29,6 @@ export class ResenjaComponent implements OnInit {
   @ViewChild('resenjeHTML', { static: false }) resenjeHTML;
 
   ngOnInit(): void {
-    this.tip = this.route.snapshot.params['tip'];
-    this.idZalbe = this.route.snapshot.params['idZalbe'];
-    if (this.tip === 'odluka'){
-      this.tipResenja = "tip_rešenja='žalba_na_odluku'";
-      this.zalbaNaOdluku();
-    }
-    else{
-      this.tipResenja = "tip_rešenja='žalba_ćutanja'";
-      this.zalbaCutanja();
-    }
     this.korisnikService.getTrenutnoUlogovan().subscribe(res => {
       const convert = require('xml-js');
       this.user = convert.xml2js(res, {ignoreComment: true, compact: true}).korisnik;
@@ -106,14 +80,70 @@ export class ResenjaComponent implements OnInit {
   kreirajXML(): void{
     const element = document.getElementById('resenje');
     const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
-    <res:odluka_poverioca xmlns:res="http://www.projekat.org/resenje" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    <res:odluka_poverioca
+        xmlns:res="http://www.projekat.org/resenje"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xs="http://www.w3.org/2001/XMLSchema#"
         xmlns:common="http://www.projekat.org/common"
         xmlns:pred="http://www.projekat.org/predicate/"
         xsi:schemaLocation="http://www.projekat.org/resenje"
-        vocab="http://www.projekat.org/predicate" 
-        broj_žalbe='${this.idZalbe}'
-        ${this.tipResenja}><res:opis_žalbe><res:žalioc><common:adresa><common:mesto>${this.mesto_podnosioca}</common:mesto><common:ulica>${this.ulica_podnosioca}</common:ulica><common:broj>${this.broj_podnosioca}</common:broj></common:adresa><common:ime>${this.ime_podnosioca}</common:ime><common:prezime>${this.prezime_podnosioca}</common:prezime></res:žalioc><res:organ><res:naziv>${this.naziv_organa}</res:naziv><res:adresa><common:mesto>Beograd</common:mesto><common:ulica>Beogradska ulica</common:ulica><common:broj>12</common:broj></res:adresa></res:organ><res:datum_žalbe>${this.datum_zalbe}</res:datum_žalbe><res:ceo_opis><res:paragraf></res:paragraf></res:ceo_opis></res:opis_žalbe><res:rešenja><res:paragraf></res:paragraf></res:rešenja><res:obrazloženje><res:opis><res:paragraf></res:paragraf></res:opis><res:razlog><res:paragraf></res:paragraf></res:razlog><res:konačno_rešenje><res:paragraf></res:paragraf></res:konačno_rešenje></res:obrazloženje><res:uputstvo></res:uputstvo><res:datum_rešenja>${new Date().toISOString().slice(0, 10)}</res:datum_rešenja><res:poverenik><common:adresa><common:mesto>Beograd</common:mesto><common:ulica>Beogradska 12</common:ulica><common:broj>12</common:broj></common:adresa><common:ime>${this.user.ime._text}</common:ime><common:prezime>${this.user.prezime._text}</common:prezime></res:poverenik></res:odluka_poverioca>`;
+        tip_rešenja=''>
+        <res:opis_žalbe>
+            <res:žalioc>
+                <common:adresa>
+                    <common:mesto></common:mesto>
+                    <common:ulica></common:ulica>
+                    <common:broj></common:broj>
+                </common:adresa>
+                <common:ime></common:ime>
+                <common:prezime></common:prezime>
+            </res:žalioc>
+            <res:organ>
+                <res:naziv></res:naziv>
+                <res:adresa>
+                    <common:mesto></common:mesto>
+                    <common:ulica></common:ulica>
+                    <common:broj></common:broj>
+                </res:adresa>
+            </res:organ>
+            <res:datum_žalbe></res:datum_žalbe>
+            <res:ceo_opis>
+            </res:ceo_opis>
+        </res:opis_žalbe>
+        <res:rešenja>
+            <res:paragraf>
+            </res:paragraf>
+        </res:rešenja>
+        <res:obrazloženje>
+            <res:opis>
+                <res:paragraf>
+                </res:paragraf>
+            </res:opis>
+            <res:razlog>
+                <res:paragraf>
+                </res:paragraf>
+            </res:razlog>
+            <res:konačno_rešenje>
+                <res:paragraf>
+                </res:paragraf>
+            </res:konačno_rešenje>
+        </res:obrazloženje>
+
+        <res:uputstvo>
+        </res:uputstvo>
+
+        <res:datum_rešenja>${new Date().toISOString().slice(0, 10)}</res:datum_rešenja>
+        <res:poverenik>
+            <common:adresa>
+                <common:mesto></common:mesto>
+                <common:ulica></common:ulica>
+                <common:broj></common:broj>
+            </common:adresa>
+            <common:ime></common:ime>
+            <common:prezime></common:prezime>
+        </res:poverenik>
+    </res:odluka_poverioca>
+    `;
     Xonomy.render(xmlString, element, {
       validate: this.xonomyService.resenjeSpecification.validate,
       elements: this.xonomyService.resenjeSpecification.elements,
@@ -128,6 +158,7 @@ export class ResenjaComponent implements OnInit {
         this.snackBar.success("Uspešno ste kreirali rešenje!")
         this.router.navigate(['/']);
       });
+
   }
 
   onChange(): void {

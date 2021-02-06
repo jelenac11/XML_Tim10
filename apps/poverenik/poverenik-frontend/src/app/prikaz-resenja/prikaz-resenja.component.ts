@@ -1,7 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ResenjaService } from '../core/services/resenja.service';
-import { ResenjaXonomyService } from '../core/xonomy/resenja-xonomy.service';
+import { Component, OnInit } from '@angular/core';
 
 declare const Xonomy: any;
 
@@ -11,7 +8,6 @@ declare const Xonomy: any;
   styleUrls: ['./prikaz-resenja.component.scss']
 })
 export class PrikazResenjaComponent implements OnInit {
-
   id: string;
   resenje: any;
   referencesOn = [];
@@ -100,6 +96,5 @@ export class PrikazResenjaComponent implements OnInit {
         console.log(this.referencesOn);
       });
   };
-
 
 }
