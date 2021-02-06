@@ -86,7 +86,7 @@ export class DokumentPretragaComponent implements OnInit {
     if (this.searchForm.get('keyWord').value == '' && this.searchForm.get('metadata').value == '') {
       return;
     }
-    let form = `<?xml version="1.0" encoding="UTF-8"?><form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><key_word>${this.searchForm.get('keyWord').value}</key_word><metadata>${this.searchForm.get('metadata').value}</metadata><operator>${this.searchForm.get('operator').value}</operator></form>`;
+    let form = `<?xml version="1.0" encoding="UTF-8"?><f:form xmlns:f="http://www.projekat.org/array" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><f:key_word>${this.searchForm.get('keyWord').value}</f:key_word><f:metadata>${this.searchForm.get('metadata').value}</f:metadata><f:operator>${this.searchForm.get('operator').value}</f:operator></f:form>`;
     switch (this.searchForm.get('type').value) {
       case 'zahtev':
         this.searchZahtev(form);
@@ -117,7 +117,7 @@ export class DokumentPretragaComponent implements OnInit {
     })
     this.getAllZahtevi();
   };
-  getReferencesZahtev(index: number): void {
+  getReferences(index: number): void {
     this.obavestenjeService.get("obavestenja/find-id-with-references-on", this.documents[index].url.split("/")[4])
       .subscribe(res => {
         this.documents[index].referencedBy = [];
@@ -131,7 +131,7 @@ export class DokumentPretragaComponent implements OnInit {
 
   open(index: number) {
     if (this.documents[index].type == 'zahtev') {
-      this.getReferencesZahtev(index);
+      this.getReferences(index);
     }
     this.documents[index].open = true;
   };
