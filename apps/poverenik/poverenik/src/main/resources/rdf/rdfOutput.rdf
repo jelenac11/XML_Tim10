@@ -1,17 +1,17 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml">
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/e5924dca-4e94-4f72-ba59-f9e1668b1301">
-<pred:zahtev_na_koji_se_odnosi_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">http://localhost:4200/zahtev/a2ba3576-36a0-4cb6-8628-6db7b9e9ddb1</pred:zahtev_na_koji_se_odnosi_zalba>
+<rdf:Description rdf:about="http://localhost:4201/resenja/cfd0a2d861ae">
+<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Nesto Nesto</pred:podnosilac_zalbe>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/e5924dca-4e94-4f72-ba59-f9e1668b1301">
-<pred:organ_koji_je_doneo_odluku xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nesto</pred:organ_koji_je_doneo_odluku>
+<rdf:Description rdf:about="http://localhost:4201/resenja/cfd0a2d861ae">
+<pred:organ_protiv_kojeg_je_zalba xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Nesto</pred:organ_protiv_kojeg_je_zalba>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/e5924dca-4e94-4f72-ba59-f9e1668b1301">
-<pred:podnosilac_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">milanm2998@gmail.com</pred:podnosilac_zalbe>
+<rdf:Description rdf:about="http://localhost:4201/resenja/cfd0a2d861ae">
+<pred:datum_zalbe xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_zalbe>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/e5924dca-4e94-4f72-ba59-f9e1668b1301">
-<pred:datum_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_podnosenja>
+<rdf:Description rdf:about="http://localhost:4201/resenja/cfd0a2d861ae">
+<pred:datum_resenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2021-02-06</pred:datum_resenja>
 </rdf:Description>
-<rdf:Description rdf:about="http://localhost:4201/zalbe-na-odluku/e5924dca-4e94-4f72-ba59-f9e1668b1301">
-<pred:mesto_podnosenja xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nesto</pred:mesto_podnosenja>
+<rdf:Description rdf:about="http://localhost:4201/resenja/cfd0a2d861ae">
+<pred:poverenik xmlns:pred="http://www.projekat.org/predicate/" rdf:datatype="http://www.w3.org/2000/01/rdf-schema#Literal">Milan Marinović</pred:poverenik>
 </rdf:Description>
 </rdf:RDF>
